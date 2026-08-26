@@ -3,6 +3,7 @@ import { DEMO, STEPS } from "../core/demo-data.mjs";
 import { ROUTE_BY_ID, localizeRoute } from "../core/portal-routes.mjs";
 import { createServiceRecord, translateSelectValues, validateServiceValues } from "../core/service-form-core.mjs";
 import { OFFICIAL_DESTINATIONS } from "./official-sources.js";
+import { IMAGE_DIMENSIONS } from "./asset-catalog.js";
 import {
   CONTENT_ROUTES,
   createInitialState,
@@ -30,19 +31,6 @@ const main = document.querySelector("#main-content");
 const liveRegion = document.querySelector("#live-region");
 const simulationDialog = document.querySelector("#simulationDialog");
 const moreDialog = document.querySelector("#moreDialog");
-
-const IMAGE_DIMENSIONS = Object.freeze({
-  "hero-civic-evidence-v1": [1672, 941],
-  "process-workspace-v1": [1448, 1086],
-  "phone-evidence-closeup-v1": [1448, 1086],
-  "evidence-preparation-overhead-v1": [1448, 1086],
-  "incident-thread-still-life-v1": [1448, 1086],
-  "advisory-phishing-v1": [1448, 1086],
-  "advisory-payment-fraud-v1": [1448, 1086],
-  "advisory-impersonation-v1": [1448, 1086],
-  "guides-resource-still-life-v1": [1672, 941],
-  "footer-evidence-thread-texture-v1": [1672, 941]
-});
 
 const clone = (value) => JSON.parse(JSON.stringify(value));
 const esc = (value) => String(value ?? "").replace(/[&<>'"]/g, (character) => ({
@@ -581,7 +569,8 @@ function serviceErrorSummary(record) {
 }
 
 function contentHeader(content) {
-  const media = content.id === "guides" ? picture("guides-resource-still-life-v1", "", "content-hero-picture") : "";
+  const mediaName = { guides: "guides-resource-still-life-v1", complaints: "process-workspace-v1", "official-tools": "incident-thread-still-life-v1" }[content.id];
+  const media = mediaName ? picture(mediaName, "", "content-hero-picture") : "";
   const groupHub = { complaints: "complaints", tracking: "track", suspect: "official-tools", volunteers: "volunteers", learning: "learning-corner", help: "contact", legal: "policies" }[content.group];
   const crumb = groupHub && groupHub !== content.id ? `${routeLink(groupHub, routeLabel(groupHub), "content-crumb")}<span aria-hidden="true">/</span>` : "";
   return `<header class="content-hero${media ? " has-media" : ""}"><div><nav class="content-breadcrumb" aria-label="${language === "hi" ? "ब्रेडक्रंब" : "Breadcrumb"}">${routeLink("home", copy().nav.home, "content-crumb")}<span aria-hidden="true">/</span>${crumb}<span aria-current="page">${esc(content.label)}</span></nav><p class="eyebrow">${esc(content.eyebrow)}</p><h1 tabindex="-1" data-focus-target>${esc(content.title)}</h1><p>${esc(content.intro)}</p></div>${media}</header>`;
@@ -922,7 +911,7 @@ document.addEventListener("click", (event) => {
   if (moreButton) {
     dialogReturnFocus = moreButton;
     moreDialog.showModal();
-    moreDialog.querySelector("a, button")?.focus();
+    moreDialog.querySelector("[data-more-links] a")?.focus();
     return;
   }
   if (event.target.closest("[data-more-close]")) {
