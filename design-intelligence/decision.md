@@ -1,13 +1,22 @@
 # Visual direction decision
 
-Status: awaiting human selection.
+Status: approved and superseding the earlier A/B/C territory gate.
 
-No direction is approved yet. After the three first-viewport candidates are rendered and verified, select one:
+## Chosen direction
 
-- A — Civic Editorial
-- B — Evidence Atlas
-- C — Guided Relief
-- Reject all and issue a new brief
+**Civic Evidence Service v1** — the ten user-supplied 1672×941 boards are the approved visual reference set.
 
-Only the selected direction may proceed to responsive HTML proof. The design constitution, ten section composition boards, reusable production assets, and final site remain blocked until that proof is approved.
+The direction combines a sober institutional shell, a documentary split hero, persistent official-action guidance, a citizen task row, an evidence-led report journey, a clearly synthetic tracker, and a dense public-service footer. Geometry and photography rhythm are retained; misleading authority, fake status, rasterized UI, generic cyber imagery, and public use of the internal codename are removed.
 
+## Superseded alternatives
+
+- Civic Editorial — useful editorial scale but no longer a separate candidate.
+- Evidence Atlas — its evidence/chronology logic is absorbed into the selected system.
+- Guided Relief — its calm sequential entry is absorbed into the selected flow.
+
+## Approval contract
+
+- `design-intelligence/board-manifest.json` is the immutable hash manifest for the ten boards.
+- `design-intelligence/visual-constitution.md` is the implementation contract.
+- The opening viewport must be proven in responsive HTML; the photograph is original generated media, not the board image.
+- Any later V2 must be versioned and must not overwrite the V1 evidence or generated masters.

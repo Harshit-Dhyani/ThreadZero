@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "set_id": "civic-evidence-service-v1",
+  "status": "approved-visual-reference-set",
+  "captured_on": "2026-08-26",
+  "dimensions": {"width": 1672, "height": 941},
+  "evidence_root": "evidence/design-references/user-supplied/selected/civic-evidence-v1/boards/",
+  "production_rule": "Boards are measurement references only. Their rasterized UI, identity, claims, icons, and imagery must not ship.",
+  "boards": [
+    {"id":"board-01","file":"board-01-brand-system.png","sha256":"5e3f387cb25fb12ea04b31ea42d648158bf292b999d09959e41ee015b8b8ac59","role":"visual system inventory"},
+    {"id":"board-02","file":"board-02-home-hero.png","sha256":"3ba939e7742e1a9e83ae7427606e2381f514081b574da648c0f39e139f699acd","role":"header, hero, urgent strip, task row"},
+    {"id":"board-03","file":"board-03-reporting-process.png","sha256":"773902ebe93e499b60029878bb1450106de34d72a34c47a34123b3619dcf3038","role":"process section and documentary workspace"},
+    {"id":"board-04","file":"board-04-evidence-guidance.png","sha256":"81d857751c4dc820cb9996becc2ade6f8632fb95f0c46fa68373c9860d1611e4","role":"evidence guidance and phone close-up"},
+    {"id":"board-05","file":"board-05-incident-choice.png","sha256":"282f2a7f6e0ab42506e6558b4178d0545c5e1153dd44c65a3cf72fdffd864279","role":"report flow shell and incident choices"},
+    {"id":"board-06","file":"board-06-chronology.png","sha256":"ebf70b90089643820a913e6bcf4eee3b75407a5da95d8bea3e8ff926ee32a3d3","role":"chronology interaction"},
+    {"id":"board-07","file":"board-07-review.png","sha256":"1ba96380cc068b25ee6e7a6c3a3bb7af23b300da99c6d8fd008b0042d286ea12","role":"review composition"},
+    {"id":"board-08","file":"board-08-tracking.png","sha256":"b88973b8ba98dc273e5a0612614834311faaa19cd89ac7b48956eb668b262846","role":"synthetic tracker composition"},
+    {"id":"board-09","file":"board-09-guides.png","sha256":"777245329144be1912ea6a15047393bfec7b8b82703da4eb7dd2c4e1a67f9479","role":"guide and resource directory"},
+    {"id":"board-10","file":"board-10-footer.png","sha256":"a2d007ea6f128646b554070cbc718bc98926a0ef95e0cb6931c2375612df4f1b","role":"footer information architecture and depth"}
+  ]
+}

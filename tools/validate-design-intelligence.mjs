@@ -4,6 +4,7 @@ import { readFile, stat } from 'node:fs/promises';
 
 const registry = JSON.parse(await readFile('design-intelligence/reference-registry.json', 'utf8'));
 const generated = JSON.parse(await readFile('design-intelligence/generated-assets.json', 'utf8'));
+const boards = JSON.parse(await readFile('design-intelligence/board-manifest.json', 'utf8'));
 const sketchesRequired = process.argv.includes('--sketches');
 
 assert.equal(registry.candidates.length, 36, 'expected 36 candidates');
@@ -11,7 +12,8 @@ assert.ok(registry.statistics.inspected_deep >= 18, 'expected at least 18 deep i
 assert.equal(registry.references.filter((reference) => ['core', 'retained'].includes(reference.status)).length, 12, 'expected 12 retained references');
 assert.equal(registry.references.filter((reference) => reference.core_reference).length, 8, 'expected 8 core references');
 assert.equal(registry.user_supplied_rejected.length, 12, 'expected 12 rejected user originals');
-assert.equal(registry.user_supplied_selected.length, 1, 'expected one selected user reference');
+assert.equal(registry.user_supplied_selected.length, 2, 'expected the earlier selected reference and approved board set');
+assert.equal(boards.boards.length, 10, 'expected ten approved visual boards');
 assert.equal(registry.statistics.landing_raster_assets_visually_inspected, 56, 'expected all 56 landing rasters inspected');
 await stat('design-intelligence/image-audit.md');
 
@@ -31,10 +33,16 @@ for (const reference of registry.user_supplied_rejected) {
   assert.equal(actualHash, reference.sha256, reference.id + ' hash mismatch');
 }
 
-for (const reference of registry.user_supplied_selected) {
+for (const reference of registry.user_supplied_selected.filter((item) => item.sha256)) {
   const bytes = await readFile(reference.evidence_path);
   const actualHash = createHash('sha256').update(bytes).digest('hex');
   assert.equal(actualHash, reference.sha256, reference.id + ' hash mismatch');
+}
+
+for (const board of boards.boards) {
+  const bytes = await readFile(boards.evidence_root + board.file);
+  const actualHash = createHash('sha256').update(bytes).digest('hex');
+  assert.equal(actualHash, board.sha256, board.id + ' hash mismatch');
 }
 
 if (sketchesRequired) {
