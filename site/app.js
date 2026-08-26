@@ -81,10 +81,10 @@ const selected = (value) => value ? " selected" : "";
 let language = "en";
 let state = createInitialState();
 let detailsDraft = clone(state.incident);
-let routeErrors = {};
-let tracker = { value: "", status: "idle" };
+let routeErrors = [];
+let tracker = { value: DEMO.reportReference, status: "idle" };
 let eventEditor = null;
-let eventErrors = {};
+let eventErrors = [];
 let customEventCounter = 1;
 let dialogReturnFocus = null;
 
@@ -98,17 +98,39 @@ function routeLink(route, label, className = "") {
   return `<a class="${esc(className)}" href="#${esc(route)}" data-route-link="${esc(route)}"${current}>${content}</a>`;
 }
 
-function officialLink(key, className = "official-link") {
+function officialAnchor(key, label, className = "official-link") {
   const destination = OFFICIAL_DESTINATIONS[key];
   if (!destination) return "";
   const c = copy();
+  return `<a class="${esc(className)}" href="${esc(destination.url)}" target="_blank" rel="noopener noreferrer">
+    <span>${esc(label || destination[language])}</span><span aria-hidden="true"> ↗</span>
+    <span class="sr-only">, ${esc(c.common.opensNew)}</span>
+  </a>`;
+}
+
+function officialLink(key, className = "official-link") {
+  const c = copy();
   return `<span class="official-link-wrap">
-    <a class="${esc(className)}" href="${esc(destination.url)}" target="_blank" rel="noopener noreferrer">
-      <span>${esc(destination[language])}</span><span aria-hidden="true"> ↗</span>
-      <span class="sr-only">, ${esc(c.common.opensNew)}</span>
-    </a>
+    ${officialAnchor(key, null, className)}
     <small>${esc(c.common.lastChecked)}</small>
   </span>`;
+}
+
+function serviceMenu(label, content, className = "") {
+  return `<details class="service-menu ${esc(className)}">
+    <summary>${esc(label)} <span aria-hidden="true">⌄</span></summary>
+    <div class="service-menu-panel">${content}</div>
+  </details>`;
+}
+
+function menuGroup(title, links) {
+  return `<div class="service-menu-group"><strong>${esc(title)}</strong>${links.join("")}</div>`;
+}
+
+function closeServiceMenus(except = null) {
+  document.querySelectorAll(".service-menu[open]").forEach((menu) => {
+    if (menu !== except) menu.removeAttribute("open");
+  });
 }
 
 function picture(name, alt, className = "", eager = false) {
@@ -132,22 +154,42 @@ function renderShell() {
   document.title = c.meta.title;
   document.querySelector("[data-brand-title]").textContent = c.meta.title;
   document.querySelector("[data-brand-qualifier]").textContent = c.meta.qualifier;
+  document.querySelector("[data-header-help-label]").textContent = c.common.actualIncident;
+  document.querySelector("[data-header-help-action]").textContent = c.common.callManually;
   document.querySelector("[data-language-label]").textContent = c.nav.language;
+  document.querySelector("[data-header-menu-label]").textContent = c.nav.services;
   const languageSelect = document.querySelector("#languageSelect");
   languageSelect.value = language;
   languageSelect.setAttribute("aria-label", c.nav.language);
   document.querySelector(".brand").setAttribute("aria-label", `${c.meta.title}, ${c.nav.home}`);
 
-  const primaryLinks = [
-    ["act-now", c.nav.report],
-    ["track", c.nav.track],
-    ["guides", c.nav.guides],
-    ["official-tools", c.nav.resources],
-    ["about", c.nav.about]
-  ];
   const primaryNav = document.querySelector("[data-primary-nav]");
   primaryNav.setAttribute("aria-label", c.nav.primary);
-  primaryNav.innerHTML = primaryLinks.map(([route, label]) => routeLink(route, label)).join("");
+  const complaintMenu = serviceMenu(c.nav.complaint, `
+    ${menuGroup(c.nav.conceptGroup, [routeLink("act-now", c.nav.prepareDemo, "service-menu-link")])}
+    ${menuGroup(c.nav.officialGroup, [
+      officialAnchor("officialComplaint", c.nav.financialFraud, "service-menu-link service-menu-official"),
+      officialAnchor("officialComplaint", c.nav.womenChildren, "service-menu-link service-menu-official"),
+      officialAnchor("officialComplaint", c.nav.otherCrime, "service-menu-link service-menu-official")
+    ])}
+    <small class="service-menu-note">${esc(c.common.lastChecked)}</small>`, "complaint-menu");
+  const learningMenu = serviceMenu(c.nav.learning, menuGroup(c.nav.learning, [
+    routeLink("guides", c.nav.guides, "service-menu-link"),
+    routeLink("advisories", c.content.advisories.eyebrow, "service-menu-link"),
+    routeLink("safety", c.content.safety.eyebrow, "service-menu-link"),
+    routeLink("awareness", c.content.awareness.eyebrow, "service-menu-link"),
+    routeLink("daily-digest", c.content["daily-digest"].eyebrow, "service-menu-link"),
+    routeLink("training", c.content.training.eyebrow, "service-menu-link"),
+    routeLink("media", c.content.media.eyebrow, "service-menu-link")
+  ]), "learning-menu");
+  primaryNav.innerHTML = `
+    ${routeLink("home", `<span aria-hidden="true">⌂</span><span class="sr-only">${esc(c.nav.home)}</span>`, "service-home raw-label")}
+    ${complaintMenu}
+    ${routeLink("track", c.nav.trackComplaint)}
+    ${routeLink("official-tools", c.nav.suspect)}
+    ${routeLink("volunteers", c.nav.volunteers)}
+    ${learningMenu}
+    ${routeLink("contact", c.nav.contact)}`;
 
   document.querySelector("[data-mobile-nav]").innerHTML = `
     ${routeLink("home", `<span aria-hidden="true">⌂</span><span>${esc(c.nav.home)}</span>`, "mobile-nav-link raw-label")}
@@ -160,14 +202,11 @@ function renderShell() {
 
   document.querySelector("[data-more-title]").textContent = c.nav.moreTitle;
   document.querySelector("[data-more-close]").setAttribute("aria-label", c.nav.closeMenu);
-  document.querySelector("[data-more-links]").innerHTML = [
-    ["official-tools", c.nav.resources], ["advisories", c.content.advisories.eyebrow],
-    ["safety", c.content.safety.eyebrow], ["awareness", c.content.awareness.eyebrow],
-    ["daily-digest", c.content["daily-digest"].eyebrow], ["training", c.content.training.eyebrow],
-    ["media", c.content.media.eyebrow], ["volunteers", c.content.volunteers.eyebrow],
-    ["faq", c.content.faq.eyebrow], ["contact", c.content.contact.eyebrow],
-    ["policies", c.content.policies.eyebrow], ["about", c.content.about.eyebrow]
-  ].map(([route, label]) => routeLink(route, label, "more-link")).join("");
+  const moreGroup = (title, links) => `<section class="more-group"><h3>${esc(title)}</h3><div>${links.map(([route, label]) => routeLink(route, label, "more-link")).join("")}</div></section>`;
+  document.querySelector("[data-more-links]").innerHTML = `
+    ${moreGroup(c.nav.reportTrackGroup, [["act-now", c.nav.report], ["track", c.nav.track], ["official-tools", c.nav.resources]])}
+    ${moreGroup(c.nav.learning, [["guides", c.nav.guides], ["advisories", c.content.advisories.eyebrow], ["safety", c.content.safety.eyebrow], ["awareness", c.content.awareness.eyebrow], ["daily-digest", c.content["daily-digest"].eyebrow], ["training", c.content.training.eyebrow], ["media", c.content.media.eyebrow]])}
+    ${moreGroup(c.nav.helpGroup, [["volunteers", c.content.volunteers.eyebrow], ["faq", c.content.faq.eyebrow], ["contact", c.content.contact.eyebrow], ["policies", c.content.policies.eyebrow], ["about", c.content.about.eyebrow]])}`;
 
   document.querySelector("[data-dialog-title]").textContent = c.flow.submit.dialogTitle;
   document.querySelector("[data-dialog-body]").textContent = c.flow.submit.dialogBody;
@@ -184,7 +223,6 @@ function renderFooter() {
     <div class="footer-grid">
       <div class="footer-brand">
         <strong>${esc(c.footer.title)}</strong>
-        <span>${esc(c.footer.qualifier)}</span>
         <p>${esc(c.footer.body)}</p>
       </div>
       ${group(c.footer.services, [["act-now", c.nav.report], ["track", c.nav.track], ["official-tools", c.nav.resources], ["faq", c.nav.moreTitle]])}
@@ -518,12 +556,12 @@ function renderTracker() {
   const t = c.tracker;
   const error = tracker.status === "empty" ? t.empty : tracker.status === "invalid" ? t.invalid : "";
   const errors = error ? [{ key: "tracker", target: "demo-reference", message: error }] : [];
-  return `<div class="content-page tracker-page">
-    <header class="content-hero"><p class="eyebrow">${esc(t.eyebrow)}</p><h1 tabindex="-1" data-focus-target>${esc(t.title)}</h1><p>${esc(t.intro)}</p><span class="concept-pill">${esc(c.meta.qualifier)}</span></header>
-    <div class="content-container">
+  return `<div class="tracker-page">
+    <div class="tracker-shell">
+      <header class="tracker-heading"><p class="eyebrow">${esc(t.eyebrow)}</p><h1 tabindex="-1" data-focus-target>${esc(t.title)}</h1><p>${esc(t.intro)}</p></header>
       ${errorSummary(errors)}
-      <form class="tracker-form" data-tracker-form novalidate><label for="demo-reference">${esc(t.label)}</label><div class="tracker-input-row"><input id="demo-reference" name="reference" type="text" value="${esc(tracker.value)}" placeholder="${esc(t.placeholder)}" autocomplete="off" spellcheck="false"${error ? ' aria-invalid="true" aria-describedby="tracker-error"' : ""}><button class="button button-primary" type="submit">${esc(t.submit)}</button></div>${error ? `<p class="field-error" id="tracker-error">${esc(error)}</p>` : ""}<p class="field-help">${esc(c.common.demoOnly)} · ${esc(DEMO.reportReference)}</p></form>
-      ${tracker.status === "found" ? `<section class="tracker-result" tabindex="-1" aria-live="polite"><div class="tracker-banner"><div><span>${esc(c.common.syntheticReference)}</span><strong>${esc(DEMO.reportReference)}</strong></div><p>${esc(t.found)}</p></div><ol class="status-track compact-status">${t.states.map((item, index) => `<li class="${index === 0 ? "is-active" : ""}"><span aria-hidden="true">${index + 1}</span><div><strong>${esc(item.title)}</strong><p>${esc(item.body)}</p></div></li>`).join("")}</ol><button class="button button-secondary" type="button" data-reset-tracker>${esc(t.reset)}</button></section>` : ""}
+      <form class="tracker-form" data-tracker-form novalidate><label for="demo-reference">${esc(t.label)}</label><div class="tracker-input-row"><input id="demo-reference" name="reference" type="text" value="${esc(tracker.value)}" placeholder="${esc(t.placeholder)}" autocomplete="off" spellcheck="false"${error ? ' aria-invalid="true" aria-describedby="tracker-error"' : ""}><button class="button button-primary" type="submit">${esc(t.submit)}</button></div>${error ? `<p class="field-error" id="tracker-error">${esc(error)}</p>` : ""}<p class="field-help">${esc(c.common.demoOnly)} · <strong>${esc(DEMO.reportReference)}</strong></p></form>
+      ${tracker.status === "found" ? `<section class="tracker-result" tabindex="-1" aria-live="polite"><div class="tracker-banner"><div><span>${esc(c.common.syntheticReference)}</span><strong>${esc(DEMO.reportReference)}</strong></div><div class="tracker-banner-state"><span>${esc(t.found)}</span><strong>${esc(t.states[0].title)}</strong></div></div><ol class="status-track compact-status">${t.states.map((item, index) => `<li class="${index === 0 ? "is-active" : ""}"><span aria-hidden="true">${index + 1}</span><div><strong>${esc(item.title)}</strong><p>${esc(item.body)}</p></div></li>`).join("")}</ol><button class="button button-secondary" type="button" data-reset-tracker>${esc(t.reset)}</button></section>` : ""}
       <section class="official-handoff"><div><p class="eyebrow">${esc(c.common.officialBoundary)}</p><h2>${esc(t.officialTitle)}</h2><p>${esc(t.officialBody)}</p></div>${officialLink("officialTrack", "button button-primary")}</section>
     </div>
   </div>`;
@@ -534,7 +572,7 @@ function renderContent(route) {
   const content = c.content[route];
   const media = route === "guides" ? picture("guides-resource-still-life-v1", "", "content-hero-picture") : "";
   return `<div class="content-page">
-    <header class="content-hero${media ? " has-media" : ""}"><div><p class="eyebrow">${esc(content.eyebrow)}</p><h1 tabindex="-1" data-focus-target>${esc(content.title)}</h1><p>${esc(content.intro)}</p><span class="concept-pill">${esc(c.meta.qualifier)}</span></div>${media}</header>
+    <header class="content-hero${media ? " has-media" : ""}"><div><p class="eyebrow">${esc(content.eyebrow)}</p><h1 tabindex="-1" data-focus-target>${esc(content.title)}</h1><p>${esc(content.intro)}</p></div>${media}</header>
     <div class="content-container">
       <section class="content-grid" aria-label="${esc(content.title)}">${content.items.map((item, index) => `<article><span class="number-icon" aria-hidden="true">${index + 1}</span><h2>${esc(item.title)}</h2><p>${esc(item.body)}</p></article>`).join("")}</section>
       <section class="source-panel"><div><p class="eyebrow">${esc(c.common.source)}</p><h2>${esc(c.common.officialBoundary)}</h2><p>${esc(c.common.sourceNote)}</p></div><div class="official-directory">${content.links.map((key) => officialLink(key, "directory-official-link")).join("")}</div></section>
@@ -795,10 +833,17 @@ document.addEventListener("click", (event) => {
   const routeAnchor = event.target.closest("[data-route-link]");
   if (routeAnchor) {
     event.preventDefault();
+    closeServiceMenus();
     if (moreDialog.open) moreDialog.close();
     navigate(routeAnchor.dataset.routeLink);
     return;
   }
+
+  if (event.target.closest(".service-menu a[target='_blank']")) {
+    closeServiceMenus();
+    return;
+  }
+  if (!event.target.closest(".service-menu")) closeServiceMenus();
 
   const moreButton = event.target.closest("[data-open-more]");
   if (moreButton) {
@@ -857,6 +902,19 @@ document.addEventListener("click", (event) => {
 
   const eventButton = event.target.closest("[data-event-action]");
   if (eventButton) handleEventAction(eventButton);
+});
+
+document.addEventListener("toggle", (event) => {
+  const menu = event.target.closest?.(".service-menu");
+  if (menu?.open) closeServiceMenus(menu);
+}, true);
+
+document.addEventListener("keydown", (event) => {
+  if (event.key !== "Escape") return;
+  const menu = document.querySelector(".service-menu[open]");
+  if (!menu) return;
+  menu.removeAttribute("open");
+  menu.querySelector("summary")?.focus();
 });
 
 document.addEventListener("submit", (event) => {

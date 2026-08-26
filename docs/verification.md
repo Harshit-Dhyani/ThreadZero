@@ -13,14 +13,11 @@ The checks cover guarded and unguarded routes, centralized validation, chronolog
 
 ## In-app browser evidence
 
-The approved first viewport was rendered at an asserted 1672×941 CSS viewport. Its measured section geometry was:
+The corrected portal was checked in the in-app browser after the visual-system reset. At an asserted 1440 CSS-pixel width, the landing page used the licensed local Geist face, a 600-weight 49.68px hero heading, a 460px hero-media frame, one compact safety qualifier, and no horizontal overflow. The report shell used an 88px task header and kept the incident choices and primary action visible within a 1440×900 viewport.
 
-- header: y 0–101;
-- hero: y 101–613, 512px high, split at x 824;
-- urgent guidance: y 613–723, 110px high; and
-- task row: y 723–941, 218px high.
+All 24 routes were then rendered at asserted widths of 1440, 1024, 390, and 320 CSS pixels: 96 route/viewport checks in total. Every check matched the requested width, exposed exactly one visible `h1`, avoided horizontal page overflow, loaded its images, and resolved guarded routes consistently. English and Hindi were also checked at a 720 CSS-pixel viewport as the 200% zoom reflow equivalent.
 
-The complete portal was exercised at 1440, 1024, 390, and 320 CSS pixels. Every guarded route and every one of the fourteen content routes had one visible `h1`, no horizontal page overflow, no broken loaded image, and no undersized interactive target. English and Hindi were also checked at a 720 CSS-pixel viewport as the 200% zoom reflow equivalent.
+The tracker was checked in its initial, empty, invalid, and valid synthetic-reference states. Its initial field now contains the documented `DEMO-2026-08421` fixture, while the valid result presents only illustrative preparation states. The English-to-Hindi switch preserved both the route and in-memory report state; Hindi rendered with the bundled Noto Sans Devanagari face.
 
 The browser journey covered empty submission, focused error recovery, backward editing, evidence confirmation, chronology add/edit/reorder/association, review, the cancel and confirm paths of the simulation dialog, locked read-only review, browser history, and the final nothing-sent state. The tracker covered empty, invalid, valid, reset, and official-handoff paths. Mobile navigation and the More dialog were exercised in both languages. No unexpected same-origin console errors were observed.
 
@@ -28,4 +25,5 @@ The browser journey covered empty submission, focused error recovery, backward e
 
 - No `tel:` action, file input, storage API, network write, or real submission exists.
 - All public images are approved local assets; third-party research evidence remains internal.
+- The repeated concept badges and footer qualifier were removed. One subdued header qualifier remains because the product contract requires the concept and non-government boundary to stay visible.
 - Error-summary focus, dialog focus return, and visible focus styling were verified. The in-app browser keyboard driver did not advance sequential Tab focus reliably, so a final human keyboard-only sweep remains the sole manual acceptance check; no keyboard defect was observed.

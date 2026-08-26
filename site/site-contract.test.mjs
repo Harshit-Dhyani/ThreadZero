@@ -32,6 +32,14 @@ test("the static portal preserves its bilingual, safety, and asset contracts", a
   assert.match(html, /<footer[\s>]/);
   assert.match(html, /Content-Security-Policy/);
   assert.match(css, /prefers-reduced-motion:\s*reduce/);
+  assert.match(app, /class="service-menu/);
+  assert.match(app, /Register a complaint|complaintMenu/);
+  assert.match(app, /Learning Corner|learningMenu/);
+  assert.match(css, /img\s*\{[^}]*height:\s*auto/s);
+  assert.match(app, /let routeErrors = \[\];/);
+  assert.match(app, /let eventErrors = \[\];/);
+  assert.match(app, /let tracker = \{ value: DEMO\.reportReference, status: "idle" \};/);
+  assert.doesNotMatch(app, /concept-pill/);
 
   for (const forbidden of [/\btel:/i, /\bmailto:/i, /type=["']file["']/i, /\blocalStorage\b/, /\bsessionStorage\b/, /\bfetch\s*\(/, /\bXMLHttpRequest\b/, /\bWebSocket\b/, /ThreadZero/i]) {
     assert.doesNotMatch(publicSource, forbidden);
@@ -51,6 +59,8 @@ test("the static portal preserves its bilingual, safety, and asset contracts", a
   }
 
   for (const fontPath of [
+    "site/assets/fonts/geist/Geist-Variable.woff2",
+    "site/assets/fonts/geist/LICENSE.txt",
     "site/assets/fonts/inter/Inter-Variable.ttf",
     "site/assets/fonts/inter/OFL.txt",
     "site/assets/fonts/noto-sans-devanagari/NotoSansDevanagari-Variable.ttf",
