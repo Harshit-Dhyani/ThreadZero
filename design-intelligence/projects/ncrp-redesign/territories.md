@@ -14,9 +14,13 @@ All three sketches use the same facts and actions:
 
 The sketches may render only short display labels. Production HTML will own all text and controls.
 
+All landing imagery must follow the completed 56-raster audit. Source files are internal evidence only. The final candidates use original generated scenes derived from three observed roles: wide documentary crop, warm device-in-context photography, and overhead material organization.
+
+The user-approved ref-user-013 also informs the candidates: wide split composition, strong navy headline, pale patterned field, and four-action rhythm are permitted. Its Ministry styling, flag, monuments, patriotic decoration, authority claims, exact layout, and security icons are prohibited.
+
 ## A — Civic Editorial
 
-Composition: asymmetric two-column civic opening. Large plain headline and urgent official-action band on the left; original documentary still life of a phone, bank message printout, notebook, and evidence envelope on the right. The lower edge reveals the first task-routing transition.
+Composition: asymmetric two-column civic opening. Large plain headline and urgent official-action band on the left; an original wide documentary preparation scene on the right, using the audited Boston image-to-task pacing without its civic identity. The lower edge reveals the first task-routing transition.
 
 Typography: sober editorial serif for display paired with a highly legible humanist sans.
 
@@ -30,7 +34,7 @@ Do not include: seals, flags, uniforms, government logos, victims, fake proof, d
 
 ## B — Evidence Atlas
 
-Composition: light incident chronology runs diagonally through the viewport. Three tactile evidence objects attach to numbered events while the urgent official-action card and start action remain plainly visible. It should feel like an evidence table, not a dashboard.
+Composition: light incident chronology runs diagonally through the viewport. Three tactile evidence objects attach to numbered events while the urgent official-action card and start action remain plainly visible. The original overhead composition uses the audited public-notice structure and material-table photography. It should feel like an evidence table, not a dashboard.
 
 Typography: compact grotesk for labels with a sturdy serif for the core message.
 
@@ -44,7 +48,7 @@ Do not include: maps, charts, network nodes, threat scores, surveillance motifs,
 
 ## C — Guided Relief
 
-Composition: a calm sequential entry with one clear decision, a visible three-step service path, and a warm original still life of hands sorting neutral evidence objects. Official-action guidance remains persistent and stronger than the concept action.
+Composition: a calm sequential entry with one clear decision, a visible three-step service path, and original warm device-in-context photography with hands sorting neutral evidence objects. It uses the audited SGDS domestic-device crop without its source screen, copy, or identity. Official-action guidance remains persistent and stronger than the concept action.
 
 Typography: large rounded grotesk with a quiet serif accent for reassurance.
 
@@ -66,4 +70,3 @@ Do not include: testimonials, portraits as victims, AI assistants, mascots, grad
 - Originality without copied identity: 10
 
 The rubric informs critique but does not replace human selection.
-

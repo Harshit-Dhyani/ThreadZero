@@ -9,9 +9,13 @@ Status: research gate complete; visual selection pending.
 - 1 additional authoritative design-system inspection attempted and blocked by DNS.
 - 13 sources saved locally, 12 retained, and 8 designated as core.
 - 12 user-supplied originals preserved unchanged and classified as rejected provenance.
+- 1 additional user-supplied positive reference preserved unchanged with unknown-source restrictions.
+- 56 of 56 extracted landing-page raster assets visually opened and audited.
+- 10 SGDS SVG/icon assets preserved for the later component-system phase and intentionally deferred.
 - Actual source image files were extracted when the page exposed them. Screenshots are supplementary context.
 
 The reference registry is the source of record for URLs, capture dates, evidence paths, findings, uncertainty, scores, and copying restrictions.
+The extracted landing-image audit records the visual decision for every raster file.
 
 ## Confirmed source findings
 
@@ -19,6 +23,7 @@ The reference registry is the source of record for URLs, capture dates, evidence
 2. GOV.UK, USWDS, NHS, SGDS, and UX4G converge on plain language, semantic controls, high-contrast actions, visible validation, predictable reflow, and restrained visual authority.
 3. Scamwatch, CFPB, ReportFraud, and IdentityTheft.gov separate urgent action, incident routing, preparation, reporting, and recovery expectations.
 4. Boston.gov and its redesign case study demonstrate that a civic service can have a strong editorial identity while keeping tasks literal and prominent.
+5. The actual extracted imagery supports three original production recipes: overhead evidence organization, warm device-in-context photography, and wide documentary preparation scenes.
 
 ## Synthesis
 
@@ -42,6 +47,8 @@ The reporting flow should make evidence feel manageable. Ready, Missing, and Opt
 - Evidence grouped into an understandable incident thread.
 - Preflight explanation and honest after-submission expectations.
 - Editorial media used to orient, never to impersonate authority.
+- Original overhead evidence, hands-and-device, and wide documentary crops derived from the audited image roles.
+- The approved user reference's wide split, navy headline hierarchy, pale technical texture, and four-action rhythm without its official identity.
 
 ## Reject
 
@@ -50,6 +57,7 @@ The reporting flow should make evidence feel manageable. Ready, Missing, and Opt
 - Generic blue-purple gradients, AI orbs, robots, card spam, fake metrics, testimonials, client logos, and recovery promises.
 - Rasterized form text, buttons, statuses, or instructions in production.
 - Third-party reference files in the public site.
+- Embedded screenshots or rasterized form content; device screens in generated imagery remain abstract.
 
 ## Three visual territories
 
@@ -66,4 +74,3 @@ Evidence and chronology form the visual spine. A light, tactile incident map exp
 A humane sequential entry that reduces the first decision to a clear choice. Warm material photography and visible steps communicate support without testimonials or personas.
 
 No territory is approved. Responsive HTML, the design constitution, section boards, production assets, and the full product build remain behind the human selection gate.
-

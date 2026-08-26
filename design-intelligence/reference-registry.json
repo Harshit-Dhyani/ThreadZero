@@ -9,7 +9,10 @@
     "saved_sources": 13,
     "retained_references": 12,
     "core_references": 8,
-    "user_supplied_rejected_originals": 12
+    "user_supplied_rejected_originals": 12,
+    "user_supplied_selected_references": 1,
+    "landing_raster_assets_visually_inspected": 56,
+    "component_svg_or_icon_assets_deferred": 10
   },
   "candidates": [
     {"id": "candidate-001", "title": "National Cyber Crime Reporting Portal", "url": "https://cybercrime.gov.in/", "status": "inspected"},
@@ -70,7 +73,8 @@
       "confirmed_observations": [
         "The service prioritizes reporting cybercrime and separates financial fraud from other reporting routes.",
         "The page exposes the official 1930 helpline and cybercrime.gov.in as urgent financial-fraud actions.",
-        "The inspected page reported a last-updated date of 05/06/2026."
+        "The inspected page reported a last-updated date of 05/06/2026.",
+        "All 35 extracted raster assets were visually inspected; most are official identity, social icons, institutional event photos, or prohibited fear-based cyber stock."
       ],
       "inferred_principles": [
         "Urgent official action must precede concept onboarding.",
@@ -131,7 +135,7 @@
       ],
       "confirmed_observations": [
         "The system balances institutional navigation with warmer editorial modules.",
-        "Actual page image assets were exposed and preserved for internal composition study."
+        "Four photographic raster assets were visually inspected for landing-page composition; ten SVG or icon system assets are preserved and intentionally deferred."
       ],
       "inferred_principles": [
         "A public-service interface can feel contemporary without decorative technology motifs.",
@@ -399,7 +403,7 @@
       ],
       "confirmed_observations": [
         "The live site combines strong editorial scale with direct city-service navigation.",
-        "Three exposed page images were preserved as internal composition evidence."
+        "All three exposed page images were visually inspected as internal composition evidence."
       ],
       "inferred_principles": [
         "Civic warmth can come from human-scale editorial composition while actions stay literal.",
@@ -430,7 +434,7 @@
       ],
       "confirmed_observations": [
         "The case study shows a coherent civic system across navigation, content, mobile, and service entry.",
-        "Fourteen unique exposed case-study modules were preserved as internal composition evidence."
+        "All fourteen unique exposed case-study modules were visually inspected as internal composition evidence."
       ],
       "inferred_principles": [
         "A visual direction must prove both homepage identity and transaction behavior.",
@@ -441,6 +445,47 @@
       "permitted_influence": ["system coherence", "editorial rhythm", "responsive composition reasoning"],
       "prohibited_copying": ["Boston identity", "source artwork", "photography", "exact layouts", "case-study claims"],
       "copyright_note": "Extracted files are internal evidence only; principles may inform original work."
+    }
+  ],
+  "user_supplied_selected": [
+    {
+      "id": "ref-user-013",
+      "title": "Safer Digital India screen reference",
+      "url": null,
+      "captured_on": "2026-08-26",
+      "source_role": "user-supplied positive composition reference",
+      "status": "selected-reference",
+      "sha256": "f9c55eeb4a5fc68c0fe3b870f55d45460d95e3379fa3ac4a94b5f0f7d71870b6",
+      "evidence_path": "evidence/design-references/user-supplied/selected/ref-user-013/original.png",
+      "confirmed_observations": [
+        "The photographed screen uses a two-level navigation, wide light hero, large navy headline, and four simple action columns.",
+        "The hero combines a strong left visual field with a right-aligned message and a subtle halftone background.",
+        "The visible identity includes ministry styling, the Indian flag, monument silhouettes, patriotic accents, and authority-oriented claims."
+      ],
+      "inferred_principles": [
+        "Use the split composition, decisive headline scale, quiet patterned field, and four-action rhythm.",
+        "Keep the opening unmistakably civic in seriousness while explicitly identifying the prototype as independent."
+      ],
+      "unknowns": [
+        "The original author, source URL, license, and whether this is an official implementation or a concept are unknown."
+      ],
+      "permitted_influence": [
+        "wide split hero",
+        "strong navy typographic hierarchy",
+        "light technical texture",
+        "four-action rhythm",
+        "two-level navigation proportion"
+      ],
+      "prohibited_copying": [
+        "Ministry identity",
+        "government marks",
+        "Indian flag",
+        "monument silhouettes",
+        "patriotic decoration",
+        "authority claims",
+        "exact layout",
+        "shield and headset iconography"
+      ]
     }
   ],
   "user_supplied_rejected": [

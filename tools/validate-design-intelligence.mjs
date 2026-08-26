@@ -11,6 +11,9 @@ assert.ok(registry.statistics.inspected_deep >= 18, 'expected at least 18 deep i
 assert.equal(registry.references.filter((reference) => ['core', 'retained'].includes(reference.status)).length, 12, 'expected 12 retained references');
 assert.equal(registry.references.filter((reference) => reference.core_reference).length, 8, 'expected 8 core references');
 assert.equal(registry.user_supplied_rejected.length, 12, 'expected 12 rejected user originals');
+assert.equal(registry.user_supplied_selected.length, 1, 'expected one selected user reference');
+assert.equal(registry.statistics.landing_raster_assets_visually_inspected, 56, 'expected all 56 landing rasters inspected');
+await stat('design-intelligence/image-audit.md');
 
 for (const reference of registry.references.filter((item) => ['core', 'retained'].includes(item.status))) {
   assert.ok(reference.url.startsWith('https://'), reference.id + ' must have an exact HTTPS URL');
@@ -23,6 +26,12 @@ for (const reference of registry.references.filter((item) => ['core', 'retained'
 }
 
 for (const reference of registry.user_supplied_rejected) {
+  const bytes = await readFile(reference.evidence_path);
+  const actualHash = createHash('sha256').update(bytes).digest('hex');
+  assert.equal(actualHash, reference.sha256, reference.id + ' hash mismatch');
+}
+
+for (const reference of registry.user_supplied_selected) {
   const bytes = await readFile(reference.evidence_path);
   const actualHash = createHash('sha256').update(bytes).digest('hex');
   assert.equal(actualHash, reference.sha256, reference.id + ' hash mismatch');
