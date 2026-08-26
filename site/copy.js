@@ -24,8 +24,29 @@ export const COPY = {
       officialGroup: "Official NCRP",
       prepareDemo: "Prepare a demo record",
       financialFraud: "Financial fraud complaint",
+      financialFraudNote: "Report financial cyber fraud through NCRP.",
       womenChildren: "Women or child related cybercrime",
+      womenChildrenAnonymous: "Women or child crime — report anonymously",
+      womenChildrenAnonymousNote: "Choose the anonymous option on the official portal.",
+      womenChildrenTrack: "Women or child crime — register and track",
+      womenChildrenTrackNote: "Use the identifiable official reporting option.",
       otherCrime: "Other cybercrime",
+      otherCrimeNote: "Open the official category entry.",
+      suspectGroup: "Understand the service",
+      suspectOverview: "Suspect and abuse tools",
+      checkIdentifiers: "Check an identifier",
+      checkIdentifiersNote: "Mobile, email, bank account, social account, or UPI ID.",
+      checkWebsite: "Check a website or app",
+      checkWebsiteNote: "Use the official website and app repository.",
+      reportSuspect: "Report a suspect to I4C",
+      reportSuspectNote: "Opens the official suspect-report form.",
+      reportAbuse: "Report abuse to a social platform",
+      reportAbuseNote: "Find verified intermediary reporting destinations.",
+      tafcop: "Check mobile connections",
+      tafcopNote: "Opens the official TAFCOP service.",
+      gac: "File a GAC appeal",
+      gacNote: "Opens the Grievance Appellate Committee.",
+      learningOverview: "Explore the Learning Corner",
       reportTrackGroup: "Report and track",
       helpGroup: "Help and project",
       language: "Language",
@@ -68,11 +89,17 @@ export const COPY = {
     },
     home: {
       hero: {
-        eyebrow: "Clear preparation after online financial fraud",
-        title: "Preserve the facts. Prepare a clearer report.",
-        intro: "Use a guided, private-in-this-tab demonstration to organise transaction details, evidence, and a simple incident chronology before using the official reporting service.",
-        primary: "Prepare a demo report",
-        secondary: "Track a demo report",
+        eyebrow: "Cybercrime reporting and citizen guidance",
+        title: "Report cybercrime with a clearer first step.",
+        intro: "Start with the type of incident. Organise the facts locally, understand the route, and choose when to consult an official source.",
+        primary: "Prepare financial-fraud details",
+        secondary: "Explore complaint services",
+        pathsLabel: "Complaint options",
+        paths: [
+          { route: "act-now", title: "Financial fraud", body: "Prepare the transaction, evidence, and timeline." },
+          { route: "women-children", title: "Women or child related crime", body: "Understand anonymous and registered practice routes." },
+          { route: "other-cybercrime", title: "Other cybercrime", body: "Prepare a clear synthetic complaint draft." }
+        ],
         imageAlt: "An Indian man comparing a neutral phone and a printed transaction record at a desk"
       },
       urgent: {
@@ -82,15 +109,16 @@ export const COPY = {
         siteBody: "Open cybercrime.gov.in for real complaint preparation, reporting, and tracking."
       },
       tasks: {
-        eyebrow: "Choose a task",
-        title: "Start with what you need now",
-        intro: "Two concept flows work fully. Other actions lead to sourced guidance or clearly marked official handoffs.",
+        eyebrow: "Citizen services",
+        title: "What do you need to do?",
+        intro: "Local preparation tools stay separate from real government actions.",
         items: [
-          { route: "act-now", title: "Prepare a demo report", body: "Organise a synthetic financial-fraud incident step by step." },
-          { route: "track", title: "Track a demo report", body: "Try the documented synthetic reference and illustrative states." },
-          { route: "official-tools", title: "Use official tools", body: "Find suspect checks, complaint actions, and real tracking handoffs." },
-          { route: "guides", title: "Guides and evidence", body: "Understand useful records, safety steps, and reporting boundaries." },
-          { route: "faq", title: "Help and FAQ", body: "Get plain-language answers and verified official destinations." }
+          { route: "act-now", title: "Prepare a report", body: "Organise a synthetic financial-fraud incident." },
+          { route: "track", title: "Track a complaint", body: "Try the demo tracker or open official tracking." },
+          { route: "official-tools", title: "Check or report a suspect", body: "Find official identifier, website, abuse, and appeal tools." },
+          { route: "volunteers", title: "Cyber Volunteers", body: "Read the programme, terms, and registration guidance." },
+          { route: "learning-corner", title: "Learning Corner", body: "Manuals, advisories, safety, training, and media." },
+          { route: "contact", title: "Help and contact", body: "FAQ, feedback, grievance contacts, and notices." }
         ]
       },
       prompt: {
@@ -138,15 +166,27 @@ export const COPY = {
         imageAlt: "An overhead view of a phone, neutral transaction papers, notes, and a folder organised for evidence preparation"
       },
       resources: {
-        eyebrow: "Advisories and safety",
-        title: "Recognise common pressure tactics.",
-        intro: "These summaries are educational. Follow the linked official pages for current advice.",
+        eyebrow: "Learning Corner",
+        title: "Learn, verify, and stay informed.",
+        intro: "Open practical guidance or continue to the complete learning directory.",
+        action: "Explore Learning Corner",
         cards: [
           { route: "advisories", image: "phishing", title: "Phishing and fake links", body: "Pause before opening urgent links or entering credentials on a page reached through a message." },
           { route: "safety", image: "payment", title: "Payment and UPI fraud", body: "A UPI PIN authorises money leaving an account; it is not needed to receive money." },
           { route: "awareness", image: "impersonation", title: "Impersonation pressure", body: "Verify unexpected officials, relatives, employers, or support agents through an independently found channel." }
         ],
         official: "Open NCRP advisories"
+      },
+      official: {
+        eyebrow: "Official actions",
+        title: "Use every portal tool without losing your place.",
+        intro: "Checks, reporting practice, mobile-connection guidance, and appeal preparation now stay inside this local experience.",
+        items: [
+          { key: "officialTrack", title: "Track a real complaint", body: "Use your official acknowledgement details on NCRP." },
+          { key: "officialSuspectSearch", title: "Check a suspect identifier", body: "Check supported mobile, email, bank, social, or UPI identifiers." },
+          { key: "officialTafcop", title: "Review mobile connections", body: "Use TAFCOP to review connections issued in your name." },
+          { key: "officialGac", title: "File an online-safety appeal", body: "Continue to the Grievance Appellate Committee." }
+        ]
       },
       after: {
         eyebrow: "After official submission",
@@ -160,9 +200,9 @@ export const COPY = {
         caution: "No outcome, fund freeze, recovery, investigation, or response time is promised."
       },
       help: {
-        eyebrow: "Help and official directory",
+        eyebrow: "Help and legal directory",
         title: "Answers, contacts, and trusted destinations",
-        intro: "Use the concept for orientation and the official destinations for real actions.",
+        intro: "Find answers, local simulations, policies, notices, and deliberately separated source references.",
         faqs: [
           { q: "Does this submit a complaint?", a: "No. It prepares only a synthetic record in memory and never sends data anywhere." },
           { q: "Can I continue with missing evidence?", a: "Yes. Missing evidence is guidance, not failure. Report urgently through official channels with what you have." },
@@ -385,6 +425,18 @@ export const COPY = {
         ],
         links: ["officialHome", "officialComplaint", "officialTrack", "officialSuspectSearch", "officialSuspectReport"]
       },
+      "learning-corner": {
+        eyebrow: "Learning Corner",
+        title: "Guidance, manuals, advisories, and public learning material.",
+        intro: "Choose a practical topic here, then use the original NCRP destination when currency or official procedure matters.",
+        items: [
+          { title: "Citizen manuals and FAQ", body: "Understand official reporting steps, common questions, and the information to keep ready." },
+          { title: "Advisories and safety", body: "Review current warnings, verification habits, and common social-engineering pressure." },
+          { title: "Training and media", body: "Find official training resources, videos, radio material, galleries, and the daily digest." },
+          { title: "Accessible information", body: "Open screen-reader information, public notices, and original documents on their source pages." }
+        ],
+        links: ["officialManuals", "officialFaq", "officialAdvisories", "officialSafety", "officialTraining", "officialVideos", "officialScreenReader", "officialRtiNotice"]
+      },
       guides: {
         eyebrow: "Guides and evidence",
         title: "Prepare facts without changing the originals.",
@@ -534,6 +586,12 @@ export const COPY = {
       services: "Services",
       learning: "Learning",
       project: "Project and policies",
+      official: "Official policies and notices",
+      feedback: "Feedback",
+      websitePolicy: "Website policies",
+      privacy: "CyberDost privacy policy",
+      disclaimer: "Disclaimer",
+      notices: "RTI public notice",
       urgent: "Actual incident? Call 1930 manually and use cybercrime.gov.in.",
       boundary: "No uploads. No real calls. No external submission. No government status.",
       imageAlt: ""
@@ -564,8 +622,29 @@ export const COPY = {
       officialGroup: "आधिकारिक NCRP",
       prepareDemo: "डेमो रिकॉर्ड तैयार करें",
       financialFraud: "वित्तीय धोखाधड़ी शिकायत",
+      financialFraudNote: "NCRP पर वित्तीय साइबर धोखाधड़ी रिपोर्ट करें।",
       womenChildren: "महिला या बाल संबंधी साइबर अपराध",
+      womenChildrenAnonymous: "महिला या बाल अपराध — गुमनाम रिपोर्ट",
+      womenChildrenAnonymousNote: "आधिकारिक पोर्टल पर गुमनाम विकल्प चुनें।",
+      womenChildrenTrack: "महिला या बाल अपराध — दर्ज और ट्रैक करें",
+      womenChildrenTrackNote: "पहचान सहित आधिकारिक रिपोर्टिंग विकल्प उपयोग करें।",
       otherCrime: "अन्य साइबर अपराध",
+      otherCrimeNote: "आधिकारिक श्रेणी प्रवेश खोलें।",
+      suspectGroup: "सेवा को समझें",
+      suspectOverview: "संदिग्ध और दुरुपयोग टूल",
+      checkIdentifiers: "पहचानकर्ता जाँचें",
+      checkIdentifiersNote: "मोबाइल, ईमेल, बैंक खाता, सोशल खाता या UPI ID।",
+      checkWebsite: "वेबसाइट या ऐप जाँचें",
+      checkWebsiteNote: "आधिकारिक वेबसाइट और ऐप रिपॉज़िटरी उपयोग करें।",
+      reportSuspect: "I4C को संदिग्ध रिपोर्ट करें",
+      reportSuspectNote: "आधिकारिक संदिग्ध रिपोर्ट फ़ॉर्म खुलेगा।",
+      reportAbuse: "सोशल प्लेटफ़ॉर्म को दुरुपयोग रिपोर्ट करें",
+      reportAbuseNote: "सत्यापित मध्यस्थ रिपोर्टिंग गंतव्य पाएँ।",
+      tafcop: "मोबाइल कनेक्शन जाँचें",
+      tafcopNote: "आधिकारिक TAFCOP सेवा खुलेगी।",
+      gac: "GAC में अपील दर्ज करें",
+      gacNote: "शिकायत अपीलीय समिति खुलेगी।",
+      learningOverview: "लर्निंग कॉर्नर देखें",
       reportTrackGroup: "रिपोर्ट और ट्रैक",
       helpGroup: "सहायता और परियोजना",
       language: "भाषा",
@@ -608,11 +687,17 @@ export const COPY = {
     },
     home: {
       hero: {
-        eyebrow: "ऑनलाइन वित्तीय धोखाधड़ी के बाद स्पष्ट तैयारी",
-        title: "तथ्य सुरक्षित रखें। अधिक स्पष्ट रिपोर्ट तैयार करें।",
-        intro: "आधिकारिक रिपोर्टिंग सेवा पर जाने से पहले लेन-देन विवरण, साक्ष्य और सरल घटना-क्रम को व्यवस्थित करने के लिए इस टैब में चलने वाले मार्गदर्शित डेमो का उपयोग करें।",
-        primary: "डेमो रिपोर्ट तैयार करें",
-        secondary: "डेमो रिपोर्ट ट्रैक करें",
+        eyebrow: "साइबर अपराध रिपोर्टिंग और नागरिक मार्गदर्शन",
+        title: "साइबर अपराध रिपोर्टिंग का स्पष्ट पहला कदम पाएँ।",
+        intro: "घटना के प्रकार से शुरू करें। तथ्य स्थानीय रूप से व्यवस्थित करें, मार्ग समझें और तय करें कि आधिकारिक स्रोत कब देखना है।",
+        primary: "वित्तीय धोखाधड़ी विवरण तैयार करें",
+        secondary: "शिकायत सेवाएँ देखें",
+        pathsLabel: "शिकायत विकल्प",
+        paths: [
+          { route: "act-now", title: "वित्तीय धोखाधड़ी", body: "लेन-देन, साक्ष्य और घटना-क्रम तैयार करें।" },
+          { route: "women-children", title: "महिला या बाल संबंधी अपराध", body: "गुमनाम और पंजीकृत अभ्यास मार्ग समझें।" },
+          { route: "other-cybercrime", title: "अन्य साइबर अपराध", body: "स्पष्ट सिंथेटिक शिकायत मसौदा तैयार करें।" }
+        ],
         imageAlt: "डेस्क पर एक भारतीय व्यक्ति सामान्य फोन और मुद्रित लेन-देन रिकॉर्ड की तुलना करते हुए"
       },
       urgent: {
@@ -622,15 +707,16 @@ export const COPY = {
         siteBody: "वास्तविक शिकायत तैयार करने, रिपोर्ट करने और ट्रैक करने हेतु cybercrime.gov.in खोलें।"
       },
       tasks: {
-        eyebrow: "काम चुनें",
-        title: "अभी जो चाहिए, वहीं से शुरू करें",
-        intro: "दो अवधारणा प्रवाह पूरी तरह काम करते हैं। अन्य कार्रवाइयाँ स्रोत-आधारित मार्गदर्शन या स्पष्ट आधिकारिक लिंक पर ले जाती हैं।",
+        eyebrow: "नागरिक सेवाएँ",
+        title: "आपको क्या करना है?",
+        intro: "स्थानीय तैयारी टूल वास्तविक सरकारी कार्रवाइयों से अलग रहते हैं।",
         items: [
-          { route: "act-now", title: "डेमो रिपोर्ट तैयार करें", body: "कृत्रिम वित्तीय धोखाधड़ी घटना को चरण-दर-चरण व्यवस्थित करें।" },
-          { route: "track", title: "डेमो रिपोर्ट ट्रैक करें", body: "दिए गए कृत्रिम संदर्भ और उदाहरणात्मक स्थितियों को आजमाएँ।" },
-          { route: "official-tools", title: "आधिकारिक टूल उपयोग करें", body: "संदिग्ध जाँच, शिकायत और वास्तविक ट्रैकिंग के आधिकारिक लिंक पाएँ।" },
-          { route: "guides", title: "मार्गदर्शिका और साक्ष्य", body: "उपयोगी रिकॉर्ड, सुरक्षा कदम और रिपोर्टिंग सीमाएँ समझें।" },
-          { route: "faq", title: "सहायता और प्रश्न", body: "सरल उत्तर और सत्यापित आधिकारिक गंतव्य पाएँ।" }
+          { route: "act-now", title: "रिपोर्ट तैयार करें", body: "कृत्रिम वित्तीय धोखाधड़ी घटना व्यवस्थित करें।" },
+          { route: "track", title: "शिकायत ट्रैक करें", body: "डेमो ट्रैकर आजमाएँ या आधिकारिक ट्रैकिंग खोलें।" },
+          { route: "official-tools", title: "संदिग्ध जाँचें या रिपोर्ट करें", body: "पहचान, वेबसाइट, दुरुपयोग और अपील टूल पाएँ।" },
+          { route: "volunteers", title: "साइबर स्वयंसेवक", body: "कार्यक्रम, नियम और पंजीकरण मार्गदर्शन पढ़ें।" },
+          { route: "learning-corner", title: "लर्निंग कॉर्नर", body: "पुस्तिकाएँ, सलाह, सुरक्षा, प्रशिक्षण और मीडिया।" },
+          { route: "contact", title: "सहायता और संपर्क", body: "FAQ, प्रतिक्रिया, शिकायत संपर्क और सूचनाएँ।" }
         ]
       },
       prompt: {
@@ -678,15 +764,27 @@ export const COPY = {
         imageAlt: "साक्ष्य तैयारी हेतु व्यवस्थित फोन, सामान्य लेन-देन कागज़, नोट और फ़ोल्डर का ऊपर से दृश्य"
       },
       resources: {
-        eyebrow: "सलाह और सुरक्षा",
-        title: "दबाव बनाने की सामान्य तरकीबें पहचानें।",
-        intro: "ये सार शैक्षिक हैं। नवीन सलाह के लिए जुड़े आधिकारिक पृष्ठ देखें।",
+        eyebrow: "लर्निंग कॉर्नर",
+        title: "सीखें, सत्यापित करें और जानकारी रखें।",
+        intro: "व्यावहारिक मार्गदर्शन खोलें या पूरी सीख निर्देशिका देखें।",
+        action: "लर्निंग कॉर्नर देखें",
         cards: [
           { route: "advisories", image: "phishing", title: "फ़िशिंग और नकली लिंक", body: "तत्काल लिंक खोलने या संदेश से पहुँचे पृष्ठ पर पहचान जानकारी डालने से पहले रुकें।" },
           { route: "safety", image: "payment", title: "भुगतान और UPI धोखाधड़ी", body: "UPI PIN खाते से पैसा भेजने की अनुमति देता है; पैसा पाने के लिए इसकी जरूरत नहीं।" },
           { route: "awareness", image: "impersonation", title: "प्रतिरूपण का दबाव", body: "अचानक आए अधिकारी, रिश्तेदार, नियोक्ता या सहायता एजेंट को स्वतंत्र माध्यम से सत्यापित करें।" }
         ],
         official: "NCRP सलाह खोलें"
+      },
+      official: {
+        eyebrow: "आधिकारिक कार्रवाइयाँ",
+        title: "अपनी जगह छोड़े बिना हर पोर्टल टूल उपयोग करें।",
+        intro: "जाँच, रिपोर्टिंग अभ्यास, मोबाइल-कनेक्शन मार्गदर्शन और अपील तैयारी अब इसी स्थानीय अनुभव में रहती है।",
+        items: [
+          { key: "officialTrack", title: "वास्तविक शिकायत ट्रैक करें", body: "NCRP पर अपने आधिकारिक पावती विवरण उपयोग करें।" },
+          { key: "officialSuspectSearch", title: "संदिग्ध पहचानकर्ता जाँचें", body: "समर्थित मोबाइल, ईमेल, बैंक, सोशल या UPI पहचान जाँचें।" },
+          { key: "officialTafcop", title: "मोबाइल कनेक्शन देखें", body: "अपने नाम पर जारी कनेक्शन देखने हेतु TAFCOP उपयोग करें।" },
+          { key: "officialGac", title: "ऑनलाइन सुरक्षा अपील दर्ज करें", body: "शिकायत अपीलीय समिति पर आगे बढ़ें।" }
+        ]
       },
       after: {
         eyebrow: "आधिकारिक सबमिशन के बाद",
@@ -700,9 +798,9 @@ export const COPY = {
         caution: "किसी परिणाम, धन रोक, वसूली, जाँच या प्रतिक्रिया समय का वादा नहीं है।"
       },
       help: {
-        eyebrow: "सहायता और आधिकारिक निर्देशिका",
+        eyebrow: "सहायता और कानूनी निर्देशिका",
         title: "उत्तर, संपर्क और विश्वसनीय गंतव्य",
-        intro: "समझने के लिए अवधारणा और वास्तविक कार्यों के लिए आधिकारिक गंतव्य उपयोग करें।",
+        intro: "उत्तर, स्थानीय सिमुलेशन, नीतियाँ, सूचनाएँ और अलग स्रोत संदर्भ पाएँ।",
         faqs: [
           { q: "क्या यह शिकायत जमा करता है?", a: "नहीं। यह स्मृति में केवल कृत्रिम रिकॉर्ड तैयार करता है और कहीं डेटा नहीं भेजता।" },
           { q: "क्या अनुपलब्ध साक्ष्य के साथ आगे बढ़ सकता हूँ?", a: "हाँ। अनुपलब्ध साक्ष्य मार्गदर्शन है, असफलता नहीं। जो है उसके साथ आधिकारिक माध्यम पर शीघ्र रिपोर्ट करें।" },
@@ -925,6 +1023,18 @@ export const COPY = {
         ],
         links: ["officialHome", "officialComplaint", "officialTrack", "officialSuspectSearch", "officialSuspectReport"]
       },
+      "learning-corner": {
+        eyebrow: "लर्निंग कॉर्नर",
+        title: "मार्गदर्शन, पुस्तिकाएँ, सलाह और सार्वजनिक सीख सामग्री।",
+        intro: "यहाँ व्यावहारिक विषय चुनें, फिर नवीनता या आधिकारिक प्रक्रिया के लिए मूल NCRP गंतव्य उपयोग करें।",
+        items: [
+          { title: "नागरिक पुस्तिकाएँ और FAQ", body: "आधिकारिक रिपोर्टिंग कदम, सामान्य प्रश्न और तैयार रखने वाली जानकारी समझें।" },
+          { title: "सलाह और सुरक्षा", body: "वर्तमान चेतावनी, सत्यापन आदतें और सामान्य सामाजिक दबाव देखें।" },
+          { title: "प्रशिक्षण और मीडिया", body: "आधिकारिक प्रशिक्षण, वीडियो, रेडियो, गैलरी और दैनिक डाइजेस्ट पाएँ।" },
+          { title: "सुलभ जानकारी", body: "स्क्रीन रीडर जानकारी, सार्वजनिक सूचनाएँ और मूल दस्तावेज़ उनके स्रोत पृष्ठ पर खोलें।" }
+        ],
+        links: ["officialManuals", "officialFaq", "officialAdvisories", "officialSafety", "officialTraining", "officialVideos", "officialScreenReader", "officialRtiNotice"]
+      },
       guides: {
         eyebrow: "मार्गदर्शिका और साक्ष्य",
         title: "मूल रिकॉर्ड बदले बिना तथ्य तैयार करें।",
@@ -1074,6 +1184,12 @@ export const COPY = {
       services: "सेवाएँ",
       learning: "सीख",
       project: "परियोजना और नीतियाँ",
+      official: "आधिकारिक नीतियाँ और सूचनाएँ",
+      feedback: "प्रतिक्रिया",
+      websitePolicy: "वेबसाइट नीतियाँ",
+      privacy: "CyberDost गोपनीयता नीति",
+      disclaimer: "अस्वीकरण",
+      notices: "RTI सार्वजनिक सूचना",
       urgent: "वास्तविक घटना? 1930 पर स्वयं कॉल करें और cybercrime.gov.in उपयोग करें।",
       boundary: "कोई अपलोड नहीं। कोई वास्तविक कॉल नहीं। कोई बाहरी सबमिशन नहीं। कोई सरकारी स्थिति नहीं।",
       imageAlt: ""

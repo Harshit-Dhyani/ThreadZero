@@ -5,6 +5,7 @@ import test from "node:test";
 import { fileURLToPath } from "node:url";
 
 import { CONTENT_ROUTES } from "../core/flow-core.mjs";
+import { PORTAL_ROUTES } from "../core/portal-routes.mjs";
 import { COPY, assertCatalogParity } from "./copy.js";
 
 const siteRoot = path.dirname(fileURLToPath(import.meta.url));
@@ -13,8 +14,12 @@ const read = (relativePath) => readFile(path.join(repoRoot, relativePath), "utf8
 
 test("the static portal preserves its bilingual, safety, and asset contracts", async () => {
   assert.equal(assertCatalogParity(), true);
-  assert.deepEqual(Object.keys(COPY.en.content).sort(), [...CONTENT_ROUTES].filter((route) => route !== "track").sort());
   assert.deepEqual(Object.keys(COPY.hi.content).sort(), Object.keys(COPY.en.content).sort());
+  assert.equal(CONTENT_ROUTES.length, PORTAL_ROUTES.length);
+  for (const route of PORTAL_ROUTES) {
+    assert.ok(route.label.en && route.label.hi);
+    for (const field of route.fields) assert.ok(field.label.en && field.label.hi);
+  }
 
   const [html, css, app, copySource, manifestSource] = await Promise.all([
     read("site/index.html"),
@@ -25,8 +30,8 @@ test("the static portal preserves its bilingual, safety, and asset contracts", a
   ]);
   const publicSource = [html, css, app, copySource].join("\n");
 
-  assert.equal((app.match(/data-home-section="\d+"/g) || []).length, 10);
-  for (let index = 1; index <= 10; index += 1) assert.match(app, new RegExp(`data-home-section="${index}"`));
+  assert.equal((app.match(/data-home-section="\d+"/g) || []).length, 7);
+  for (let index = 1; index <= 7; index += 1) assert.match(app, new RegExp(`data-home-section="${index}"`));
   assert.match(html, /<header[\s>]/);
   assert.match(html, /<main id="main-content"/);
   assert.match(html, /<footer[\s>]/);
@@ -35,11 +40,16 @@ test("the static portal preserves its bilingual, safety, and asset contracts", a
   assert.match(app, /class="service-menu/);
   assert.match(app, /Register a complaint|complaintMenu/);
   assert.match(app, /Learning Corner|learningMenu/);
+  assert.match(app, /data-service-form/);
+  assert.match(app, /sourcePanel\(content\.sources\)/);
   assert.match(css, /img\s*\{[^}]*height:\s*auto/s);
   assert.match(app, /let routeErrors = \[\];/);
   assert.match(app, /let eventErrors = \[\];/);
   assert.match(app, /let tracker = \{ value: DEMO\.reportReference, status: "idle" \};/);
   assert.doesNotMatch(app, /concept-pill/);
+  assert.doesNotMatch(app, /menuOfficial/);
+  assert.equal((app.match(/target="_blank"/g) || []).length, 1);
+  assert.doesNotMatch(app, /<form[^>]+action=/i);
 
   for (const forbidden of [/\btel:/i, /\bmailto:/i, /type=["']file["']/i, /\blocalStorage\b/, /\bsessionStorage\b/, /\bfetch\s*\(/, /\bXMLHttpRequest\b/, /\bWebSocket\b/, /ThreadZero/i]) {
     assert.doesNotMatch(publicSource, forbidden);

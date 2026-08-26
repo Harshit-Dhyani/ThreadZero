@@ -1,5 +1,6 @@
-import { COPY, assertCatalogParity } from "./copy.js";
+import { COPY, assertCatalogParity } from "./copy.js?v=20260826a";
 import { DEMO, STEPS } from "../core/demo-data.mjs";
+import { ROUTE_BY_ID, localizeRoute } from "../core/portal-routes.mjs";
 import {
   CONTENT_ROUTES,
   createInitialState,
@@ -33,7 +34,11 @@ const OFFICIAL_DESTINATIONS = Object.freeze({
   officialComplaint: { url: "https://cybercrime.gov.in/Webform/Index.aspx", en: "Official complaint entry", hi: "आधिकारिक शिकायत प्रवेश" },
   officialTrack: { url: "https://cybercrime.gov.in/Webform/chkackstatus.aspx", en: "Official complaint tracking", hi: "आधिकारिक शिकायत ट्रैकिंग" },
   officialSuspectSearch: { url: "https://cybercrime.gov.in/Webform/suspect_search_repository.aspx", en: "Official suspect identifier search", hi: "आधिकारिक संदिग्ध पहचान खोज" },
+  officialSuspectWebsite: { url: "https://cybercrime.gov.in/Webform/suspect_search_websites.aspx", en: "Check a suspect website or app", hi: "संदिग्ध वेबसाइट या ऐप जाँचें" },
   officialSuspectReport: { url: "https://cybercrime.gov.in/Webform/cyber_suspect.aspx", en: "Official suspect reporting", hi: "आधिकारिक संदिग्ध रिपोर्टिंग" },
+  officialReportAbuse: { url: "https://cybercrime.gov.in/Webform/report_abuse_social_media.aspx", en: "Report abuse to a social platform", hi: "सोशल प्लेटफ़ॉर्म को दुरुपयोग रिपोर्ट करें" },
+  officialTafcop: { url: "https://tafcop.sancharsaathi.gov.in/telecomUser/", en: "Check mobile connections with TAFCOP", hi: "TAFCOP पर मोबाइल कनेक्शन जाँचें" },
+  officialGac: { url: "https://gac.gov.in/", en: "File an appeal with GAC", hi: "GAC में अपील दर्ज करें" },
   officialManuals: { url: "https://cybercrime.gov.in/Webform/Citizen_Manual.aspx", en: "Citizen manuals", hi: "नागरिक पुस्तिकाएँ" },
   officialFaq: { url: "https://cybercrime.gov.in/Webform/FAQ.aspx", en: "NCRP FAQ", hi: "NCRP सामान्य प्रश्न" },
   officialAdvisories: { url: "https://cybercrime.gov.in/Webform/Advisory.aspx", en: "NCRP advisories", hi: "NCRP सलाह" },
@@ -48,6 +53,7 @@ const OFFICIAL_DESTINATIONS = Object.freeze({
   officialVolunteerConcept: { url: "https://cybercrime.gov.in/Webform/cyber_volunteers_concept.aspx", en: "Cyber Volunteer programme", hi: "साइबर स्वयंसेवक कार्यक्रम" },
   officialVolunteerTerms: { url: "https://cybercrime.gov.in/Webform/cyber_volunteers_TnC.aspx", en: "Cyber Volunteer terms", hi: "साइबर स्वयंसेवक नियम" },
   officialVolunteerInstructions: { url: "https://cybercrime.gov.in/Webform/CyberVolunteerinstruction.aspx", en: "Cyber Volunteer instructions", hi: "साइबर स्वयंसेवक निर्देश" },
+  officialVolunteerUnlawful: { url: "https://cybercrime.gov.in/Webform/about_unlawful_content.aspx", en: "Unlawful-content guidance", hi: "गैरकानूनी सामग्री मार्गदर्शन" },
   officialVolunteerLogin: { url: "https://cybercrime.gov.in/Webform/crmcondivol.aspx?vol=1", en: "Official volunteer login", hi: "आधिकारिक स्वयंसेवक लॉगिन" },
   officialContacts: { url: "https://cybercrime.gov.in/Webform/Crime_NodalGrivanceList.aspx", en: "Nodal and grievance contacts", hi: "नोडल और शिकायत संपर्क" },
   officialFeedback: { url: "https://cybercrime.gov.in/Webform/Crime_Feedback.aspx", en: "Official portal feedback", hi: "आधिकारिक पोर्टल प्रतिक्रिया" },
@@ -55,7 +61,8 @@ const OFFICIAL_DESTINATIONS = Object.freeze({
   officialPolicies: { url: "https://cybercrime.gov.in/Webform/Wbsitepolice.aspx", en: "NCRP website policies", hi: "NCRP वेबसाइट नीतियाँ" },
   officialDisclaimer: { url: "https://cybercrime.gov.in/Webform/Disclaimer.aspx", en: "NCRP disclaimer", hi: "NCRP अस्वीकरण" },
   officialPrivacy: { url: "https://cybercrime.gov.in/Webform/privacy_policy.aspx", en: "CyberDost privacy policy", hi: "CyberDost गोपनीयता नीति" },
-  officialRtiNotice: { url: "https://cybercrime.gov.in/UploadMedia/PublicNotice.pdf", en: "RTI public notice", hi: "RTI सार्वजनिक सूचना" }
+  officialRtiNotice: { url: "https://cybercrime.gov.in/UploadMedia/PublicNotice.pdf", en: "RTI public notice", hi: "RTI सार्वजनिक सूचना" },
+  officialScreenReader: { url: "https://www.nvaccess.org/download/", en: "NVDA screen reader", hi: "NVDA स्क्रीन रीडर" }
 });
 
 const IMAGE_DIMENSIONS = Object.freeze({
@@ -87,6 +94,7 @@ let eventEditor = null;
 let eventErrors = [];
 let customEventCounter = 1;
 let dialogReturnFocus = null;
+let serviceForms = Object.create(null);
 
 function copy() {
   return COPY[language];
@@ -125,6 +133,20 @@ function serviceMenu(label, content, className = "") {
 
 function menuGroup(title, links) {
   return `<div class="service-menu-group"><strong>${esc(title)}</strong>${links.join("")}</div>`;
+}
+
+function menuRoute(route, title, description) {
+  return routeLink(route, `<span><strong>${esc(title)}</strong><small>${esc(description)}</small></span><span aria-hidden="true">→</span>`, "service-menu-link service-menu-action raw-label");
+}
+
+function routeLabel(route) {
+  return localizeRoute(ROUTE_BY_ID[route], language)?.label || route;
+}
+
+function sourcePanel(keys = []) {
+  const c = copy();
+  if (!keys.length) return "";
+  return `<section class="source-panel" data-source-panel><div><p class="eyebrow">${esc(c.common.source)}</p><h2>${esc(c.common.officialBoundary)}</h2><p>${esc(c.common.sourceNote)}</p></div><div class="official-directory">${keys.map((key) => officialLink(key, "directory-official-link")).join("")}</div></section>`;
 }
 
 function closeServiceMenus(except = null) {
@@ -166,14 +188,22 @@ function renderShell() {
   const primaryNav = document.querySelector("[data-primary-nav]");
   primaryNav.setAttribute("aria-label", c.nav.primary);
   const complaintMenu = serviceMenu(c.nav.complaint, `
-    ${menuGroup(c.nav.conceptGroup, [routeLink("act-now", c.nav.prepareDemo, "service-menu-link")])}
-    ${menuGroup(c.nav.officialGroup, [
-      officialAnchor("officialComplaint", c.nav.financialFraud, "service-menu-link service-menu-official"),
-      officialAnchor("officialComplaint", c.nav.womenChildren, "service-menu-link service-menu-official"),
-      officialAnchor("officialComplaint", c.nav.otherCrime, "service-menu-link service-menu-official")
-    ])}
-    <small class="service-menu-note">${esc(c.common.lastChecked)}</small>`, "complaint-menu");
+    ${menuGroup(routeLabel("complaints"), [
+      menuRoute("women-children", routeLabel("women-children"), c.nav.womenChildrenAnonymousNote),
+      menuRoute("act-now", c.nav.financialFraud, c.nav.financialFraudNote),
+      menuRoute("other-cybercrime", routeLabel("other-cybercrime"), c.nav.otherCrimeNote)
+    ])}`, "complaint-menu");
+  const suspectMenu = serviceMenu(c.nav.suspect, `
+    ${menuGroup(routeLabel("official-tools"), [
+      menuRoute("check-identifier", routeLabel("check-identifier"), c.nav.checkIdentifiersNote),
+      menuRoute("check-website", routeLabel("check-website"), c.nav.checkWebsiteNote),
+      menuRoute("report-suspect", routeLabel("report-suspect"), c.nav.reportSuspectNote),
+      menuRoute("report-abuse", routeLabel("report-abuse"), c.nav.reportAbuseNote),
+      menuRoute("mobile-connections", routeLabel("mobile-connections"), c.nav.tafcopNote),
+      menuRoute("appeal", routeLabel("appeal"), c.nav.gacNote)
+    ])}`, "suspect-menu");
   const learningMenu = serviceMenu(c.nav.learning, menuGroup(c.nav.learning, [
+    routeLink("learning-corner", c.nav.learningOverview, "service-menu-link"),
     routeLink("guides", c.nav.guides, "service-menu-link"),
     routeLink("advisories", c.content.advisories.eyebrow, "service-menu-link"),
     routeLink("safety", c.content.safety.eyebrow, "service-menu-link"),
@@ -186,8 +216,8 @@ function renderShell() {
     ${routeLink("home", `<span aria-hidden="true">⌂</span><span class="sr-only">${esc(c.nav.home)}</span>`, "service-home raw-label")}
     ${complaintMenu}
     ${routeLink("track", c.nav.trackComplaint)}
-    ${routeLink("official-tools", c.nav.suspect)}
-    ${routeLink("volunteers", c.nav.volunteers)}
+    ${suspectMenu}
+    ${routeLink("volunteers", routeLabel("volunteers"))}
     ${learningMenu}
     ${routeLink("contact", c.nav.contact)}`;
 
@@ -195,7 +225,7 @@ function renderShell() {
     ${routeLink("home", `<span aria-hidden="true">⌂</span><span>${esc(c.nav.home)}</span>`, "mobile-nav-link raw-label")}
     ${routeLink("act-now", `<span aria-hidden="true">＋</span><span>${esc(c.nav.report)}</span>`, "mobile-nav-link raw-label")}
     ${routeLink("track", `<span aria-hidden="true">◎</span><span>${esc(c.nav.track)}</span>`, "mobile-nav-link raw-label")}
-    ${routeLink("guides", `<span aria-hidden="true">▤</span><span>${esc(c.nav.guides)}</span>`, "mobile-nav-link raw-label")}
+    ${routeLink("learning-corner", `<span aria-hidden="true">▤</span><span>${esc(c.nav.learning)}</span>`, "mobile-nav-link raw-label")}
     <button class="mobile-nav-link" type="button" data-open-more aria-haspopup="dialog">
       <span aria-hidden="true">•••</span><span>${esc(c.nav.more)}</span>
     </button>`;
@@ -204,9 +234,9 @@ function renderShell() {
   document.querySelector("[data-more-close]").setAttribute("aria-label", c.nav.closeMenu);
   const moreGroup = (title, links) => `<section class="more-group"><h3>${esc(title)}</h3><div>${links.map(([route, label]) => routeLink(route, label, "more-link")).join("")}</div></section>`;
   document.querySelector("[data-more-links]").innerHTML = `
-    ${moreGroup(c.nav.reportTrackGroup, [["act-now", c.nav.report], ["track", c.nav.track], ["official-tools", c.nav.resources]])}
-    ${moreGroup(c.nav.learning, [["guides", c.nav.guides], ["advisories", c.content.advisories.eyebrow], ["safety", c.content.safety.eyebrow], ["awareness", c.content.awareness.eyebrow], ["daily-digest", c.content["daily-digest"].eyebrow], ["training", c.content.training.eyebrow], ["media", c.content.media.eyebrow]])}
-    ${moreGroup(c.nav.helpGroup, [["volunteers", c.content.volunteers.eyebrow], ["faq", c.content.faq.eyebrow], ["contact", c.content.contact.eyebrow], ["policies", c.content.policies.eyebrow], ["about", c.content.about.eyebrow]])}`;
+    ${moreGroup(c.nav.reportTrackGroup, [["complaints", routeLabel("complaints")], ["act-now", c.nav.report], ["track", c.nav.track], ["official-tools", routeLabel("official-tools")]])}
+    ${moreGroup(c.nav.learning, [["learning-corner", c.nav.learningOverview], ["guides", c.nav.guides], ["advisories", c.content.advisories.eyebrow], ["safety", c.content.safety.eyebrow], ["awareness", c.content.awareness.eyebrow], ["daily-digest", c.content["daily-digest"].eyebrow], ["training", c.content.training.eyebrow], ["media", c.content.media.eyebrow]])}
+    ${moreGroup(c.nav.helpGroup, [["volunteers", routeLabel("volunteers")], ["faq", routeLabel("faq")], ["contact", routeLabel("contact")], ["feedback", routeLabel("feedback")], ["policies", routeLabel("policies")], ["privacy", routeLabel("privacy")], ["disclaimer", routeLabel("disclaimer")], ["notices", routeLabel("notices")], ["about", routeLabel("about")]])}`;
 
   document.querySelector("[data-dialog-title]").textContent = c.flow.submit.dialogTitle;
   document.querySelector("[data-dialog-body]").textContent = c.flow.submit.dialogBody;
@@ -218,6 +248,7 @@ function renderShell() {
 function renderFooter() {
   const c = copy();
   const group = (title, links) => `<div class="footer-group"><strong>${esc(title)}</strong>${links.map(([route, label]) => routeLink(route, label)).join("")}</div>`;
+  const officialGroup = (title, links) => `<div class="footer-group"><strong>${esc(title)}</strong>${links.map(([key, label]) => officialAnchor(key, label, "footer-link-official")).join("")}</div>`;
   document.querySelector("[data-shell-footer]").innerHTML = `
     <div class="footer-media" aria-hidden="true">${picture("footer-evidence-thread-texture-v1", "", "footer-picture")}</div>
     <div class="footer-grid">
@@ -226,8 +257,9 @@ function renderFooter() {
         <p>${esc(c.footer.body)}</p>
       </div>
       ${group(c.footer.services, [["act-now", c.nav.report], ["track", c.nav.track], ["official-tools", c.nav.resources], ["faq", c.nav.moreTitle]])}
-      ${group(c.footer.learning, [["guides", c.nav.guides], ["advisories", c.content.advisories.eyebrow], ["safety", c.content.safety.eyebrow], ["training", c.content.training.eyebrow]])}
-      ${group(c.footer.project, [["about", c.nav.about], ["contact", c.content.contact.eyebrow], ["policies", c.content.policies.eyebrow], ["volunteers", c.content.volunteers.eyebrow]])}
+      ${group(c.footer.learning, [["learning-corner", c.nav.learning], ["guides", c.nav.guides], ["advisories", c.content.advisories.eyebrow], ["training", c.content.training.eyebrow]])}
+      ${group(c.footer.project, [["contact", c.content.contact.eyebrow], ["policies", c.content.policies.eyebrow], ["about", c.nav.about], ["volunteers", c.content.volunteers.eyebrow]])}
+      ${officialGroup(c.footer.official, [["officialFeedback", c.footer.feedback], ["officialPolicies", c.footer.websitePolicy], ["officialPrivacy", c.footer.privacy], ["officialDisclaimer", c.footer.disclaimer], ["officialRtiNotice", c.footer.notices]])}
     </div>
     <div class="footer-truth">
       <p>${esc(c.footer.urgent)}</p>
@@ -246,19 +278,23 @@ function renderHome() {
     impersonation: "advisory-impersonation-v1"
   };
 
+  const complaintRoutes = ["act-now", "women-children", "other-cybercrime"];
+  const complaintPath = (item, index) => routeLink(item.route || complaintRoutes[index], `<strong>${esc(item.title)}</strong><small>${esc(item.body)}</small><span aria-hidden="true">→</span>`, "complaint-path raw-label");
+
   return `
-    <section class="home-hero" data-home-section="1">
+    <section class="home-hero civic-entry" data-home-section="1">
       <div class="hero-copy">
         <p class="eyebrow eyebrow-light">${esc(h.hero.eyebrow)}</p>
         <h1 tabindex="-1" data-focus-target>${esc(h.hero.title)}</h1>
         <p class="hero-intro">${esc(h.hero.intro)}</p>
         <div class="button-row">
           ${routeLink("act-now", `${esc(h.hero.primary)} <span aria-hidden="true">→</span>`, "button button-urgent raw-label")}
-          ${routeLink("track", `${esc(h.hero.secondary)} <span aria-hidden="true">→</span>`, "button button-ghost raw-label")}
+          ${routeLink("complaints", routeLabel("complaints"), "button button-ghost")}
         </div>
         <p class="hero-disclosure">${esc(c.meta.disclosure)}</p>
       </div>
       <div class="hero-media">${picture("hero-civic-evidence-v1", h.hero.imageAlt, "hero-picture", true)}</div>
+      <nav class="complaint-paths" aria-label="${esc(h.hero.pathsLabel)}">${h.hero.paths.map(complaintPath).join("")}</nav>
     </section>
 
     <section class="urgent-band" data-home-section="2" aria-labelledby="urgent-title">
@@ -269,52 +305,37 @@ function renderHome() {
       <div class="urgent-separator" aria-hidden="true"></div>
       <div class="urgent-item">
         <span class="globe-symbol" aria-hidden="true">◎</span>
-        <div><h2>${esc(h.urgent.siteTitle)}</h2><p>${esc(h.urgent.siteBody)}</p>${officialLink("officialHome")}</div>
+        <div><h2>${esc(h.urgent.siteTitle)}</h2><p>${esc(h.urgent.siteBody)}</p>${routeLink("official-tools", routeLabel("official-tools"), "text-link")}</div>
       </div>
     </section>
 
-    <section class="section task-section" data-home-section="3" aria-labelledby="tasks-title">
+    <section class="section service-directory-section" data-home-section="3" aria-labelledby="tasks-title">
       <div class="section-heading compact-heading"><div><p class="eyebrow">${esc(h.tasks.eyebrow)}</p><h2 id="tasks-title">${esc(h.tasks.title)}</h2></div><p>${esc(h.tasks.intro)}</p></div>
       <div class="task-grid">${h.tasks.items.map((item, index) => routeLink(item.route, `${icon(index)}<span><strong>${esc(item.title)}</strong><small>${esc(item.body)}</small></span><b aria-hidden="true">→</b>`, "task-card raw-label")).join("")}</div>
     </section>
 
-    <section class="section prompt-section" data-home-section="4" aria-labelledby="prompt-title">
-      <div class="section-heading"><p class="eyebrow">${esc(h.prompt.eyebrow)}</p><h2 id="prompt-title">${esc(h.prompt.title)}</h2><p>${esc(h.prompt.intro)}</p></div>
-      <div class="three-column-list">${h.prompt.points.map((item, index) => `<article>${icon(index)}<h3>${esc(item.title)}</h3><p>${esc(item.body)}</p></article>`).join("")}</div>
-    </section>
-
-    <section class="section split-section mechanism-section" data-home-section="5" aria-labelledby="mechanism-title">
-      <div class="split-media">${picture("incident-thread-still-life-v1", h.mechanism.imageAlt, "section-picture")}</div>
-      <div class="split-copy"><p class="eyebrow">${esc(h.mechanism.eyebrow)}</p><h2 id="mechanism-title">${esc(h.mechanism.title)}</h2><p>${esc(h.mechanism.intro)}</p><ol class="thread-steps">${h.mechanism.steps.map((step, index) => `<li><span>${index + 1}</span><strong>${esc(step)}</strong></li>`).join("")}</ol></div>
-    </section>
-
-    <section class="section process-section" data-home-section="6" aria-labelledby="process-title">
-      <div class="process-layout">
-        <div class="process-copy"><p class="eyebrow">${esc(h.process.eyebrow)}</p><h2 id="process-title">${esc(h.process.title)}</h2><p>${esc(h.process.intro)}</p><div class="process-grid">${h.process.steps.map((item, index) => `<article>${icon(index)}<h3>${esc(item.title)}</h3><p>${esc(item.body)}</p></article>`).join("")}</div>${routeLink("act-now", `${esc(h.process.action)} <span aria-hidden="true">→</span>`, "button button-primary raw-label")}</div>
-        <div class="process-media">${picture("process-workspace-v1", h.process.imageAlt, "section-picture")}</div>
-      </div>
-    </section>
-
-    <section class="section split-section checklist-section" data-home-section="7" aria-labelledby="checklist-title">
+    <section class="section split-section checklist-section evidence-section" data-home-section="4" aria-labelledby="checklist-title">
       <div class="split-copy"><p class="eyebrow">${esc(h.checklist.eyebrow)}</p><h2 id="checklist-title">${esc(h.checklist.title)}</h2><p>${esc(h.checklist.intro)}</p><ul class="checklist">${h.checklist.items.map((item) => `<li><span aria-hidden="true">✓</span><div><strong>${esc(item.title)}</strong><p>${esc(item.body)}</p></div></li>`).join("")}</ul><p class="info-note">${esc(h.checklist.note)}</p></div>
       <div class="split-media">${picture("evidence-preparation-overhead-v1", h.checklist.imageAlt, "section-picture")}</div>
     </section>
 
-    <section class="section resources-section" data-home-section="8" aria-labelledby="resources-title">
-      <div class="section-heading"><p class="eyebrow">${esc(h.resources.eyebrow)}</p><h2 id="resources-title">${esc(h.resources.title)}</h2><p>${esc(h.resources.intro)}</p></div>
+    <section class="section resources-section learning-shelf" data-home-section="5" aria-labelledby="resources-title">
+      <div class="section-heading section-heading-action"><div><p class="eyebrow">${esc(h.resources.eyebrow)}</p><h2 id="resources-title">${esc(h.resources.title)}</h2><p>${esc(h.resources.intro)}</p></div>${routeLink("learning-corner", `${esc(h.resources.action)} <span aria-hidden="true">→</span>`, "button button-secondary raw-label")}</div>
       <div class="resource-grid">${h.resources.cards.map((item) => `<article class="resource-card">${picture(advisoryImage[item.image], "", "resource-picture")}<div><h3>${esc(item.title)}</h3><p>${esc(item.body)}</p>${routeLink(item.route, `${esc(c.common.learnMore)} <span aria-hidden="true">→</span>`, "text-link raw-label")}</div></article>`).join("")}</div>
-      <div class="source-row"><p>${esc(c.common.sourceNote)}</p>${officialLink("officialAdvisories")}</div>
+      <div class="source-row"><p>${esc(c.common.sourceNote)}</p>${routeLink("advisories", routeLabel("advisories"), "text-link")}</div>
     </section>
 
-    <section class="section after-section" data-home-section="9" aria-labelledby="after-title">
-      <div class="section-heading"><p class="eyebrow">${esc(h.after.eyebrow)}</p><h2 id="after-title">${esc(h.after.title)}</h2><p>${esc(h.after.intro)}</p></div>
-      <ol class="status-track">${h.after.states.map((item, index) => `<li><span aria-hidden="true">${index + 1}</span><div><strong>${esc(item.title)}</strong><p>${esc(item.body)}</p></div></li>`).join("")}</ol>
-      <p class="caution-note">${esc(h.after.caution)}</p>
+    <section class="section official-services-section" data-home-section="6" aria-labelledby="official-services-title">
+      <div class="section-heading"><p class="eyebrow">${esc(h.official.eyebrow)}</p><h2 id="official-services-title">${esc(h.official.title)}</h2><p>${esc(h.official.intro)}</p></div>
+      <div class="official-service-list">${h.official.items.map((item, index) => {
+        const routes = ["track", "check-identifier", "mobile-connections", "appeal"];
+        return `<article><div><h3>${esc(item.title)}</h3><p>${esc(item.body)}</p></div>${routeLink(routes[index], routeLabel(routes[index]), "button button-secondary")}</article>`;
+      }).join("")}</div>
     </section>
 
-    <section class="section help-section" data-home-section="10" aria-labelledby="help-title">
+    <section class="section help-section" data-home-section="7" aria-labelledby="help-title">
       <div class="section-heading"><p class="eyebrow">${esc(h.help.eyebrow)}</p><h2 id="help-title">${esc(h.help.title)}</h2><p>${esc(h.help.intro)}</p></div>
-      <div class="help-layout"><div class="faq-list">${h.help.faqs.map((item) => `<details><summary>${esc(item.q)}</summary><p>${esc(item.a)}</p></details>`).join("")}</div><nav class="directory" aria-label="${esc(h.help.title)}">${h.help.directory.map((item) => routeLink(item.route, `${esc(item.title)} <span aria-hidden="true">→</span>`, "directory-link raw-label")).join("")}${officialLink("officialHome", "button button-primary")}</nav></div>
+      <div class="help-layout"><div class="faq-list">${h.help.faqs.map((item) => `<details><summary>${esc(item.q)}</summary><p>${esc(item.a)}</p></details>`).join("")}</div><nav class="directory" aria-label="${esc(h.help.title)}">${h.help.directory.map((item) => routeLink(item.route, `${esc(item.title)} <span aria-hidden="true">→</span>`, "directory-link raw-label")).join("")}${routeLink("contact", routeLabel("contact"), "button button-primary")}</nav></div>
     </section>`;
 }
 
@@ -374,7 +395,7 @@ function flowProgress() {
     <div class="flow-official-card">
       <strong>${esc(c.common.actualIncident)}</strong>
       <p>${esc(c.common.callManually)}</p>
-      ${officialLink("officialHome")}
+      ${routeLink("official-tools", routeLabel("official-tools"), "text-link")}
     </div>
   </nav>`;
 }
@@ -411,7 +432,7 @@ function renderActNow() {
   return flowLayout(`${flowHeading(s)}${errorSummary()}
     <div class="urgent-guidance-card">
       <div><span class="urgent-symbol" aria-hidden="true">1930</span><strong>${esc(c.common.callManually)}</strong><small>${esc(c.common.noCall)}</small></div>
-      <div>${officialLink("officialHome", "button button-secondary")}</div>
+      <div>${routeLink("official-tools", routeLabel("official-tools"), "button button-secondary")}</div>
     </div>
     <div class="boundary-card"><h2>${esc(s.boundaryTitle)}</h2><p>${esc(s.boundaryBody)}</p><p class="truth-line">${esc(c.meta.disclosure)}</p></div>
     <form class="flow-form" data-route-form="act-now">
@@ -547,7 +568,7 @@ function renderNext() {
   return flowLayout(`${flowHeading(s)}
     <div class="reference-card"><span>${esc(c.common.syntheticReference)}</span><strong>${esc(DEMO.reportReference)}</strong><small>${esc(c.common.nothingSent)}</small><p>${esc(s.referenceHelp)}</p></div>
     <ol class="status-track compact-status">${s.states.map((item, index) => `<li class="${index === 0 ? "is-active" : ""}"><span aria-hidden="true">${index + 1}</span><div><strong>${esc(item.title)}</strong><p>${esc(item.body)}</p></div></li>`).join("")}</ol>
-    <div class="official-next"><div><strong>${esc(c.common.actualIncident)}</strong><p>${esc(c.common.callManually)}</p></div>${officialLink("officialHome", "button button-secondary")}</div>
+    <div class="official-next"><div><strong>${esc(c.common.actualIncident)}</strong><p>${esc(c.common.callManually)}</p></div>${routeLink("official-tools", routeLabel("official-tools"), "button button-secondary")}</div>
     <div class="flow-actions"><button class="button button-primary" type="button" data-reset-report>${esc(c.common.reset)}</button>${routeLink("track", c.nav.track, "button button-secondary")}</div>`, { hideBack: true });
 }
 
@@ -562,22 +583,77 @@ function renderTracker() {
       ${errorSummary(errors)}
       <form class="tracker-form" data-tracker-form novalidate><label for="demo-reference">${esc(t.label)}</label><div class="tracker-input-row"><input id="demo-reference" name="reference" type="text" value="${esc(tracker.value)}" placeholder="${esc(t.placeholder)}" autocomplete="off" spellcheck="false"${error ? ' aria-invalid="true" aria-describedby="tracker-error"' : ""}><button class="button button-primary" type="submit">${esc(t.submit)}</button></div>${error ? `<p class="field-error" id="tracker-error">${esc(error)}</p>` : ""}<p class="field-help">${esc(c.common.demoOnly)} · <strong>${esc(DEMO.reportReference)}</strong></p></form>
       ${tracker.status === "found" ? `<section class="tracker-result" tabindex="-1" aria-live="polite"><div class="tracker-banner"><div><span>${esc(c.common.syntheticReference)}</span><strong>${esc(DEMO.reportReference)}</strong></div><div class="tracker-banner-state"><span>${esc(t.found)}</span><strong>${esc(t.states[0].title)}</strong></div></div><ol class="status-track compact-status">${t.states.map((item, index) => `<li class="${index === 0 ? "is-active" : ""}"><span aria-hidden="true">${index + 1}</span><div><strong>${esc(item.title)}</strong><p>${esc(item.body)}</p></div></li>`).join("")}</ol><button class="button button-secondary" type="button" data-reset-tracker>${esc(t.reset)}</button></section>` : ""}
-      <section class="official-handoff"><div><p class="eyebrow">${esc(c.common.officialBoundary)}</p><h2>${esc(t.officialTitle)}</h2><p>${esc(t.officialBody)}</p></div>${officialLink("officialTrack", "button button-primary")}</section>
+      ${sourcePanel(["officialTrack"])}
     </div>
   </div>`;
 }
 
+function serviceUi() {
+  return language === "hi" ? {
+    required: "आवश्यक", submit: "स्थानीय रूप से तैयार करें", reset: "रीसेट", edit: "संपादित करें", back: "सेवा हब पर वापस जाएँ",
+    errorsTitle: "कृपया इन समस्याओं को ठीक करें", requiredError: "यह फ़ील्ड भरें।", invalidError: "दिया गया सिंथेटिक उदाहरण उपयोग करें।",
+    shortError: "थोड़ा और विवरण जोड़ें।", prepared: "केवल इस ब्राउज़र सत्र में तैयार", nothingSent: "कुछ भी भेजा, अपलोड या सुरक्षित नहीं किया गया।",
+    example: "डेमो उदाहरण", open: "खोलें"
+  } : {
+    required: "Required", submit: "Prepare locally", reset: "Reset", edit: "Edit", back: "Back to service hub",
+    errorsTitle: "Please fix these problems", requiredError: "Complete this field.", invalidError: "Use the documented synthetic example.",
+    shortError: "Add a little more detail.", prepared: "Prepared only for this browser session", nothingSent: "Nothing was sent, uploaded, or saved.",
+    example: "Demo example", open: "Open"
+  };
+}
+
+function serviceRecord(route) {
+  return serviceForms[route] ||= { values: Object.create(null), errors: [], submitted: false };
+}
+
+function serviceErrorSummary(record) {
+  if (!record.errors.length) return "";
+  const ui = serviceUi();
+  return `<div id="errorSummary" class="error-summary" role="alert" tabindex="-1"><h2>${esc(ui.errorsTitle)}</h2><ul>${record.errors.map((error) => `<li><a href="#service-${esc(error.name)}">${esc(error.message)}</a></li>`).join("")}</ul></div>`;
+}
+
+function contentHeader(content) {
+  const media = content.id === "guides" ? picture("guides-resource-still-life-v1", "", "content-hero-picture") : "";
+  return `<header class="content-hero${media ? " has-media" : ""}"><div><p class="eyebrow">${esc(content.eyebrow)}</p><h1 tabindex="-1" data-focus-target>${esc(content.title)}</h1><p>${esc(content.intro)}</p></div>${media}</header>`;
+}
+
+function contentItems(content, className = "content-grid") {
+  const ui = serviceUi();
+  return `<section class="${esc(className)}" aria-label="${esc(content.title)}">${content.items.map((item, index) => `<article><span class="number-icon" aria-hidden="true">${index + 1}</span><h2>${esc(item.title)}</h2><p>${esc(item.body)}</p>${item.route ? routeLink(item.route, `${esc(ui.open)} <span aria-hidden="true">→</span>`, "text-link raw-label") : ""}</article>`).join("")}</section>`;
+}
+
+function serviceField(field, record) {
+  const ui = serviceUi();
+  const value = record.values[field.name] || "";
+  const error = record.errors.find((candidate) => candidate.name === field.name);
+  const errorMarkup = error ? `<p class="field-error" id="service-${esc(field.name)}-error">${esc(error.message)}</p>` : "";
+  const invalid = error ? ` aria-invalid="true" aria-describedby="service-${esc(field.name)}-error"` : "";
+  const common = `id="service-${esc(field.name)}" name="${esc(field.name)}"${field.required ? " required" : ""}${invalid}`;
+  const example = field.example ? `<small class="field-help">${esc(ui.example)}: <code>${esc(field.example)}</code></small>` : "";
+  let control = "";
+  if (field.type === "textarea") control = `<textarea ${common} rows="5" minlength="${field.minLength || 1}">${esc(value)}</textarea>`;
+  else if (field.type === "select") control = `<select ${common}><option value="">—</option>${field.options.map((option) => `<option value="${esc(option)}"${selected(value === option)}>${esc(option)}</option>`).join("")}</select>`;
+  else control = `<input ${common} type="${esc(field.type)}" value="${esc(value)}" autocomplete="off" spellcheck="false">`;
+  return `<div class="field"><label for="service-${esc(field.name)}">${esc(field.label)}${field.required ? ` <span>${esc(ui.required)}</span>` : ""}</label>${control}${example}${errorMarkup}</div>`;
+}
+
+function renderSyntheticService(content) {
+  const ui = serviceUi();
+  const record = serviceRecord(content.id);
+  if (record.submitted) {
+    const visibleValues = content.fields.filter((field) => field.type !== "password" && record.values[field.name]);
+    return `<section class="service-result" tabindex="-1" aria-live="polite"><p class="eyebrow">${esc(ui.prepared)}</p><h2>${esc(content.result)}</h2><p>${esc(ui.nothingSent)}</p><dl>${visibleValues.map((field) => `<div><dt>${esc(field.label)}</dt><dd>${esc(record.values[field.name])}</dd></div>`).join("")}</dl><div class="button-row"><button class="button button-primary" type="button" data-service-edit="${esc(content.id)}">${esc(ui.edit)}</button><button class="button button-secondary" type="button" data-service-reset="${esc(content.id)}">${esc(ui.reset)}</button></div></section>`;
+  }
+  return `${serviceErrorSummary(record)}<form class="service-form" data-service-form="${esc(content.id)}" novalidate autocomplete="off"><div class="form-grid">${content.fields.map((field) => serviceField(field, record)).join("")}</div><p class="info-note">${esc(ui.nothingSent)}</p><div class="flow-actions"><button class="button button-primary" type="submit">${esc(ui.submit)} <span aria-hidden="true">→</span></button><button class="button button-secondary" type="button" data-service-reset="${esc(content.id)}">${esc(ui.reset)}</button></div></form>`;
+}
+
 function renderContent(route) {
-  const c = copy();
-  const content = c.content[route];
-  const media = route === "guides" ? picture("guides-resource-still-life-v1", "", "content-hero-picture") : "";
-  return `<div class="content-page">
-    <header class="content-hero${media ? " has-media" : ""}"><div><p class="eyebrow">${esc(content.eyebrow)}</p><h1 tabindex="-1" data-focus-target>${esc(content.title)}</h1><p>${esc(content.intro)}</p></div>${media}</header>
-    <div class="content-container">
-      <section class="content-grid" aria-label="${esc(content.title)}">${content.items.map((item, index) => `<article><span class="number-icon" aria-hidden="true">${index + 1}</span><h2>${esc(item.title)}</h2><p>${esc(item.body)}</p></article>`).join("")}</section>
-      <section class="source-panel"><div><p class="eyebrow">${esc(c.common.source)}</p><h2>${esc(c.common.officialBoundary)}</h2><p>${esc(c.common.sourceNote)}</p></div><div class="official-directory">${content.links.map((key) => officialLink(key, "directory-official-link")).join("")}</div></section>
-    </div>
-  </div>`;
+  const content = localizeRoute(ROUTE_BY_ID[route], language);
+  if (!content) return renderHome();
+  const body = content.composition === "form"
+    ? renderSyntheticService(content)
+    : contentItems(content, content.composition === "hub" ? "service-hub-grid" : content.composition === "directory" ? "resource-directory-grid" : content.composition === "legal" ? "legal-grid" : "content-grid");
+  return `<div class="content-page" data-composition="${esc(content.composition)}">${contentHeader(content)}<div class="content-container">${body}${sourcePanel(content.sources)}</div></div>`;
 }
 
 function renderRoute() {
@@ -734,6 +810,33 @@ function handleTracker(form) {
   }
 }
 
+function handleServiceForm(form) {
+  const route = form.dataset.serviceForm;
+  const content = localizeRoute(ROUTE_BY_ID[route], language);
+  if (!content) return;
+  const ui = serviceUi();
+  const record = serviceRecord(route);
+  const data = new FormData(form);
+  record.errors = [];
+  for (const field of content.fields) {
+    const value = String(data.get(field.name) || "").trim();
+    record.values[field.name] = value;
+    let message = "";
+    if (field.required && !value) message = ui.requiredError;
+    else if (value && field.minLength && value.length < field.minLength) message = ui.shortError;
+    else if (value && field.type === "email" && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) message = ui.invalidError;
+    else if (value && field.type === "url" && !/^https:\/\/[^\s]+$/i.test(value)) message = ui.invalidError;
+    else if (value && field.pattern && !new RegExp(field.pattern, "i").test(value)) message = ui.invalidError;
+    if (message) record.errors.push({ name: field.name, message });
+  }
+  record.submitted = record.errors.length === 0;
+  render();
+  if (record.submitted) {
+    document.querySelector(".service-result")?.focus();
+    announce(liveRegion, `${content.result}. ${ui.nothingSent}`);
+  } else document.querySelector("#errorSummary")?.focus();
+}
+
 function handleEventForm(form) {
   const c = copy();
   const data = new FormData(form);
@@ -829,6 +932,18 @@ function localizeFixtureState(nextLanguage) {
   }
 }
 
+function localizeServiceForms(nextLanguage) {
+  for (const [route, record] of Object.entries(serviceForms)) {
+    const definition = ROUTE_BY_ID[route];
+    if (!definition) continue;
+    for (const field of definition.fields) {
+      if (!field.options?.length || !record.values[field.name]) continue;
+      const index = field.options.findIndex((option) => option[language] === record.values[field.name]);
+      if (index >= 0) record.values[field.name] = field.options[index][nextLanguage];
+    }
+  }
+}
+
 document.addEventListener("click", (event) => {
   const routeAnchor = event.target.closest("[data-route-link]");
   if (routeAnchor) {
@@ -899,6 +1014,22 @@ document.addEventListener("click", (event) => {
     document.querySelector("#demo-reference")?.focus();
     return;
   }
+  const serviceReset = event.target.closest("[data-service-reset]");
+  if (serviceReset) {
+    const route = serviceReset.dataset.serviceReset;
+    serviceForms[route] = { values: Object.create(null), errors: [], submitted: false };
+    render();
+    document.querySelector("[data-service-form] input, [data-service-form] select, [data-service-form] textarea")?.focus();
+    announce(liveRegion, serviceUi().reset);
+    return;
+  }
+  const serviceEdit = event.target.closest("[data-service-edit]");
+  if (serviceEdit) {
+    serviceRecord(serviceEdit.dataset.serviceEdit).submitted = false;
+    render();
+    document.querySelector("[data-service-form] input, [data-service-form] select, [data-service-form] textarea")?.focus();
+    return;
+  }
 
   const eventButton = event.target.closest("[data-event-action]");
   if (eventButton) handleEventAction(eventButton);
@@ -921,11 +1052,13 @@ document.addEventListener("submit", (event) => {
   const routeForm = event.target.closest("[data-route-form]");
   const trackerForm = event.target.closest("[data-tracker-form]");
   const editorForm = event.target.closest("[data-event-form]");
-  if (!routeForm && !trackerForm && !editorForm) return;
+  const serviceForm = event.target.closest("[data-service-form]");
+  if (!routeForm && !trackerForm && !editorForm && !serviceForm) return;
   event.preventDefault();
   if (routeForm) handleRouteForm(routeForm);
   if (trackerForm) handleTracker(trackerForm);
   if (editorForm) handleEventForm(editorForm);
+  if (serviceForm) handleServiceForm(serviceForm);
 });
 
 document.addEventListener("input", (event) => {
@@ -938,6 +1071,8 @@ document.addEventListener("input", (event) => {
     }
   }
   if (event.target.id === "demo-reference") tracker.value = event.target.value;
+  const serviceForm = event.target.closest("[data-service-form]");
+  if (serviceForm && event.target.name) serviceRecord(serviceForm.dataset.serviceForm).values[event.target.name] = event.target.value;
 });
 
 document.addEventListener("change", (event) => {
@@ -945,6 +1080,7 @@ document.addEventListener("change", (event) => {
     const nextLanguage = event.target.value === "hi" ? "hi" : "en";
     if (nextLanguage !== language) {
       localizeFixtureState(nextLanguage);
+      localizeServiceForms(nextLanguage);
       language = nextLanguage;
       routeErrors = [];
       eventErrors = [];

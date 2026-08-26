@@ -1,12 +1,9 @@
 import { DEMO, STEPS } from "./demo-data.mjs";
+import { CONTENT_ROUTES } from "./portal-routes.mjs";
 
 export const HOME_ROUTE = "home";
 export const FLOW_ROUTES = Object.freeze([HOME_ROUTE, ...STEPS.map((step) => step.id)]);
-export const CONTENT_ROUTES = Object.freeze([
-  "track", "official-tools", "guides", "advisories", "safety", "awareness",
-  "daily-digest", "training", "media", "volunteers", "faq", "contact",
-  "policies", "about"
-]);
+export { CONTENT_ROUTES };
 export const ROUTES = Object.freeze([...FLOW_ROUTES, ...CONTENT_ROUTES]);
 const STEP_IDS = STEPS.map((step) => step.id);
 const copy = (value) => JSON.parse(JSON.stringify(value));

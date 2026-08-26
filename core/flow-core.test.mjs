@@ -1,5 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
+import { PORTAL_ROUTES, ROUTE_BY_ID } from "./portal-routes.mjs";
 
 import {
   CONTENT_ROUTES,
@@ -22,15 +23,16 @@ import {
 test("the deterministic report kernel preserves route guards and validation", () => {
   const state = createInitialState();
 
-  assert.deepEqual(ROUTES, [
-    "home", "act-now", "incident", "readiness", "details",
-    "evidence", "chronology", "review", "submit", "next",
-    "track", "official-tools", "guides", "advisories", "safety", "awareness",
-    "daily-digest", "training", "media", "volunteers", "faq", "contact",
-    "policies", "about"
-  ]);
+  assert.deepEqual(ROUTES, [...FLOW_ROUTES, ...PORTAL_ROUTES.map((route) => route.id)]);
   assert.deepEqual(FLOW_ROUTES, ROUTES.slice(0, 10));
-  assert.equal(CONTENT_ROUTES.length, 14);
+  assert.equal(CONTENT_ROUTES.length, 36);
+  assert.equal(new Set(CONTENT_ROUTES).size, CONTENT_ROUTES.length);
+  assert.equal(ROUTE_BY_ID.feedback.composition, "form");
+  for (const route of PORTAL_ROUTES) {
+    assert.ok(route.label.en && route.label.hi, `${route.id} needs bilingual labels`);
+    assert.ok(route.title.en && route.title.hi, `${route.id} needs bilingual titles`);
+    assert.ok(["hub", "guidance", "directory", "form", "status", "legal"].includes(route.composition));
+  }
   assert.equal(resolveRoute("#incident", state), "home");
   assert.equal(resolveRoute("#faq", state), "faq");
 
