@@ -114,8 +114,8 @@ export const COPY = {
         intro: "Local preparation tools stay separate from real government actions.",
         items: [
           { route: "act-now", title: "Prepare a report", body: "Organise a synthetic financial-fraud incident." },
-          { route: "track", title: "Track a complaint", body: "Try the demo tracker or open official tracking." },
-          { route: "official-tools", title: "Check or report a suspect", body: "Find official identifier, website, abuse, and appeal tools." },
+          { route: "track", title: "Track a complaint", body: "Use the deterministic demo tracker without leaving the portal." },
+          { route: "official-tools", title: "Check or report a suspect", body: "Use local identifier, website, abuse, and appeal simulations." },
           { route: "volunteers", title: "Cyber Volunteers", body: "Read the programme, terms, and registration guidance." },
           { route: "learning-corner", title: "Learning Corner", body: "Manuals, advisories, safety, training, and media." },
           { route: "contact", title: "Help and contact", body: "FAQ, feedback, grievance contacts, and notices." }
@@ -182,10 +182,10 @@ export const COPY = {
         title: "Use every portal tool without losing your place.",
         intro: "Checks, reporting practice, mobile-connection guidance, and appeal preparation now stay inside this local experience.",
         items: [
-          { key: "officialTrack", title: "Track a real complaint", body: "Use your official acknowledgement details on NCRP." },
-          { key: "officialSuspectSearch", title: "Check a suspect identifier", body: "Check supported mobile, email, bank, social, or UPI identifiers." },
-          { key: "officialTafcop", title: "Review mobile connections", body: "Use TAFCOP to review connections issued in your name." },
-          { key: "officialGac", title: "File an online-safety appeal", body: "Continue to the Grievance Appellate Committee." }
+          { key: "officialTrack", title: "Track a demo complaint", body: "Use the documented synthetic reference and illustrative states." },
+          { key: "officialSuspectSearch", title: "Check a synthetic identifier", body: "Practise checking a fictional email, mobile, account, or social handle." },
+          { key: "officialTafcop", title: "Review demo mobile connections", body: "Understand a TAFCOP-style result using fictional connections." },
+          { key: "officialGac", title: "Prepare an appeal draft", body: "Organise a fictional appeal without contacting GAC or a platform." }
         ]
       },
       after: {
@@ -712,8 +712,8 @@ export const COPY = {
         intro: "स्थानीय तैयारी टूल वास्तविक सरकारी कार्रवाइयों से अलग रहते हैं।",
         items: [
           { route: "act-now", title: "रिपोर्ट तैयार करें", body: "कृत्रिम वित्तीय धोखाधड़ी घटना व्यवस्थित करें।" },
-          { route: "track", title: "शिकायत ट्रैक करें", body: "डेमो ट्रैकर आजमाएँ या आधिकारिक ट्रैकिंग खोलें।" },
-          { route: "official-tools", title: "संदिग्ध जाँचें या रिपोर्ट करें", body: "पहचान, वेबसाइट, दुरुपयोग और अपील टूल पाएँ।" },
+          { route: "track", title: "शिकायत ट्रैक करें", body: "पोर्टल छोड़े बिना निश्चित डेमो ट्रैकर उपयोग करें।" },
+          { route: "official-tools", title: "संदिग्ध जाँचें या रिपोर्ट करें", body: "स्थानीय पहचान, वेबसाइट, दुरुपयोग और अपील सिमुलेशन उपयोग करें।" },
           { route: "volunteers", title: "साइबर स्वयंसेवक", body: "कार्यक्रम, नियम और पंजीकरण मार्गदर्शन पढ़ें।" },
           { route: "learning-corner", title: "लर्निंग कॉर्नर", body: "पुस्तिकाएँ, सलाह, सुरक्षा, प्रशिक्षण और मीडिया।" },
           { route: "contact", title: "सहायता और संपर्क", body: "FAQ, प्रतिक्रिया, शिकायत संपर्क और सूचनाएँ।" }
@@ -780,10 +780,10 @@ export const COPY = {
         title: "अपनी जगह छोड़े बिना हर पोर्टल टूल उपयोग करें।",
         intro: "जाँच, रिपोर्टिंग अभ्यास, मोबाइल-कनेक्शन मार्गदर्शन और अपील तैयारी अब इसी स्थानीय अनुभव में रहती है।",
         items: [
-          { key: "officialTrack", title: "वास्तविक शिकायत ट्रैक करें", body: "NCRP पर अपने आधिकारिक पावती विवरण उपयोग करें।" },
-          { key: "officialSuspectSearch", title: "संदिग्ध पहचानकर्ता जाँचें", body: "समर्थित मोबाइल, ईमेल, बैंक, सोशल या UPI पहचान जाँचें।" },
-          { key: "officialTafcop", title: "मोबाइल कनेक्शन देखें", body: "अपने नाम पर जारी कनेक्शन देखने हेतु TAFCOP उपयोग करें।" },
-          { key: "officialGac", title: "ऑनलाइन सुरक्षा अपील दर्ज करें", body: "शिकायत अपीलीय समिति पर आगे बढ़ें।" }
+          { key: "officialTrack", title: "डेमो शिकायत ट्रैक करें", body: "दिए गए सिंथेटिक संदर्भ और उदाहरणात्मक स्थितियाँ उपयोग करें।" },
+          { key: "officialSuspectSearch", title: "सिंथेटिक पहचानकर्ता जाँचें", body: "काल्पनिक ईमेल, मोबाइल, खाता या सोशल हैंडल जाँचें।" },
+          { key: "officialTafcop", title: "डेमो मोबाइल कनेक्शन देखें", body: "काल्पनिक कनेक्शन से TAFCOP-जैसा परिणाम समझें।" },
+          { key: "officialGac", title: "अपील मसौदा तैयार करें", body: "GAC या प्लेटफ़ॉर्म से संपर्क किए बिना काल्पनिक अपील व्यवस्थित करें।" }
         ]
       },
       after: {

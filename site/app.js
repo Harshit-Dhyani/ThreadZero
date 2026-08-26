@@ -256,9 +256,9 @@ function renderFooter() {
         <strong>${esc(c.footer.title)}</strong>
         <p>${esc(c.footer.body)}</p>
       </div>
-      ${group(c.footer.services, [["act-now", c.nav.report], ["track", c.nav.track], ["official-tools", c.nav.resources], ["faq", c.nav.moreTitle]])}
+      ${group(c.footer.services, [["complaints", routeLabel("complaints")], ["act-now", c.nav.report], ["track", c.nav.track], ["official-tools", routeLabel("official-tools")]])}
       ${group(c.footer.learning, [["learning-corner", c.nav.learning], ["guides", c.nav.guides], ["advisories", c.content.advisories.eyebrow], ["training", c.content.training.eyebrow]])}
-      ${group(c.footer.project, [["contact", c.content.contact.eyebrow], ["policies", c.content.policies.eyebrow], ["about", c.nav.about], ["volunteers", c.content.volunteers.eyebrow]])}
+      ${group(c.footer.project, [["contact", routeLabel("contact")], ["feedback", routeLabel("feedback")], ["policies", routeLabel("policies")], ["privacy", routeLabel("privacy")], ["disclaimer", routeLabel("disclaimer")], ["notices", routeLabel("notices")], ["about", c.nav.about], ["volunteers", routeLabel("volunteers")]])}
       ${officialGroup(c.footer.official, [["officialFeedback", c.footer.feedback], ["officialPolicies", c.footer.websitePolicy], ["officialPrivacy", c.footer.privacy], ["officialDisclaimer", c.footer.disclaimer], ["officialRtiNotice", c.footer.notices]])}
     </div>
     <div class="footer-truth">
