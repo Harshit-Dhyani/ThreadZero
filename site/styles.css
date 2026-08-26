@@ -2249,6 +2249,21 @@ h1[data-focus-target]:focus {
   min-width: 0;
 }
 
+.content-breadcrumb {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-bottom: 20px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.content-crumb {
+  color: var(--civic);
+  font-weight: 600;
+  text-underline-offset: 3px;
+}
+
 .content-hero h1 {
   max-width: 940px;
   margin-bottom: 14px;
