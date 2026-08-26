@@ -50,6 +50,14 @@ Reload starts a fresh synthetic report at Home. Current and completed steps are 
 
 ## Current delivery gate
 
-The rejected visual system has been removed. The repository is now at a three-territory first-viewport selection gate. The three artifacts must keep this product contract constant while changing composition, hierarchy, typography, visual medium, and trust strategy.
+The human-approved **Civic Evidence Service v1** direction supersedes the earlier three-territory selection gate. Its ten supplied boards are reference specifications, not production page images.
 
-Only a human-approved direction may receive responsive HTML proof, a design constitution, downstream section assets, or the complete route flow. No source check, generated image, or agent score may select the winner.
+The static implementation now includes:
+
+- the ten-section bilingual landing page;
+- the complete guarded report-preparation route contract;
+- the synthetic report tracker and fourteen unguarded public-information routes;
+- the approved responsive raster asset set and local fonts; and
+- deterministic flow, catalog, safety, and asset-integrity checks.
+
+Future visual changes must be versioned. They may not overwrite V1 reference evidence or generated masters, weaken the independent-concept qualifier, or introduce real submission behavior.
