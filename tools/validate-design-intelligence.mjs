@@ -5,7 +5,6 @@ import { readFile, stat } from 'node:fs/promises';
 const registry = JSON.parse(await readFile('design-intelligence/reference-registry.json', 'utf8'));
 const generated = JSON.parse(await readFile('design-intelligence/generated-assets.json', 'utf8'));
 const boards = JSON.parse(await readFile('design-intelligence/board-manifest.json', 'utf8'));
-const sketchesRequired = process.argv.includes('--sketches');
 
 assert.equal(registry.candidates.length, 36, 'expected 36 candidates');
 assert.ok(registry.statistics.inspected_deep >= 18, 'expected at least 18 deep inspections');
@@ -45,15 +44,15 @@ for (const board of boards.boards) {
   assert.equal(actualHash, board.sha256, board.id + ' hash mismatch');
 }
 
-if (sketchesRequired) {
-  assert.equal(generated.assets.length, 3, 'expected exactly three sketch assets');
-  assert.equal(new Set(generated.assets.map((asset) => asset.direction)).size, 3, 'directions must be unique');
-  for (const asset of generated.assets) {
-    assert.equal(asset.status, 'candidate', asset.id + ' must remain a candidate');
-    assert.equal(asset.approved, false, asset.id + ' must not be approved before human selection');
-    assert.equal(asset.used_in_production, false, asset.id + ' must not ship before human selection');
-    await stat(asset.production_path);
-  }
+const shipped = generated.assets.filter((asset) => asset.used_in_production);
+assert.equal(generated.assets.length, 12, 'expected three hero candidates and nine supporting assets');
+assert.equal(shipped.length, 10, 'expected ten approved production masters');
+for (const asset of shipped) {
+  assert.equal(asset.status, 'approved-v1', asset.id + ' must be approved');
+  const bytes = await readFile(asset.production_path);
+  const actualHash = createHash('sha256').update(bytes).digest('hex');
+  assert.equal(actualHash, asset.sha256, asset.id + ' production hash mismatch');
+  for (const responsivePath of asset.responsive_paths) await stat(responsivePath);
 }
 
 console.log('design intelligence contract: pass');
