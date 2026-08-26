@@ -1,6 +1,7 @@
 import { COPY, assertCatalogParity } from "./copy.js?v=20260826a";
 import { DEMO, STEPS } from "../core/demo-data.mjs";
 import { ROUTE_BY_ID, localizeRoute } from "../core/portal-routes.mjs";
+import { createServiceRecord, translateSelectValues, validateServiceValues } from "../core/service-form-core.mjs";
 import {
   CONTENT_ROUTES,
   createInitialState,
@@ -603,7 +604,7 @@ function serviceUi() {
 }
 
 function serviceRecord(route) {
-  return serviceForms[route] ||= { values: Object.create(null), errors: [], submitted: false };
+  return serviceForms[route] ||= createServiceRecord();
 }
 
 function serviceErrorSummary(record) {
@@ -817,18 +818,10 @@ function handleServiceForm(form) {
   const ui = serviceUi();
   const record = serviceRecord(route);
   const data = new FormData(form);
-  record.errors = [];
-  for (const field of content.fields) {
-    const value = String(data.get(field.name) || "").trim();
-    record.values[field.name] = value;
-    let message = "";
-    if (field.required && !value) message = ui.requiredError;
-    else if (value && field.minLength && value.length < field.minLength) message = ui.shortError;
-    else if (value && field.type === "email" && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) message = ui.invalidError;
-    else if (value && field.type === "url" && !/^https:\/\/[^\s]+$/i.test(value)) message = ui.invalidError;
-    else if (value && field.pattern && !new RegExp(field.pattern, "i").test(value)) message = ui.invalidError;
-    if (message) record.errors.push({ name: field.name, message });
-  }
+  const values = Object.fromEntries(content.fields.map((field) => [field.name, String(data.get(field.name) || "")]));
+  const validation = validateServiceValues(content.fields, values, { required: ui.requiredError, invalid: ui.invalidError, short: ui.shortError });
+  record.values = validation.normalized;
+  record.errors = validation.errors;
   record.submitted = record.errors.length === 0;
   render();
   if (record.submitted) {
@@ -936,11 +929,7 @@ function localizeServiceForms(nextLanguage) {
   for (const [route, record] of Object.entries(serviceForms)) {
     const definition = ROUTE_BY_ID[route];
     if (!definition) continue;
-    for (const field of definition.fields) {
-      if (!field.options?.length || !record.values[field.name]) continue;
-      const index = field.options.findIndex((option) => option[language] === record.values[field.name]);
-      if (index >= 0) record.values[field.name] = field.options[index][nextLanguage];
-    }
+    translateSelectValues(definition, record, language, nextLanguage);
   }
 }
 
@@ -1017,7 +1006,7 @@ document.addEventListener("click", (event) => {
   const serviceReset = event.target.closest("[data-service-reset]");
   if (serviceReset) {
     const route = serviceReset.dataset.serviceReset;
-    serviceForms[route] = { values: Object.create(null), errors: [], submitted: false };
+    serviceForms[route] = createServiceRecord();
     render();
     document.querySelector("[data-service-form] input, [data-service-form] select, [data-service-form] textarea")?.focus();
     announce(liveRegion, serviceUi().reset);
