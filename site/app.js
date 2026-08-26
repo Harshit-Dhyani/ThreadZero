@@ -176,7 +176,9 @@ function renderShell() {
     routeLink("awareness", c.content.awareness.eyebrow, "service-menu-link"),
     routeLink("daily-digest", c.content["daily-digest"].eyebrow, "service-menu-link"),
     routeLink("training", c.content.training.eyebrow, "service-menu-link"),
-    routeLink("media", c.content.media.eyebrow, "service-menu-link")
+    routeLink("media", c.content.media.eyebrow, "service-menu-link"),
+    routeLink("accessibility", routeLabel("accessibility"), "service-menu-link"),
+    routeLink("faq", routeLabel("faq"), "service-menu-link")
   ]), "learning-menu");
   primaryNav.innerHTML = `
     ${routeLink("home", `<span aria-hidden="true">⌂</span><span class="sr-only">${esc(c.nav.home)}</span>`, "service-home raw-label")}
@@ -201,7 +203,7 @@ function renderShell() {
   const moreGroup = (title, links) => `<section class="more-group"><h3>${esc(title)}</h3><div>${links.map(([route, label]) => routeLink(route, label, "more-link")).join("")}</div></section>`;
   document.querySelector("[data-more-links]").innerHTML = `
     ${moreGroup(c.nav.reportTrackGroup, [["complaints", routeLabel("complaints")], ["act-now", c.nav.report], ["track", c.nav.track], ["official-tools", routeLabel("official-tools")]])}
-    ${moreGroup(c.nav.learning, [["learning-corner", c.nav.learningOverview], ["guides", c.nav.guides], ["advisories", c.content.advisories.eyebrow], ["safety", c.content.safety.eyebrow], ["awareness", c.content.awareness.eyebrow], ["daily-digest", c.content["daily-digest"].eyebrow], ["training", c.content.training.eyebrow], ["media", c.content.media.eyebrow]])}
+    ${moreGroup(c.nav.learning, [["learning-corner", c.nav.learningOverview], ["guides", c.nav.guides], ["advisories", c.content.advisories.eyebrow], ["safety", c.content.safety.eyebrow], ["awareness", c.content.awareness.eyebrow], ["daily-digest", c.content["daily-digest"].eyebrow], ["training", c.content.training.eyebrow], ["media", c.content.media.eyebrow], ["accessibility", routeLabel("accessibility")], ["faq", routeLabel("faq")]])}
     ${moreGroup(c.nav.helpGroup, [["volunteers", routeLabel("volunteers")], ["faq", routeLabel("faq")], ["contact", routeLabel("contact")], ["feedback", routeLabel("feedback")], ["policies", routeLabel("policies")], ["privacy", routeLabel("privacy")], ["disclaimer", routeLabel("disclaimer")], ["notices", routeLabel("notices")], ["about", routeLabel("about")]])}`;
 
   document.querySelector("[data-dialog-title]").textContent = c.flow.submit.dialogTitle;
@@ -223,7 +225,7 @@ function renderFooter() {
         <p>${esc(c.footer.body)}</p>
       </div>
       ${group(c.footer.services, [["complaints", routeLabel("complaints")], ["act-now", c.nav.report], ["track", c.nav.track], ["official-tools", routeLabel("official-tools")]])}
-      ${group(c.footer.learning, [["learning-corner", c.nav.learning], ["guides", c.nav.guides], ["advisories", c.content.advisories.eyebrow], ["training", c.content.training.eyebrow]])}
+      ${group(c.footer.learning, [["learning-corner", c.nav.learning], ["guides", c.nav.guides], ["advisories", c.content.advisories.eyebrow], ["training", c.content.training.eyebrow], ["media", routeLabel("media")], ["accessibility", routeLabel("accessibility")], ["faq", routeLabel("faq")]])}
       ${group(c.footer.project, [["contact", routeLabel("contact")], ["feedback", routeLabel("feedback")], ["policies", routeLabel("policies")], ["privacy", routeLabel("privacy")], ["disclaimer", routeLabel("disclaimer")], ["notices", routeLabel("notices")], ["about", c.nav.about], ["volunteers", routeLabel("volunteers")]])}
       ${officialGroup(c.footer.official, [["officialFeedback", c.footer.feedback], ["officialPolicies", c.footer.websitePolicy], ["officialPrivacy", c.footer.privacy], ["officialDisclaimer", c.footer.disclaimer], ["officialRtiNotice", c.footer.notices]])}
     </div>
