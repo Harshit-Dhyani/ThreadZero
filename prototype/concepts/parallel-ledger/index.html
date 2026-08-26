@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>Parallel Ledger · NCRP concept redesign</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="../../shared/concept-demo.js" defer></script>
+</head>
+<body data-concept="parallel-ledger" data-phase="ready">
+  <a class="skip-link" href="#main">Skip to evidence workspace</a>
+
+  <header class="portal-header">
+    <div class="portal-header__identity">
+      <span class="service-name">National Cyber Crime Reporting Portal</span>
+      <span class="concept-label">Independent concept redesign</span>
+    </div>
+    <div class="portal-header__urgent">
+      <span><strong>Actual financial cyber fraud?</strong> Call 1930 immediately.</span>
+      <a href="https://cybercrime.gov.in/" rel="external">Use the official cybercrime.gov.in service</a>
+    </div>
+  </header>
+
+  <main class="page-shell" id="main">
+    <nav class="step-context" aria-label="Report progress">
+      <span><strong>Evidence</strong> · Step 5 of 9</span>
+      <span>Concept 01 · Parallel Ledger</span>
+    </nav>
+
+    <header class="page-heading">
+      <h1>Check the payment evidence, then place it in the incident.</h1>
+      <p>The evidence register and incident record stay visible together, so every confirmed fact has a clear destination.</p>
+    </header>
+
+    <div class="ledger-workspace">
+      <section class="evidence-register" aria-labelledby="evidenceTitle">
+        <div class="section-heading">
+          <div>
+            <h2 class="section-title" id="evidenceTitle">Evidence register</h2>
+            <p class="section-note">Three items are ready. Missing or optional evidence does not block this report.</p>
+          </div>
+          <span class="register-count">3 ready · 1 missing · 1 optional</span>
+        </div>
+
+        <ol class="evidence-rows">
+          <li class="evidence-row is-selected">
+            <div>
+              <strong>Transaction screenshot</strong>
+              <span>Amount, time, recipient, and reference are visible.</span>
+            </div>
+            <span class="state state--ready" data-evidence-state>Ready</span>
+          </li>
+          <li class="evidence-row">
+            <div><strong>Transaction reference</strong><span>12-digit UTR or reference.</span></div>
+            <span class="state state--ready">Ready</span>
+          </li>
+          <li class="evidence-row">
+            <div><strong>WhatsApp messages</strong><span>Promise, payment request, and contact sequence.</span></div>
+            <span class="state state--ready">Ready</span>
+          </li>
+          <li class="evidence-row">
+            <div><strong>Phone or account identifier</strong><span>Add later if it becomes visible.</span></div>
+            <span class="state state--missing">Missing</span>
+          </li>
+          <li class="evidence-row">
+            <div><strong>Profile or website URL</strong><span>Helpful only when one was shared.</span></div>
+            <span class="state state--optional">Optional</span>
+          </li>
+        </ol>
+
+        <section class="extraction-record" aria-labelledby="extractionTitle">
+          <div class="extraction-heading">
+            <div>
+              <h3 id="extractionTitle">Suggested payment details</h3>
+              <p>Simulated extraction from the selected screenshot. Check before attaching.</p>
+            </div>
+            <span class="check-state"><span>Review</span><strong data-extraction-state>Not yet checked</strong></span>
+          </div>
+          <dl class="fact-pairs">
+            <div><dt>Amount</dt><dd>₹25,000</dd></div>
+            <div><dt>Method</dt><dd>UPI</dd></div>
+            <div><dt>Recipient</dt><dd>dealdesk@upi</dd></div>
+            <div><dt>Reference</dt><dd>419825901772</dd></div>
+          </dl>
+          <div class="action-row">
+            <button class="button button--primary" type="button" data-confirm-extraction>Confirm four payment details</button>
+            <button class="button button--secondary" type="button" data-attach-evidence disabled>Attach to the 18:42 payment event</button>
+            <button class="button button--quiet" type="button" data-reset-demo hidden>Reset demonstration</button>
+          </div>
+        </section>
+      </section>
+
+      <div class="ledger-bridge" aria-hidden="true">
+        <span class="ledger-bridge__line"></span>
+        <span class="ledger-bridge__label">connect</span>
+      </div>
+
+      <section class="incident-record" aria-labelledby="incidentTitle">
+        <div class="section-heading">
+          <div>
+            <h2 class="section-title" id="incidentTitle">Incident record</h2>
+            <p class="section-note">25 August 2026 · WhatsApp contact · ₹25,000</p>
+          </div>
+        </div>
+
+        <ol class="incident-events">
+          <li>
+            <time datetime="2026-08-25T18:34">18:34</time>
+            <div><strong>Received WhatsApp message</strong><span>Synthetic investment opportunity introduced.</span></div>
+          </li>
+          <li>
+            <time datetime="2026-08-25T18:39">18:39</time>
+            <div><strong>Opened investment link</strong><span>Link from the message was opened.</span></div>
+          </li>
+          <li class="is-target" data-event-target tabindex="-1">
+            <time datetime="2026-08-25T18:42">18:42</time>
+            <div>
+              <strong>₹25,000 sent through UPI</strong>
+              <span>Payment sent to dealdesk@upi.</span>
+              <p class="attached-proof" data-attached-proof hidden><b>Attached evidence:</b> Transaction screenshot · 419825901772</p>
+            </div>
+          </li>
+          <li>
+            <time datetime="2026-08-25T18:47">18:47</time>
+            <div><strong>Contact stopped responding</strong><span>No further response after payment.</span></div>
+          </li>
+        </ol>
+
+        <p class="record-boundary"><strong>Citizen record, not a verdict.</strong> The sequence organises what is known; it does not prove intent or guarantee recovery.</p>
+      </section>
+    </div>
+
+    <p class="sr-only" role="status" aria-live="polite" data-live-region></p>
+  </main>
+
+  <footer class="prototype-footer">
+    <p>Independent concept using synthetic data. This screen does not upload evidence or submit to NCRP, police, banks, payment providers, or any government system.</p>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,338 @@
+@import url("../../shared/concept-foundation.css");
+
+.thread-shell {
+  max-width: 1080px;
+}
+
+.evidence-tray {
+  display: grid;
+  grid-template-columns: minmax(230px, 0.65fr) minmax(0, 1.35fr);
+  gap: 2rem;
+  padding: 1.25rem 0;
+  border-top: 3px solid var(--ink);
+  border-bottom: 1px solid var(--rule-strong);
+}
+
+.tray-content {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 250px;
+  gap: 1.5rem;
+  min-width: 0;
+}
+
+.tray-facts {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin: 0;
+}
+
+.tray-facts div {
+  min-width: 0;
+  padding: 0.35rem 0.75rem 0.7rem 0;
+}
+
+.tray-facts dt {
+  color: var(--muted);
+  font-size: 0.78rem;
+}
+
+.tray-facts dd {
+  margin: 0.1rem 0 0;
+  overflow-wrap: anywhere;
+  font-weight: 760;
+}
+
+.tray-actions {
+  display: grid;
+  gap: 0.55rem;
+}
+
+.tray-actions .button {
+  width: 100%;
+  padding-right: 0.65rem;
+  padding-left: 0.65rem;
+  font-size: 0.84rem;
+}
+
+.review-state {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+  color: var(--muted);
+  font-size: 0.78rem;
+}
+
+.review-state strong {
+  color: var(--ink);
+}
+
+.thread-record {
+  position: relative;
+  padding: 2.5rem 0 0;
+}
+
+.thread-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--rule-strong);
+}
+
+.thread-heading > span {
+  color: var(--muted);
+  font-size: 0.82rem;
+}
+
+.thread-events {
+  position: relative;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.thread-events::before {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 5.2rem;
+  width: 2px;
+  content: "";
+  background: var(--rule-strong);
+}
+
+.thread-events::after {
+  position: absolute;
+  top: 0;
+  left: 5.2rem;
+  width: 2px;
+  height: 64%;
+  content: "";
+  background: var(--action);
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: transform 220ms ease-out;
+}
+
+[data-phase="attached"] .thread-events::after {
+  transform: scaleY(1);
+}
+
+.thread-events li {
+  position: relative;
+  display: grid;
+  grid-template-columns: 4.2rem minmax(0, 1fr);
+  gap: 2rem;
+  min-height: 122px;
+  padding: 1.4rem 0;
+  border-bottom: 1px solid var(--rule);
+}
+
+.thread-events time {
+  position: relative;
+  z-index: 2;
+  align-self: start;
+  padding: 0.12rem 0.45rem 0.12rem 0;
+  color: var(--muted);
+  background: var(--canvas);
+  font-size: 0.88rem;
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+}
+
+.thread-events time::after {
+  position: absolute;
+  top: 0.43rem;
+  right: -1.5rem;
+  width: 0.65rem;
+  height: 0.65rem;
+  content: "";
+  background: var(--canvas);
+  border: 2px solid var(--rule-strong);
+  border-radius: 50%;
+}
+
+.event-body {
+  min-width: 0;
+}
+
+.event-body > strong {
+  font-size: 1.05rem;
+}
+
+.event-body > p {
+  max-width: 62ch;
+  margin: 0.25rem 0 0;
+  color: var(--muted);
+}
+
+.event-evidence {
+  display: inline-block;
+  margin-top: 0.8rem;
+  padding-left: 0.65rem;
+  color: var(--ready);
+  border-left: 2px solid currentColor;
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+.event-evidence--optional {
+  color: var(--optional);
+}
+
+.event-evidence--missing {
+  color: var(--missing);
+}
+
+.thread-events .is-target {
+  margin-right: -1rem;
+  padding-right: 1rem;
+  transition: background 220ms ease-out;
+}
+
+[data-phase="attached"] .thread-events .is-target {
+  background: var(--action-soft);
+}
+
+[data-phase="attached"] .thread-events .is-target time::after {
+  background: var(--action);
+  border-color: var(--action);
+}
+
+.attached-proof {
+  display: grid;
+  max-width: 620px;
+  gap: 0.1rem;
+  margin-top: 1rem;
+  padding: 0.8rem 0 0.8rem 1rem;
+  color: var(--action-dark);
+  border-left: 3px solid var(--action);
+}
+
+.attached-proof span,
+.attached-proof small {
+  font-size: 0.78rem;
+}
+
+.attached-proof small {
+  overflow-wrap: anywhere;
+  color: var(--muted);
+}
+
+.readiness-ledger {
+  display: grid;
+  grid-template-columns: minmax(230px, 0.65fr) minmax(0, 1.35fr);
+  gap: 2rem;
+  margin-top: 2.5rem;
+  padding-top: 1.25rem;
+  border-top: 3px solid var(--ink);
+}
+
+.readiness-ledger ul {
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid var(--rule);
+  list-style: none;
+}
+
+.readiness-ledger li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  min-height: 48px;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--rule);
+}
+
+.readiness-ledger li > span:first-child {
+  font-weight: 650;
+}
+
+.thread-boundary {
+  margin-top: 2rem;
+  padding: 1rem 0 0 1rem;
+  color: var(--muted);
+  border-top: 1px solid var(--rule);
+  border-left: 3px solid var(--rule-strong);
+  font-size: 0.86rem;
+}
+
+.thread-boundary strong {
+  color: var(--ink);
+}
+
+@media (max-width: 820px) {
+  .evidence-tray,
+  .readiness-ledger {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1rem;
+  }
+
+  .tray-content {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .tray-actions {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .tray-actions .review-state {
+    grid-column: 1 / -1;
+  }
+
+  .tray-actions .button--quiet {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 640px) {
+  .evidence-tray {
+    padding-top: 1rem;
+  }
+
+  .tray-facts {
+    grid-template-columns: 1fr;
+  }
+
+  .tray-actions {
+    grid-template-columns: 1fr;
+  }
+
+  .tray-actions .button,
+  .tray-actions .button--quiet,
+  .tray-actions .review-state {
+    grid-column: auto;
+  }
+
+  .thread-heading {
+    flex-direction: column;
+  }
+
+  .thread-events::before,
+  .thread-events::after {
+    left: 3.85rem;
+  }
+
+  .thread-events li {
+    grid-template-columns: 3.2rem minmax(0, 1fr);
+    gap: 1.3rem;
+    min-height: 112px;
+  }
+
+  .thread-events time::after {
+    right: -1rem;
+  }
+
+  .thread-events .is-target {
+    margin-right: -0.5rem;
+    padding-right: 0.5rem;
+  }
+
+  .readiness-ledger li {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+}
