@@ -1,0 +1,29 @@
+{
+  "version": "0.2.0",
+  "status": "synthetic-demo-only",
+  "incident": {
+    "type": "fake-investment-whatsapp",
+    "amount_inr": 25000,
+    "date": "2026-08-25",
+    "time": "18:42",
+    "payment_method": "UPI",
+    "recipient_identifier": "dealdesk@upi",
+    "transaction_reference": "419825901772",
+    "contact_channel": "WhatsApp",
+    "summary": "A synthetic investment contact promised returns, asked for a UPI payment, and stopped responding after payment."
+  },
+  "events": [
+    {"time": "18:34", "event": "Received WhatsApp message"},
+    {"time": "18:39", "event": "Opened investment link"},
+    {"time": "18:42", "event": "₹25,000 sent through UPI"},
+    {"time": "18:47", "event": "Contact stopped responding"}
+  ],
+  "evidence": [
+    {"id": "payment", "label": "Transaction screenshot", "state": "Ready"},
+    {"id": "transaction-reference", "label": "Transaction reference", "state": "Ready"},
+    {"id": "chat", "label": "WhatsApp messages", "state": "Ready"},
+    {"id": "phone-account", "label": "Phone/account identifier", "state": "Needs confirmation"},
+    {"id": "profile-url", "label": "Profile or website URL", "state": "Helpful but optional"}
+  ],
+  "demo_report_reference": "DEMO-2026-08421"
+}
