@@ -1,29 +1,29 @@
-# Civic Evidence Service v1 verification
+# Civic Evidence Portal v2 verification
 
-Verified on 26 August 2026 against the local static server at `http://127.0.0.1:4173/site/`.
+Verified on 27 August 2026 against the local static server at `http://127.0.0.1:4173/site/`.
 
 ## Deterministic checks
 
-- `node --test core/flow-core.test.mjs site/site-contract.test.mjs` — 2 tests passed.
+- `node --test core/flow-core.test.mjs core/service-form-core.test.mjs site/site-contract.test.mjs site/portal-manifest.test.mjs` — 4 tests passed.
 - `node tools/validate-design-intelligence.mjs` — reference and generated-asset integrity passed.
 - `node --check site/app.js` — JavaScript syntax passed.
 - `git diff --check` — no whitespace errors.
 
-The checks cover guarded and unguarded routes, centralized validation, chronology movement, simulation locking, demo-reference handling, English/Hindi catalog parity, exactly ten home sections, safety boundaries, local fonts, and approved asset usage.
+The checks cover guarded and unguarded routes, centralized validation, chronology movement, simulation locking, demo-reference handling, English/Hindi catalog parity, exactly seven home sections, safety boundaries, local fonts, and approved asset usage.
 
 ## In-app browser evidence
 
-The corrected portal was checked in the in-app browser after the visual-system reset. At an asserted 1440 CSS-pixel width, the landing page used the licensed local Geist face, a 600-weight 49.68px hero heading, a 460px hero-media frame, one compact safety qualifier, and no horizontal overflow. The report shell used an 88px task header and kept the incident choices and primary action visible within a 1440×900 viewport.
+The full portal was checked in the in-app browser after the V2 visual rebuild. At 1440 CSS pixels, the complete primary navigation occupies a dedicated 52px lower header row beneath identity and language controls. At tablet widths it becomes a Services menu; at phone widths the complete route set is split between the fixed bottom navigation and its More dialog. The Contact breadcrumb now aligns Home, separator, and current page on one 44px row, and its urgent financial-fraud card is visually distinct.
 
-All 24 routes were then rendered at asserted widths of 1440, 1024, 390, and 320 CSS pixels: 96 route/viewport checks in total. Every check matched the requested width, exposed exactly one visible `h1`, avoided horizontal page overflow, loaded its images, and resolved guarded routes consistently. English and Hindi were also checked at a 720 CSS-pixel viewport as the 200% zoom reflow equivalent.
+Home plus all 36 public routes were rendered at asserted widths of 1440×900, 1024×768, 390×844, and 320×568: 148 route/viewport checks in total. Every check exposed exactly one visible `h1`, avoided horizontal page overflow, loaded its images, kept controls unclipped, resolved to the requested public hash, and started at the top of the route. The same 37 routes passed a 720×450 CSS-pixel reflow check as the 200% zoom equivalent.
 
-The tracker was checked in its initial, empty, invalid, and valid synthetic-reference states. Its initial field now contains the documented `DEMO-2026-08421` fixture, while the valid result presents only illustrative preparation states. The English-to-Hindi switch preserved both the route and in-memory report state; Hindi rendered with the bundled Noto Sans Devanagari face.
+The tracker was checked in its initial, invalid, and valid synthetic-reference states. Its initial field contains `DEMO-2026-08421`; the valid result presents only Prepared, Ready for official reporting, and Keep records available. Hindi reflow passed at 320 CSS pixels with the bundled Noto Sans Devanagari face and no horizontal overflow.
 
-The browser journey covered empty submission, focused error recovery, backward editing, evidence confirmation, chronology add/edit/reorder/association, review, the cancel and confirm paths of the simulation dialog, locked read-only review, browser history, and the final nothing-sent state. The tracker covered empty, invalid, valid, reset, and official-handoff paths. Mobile navigation and the More dialog were exercised in both languages. No unexpected same-origin console errors were observed.
+The browser journey covered guarded entry, focused error recovery, fixture details, evidence extraction confirmation, chronology reordering and restoration, review, both paths of the simulation dialog, and the final nothing-sent state. The complete journey passed on desktop; chronology and review also passed at 390 CSS pixels, and review passed at 320 CSS pixels. Browser back and forward returned `#contact → #home → #contact`. The mobile More dialog exposed all secondary destinations while Prepare, Track, and Learning remained directly available in the bottom navigation. The browser log was empty after the final matrix.
 
 ## Boundaries and remaining manual check
 
 - No `tel:` action, file input, storage API, network write, or real submission exists.
 - All public images are approved local assets; third-party research evidence remains internal.
-- The repeated concept badges and footer qualifier were removed. One subdued header qualifier remains because the product contract requires the concept and non-government boundary to stay visible.
-- Error-summary focus, dialog focus return, and visible focus styling were verified. The in-app browser keyboard driver did not advance sequential Tab focus reliably, so a final human keyboard-only sweep remains the sole manual acceptance check; no keyboard defect was observed.
+- One subdued header qualifier remains because the product contract requires the independent, non-government boundary to stay visible.
+- Error-summary focus, dialog focus return, skip-link activation, and focus styling were verified. The in-app browser keyboard driver did not advance sequential Tab focus reliably, so a final human keyboard-only sweep remains the manual acceptance check; no keyboard defect was observed.
