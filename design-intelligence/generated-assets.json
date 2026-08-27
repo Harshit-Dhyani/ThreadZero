@@ -1,8 +1,8 @@
 {
   "schema_version": 3,
-  "updated_at": "2026-08-27T00:00:00+05:30",
-  "direction": "illustrated-civic-portal-v2",
-  "selection_status": "illustration-family-selected",
+  "updated_at": "2026-08-28T00:00:00+05:30",
+  "direction": "illustrated-civic-portal-v3-transition",
+  "selection_status": "v3-home-masters-approved",
   "renderer": "OpenAI ImageGen",
   "input_reference_archive": "design-intelligence/assets/images/input",
   "output_master_archive": "design-intelligence/assets/images/output",
@@ -22,7 +22,7 @@
       "archive_path": "design-intelligence/assets/images/output/hero-report-preparation-illustration-v1.png",
       "production_path": "site/assets/images/masters/hero-report-preparation-illustration-v1.png",
       "responsive_paths": ["site/assets/images/hero-report-preparation-illustration-v1-640.webp", "site/assets/images/hero-report-preparation-illustration-v1-1200.webp"],
-      "used_in_production": true
+      "used_in_production": false
     },
     {
       "id": "evidence-thread-illustration-v1",
@@ -38,7 +38,7 @@
       "archive_path": "design-intelligence/assets/images/output/evidence-thread-illustration-v1.png",
       "production_path": "site/assets/images/masters/evidence-thread-illustration-v1.png",
       "responsive_paths": ["site/assets/images/evidence-thread-illustration-v1-640.webp", "site/assets/images/evidence-thread-illustration-v1-1200.webp"],
-      "used_in_production": true
+      "used_in_production": false
     },
     {
       "id": "transaction-review-illustration-v1",
@@ -134,6 +134,38 @@
       "archive_path": "design-intelligence/assets/images/output/help-footer-illustration-v1.png",
       "production_path": "site/assets/images/masters/help-footer-illustration-v1.png",
       "responsive_paths": ["site/assets/images/help-footer-illustration-v1-640.webp", "site/assets/images/help-footer-illustration-v1-1200.webp"],
+      "used_in_production": true
+    },
+    {
+      "id": "home-preparation-illustration-v3",
+      "prompt_version": 3,
+      "prompt": "Approved P07 editorial website scene: Character A calmly organises a phone, receipt and notes beside a laptop; right-weighted subject, 65–70% quiet transparent field, restrained pale-blue atmosphere, no readable text, official identity or opaque canvas.",
+      "reference_images": ["P01-character-a-master-v1.png", "P05-civic-object-family-v1.png", "style-master-v1-faq-woman-laptop-reference.png"],
+      "section": "home-gateway",
+      "role": "V3 report preparation hero",
+      "dimensions": {"width": 1672, "height": 941},
+      "alt_text": {"decision": "informative", "en": "Illustration of an Indian citizen organising a phone, receipt, and notes beside a laptop.", "hi": "लैपटॉप के पास फोन, रसीद और नोट व्यवस्थित करते भारतीय नागरिक का चित्रण।"},
+      "sha256": "7b396b89229ccb23536490cfc0dc8fc3c123d30a428605daa75a290c6a422dd8",
+      "status": "approved-illustration-v3",
+      "archive_path": "design-intelligence/assets/images/output/home-preparation-illustration-v3.png",
+      "production_path": "site/assets/images/masters/home-preparation-illustration-v3.png",
+      "responsive_paths": ["site/assets/images/home-preparation-illustration-v3-640.webp", "site/assets/images/home-preparation-illustration-v3-1200.webp"],
+      "used_in_production": true
+    },
+    {
+      "id": "home-evidence-thread-illustration-v3",
+      "prompt_version": 3,
+      "prompt": "Approved P06 Evidence Thread: six separable transparent stages for message, suspicious link, payment, evidence receipt, lost contact and next action; shared object grammar, no baked UI text, official identity or opaque canvas.",
+      "reference_images": ["P05-civic-object-family-v1.png"],
+      "section": "home-evidence-thread",
+      "role": "V3 signature evidence sequence",
+      "dimensions": {"width": 1672, "height": 941},
+      "alt_text": {"decision": "informative", "en": "Illustrated sequence from a suspicious message and link through payment evidence to a clear next action.", "hi": "संदिग्ध संदेश और लिंक से भुगतान साक्ष्य तथा स्पष्ट अगले कदम तक का चित्रित क्रम।"},
+      "sha256": "04340491f311474c5872f0d36093c331e527bd13a0183ec8d01659d2cf7dfc52",
+      "status": "approved-illustration-v3",
+      "archive_path": "design-intelligence/assets/images/output/home-evidence-thread-illustration-v3.png",
+      "production_path": "site/assets/images/masters/home-evidence-thread-illustration-v3.png",
+      "responsive_paths": ["site/assets/images/home-evidence-thread-illustration-v3-640.webp", "site/assets/images/home-evidence-thread-illustration-v3-1200.webp"],
       "used_in_production": true
     }
   ]

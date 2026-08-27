@@ -1,4 +1,6 @@
 export const IMAGE_DIMENSIONS = Object.freeze({
+  "home-preparation-illustration-v3": [1672, 941],
+  "home-evidence-thread-illustration-v3": [1672, 941],
   "hero-report-preparation-illustration-v1": [1672, 941],
   "evidence-thread-illustration-v1": [1672, 941],
   "transaction-review-illustration-v1": [1672, 941],
