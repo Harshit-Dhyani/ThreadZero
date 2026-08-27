@@ -4,7 +4,7 @@ export const COPY = {
       language: "English",
       languageCode: "en",
       title: "Financial Cyber Fraud Reporting Guide",
-      qualifier: "Synthetic preparation demo · No government submission",
+      qualifier: "Independent concept redesign · Not a government service",
       disclosure: "Synthetic data only · No uploads · No real submission"
     },
     nav: {
@@ -89,7 +89,6 @@ export const COPY = {
     },
     home: {
       hero: {
-        eyebrow: "Cybercrime reporting and citizen guidance",
         title: "Report cybercrime with a clearer first step.",
         intro: "Start with the type of incident. Organise the facts locally, understand the route, and choose when to consult an official source.",
         primary: "Prepare financial-fraud details",
@@ -581,7 +580,7 @@ export const COPY = {
     },
     footer: {
       title: "Financial Cyber Fraud Reporting Guide",
-      qualifier: "Synthetic preparation demo · No government submission",
+      qualifier: "Independent concept redesign · Not a government service",
       body: "A bilingual synthetic demonstration for organising financial-fraud facts and evidence before using official channels.",
       services: "Services",
       learning: "Learning",
@@ -602,7 +601,7 @@ export const COPY = {
       language: "हिन्दी",
       languageCode: "hi",
       title: "वित्तीय साइबर धोखाधड़ी रिपोर्टिंग मार्गदर्शिका",
-      qualifier: "कृत्रिम तैयारी डेमो · किसी सरकारी प्रणाली में जमा नहीं होता",
+      qualifier: "स्वतंत्र अवधारणा पुनर्रचना · सरकारी सेवा नहीं",
       disclosure: "केवल कृत्रिम डेटा · कोई अपलोड नहीं · कोई वास्तविक सबमिशन नहीं"
     },
     nav: {
@@ -687,7 +686,6 @@ export const COPY = {
     },
     home: {
       hero: {
-        eyebrow: "साइबर अपराध रिपोर्टिंग और नागरिक मार्गदर्शन",
         title: "साइबर अपराध रिपोर्टिंग का स्पष्ट पहला कदम पाएँ।",
         intro: "घटना के प्रकार से शुरू करें। तथ्य स्थानीय रूप से व्यवस्थित करें, मार्ग समझें और तय करें कि आधिकारिक स्रोत कब देखना है।",
         primary: "वित्तीय धोखाधड़ी विवरण तैयार करें",
@@ -1179,7 +1177,7 @@ export const COPY = {
     },
     footer: {
       title: "वित्तीय साइबर धोखाधड़ी रिपोर्टिंग मार्गदर्शिका",
-      qualifier: "कृत्रिम तैयारी डेमो · किसी सरकारी प्रणाली में जमा नहीं होता",
+      qualifier: "स्वतंत्र अवधारणा पुनर्रचना · सरकारी सेवा नहीं",
       body: "आधिकारिक माध्यम से पहले वित्तीय धोखाधड़ी तथ्य और साक्ष्य व्यवस्थित करने का द्विभाषी कृत्रिम डेमो।",
       services: "सेवाएँ",
       learning: "सीख",

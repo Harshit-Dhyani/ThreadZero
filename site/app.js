@@ -1,4 +1,4 @@
-import { COPY, assertCatalogParity } from "./copy.js?v=20260826a";
+import { COPY, assertCatalogParity } from "./copy.js?v=20260827d";
 import { DEMO, STEPS } from "../core/demo-data.mjs";
 import { ROUTE_BY_ID, localizeRoute } from "../core/portal-routes.mjs";
 import { createServiceRecord, translateSelectValues, validateServiceValues } from "../core/service-form-core.mjs";
@@ -234,23 +234,18 @@ function renderHome() {
     impersonation: "advisory-impersonation-v1"
   };
 
-  const complaintRoutes = ["act-now", "women-children", "other-cybercrime"];
-  const complaintPath = (item, index) => routeLink(item.route || complaintRoutes[index], `<strong>${esc(item.title)}</strong><small>${esc(item.body)}</small><span aria-hidden="true">→</span>`, "complaint-path raw-label");
-
   return `
     <section class="home-hero civic-entry" data-home-section="1">
       <div class="hero-copy">
-        <p class="eyebrow eyebrow-light">${esc(h.hero.eyebrow)}</p>
         <h1 tabindex="-1" data-focus-target>${esc(h.hero.title)}</h1>
         <p class="hero-intro">${esc(h.hero.intro)}</p>
         <div class="button-row">
-          ${routeLink("act-now", `${esc(h.hero.primary)} <span aria-hidden="true">→</span>`, "button button-urgent raw-label")}
-          ${routeLink("complaints", routeLabel("complaints"), "button button-ghost")}
+          ${routeLink("act-now", `${esc(h.hero.primary)} <span aria-hidden="true">→</span>`, "button button-primary raw-label")}
+          ${routeLink("track", c.nav.track, "button button-ghost")}
         </div>
         <p class="hero-disclosure">${esc(c.meta.disclosure)}</p>
       </div>
       <div class="hero-media">${picture("hero-civic-evidence-v1", h.hero.imageAlt, "hero-picture", true)}</div>
-      <nav class="complaint-paths" aria-label="${esc(h.hero.pathsLabel)}">${h.hero.paths.map(complaintPath).join("")}</nav>
     </section>
 
     <section class="urgent-band" data-home-section="2" aria-labelledby="urgent-title">
@@ -261,7 +256,7 @@ function renderHome() {
       <div class="urgent-separator" aria-hidden="true"></div>
       <div class="urgent-item">
         <span class="globe-symbol" aria-hidden="true">◎</span>
-        <div><h2>${esc(h.urgent.siteTitle)}</h2><p>${esc(h.urgent.siteBody)}</p>${routeLink("official-tools", routeLabel("official-tools"), "text-link")}</div>
+        <div><h2>${esc(h.urgent.siteTitle)}</h2><p>${esc(h.urgent.siteBody)}</p>${officialAnchor("officialHome", c.common.officialSite, "text-link")}</div>
       </div>
     </section>
 
@@ -515,7 +510,7 @@ function renderSubmit() {
   const s = c.flow.submit;
   return flowLayout(`${flowHeading(s)}
     <div class="simulation-boundary"><span class="dialog-symbol" aria-hidden="true">!</span><div><h2>${esc(s.cardTitle)}</h2><p>${esc(s.cardBody)}</p><ul><li>${esc(c.meta.disclosure)}</li><li>${esc(c.common.noUpload)}</li><li>${esc(c.common.noCall)}</li></ul></div></div>
-    <div class="flow-actions"><button class="button button-urgent" type="button" data-open-simulation>${esc(s.action)}</button></div>`);
+    <div class="flow-actions"><button class="button button-primary" type="button" data-open-simulation>${esc(s.action)}</button></div>`);
 }
 
 function renderNext() {
@@ -612,7 +607,7 @@ function renderContent(route) {
   const body = content.composition === "form"
     ? renderSyntheticService(content)
     : contentItems(content, content.composition === "hub" ? "service-hub-grid" : content.composition === "directory" ? "resource-directory-grid" : content.composition === "legal" ? "legal-grid" : "content-grid");
-  return `<div class="content-page" data-composition="${esc(content.composition)}">${contentHeader(content)}<div class="content-container">${body}${sourcePanel(content.sources)}</div></div>`;
+  return `<div class="content-page" data-composition="${esc(content.composition)}" data-group="${esc(content.group)}">${contentHeader(content)}<div class="content-container">${body}${sourcePanel(content.sources)}</div></div>`;
 }
 
 function renderRoute() {
@@ -636,7 +631,10 @@ function render({ focus = false } = {}) {
   renderShell();
   main.innerHTML = renderRoute();
   document.body.dataset.route = state.route;
-  if (focus) focusHeadingOrError(document);
+  if (focus) {
+    window.scrollTo(0, 0);
+    focusHeadingOrError(document);
+  }
 }
 
 function navigate(route, { replace = false, focus = true } = {}) {
@@ -1090,4 +1088,7 @@ const initialRequested = parseRoute(location.hash);
 const initialRoute = resolveRoute(initialRequested, state);
 state.route = initialRoute;
 if (location.hash !== `#${initialRoute}`) history.replaceState(null, "", `#${initialRoute}`);
+history.scrollRestoration = "manual";
+window.scrollTo(0, 0);
+window.addEventListener("pageshow", () => window.scrollTo(0, 0), { once: true });
 render();
