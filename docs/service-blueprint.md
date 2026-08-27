@@ -12,16 +12,19 @@ This is the single citizen-flow specification for the approved prototype.
 
 ## Home — `#home`
 
-Show a compact task router with:
+Show a clear public gateway with:
 
-- `National Cyber Crime Reporting Portal`
+- `Financial Cyber Fraud Reporting Guide`
 - `Independent concept redesign`
 - prominent actual-incident guidance for 1930
 - one primary entry: prepare a financial-fraud report
+- a secondary demo-tracker entry
+- six citizen-service categories covering complaints, tracking, suspect tools, volunteers, learning, and help
+- concise evidence, learning, official-action, and handoff sections
 - a link to cybercrime.gov.in
 - concise statements of what the concept does and does not do
 
-Do not imitate unrelated working NCRP routes. Reload always returns here with fresh synthetic state.
+All 36 public routes are local bilingual guidance or deterministic practice surfaces. They never imitate authenticated government state or send data. Reload clears synthetic report and form state; an inaccessible guarded flow hash resolves safely.
 
 ## Nine-step journey
 
@@ -104,5 +107,7 @@ Show an illustrative lifecycle: Prepared, Ready for official reporting, and Keep
 ## Navigation
 
 Current and completed steps are reachable. Future routes are visibly unavailable and resolve to the current reachable route with a live announcement. Back, browser history, and completed-step edits remain usable before simulated submission.
+
+On desktop, the complete primary navigation occupies a dedicated lower row beneath the identity bar. Tablet layouts use the complete Services dialog. Phones keep Home, Prepare, Track, Learning, and More in a fixed bottom navigation; More contains the secondary route directory. The reporting flow keeps a compact progress header on phones.
 
 The comparison board may persist only a chosen design direction and decision note. Incident data is never persisted.
