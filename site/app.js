@@ -336,6 +336,12 @@ function localizeServiceForms(nextLanguage) {
 }
 
 document.addEventListener("click", (event) => {
+  if (event.target.closest(".skip-link")) {
+    event.preventDefault();
+    requestAnimationFrame(() => focusHeadingOrError(document));
+    return;
+  }
+
   const routeAnchor = event.target.closest("[data-route-link]");
   if (routeAnchor) {
     event.preventDefault();

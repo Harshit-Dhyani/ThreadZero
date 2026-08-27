@@ -237,6 +237,13 @@
     text-decoration: none;
   }
 
+  .mobile-nav-link span {
+    min-width: 0;
+    max-width: 100%;
+    line-height: 1.1;
+    overflow-wrap: anywhere;
+  }
+
   .mobile-nav-link .icon {
     width: 21px;
     height: 21px;

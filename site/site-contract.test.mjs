@@ -53,6 +53,7 @@ test("the static portal preserves its bilingual, safety, and asset contracts", a
   assert.match(appSource, /Learning Corner|learningMenu/);
   assert.match(appSource, /data-service-form/);
   assert.match(appSource, /sourcePanel\(content\.sources\)/);
+  assert.match(app, /closest\("\.skip-link"\)[\s\S]*focusHeadingOrError\(document\)/);
   assert.match(css, /img\s*\{[^}]*height:\s*auto/s);
   assert.match(app, /let routeErrors = \[\];/);
   assert.match(app, /let eventErrors = \[\];/);
