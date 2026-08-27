@@ -1,17 +1,16 @@
-# Civic Evidence Service v1 — visual constitution
+# Civic Evidence Service v2 — illustrated visual constitution
 
-Status: locked from the ten user-approved 1672×941 boards. The boards define geometry and rhythm; live HTML owns every word, control, status, and data point.
+Status: locked from the supplied civic-portal references and the user-approved illustration-only direction. References define hierarchy and rhythm; live HTML owns every word, control, status, and data point.
 
 ## Desktop measurement lock
 
 - Reference canvas: 1672 × 941 CSS pixels.
 - Primary content inset: 42px in the header and 54px in landing sections.
-- Header: 101px high; brand block begins at x=42; language control ends at x=1630.
-- Hero: 512px high from y=101 to y=613; 50/50 split at x=824. The left text block begins at x=70 and is no wider than 590px.
-- Urgent strip: 110px high from y=613 to y=723; content split into two plain guidance groups.
-- Task row: 218px high with five equal actions and 24px outer gutters.
-- Flow shell: 110px institutional header, then a white 16px-radius surface with 44px outer inset; 362px desktop step rail and a flexible task pane.
-- Landing section maximum width: 1564px; 48–72px vertical section padding; 24px card gap; 12px card radius.
+- Header: an upper identity/utilities row and a separate lower navigation row. The lower row must never compete with the disclosure or language control.
+- Hero: a balanced 50/50 editorial split with one dominant preparation action, one tracker action, and the urgent strip attached to the gateway section.
+- Home: exactly four purposeful sections and approximately three desktop viewports including the footer.
+- Flow shell: compact identity header, five visible phases, a 260–300px desktop orientation rail, and a flexible task pane.
+- Landing section maximum width: 1240px; 54–76px vertical section padding; 18–24px component gap; 9–22px radius by hierarchy.
 - Touch target minimum: 44px. Primary action minimum height: 56px on landing pages and 52px in the flow.
 - Borders: 1px `#d8e0ec`; focus ring: 3px `#2563eb` with 2px offset.
 - Measurement target: major edges, padding, radii, CTA dimensions, and section boundaries within 2px at 1672×941. Text and generated media are allowed to reflow naturally.
@@ -35,7 +34,7 @@ Status: locked from the ten user-approved 1672×941 boards. The boards define ge
 - Warning amber `#b66a00` — missing-but-actionable guidance.
 - Ink `#091b3f`, muted ink `#52627c`, rule `#d8e0ec`.
 - Warm white `#fbfcfe`, cool wash `#f3f7fd`, white `#ffffff`.
-- No gradients. Tonal depth comes from solid color, photography, rules, and restrained shadow.
+- No gradients. Tonal depth comes from solid color, illustration, rules, and restrained shadow.
 
 ## Geometry and grid
 
@@ -44,12 +43,14 @@ Status: locked from the ten user-approved 1672×941 boards. The boards define ge
 - Cards use 12px radius and almost-flat shadow. Urgent guidance uses rules and solid color, not floating alerts.
 - Flow pages keep persistent orientation on desktop; mobile replaces the rail with a compact progress header.
 
-## Photography and raster media
+## Illustration and raster media
 
-- Documentary, ordinary Indian environments, warm daylight plus practical light, believable skin/fabric/object texture.
-- Evidence is neutral and synthetic. Phone screens, receipts, forms, and timelines never contain readable generated text; HTML overlays own essential meaning.
-- Avoid stock-photo smiles, distress performance, hooded hackers, 3D shields/books, monuments, uniforms, emblems, flags, fake teams, or security theatre.
+- Production uses one coordinated two-dimensional civic editorial illustration family. Photography is prohibited in the active asset tree and catalog.
+- Palette stays within cobalt, indigo, navy, restrained green, warm white, and urgent red. People may appear only when they clarify a citizen task.
+- Evidence is neutral and synthetic. Phone screens, receipts, forms, and timelines never contain readable generated text; HTML owns essential meaning.
+- Avoid shields, emblems, flags, monuments, uniforms, distress scenes, fake interfaces, stock-photo realism, 3D security objects, and authority theatre.
 - Responsive images use `<picture>` with explicit width/height, intentional crops, and either concise alt text or empty alt when decorative.
+- Eight masters cover preparation, evidence thread, transaction review, guides/learning, safety/advisories, awareness/community, accessibility, and help/footer.
 
 ## Interaction and status language
 
@@ -63,5 +64,5 @@ Status: locked from the ten user-approved 1672×941 boards. The boards define ge
 
 - Public title: `Financial Cyber Fraud Reporting Guide` with adjacent `Independent concept redesign · Not a government service`.
 - No shield logo, government emblem, public `ThreadZero` name, official copyright, invented support team, email address, or agency-processing status.
-- The footer preserves the board's information density and navy depth while replacing monuments and people with an original evidence-thread texture.
+- The footer uses a compact white directory, four link groups, an illustrated help panel, and a navy safety strip.
 - Controls are semantic live HTML. No board screenshot or generated UI is embedded in production.
