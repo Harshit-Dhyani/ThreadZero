@@ -1,0 +1,255 @@
+/* Tokens and base */
+@font-face {
+  font-family: Inter;
+  src: url("./assets/fonts/inter/Inter-Variable.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Noto Sans Devanagari";
+  src: url("./assets/fonts/noto-sans-devanagari/NotoSansDevanagari-Variable.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+}
+
+:root {
+  --navy-950: #06152f;
+  --navy-900: #071d41;
+  --navy-800: #0a2b5e;
+  --blue-700: #084fc6;
+  --blue-600: #0964e8;
+  --blue-100: #eaf2ff;
+  --blue-50: #f4f8ff;
+  --ink: #081b3f;
+  --muted: #50617d;
+  --line: #d8e2f0;
+  --surface: #ffffff;
+  --warm: #fbfcff;
+  --green: #087a55;
+  --green-soft: #e7f7f0;
+  --red: #c9252d;
+  --red-soft: #fff1f1;
+  --amber: #9b6200;
+  --amber-soft: #fff7df;
+  --shadow: 0 14px 36px rgb(20 54 107 / 10%);
+  --radius-lg: 22px;
+  --radius-md: 14px;
+  --radius-sm: 9px;
+  --page: min(1240px, calc(100% - 48px));
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  color-scheme: light;
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-width: 280px;
+  background: var(--warm);
+  color: var(--ink);
+  font-family: Inter, "Noto Sans Devanagari", system-ui, sans-serif;
+  font-size: 16px;
+  line-height: 1.55;
+  overflow-x: hidden;
+}
+
+html[lang="hi"] body {
+  font-family: "Noto Sans Devanagari", Inter, system-ui, sans-serif;
+}
+
+img,
+picture {
+  display: block;
+  max-width: 100%;
+}
+
+img {
+  height: auto;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+button,
+a,
+summary,
+select,
+input[type="checkbox"],
+input[type="radio"] {
+  -webkit-tap-highlight-color: transparent;
+}
+
+a {
+  color: inherit;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin-top: 0;
+}
+
+h1,
+h2,
+h3 {
+  line-height: 1.12;
+  letter-spacing: -0.025em;
+}
+
+h1 {
+  margin-bottom: 18px;
+  font-size: clamp(2.35rem, 5vw, 4.5rem);
+  font-weight: 760;
+}
+
+h2 {
+  font-size: clamp(1.55rem, 2.7vw, 2.5rem);
+  font-weight: 730;
+}
+
+h3 {
+  font-size: 1.05rem;
+}
+
+main {
+  min-height: 50vh;
+}
+
+:focus-visible {
+  outline: 3px solid #f3a712;
+  outline-offset: 3px;
+}
+
+.sr-only {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+.skip-link {
+  position: fixed;
+  z-index: 999;
+  top: 12px;
+  left: 12px;
+  padding: 12px 18px;
+  border-radius: 8px;
+  background: #fff;
+  color: var(--navy-900);
+  transform: translateY(-180%);
+}
+
+.skip-link:focus {
+  transform: none;
+}
+
+.eyebrow {
+  margin-bottom: 9px;
+  color: var(--blue-700);
+  font-size: 0.76rem;
+  font-weight: 800;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+}
+
+.icon {
+  width: 24px;
+  height: 24px;
+  flex: 0 0 auto;
+}
+
+.icon-small {
+  width: 18px;
+  height: 18px;
+}
+
+.icon-inline {
+  display: inline-block;
+  width: 17px;
+  height: 17px;
+  vertical-align: -3px;
+}
+
+.icon-back {
+  transform: rotate(180deg);
+}
+
+.button {
+  min-height: 46px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  padding: 11px 19px;
+  border: 1px solid transparent;
+  border-radius: 9px;
+  font-weight: 720;
+  line-height: 1.2;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.button-primary {
+  background: var(--blue-600);
+  color: #fff;
+  box-shadow: 0 8px 18px rgb(9 100 232 / 22%);
+}
+
+.button-primary:hover {
+  background: var(--blue-700);
+}
+
+.button-secondary,
+.button-ghost {
+  border-color: #9db9e7;
+  background: #fff;
+  color: var(--blue-700);
+}
+
+.button:disabled {
+  opacity: 0.56;
+  cursor: not-allowed;
+}
+
+.button-row,
+.flow-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+}
+
+.text-link {
+  min-width: 44px;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  color: var(--blue-700);
+  font-weight: 720;
+  text-decoration: none;
+}
+
+.text-link:hover,
+.footer-group a:hover {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
