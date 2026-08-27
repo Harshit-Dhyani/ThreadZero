@@ -97,6 +97,14 @@ export default {
       "Coherent incident",
       "Clear next action"
     ],
+    "visualSteps": [
+      "Suspicious message",
+      "Link or website",
+      "Payment",
+      "Evidence record",
+      "Contact lost",
+      "Next action"
+    ],
     "imageAlt": "Illustrated sequence connecting a message, link, payment record, and lost contact"
   },
   "process": {

@@ -1,7 +1,7 @@
 import { PORTAL_ROUTES, ROUTE_GROUPS } from "../../core/portal-routes.mjs";
 
 export function renderShell(ctx) {
-  const { language, copy, esc, routeLink, routeLabel, icon, picture, officialAnchor } = ctx;
+  const { language, copy, esc, routeLink, routeLabel, icon, officialAnchor } = ctx;
 
   function serviceMenu(label, content, className = "") {
     return `<details class="service-menu ${esc(className)}">
@@ -119,8 +119,8 @@ export function renderShell(ctx) {
         ${group(c.nav.helpGroup, [["faq", routeLabel("faq")], ["contact", routeLabel("contact")], ["feedback", routeLabel("feedback")], ["grievance", routeLabel("grievance")]])}
         ${group(c.nav.about, [["about", routeLabel("about")], ["policies", routeLabel("policies")], ["privacy", routeLabel("privacy")], ["accessibility", routeLabel("accessibility")]])}
         <aside class="footer-help-panel">
+          ${icon("circle-help", "footer-help-icon")}
           <div><strong>${esc(c.home.help.title)}</strong><p>${esc(c.home.help.intro)}</p>${routeLink("contact", routeLabel("contact"), "text-link")}</div>
-          ${picture("help-footer-illustration-v1", c.footer.imageAlt, "footer-help-picture")}
         </aside>
       </div>
       <div class="footer-lower">

@@ -1,8 +1,8 @@
-import { COPY, assertCatalogParity } from "./copy.js?v=20260827d";
+import { COPY, assertCatalogParity } from "./copy.js?v=20260828a";
 import { DEMO } from "../core/demo-data.mjs";
 import { ROUTE_BY_ID, localizeRoute } from "../core/portal-routes.mjs";
 import { createServiceRecord, translateSelectValues, validateServiceValues } from "../core/service-form-core.mjs";
-import { getEvidenceCopy, getServiceUi, renderPortal } from "./renderers.js?v=20260827f";
+import { getEvidenceCopy, getServiceUi, renderPortal } from "./renderers.js?v=20260828a";
 import {
   createInitialState,
   resolveRoute,

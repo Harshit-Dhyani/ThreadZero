@@ -45,7 +45,7 @@ export function renderPublicRoute(ctx) {
             </div>
             <p class="hero-disclosure">${esc(c.meta.disclosure)}</p>
           </div>
-          <div class="hero-media">${picture("hero-report-preparation-illustration-v1", h.hero.imageAlt, "hero-picture", true)}</div>
+          <div class="hero-media">${picture("home-preparation-illustration-v3", h.hero.imageAlt, "hero-picture", true)}</div>
         </div>
         <div class="urgent-band" aria-labelledby="urgent-title">
           <div class="urgent-item urgent-call">${icon("phone-call", "urgent-icon")}<div><h2 id="urgent-title">${esc(h.urgent.title)}</h2><p>${esc(h.urgent.body)}</p><small>${esc(c.common.noCall)}</small></div></div>
@@ -61,11 +61,9 @@ export function renderPublicRoute(ctx) {
       <section class="section evidence-thread-section" data-home-section="3" aria-labelledby="thread-title">
         <div class="section-heading"><div><p class="eyebrow">${esc(h.mechanism.eyebrow)}</p><h2 id="thread-title">${esc(h.mechanism.title)}</h2></div><p>${esc(h.mechanism.intro)}</p></div>
         <div class="evidence-thread-layout">
-          <div>
-            <ol class="thread-events">${c.flow.fixture.events.map((event, index) => `<li><span>${index + 1}</span><div><strong>${esc(event.description)}</strong><small>${esc(event.detail)}</small></div></li>`).join("")}</ol>
-            <div class="readiness-legend">${evidenceStates.map(([status, label, item]) => `<article data-status="${status}"><span>${esc(label)}</span><strong>${esc(item.name)}</strong><p>${esc(item.reason)}</p></article>`).join("")}</div>
-          </div>
-          ${picture("evidence-thread-illustration-v1", h.mechanism.imageAlt, "evidence-thread-picture")}
+          ${picture("home-evidence-thread-illustration-v3", h.mechanism.imageAlt, "evidence-thread-picture")}
+          <ol class="thread-stages">${h.mechanism.visualSteps.map((label, index) => `<li><span>${index + 1}</span><strong>${esc(label)}</strong></li>`).join("")}</ol>
+          <div class="readiness-legend">${evidenceStates.map(([status, label, item]) => `<article data-status="${status}"><span>${esc(label)}</span><strong>${esc(item.name)}</strong><p>${esc(item.reason)}</p></article>`).join("")}</div>
         </div>
       </section>
   
@@ -74,7 +72,7 @@ export function renderPublicRoute(ctx) {
         <div class="learning-help-grid">
           <div class="learning-list">${h.resources.cards.map((item, index) => routeLink(item.route, `${icon(["triangle-alert", "credit-card", "users"][index], "task-icon")}<span><strong>${esc(item.title)}</strong><small>${esc(item.body)}</small></span>${icon("arrow-right", "icon icon-small")}`, "learning-row raw-label")).join("")}</div>
           <div class="faq-list">${h.help.faqs.slice(0, 3).map((item) => `<details><summary>${esc(item.q)}</summary><p>${esc(item.a)}</p></details>`).join("")}</div>
-          <aside class="home-help-panel">${picture("help-footer-illustration-v1", "", "home-help-picture")}<nav aria-label="${esc(h.help.title)}">${h.help.directory.map((item) => routeLink(item.route, `${esc(item.title)} ${icon("arrow-right", "icon icon-small")}`, "directory-link raw-label")).join("")}</nav></aside>
+          <aside class="home-help-panel"><div class="home-help-copy"><strong>${esc(h.help.title)}</strong><p>${esc(c.meta.disclosure)}</p></div><nav aria-label="${esc(h.help.title)}">${h.help.directory.map((item) => routeLink(item.route, `${esc(item.title)} ${icon("arrow-right", "icon icon-small")}`, "directory-link raw-label")).join("")}</nav></aside>
         </div>
         <div class="official-handoff"><div>${icon("globe-2", "handoff-icon")}<span><strong>${esc(h.urgent.siteTitle)}</strong><small>${esc(c.common.officialBoundary)}</small></span></div>${officialAnchor("officialHome", c.common.officialSite, "button button-primary")}</div>
       </section>`;
