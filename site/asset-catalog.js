@@ -1,12 +1,10 @@
 export const IMAGE_DIMENSIONS = Object.freeze({
-  "hero-civic-evidence-v1": [1672, 941],
-  "process-workspace-v1": [1448, 1086],
-  "phone-evidence-closeup-v1": [1448, 1086],
-  "evidence-preparation-overhead-v1": [1448, 1086],
-  "incident-thread-still-life-v1": [1448, 1086],
-  "advisory-phishing-v1": [1448, 1086],
-  "advisory-payment-fraud-v1": [1448, 1086],
-  "advisory-impersonation-v1": [1448, 1086],
-  "guides-resource-still-life-v1": [1672, 941],
-  "footer-evidence-thread-texture-v1": [1672, 941]
+  "hero-report-preparation-illustration-v1": [1672, 941],
+  "evidence-thread-illustration-v1": [1672, 941],
+  "transaction-review-illustration-v1": [1672, 941],
+  "guides-learning-illustration-v1": [1672, 941],
+  "safety-advisory-illustration-v1": [1672, 941],
+  "awareness-community-illustration-v1": [1672, 941],
+  "accessibility-illustration-v1": [1672, 941],
+  "help-footer-illustration-v1": [1536, 1024]
 });
