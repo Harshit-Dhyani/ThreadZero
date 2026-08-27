@@ -1,6 +1,6 @@
 # ThreadZero design intelligence report
 
-Status: research gate complete; visual selection pending.
+Status: historical research record. Visual selection is complete; production is illustration-only under `visual-constitution.md`.
 
 ## Coverage
 

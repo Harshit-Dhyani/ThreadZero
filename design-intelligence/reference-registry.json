@@ -513,13 +513,13 @@
       ],
       "unknowns": [
         "The boards do not establish a license for their embedded imagery or icons, so none may ship.",
-        "Generated photography remains subject to visual approval and may require a V2."
+        "Production now uses the approved coordinated illustration family; photography is archived and must not ship."
       ],
       "permitted_influence": [
         "measured geometry",
         "spacing rhythm",
         "typographic hierarchy",
-        "photography roles",
+        "image-role hierarchy",
         "information architecture",
         "responsive composition intent"
       ],
