@@ -389,6 +389,10 @@
     gap: 10px;
   }
 
+  .thread-evidence-links {
+    grid-template-columns: 1fr 1fr;
+  }
+
   .readiness-legend {
     gap: 8px;
     grid-template-columns: 1fr;
@@ -631,6 +635,10 @@
 }
 
 @media (max-width: 360px) {
+  .thread-evidence-links {
+    grid-template-columns: 1fr;
+  }
+
   :root {
     --page: calc(100% - 18px);
   }

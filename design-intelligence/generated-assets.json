@@ -2,11 +2,11 @@
   "schema_version": 3,
   "updated_at": "2026-08-28T00:00:00+05:30",
   "direction": "illustrated-civic-portal-v3-transition",
-  "selection_status": "v3-home-masters-approved",
+  "selection_status": "reset-01-page-proofs-integrated-for-review",
   "renderer": "OpenAI ImageGen",
   "input_reference_archive": "design-intelligence/assets/images/input",
   "output_master_archive": "design-intelligence/assets/images/output",
-  "prompt_contract": "Clean two-dimensional civic editorial illustration in cobalt, indigo, navy, restrained green and warm white; believable Indian citizens only when useful; soft pale background; no readable generated text, shields, emblems, flags, monuments, uniforms, distress scenes, fake interfaces, 3D security objects, watermarks, government identity, or photography.",
+  "prompt_contract": "Soft modern civic editorial illustration with matte flat fills, restrained shadows, thin navy outlines, desaturated civic blue, natural skin and generous quiet space; no readable generated text, shields, emblems, flags, monuments, uniforms, circuit motifs, fake interfaces, glossy or 3D security objects, watermarks, government identity, or photography.",
   "assets": [
     {
       "id": "hero-report-preparation-illustration-v1",
@@ -146,11 +146,11 @@
       "dimensions": {"width": 1672, "height": 941},
       "alt_text": {"decision": "informative", "en": "Illustration of an Indian citizen organising a phone, receipt, and notes beside a laptop.", "hi": "लैपटॉप के पास फोन, रसीद और नोट व्यवस्थित करते भारतीय नागरिक का चित्रण।"},
       "sha256": "7b396b89229ccb23536490cfc0dc8fc3c123d30a428605daa75a290c6a422dd8",
-      "status": "approved-illustration-v3",
+      "status": "rejected-exploration-v3",
       "archive_path": "design-intelligence/assets/images/output/home-preparation-illustration-v3.png",
       "production_path": "site/assets/images/masters/home-preparation-illustration-v3.png",
       "responsive_paths": ["site/assets/images/home-preparation-illustration-v3-640.webp", "site/assets/images/home-preparation-illustration-v3-1200.webp"],
-      "used_in_production": true
+      "used_in_production": false
     },
     {
       "id": "home-evidence-thread-illustration-v3",
@@ -162,10 +162,58 @@
       "dimensions": {"width": 1672, "height": 941},
       "alt_text": {"decision": "informative", "en": "Illustrated sequence from a suspicious message and link through payment evidence to a clear next action.", "hi": "संदिग्ध संदेश और लिंक से भुगतान साक्ष्य तथा स्पष्ट अगले कदम तक का चित्रित क्रम।"},
       "sha256": "04340491f311474c5872f0d36093c331e527bd13a0183ec8d01659d2cf7dfc52",
-      "status": "approved-illustration-v3",
+      "status": "rejected-exploration-v3",
       "archive_path": "design-intelligence/assets/images/output/home-evidence-thread-illustration-v3.png",
       "production_path": "site/assets/images/masters/home-evidence-thread-illustration-v3.png",
       "responsive_paths": ["site/assets/images/home-evidence-thread-illustration-v3-640.webp", "site/assets/images/home-evidence-thread-illustration-v3-1200.webp"],
+      "used_in_production": false
+    },
+    {
+      "id": "home-preparation-illustration-v5",
+      "prompt_version": 5,
+      "prompt": "RESET-01 Home editorial scene using the FAQ woman-at-laptop image as the sole rendering authority and P01 only for Character A identity: the citizen calmly organises a phone, receipt and notes beside a laptop on the right, with 65–70% quiet left space, softer outlines and reduced cobalt. The generator could not produce native alpha, so the verified fallback uses a uniform white canvas for placement only on white page regions.",
+      "reference_images": ["style-master-v1-faq-woman-laptop-reference.png", "P01-character-a-master-v1.png"],
+      "section": "home-gateway",
+      "role": "RESET-01 Home editorial hero",
+      "dimensions": {"width": 1672, "height": 941},
+      "alt_text": {"decision": "informative", "en": "Illustration of an Indian citizen organising a phone, receipt, and notes beside a laptop.", "hi": "लैपटॉप के पास फोन, रसीद और नोट व्यवस्थित करते भारतीय नागरिक का चित्रण।"},
+      "sha256": "1a634816a7bc5dcf19a6d7143d1d25b2f288e637a89833c1fae3f1147e07554a",
+      "status": "approved-illustration-v5",
+      "archive_path": "design-intelligence/assets/images/output/home-preparation-illustration-v5.png",
+      "production_path": "site/assets/images/masters/home-preparation-illustration-v5.png",
+      "responsive_paths": ["site/assets/images/home-preparation-illustration-v5-640.webp", "site/assets/images/home-preparation-illustration-v5-1200.webp"],
+      "used_in_production": true
+    },
+    {
+      "id": "home-evidence-thread-illustration-v5",
+      "prompt_version": 5,
+      "prompt": "RESET-01 two-layer Evidence Thread using only the FAQ Style Master: four incident anchors above four evidence records, with the first three relationships ready and the missing phone identifier shown as incomplete. No generated labels or interface. The generator could not produce native alpha, so the verified fallback uses a uniform white canvas for placement only on white page regions.",
+      "reference_images": ["style-master-v1-faq-woman-laptop-reference.png"],
+      "section": "home-evidence-thread",
+      "role": "RESET-01 event-to-evidence relationship illustration",
+      "dimensions": {"width": 1672, "height": 941},
+      "alt_text": {"decision": "informative", "en": "Two-layer illustration connecting incident events to supporting evidence, with a missing phone identifier.", "hi": "घटनाओं को समर्थक साक्ष्य से जोड़ता दो-स्तरीय चित्र, जिसमें फोन पहचानकर्ता उपलब्ध नहीं है।"},
+      "sha256": "dffd6e531879a9ec8cfc2e8b11f55d73972d6f7ee045c2a292818ccd72f525c9",
+      "status": "approved-illustration-v5",
+      "archive_path": "design-intelligence/assets/images/output/home-evidence-thread-illustration-v5.png",
+      "production_path": "site/assets/images/masters/home-evidence-thread-illustration-v5.png",
+      "responsive_paths": ["site/assets/images/home-evidence-thread-illustration-v5-640.webp", "site/assets/images/home-evidence-thread-illustration-v5-1200.webp"],
+      "used_in_production": true
+    },
+    {
+      "id": "faq-support-illustration-v5",
+      "prompt_version": 5,
+      "prompt": "RESET-01 FAQ/support editorial scene using the FAQ woman-at-laptop image as sole rendering authority and P03 only for Character C/D identity: two citizens calmly review a phone and plain printed guidance together, with restrained detail and no authority cues. The generator could not produce native alpha, so the verified fallback uses a uniform white canvas for placement only on white page regions.",
+      "reference_images": ["style-master-v1-faq-woman-laptop-reference.png", "P03-community-cd-master-v1.png"],
+      "section": "faq",
+      "role": "RESET-01 FAQ contextual illustration",
+      "dimensions": {"width": 1536, "height": 1024},
+      "alt_text": {"decision": "decorative", "value": ""},
+      "sha256": "34ee1fce7e508f338af7dc267425f92d8c0101db39f2609a3a5b1182fe3b7d45",
+      "status": "approved-illustration-v5",
+      "archive_path": "design-intelligence/assets/images/output/faq-support-illustration-v5.png",
+      "production_path": "site/assets/images/masters/faq-support-illustration-v5.png",
+      "responsive_paths": ["site/assets/images/faq-support-illustration-v5-640.webp", "site/assets/images/faq-support-illustration-v5-1200.webp"],
       "used_in_production": true
     }
   ]

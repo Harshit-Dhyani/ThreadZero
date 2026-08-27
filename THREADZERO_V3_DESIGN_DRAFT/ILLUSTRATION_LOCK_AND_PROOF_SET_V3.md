@@ -1,5 +1,7 @@
 # ThreadZero V3 Illustration Lock and Proof Set
 
+> **Historical evidence only.** Superseded for active V3 implementation by `ILLUSTRATION_RESET_01.md`. Its former approval labels do not authorize P05–P08 as generation references.
+
 - **Status:** ILLUSTRATION SYSTEM APPROVED — V1.0 — 2026-08-28
 - **Version:** 3.0-locked
 - **Scope:** illustration system and proof-set planning only

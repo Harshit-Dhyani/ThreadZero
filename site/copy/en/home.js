@@ -99,13 +99,18 @@ export default {
     ],
     "visualSteps": [
       "Suspicious message",
-      "Link or website",
-      "Payment",
-      "Evidence record",
-      "Contact lost",
-      "Next action"
+      "Link opened",
+      "₹25,000 payment",
+      "Contact disappears"
     ],
-    "imageAlt": "Illustrated sequence connecting a message, link, payment record, and lost contact"
+    "evidenceLabel": "Evidence connected to the incident timeline",
+    "evidenceLinks": [
+      { "evidence": "WhatsApp screenshot", "connection": "Supports event 1", "status": "ready" },
+      { "evidence": "Suspicious URL", "connection": "Supports event 2", "status": "ready" },
+      { "evidence": "Transaction receipt", "connection": "Supports event 3", "status": "ready" },
+      { "evidence": "Phone identifier", "connection": "Missing for event 4", "status": "missing" }
+    ],
+    "imageAlt": "Two-layer illustration connecting incident events to supporting evidence, with a missing phone identifier"
   },
   "process": {
     "eyebrow": "How the demonstration works",

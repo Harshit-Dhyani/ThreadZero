@@ -1,5 +1,7 @@
 # ThreadZero Illustration System v1.0 — Final Lock
 
+> **Historical evidence only.** Superseded for active V3 implementation by `ILLUSTRATION_RESET_01.md`. P01–P04 remain identity references; P05–P08 are rejected exploration.
+
 - **Decision:** APPROVED AND FROZEN
 - **Lock date:** 2026-08-28
 - **Implementation authority:** `THREADZERO_V3_DESIGN_DRAFT/proofs/approved/`

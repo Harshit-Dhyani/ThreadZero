@@ -74,10 +74,10 @@ test("the static portal preserves its bilingual, safety, and asset contracts", a
 
   const manifest = JSON.parse(manifestSource);
   const shipped = manifest.assets.filter((asset) => asset.used_in_production);
-  assert.equal(shipped.length, 8);
+  assert.equal(shipped.length, 9);
   for (const asset of shipped) {
     assert.match(asset.status, /^approved-illustration/);
-    assert.match(asset.id, /-illustration-v(?:1|3)$/);
+    assert.match(asset.id, /-illustration-v(?:1|5)$/);
     const baseName = path.basename(asset.production_path, ".png");
     assert.match(appSource, new RegExp(baseName.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
     await stat(path.join(repoRoot, asset.production_path));
@@ -86,7 +86,7 @@ test("the static portal preserves its bilingual, safety, and asset contracts", a
   }
 
   assert.equal((await readdir(path.join(repoRoot, "design-intelligence/assets/images/input"))).filter((file) => file.endsWith(".png")).length, 8);
-  assert.equal((await readdir(path.join(repoRoot, "design-intelligence/assets/images/output"))).filter((file) => file.endsWith(".png")).length, 10);
+  assert.equal((await readdir(path.join(repoRoot, "design-intelligence/assets/images/output"))).filter((file) => file.endsWith(".png")).length, 13);
   await stat(path.join(repoRoot, "site/assets/icons/lucide-1.27.0/LICENSE"));
 
   for (const fontPath of [

@@ -45,7 +45,7 @@ export function renderPublicRoute(ctx) {
             </div>
             <p class="hero-disclosure">${esc(c.meta.disclosure)}</p>
           </div>
-          <div class="hero-media">${picture("home-preparation-illustration-v3", h.hero.imageAlt, "hero-picture", true)}</div>
+          <div class="hero-media">${picture("home-preparation-illustration-v5", h.hero.imageAlt, "hero-picture", true)}</div>
         </div>
         <div class="urgent-band" aria-labelledby="urgent-title">
           <div class="urgent-item urgent-call">${icon("phone-call", "urgent-icon")}<div><h2 id="urgent-title">${esc(h.urgent.title)}</h2><p>${esc(h.urgent.body)}</p><small>${esc(c.common.noCall)}</small></div></div>
@@ -61,8 +61,9 @@ export function renderPublicRoute(ctx) {
       <section class="section evidence-thread-section" data-home-section="3" aria-labelledby="thread-title">
         <div class="section-heading"><div><p class="eyebrow">${esc(h.mechanism.eyebrow)}</p><h2 id="thread-title">${esc(h.mechanism.title)}</h2></div><p>${esc(h.mechanism.intro)}</p></div>
         <div class="evidence-thread-layout">
-          ${picture("home-evidence-thread-illustration-v3", h.mechanism.imageAlt, "evidence-thread-picture")}
-          <ol class="thread-stages">${h.mechanism.visualSteps.map((label, index) => `<li><span>${index + 1}</span><strong>${esc(label)}</strong></li>`).join("")}</ol>
+          ${picture("home-evidence-thread-illustration-v5", h.mechanism.imageAlt, "evidence-thread-picture")}
+          <ol class="thread-events">${h.mechanism.visualSteps.map((label, index) => `<li><span>${index + 1}</span><strong>${esc(label)}</strong></li>`).join("")}</ol>
+          <ol class="thread-evidence-links" aria-label="${esc(h.mechanism.evidenceLabel)}">${h.mechanism.evidenceLinks.map((item, index) => `<li data-status="${esc(item.status)}"><span>${index + 1}</span><div><strong>${esc(item.evidence)}</strong><small>${esc(item.connection)}</small></div></li>`).join("")}</ol>
           <div class="readiness-legend">${evidenceStates.map(([status, label, item]) => `<article data-status="${status}"><span>${esc(label)}</span><strong>${esc(item.name)}</strong><p>${esc(item.reason)}</p></article>`).join("")}</div>
         </div>
       </section>
@@ -118,7 +119,7 @@ export function renderPublicRoute(ctx) {
       guides: "guides-learning-illustration-v1", "learning-corner": "guides-learning-illustration-v1", training: "guides-learning-illustration-v1", media: "guides-learning-illustration-v1",
       advisories: "safety-advisory-illustration-v1", safety: "safety-advisory-illustration-v1", "daily-digest": "safety-advisory-illustration-v1",
       awareness: "awareness-community-illustration-v1", volunteers: "awareness-community-illustration-v1", "volunteer-register": "awareness-community-illustration-v1",
-      accessibility: "accessibility-illustration-v1", faq: "help-footer-illustration-v1", contact: "help-footer-illustration-v1"
+      accessibility: "accessibility-illustration-v1", faq: "faq-support-illustration-v5", contact: "help-footer-illustration-v1"
     }[content.id] || ({ complaints: "transaction-review-illustration-v1", tracking: "transaction-review-illustration-v1", suspect: "safety-advisory-illustration-v1", volunteers: "awareness-community-illustration-v1", learning: "guides-learning-illustration-v1", help: "help-footer-illustration-v1", legal: "help-footer-illustration-v1" }[content.group]);
     const media = picture(mediaName, "", "content-hero-picture");
     const groupHub = { complaints: "complaints", tracking: "track", suspect: "official-tools", volunteers: "volunteers", learning: "learning-corner", help: "contact", legal: "policies" }[content.group];
