@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
-import { readFile, stat } from 'node:fs/promises';
+import { readFile, readdir, stat } from 'node:fs/promises';
 
 const registry = JSON.parse(await readFile('design-intelligence/reference-registry.json', 'utf8'));
 const generated = JSON.parse(await readFile('design-intelligence/generated-assets.json', 'utf8'));
@@ -45,13 +45,20 @@ for (const board of boards.boards) {
 }
 
 const shipped = generated.assets.filter((asset) => asset.used_in_production);
-assert.equal(generated.assets.length, 12, 'expected three hero candidates and nine supporting assets');
-assert.equal(shipped.length, 10, 'expected ten approved production masters');
+assert.equal(generated.schema_version, 3, 'expected illustration manifest schema v3');
+assert.equal(generated.assets.length, 8, 'expected eight coordinated illustration masters');
+assert.equal(shipped.length, 8, 'expected all eight illustrations in production');
+assert.match(generated.prompt_contract, /no .*photography/i, 'prompt contract must prohibit photography');
+assert.equal((await readdir(generated.input_reference_archive)).filter((name) => name.endsWith('.png')).length, 8, 'expected eight archived user references');
+assert.equal((await readdir(generated.output_master_archive)).filter((name) => name.endsWith('.png')).length, 8, 'expected eight archived generated masters');
 for (const asset of shipped) {
-  assert.equal(asset.status, 'approved-v1', asset.id + ' must be approved');
+  assert.match(asset.status, /^approved-illustration/, asset.id + ' must be an approved illustration');
+  assert.match(asset.id, /-illustration-v1$/, asset.id + ' must use the illustration id contract');
   const bytes = await readFile(asset.production_path);
   const actualHash = createHash('sha256').update(bytes).digest('hex');
   assert.equal(actualHash, asset.sha256, asset.id + ' production hash mismatch');
+  const archiveHash = createHash('sha256').update(await readFile(asset.archive_path)).digest('hex');
+  assert.equal(archiveHash, asset.sha256, asset.id + ' archive hash mismatch');
   for (const responsivePath of asset.responsive_paths) await stat(responsivePath);
 }
 
