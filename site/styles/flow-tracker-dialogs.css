@@ -793,6 +793,7 @@
   border-bottom: 1px solid var(--line);
   color: var(--muted);
   font-size: 0.78rem;
+  font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
@@ -812,6 +813,6 @@
   border-radius: 7px;
   color: var(--blue-700);
   font-size: 0.84rem;
-  font-weight: 700;
+  font-weight: 590;
   text-decoration: none;
 }

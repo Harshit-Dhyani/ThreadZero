@@ -41,6 +41,7 @@
 .brand-copy strong {
   max-width: 390px;
   font-size: 1.02rem;
+  font-weight: 620;
   line-height: 1.12;
 }
 
@@ -70,6 +71,7 @@
 
 .flow-header-help strong {
   font-size: 0.86rem;
+  font-weight: 600;
 }
 
 .language-control {
@@ -111,7 +113,7 @@
   border: 0;
   color: #fff;
   font-size: 0.84rem;
-  font-weight: 680;
+  font-weight: 560;
   list-style: none;
   text-decoration: none;
   cursor: pointer;
@@ -165,7 +167,8 @@
   padding: 7px 10px;
   color: var(--muted);
   font-size: 0.74rem;
-  letter-spacing: 0.08em;
+  font-weight: 600;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
 }
 
@@ -190,10 +193,14 @@
   gap: 2px;
 }
 
+.service-menu-link strong {
+  font-weight: 590;
+}
+
 .service-menu-link small {
   color: var(--muted);
   font-size: 0.74rem;
-  font-weight: 450;
+  font-weight: 400;
 }
 
 .header-menu-button {
