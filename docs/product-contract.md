@@ -55,11 +55,13 @@ The portal also keeps the 36 bilingual public guidance, directory, tracker, and 
 
 The static implementation now includes:
 
-- a seven-section bilingual landing page with all six citizen-service categories;
+- a four-section bilingual landing page with all six citizen-service categories;
 - a two-tier desktop header with the full navigation in its lower row, a compact tablet Services menu, and phone bottom navigation with a complete More menu;
 - the complete guarded report-preparation route contract;
 - all 36 unguarded public-information and local-practice routes, including the synthetic report tracker;
-- the approved responsive raster asset set and local fonts; and
+- eight coordinated civic illustrations, a locally vendored Lucide subset, and local fonts; and
 - deterministic flow, catalog, safety, and asset-integrity checks.
+
+The dependency-free frontend keeps stable entry files while splitting implementation by responsibility: ordered CSS modules, shell/public/flow renderers, language-and-section copy modules, and route-group data modules.
 
 Future visual changes must be versioned. They may not overwrite V1 reference evidence or generated masters, weaken the independent-concept qualifier, or introduce real submission behavior.

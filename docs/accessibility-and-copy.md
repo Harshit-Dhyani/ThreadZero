@@ -25,6 +25,8 @@ Interactive targets are at least 44×44 CSS pixels. Content must reflow without 
 
 Reduced-motion mode must show the final state immediately and may not leave content hidden.
 
+Illustrations are supplemental: meaningful images require concise localized alternative text, while decorative route and tracker illustrations use empty alternatives. Generated art may never carry required copy, controls, status, or navigation.
+
 ## Citizen language
 
 Use concrete verbs: **check**, **confirm**, **attach**, **edit**, **review**, and **continue**.

@@ -9,10 +9,11 @@ For an actual financial cyber-fraud incident in India, call **1930** and use **c
 The approved **Civic Evidence Service v1** direction is implemented as a dependency-free bilingual static portal in `site/`.
 
 - English and Hindi share one complete copy catalog and preserve the active route and in-memory report state when switched.
-- The landing page contains exactly ten sections and uses approved original/generated raster media.
+- The landing page contains exactly four purposeful sections and uses one coordinated illustration family.
 - The guarded financial-fraud preparation journey runs from `#home` through `#next` with deterministic synthetic data.
 - `#track` accepts only the documented demo reference `DEMO-2026-08421`; real complaint actions hand off to official NCRP pages.
-- Fourteen unguarded information routes cover official tools, guides, advisories, safety, awareness, training, media, volunteers, FAQ, contact, policies, and project information.
+- Thirty-six unguarded public routes cover complaint preparation, tracking, suspect tools, volunteers, learning, help, and legal information.
+- CSS, renderers, bilingual copy, and route data are split into bounded native modules behind stable entry files.
 
 ## Preserved foundation
 
@@ -33,9 +34,10 @@ Open `http://127.0.0.1:4173/site/#home`.
 ## Verify
 
 ```text
-node --test core/flow-core.test.mjs site/site-contract.test.mjs
+node --test core/*.test.mjs site/*.test.mjs
 node tools/validate-design-intelligence.mjs
 node --check site/app.js
+node --check site/renderers.js
 ```
 
 Nothing in this repository places a real call, uploads evidence, or submits externally.
