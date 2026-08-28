@@ -7,6 +7,7 @@ import { fileURLToPath } from "node:url";
 import { CONTENT_ROUTES } from "../core/flow-core.mjs";
 import { PORTAL_ROUTES } from "../core/portal-routes.mjs";
 import { COPY, assertCatalogParity } from "./copy.js";
+import { ROUTE_PRESENTATION } from "./route-presentation.js";
 
 const siteRoot = path.dirname(fileURLToPath(import.meta.url));
 const repoRoot = path.dirname(siteRoot);
@@ -16,6 +17,7 @@ test("the static portal preserves its bilingual, safety, and asset contracts", a
   assert.equal(assertCatalogParity(), true);
   assert.deepEqual(Object.keys(COPY.hi.content).sort(), Object.keys(COPY.en.content).sort());
   assert.equal(CONTENT_ROUTES.length, PORTAL_ROUTES.length);
+  assert.equal(Object.keys(ROUTE_PRESENTATION).length, PORTAL_ROUTES.length - 1);
   for (const route of PORTAL_ROUTES) {
     assert.ok(route.label.en && route.label.hi);
     for (const field of route.fields) assert.ok(field.label.en && field.label.hi);
@@ -44,28 +46,31 @@ test("the static portal preserves its bilingual, safety, and asset contracts", a
   assert.match(html, /<header[\s>]/);
   assert.match(html, /<main id="main-content"/);
   assert.match(html, /<footer[\s>]/);
+  assert.match(html, /class="official-action-strip"/);
   assert.match(html, /data-open-more[^>]+aria-label="Services"/);
   assert.match(html, /id="simulationDialog"[^>]+aria-labelledby="simulation-dialog-title"[^>]+aria-describedby="simulation-dialog-body"/);
   assert.match(html, /id="moreDialog"[^>]+aria-labelledby="more-dialog-title"/);
+  assert.match(html, /id="demoAccessDialog"[^>]+aria-labelledby="demo-access-title"[^>]+aria-describedby="demo-access-intro"/);
   assert.match(html, /Content-Security-Policy/);
   assert.match(css, /prefers-reduced-motion:\s*reduce/);
   assert.equal(cssFiles.length, 8);
   assert.match(cssEntry, /tokens-base\.css/);
-  assert.match(appSource, /class="service-menu/);
-  assert.match(appSource, /const complaintMenu = serviceMenu/);
-  assert.match(appSource, /const suspectMenu = serviceMenu/);
-  assert.match(appSource, /const learningMenu = serviceMenu/);
-  assert.match(appSource, /"nav-direct nav-track"/);
-  assert.match(appSource, /"nav-direct nav-volunteers"/);
+  assert.match(appSource, /Object\.entries\(WORKSPACES\)/);
+  assert.match(appSource, /workspace-link/);
+  assert.match(appSource, /data-primary-nav/);
   assert.match(appSource, /"nav-get-started raw-label"/);
   assert.match(appSource, /class="footer-main"/);
-  assert.match(appSource, /class="footer-urgent"/);
+  assert.match(appSource, /class="footer-help"/);
+  assert.match(appSource, /class="footer-official"/);
   assert.match(appSource, /setAttribute\("aria-label", c\.nav\.services\)/);
-  assert.match(appSource, /content-hero-\$\{esc\(composition\)\}/);
+  assert.match(appSource, /content-hero-\$\{esc\(presentation\.archetype\)\}/);
   assert.match(appSource, /class="legal-layout"/);
   assert.match(css, /\.tracker-timeline \.compact-status\s*\{[^}]*repeat\(4, minmax\(0, 1fr\)\)/s);
   assert.doesNotMatch(appSource, /help-footer-illustration-v1-1200\.webp/);
-  assert.doesNotMatch(appSource, /ThreadZero/i);
+  assert.doesNotMatch(appSource, /P07-editorial-help-scene-v1/);
+  assert.doesNotMatch(appSource, /act-now-confirm/);
+  assert.match(appSource, /event\.id === "event-payment"/);
+  assert.match(appSource, /ThreadZero/i);
   assert.match(appSource, /data-service-form/);
   assert.match(appSource, /sourcePanel\(content\.sources\)/);
   assert.match(app, /closest\("\.skip-link"\)[\s\S]*focusHeadingOrError\(document\)/);
@@ -78,7 +83,12 @@ test("the static portal preserves its bilingual, safety, and asset contracts", a
   assert.equal((appSource.match(/target="_blank"/g) || []).length, 1);
   assert.doesNotMatch(appSource, /<form[^>]+action=/i);
 
-  for (const forbidden of [/\btel:/i, /\bmailto:/i, /type=["']file["']/i, /\blocalStorage\b/, /\bsessionStorage\b/, /\bfetch\s*\(/, /\bXMLHttpRequest\b/, /\bWebSocket\b/]) {
+  assert.match(app, /financial-fraud-guide\.demoAccess\.v1/);
+  assert.match(app, /localStorage\.setItem\(DEMO_ACCESS_KEY, JSON\.stringify\(record\)\)/);
+  assert.equal((html.match(/type=["']password["']/gi) || []).length, 1);
+  assert.match(html, /data-demo-credential-form/);
+  assert.doesNotMatch(app, /localStorage\.setItem\([^\n]*(?:email|password)/i);
+  for (const forbidden of [/\btel:/i, /\bmailto:/i, /type=["']file["']/i, /\bsessionStorage\b/, /\bfetch\s*\(/, /\bXMLHttpRequest\b/, /\bWebSocket\b/]) {
     assert.doesNotMatch(publicSource, forbidden);
   }
   assert.doesNotMatch(appSource, /<img[^>]+src=["']https?:/i);
@@ -89,10 +99,10 @@ test("the static portal preserves its bilingual, safety, and asset contracts", a
 
   const manifest = JSON.parse(manifestSource);
   const shipped = manifest.assets.filter((asset) => asset.used_in_production);
-  assert.equal(shipped.length, 12);
+  assert.equal(shipped.length, 5);
   for (const asset of shipped) {
     assert.match(asset.status, /^approved-illustration/);
-    assert.match(asset.id, /(?:-illustration-v(?:1|5)|^P0[678]-.+-v1)$/);
+    assert.match(asset.id, /^P0[68]-.+-v1$/);
     const baseName = path.basename(asset.production_path, ".png");
     assert.match(appSource, new RegExp(baseName.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
     await stat(path.join(repoRoot, asset.production_path));
