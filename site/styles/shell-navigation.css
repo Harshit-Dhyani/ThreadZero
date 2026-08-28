@@ -29,19 +29,25 @@
 
 .brand-copy {
   display: grid;
-  gap: 3px;
+  gap: 1px;
 }
 
-.brand-copy strong {
+.brand-copy [data-brand-name] {
   max-width: 360px;
-  font-size: 0.98rem;
-  font-weight: 620;
+  font-size: 1.08rem;
+  font-weight: 700;
   line-height: 1.15;
 }
 
-.brand-copy span {
+.brand-copy [data-brand-title] {
+  color: #fff;
+  font-size: 0.78rem;
+  font-weight: 560;
+}
+
+.brand-copy small {
   color: #c9d7ec;
-  font-size: 0.72rem;
+  font-size: 0.67rem;
 }
 
 .header-utilities {
@@ -63,21 +69,34 @@
   text-decoration: none;
 }
 
-.header-support-button img {
+.header-utility-button img {
   filter: brightness(0) invert(1);
 }
 
-.header-support-button {
+.header-utility-button {
   min-height: 44px;
-  padding: 0;
-  border: 0;
+  padding: 7px 9px;
+  border: 1px solid rgb(255 255 255 / 20%);
+  border-radius: 8px;
   background: transparent;
   color: #fff;
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  font-size: 0.96rem;
-  text-decoration: none;
+  font-size: 0.82rem;
+  cursor: pointer;
+}
+
+.header-utility-button kbd {
+  padding: 1px 5px;
+  border: 1px solid rgb(255 255 255 / 24%);
+  border-radius: 5px;
+  color: #c9d7ec;
+  font-size: 0.68rem;
+}
+
+.header-1930 {
+  font-weight: 700;
 }
 
 .demo-profile-button {
@@ -121,10 +140,9 @@
 .desktop-nav {
   min-height: 52px;
   padding: 0 max(44px, calc((100% - 1280px) / 2));
-  display: grid;
-  grid-template-columns: repeat(9, minmax(0, 1fr));
+  display: flex;
   align-items: stretch;
-  gap: 0;
+  gap: 4px;
   background: var(--blue-700);
 }
 
@@ -135,7 +153,7 @@
   align-items: center;
   justify-content: center;
   gap: 8px;
-  padding: 0 13px;
+  padding: 0 16px;
   border: 0;
   color: #fff;
   font-size: 0.82rem;
@@ -152,8 +170,7 @@
 
 .desktop-nav > a,
 .desktop-nav > .service-menu {
-  min-width: 0;
-  border-right: 1px solid rgb(255 255 255 / 18%);
+  min-width: max-content;
 }
 
 .desktop-nav > .service-menu {
@@ -166,8 +183,9 @@
 }
 
 .desktop-nav .nav-get-started {
+  min-width: 148px;
   min-height: 40px;
-  margin: 6px 0;
+  margin: 6px 0 6px auto;
   padding: 0 16px;
   border: 1px solid rgb(255 255 255 / 78%);
   border-radius: 8px;
@@ -176,6 +194,7 @@
 
 .desktop-nav > a:hover,
 .desktop-nav > a[aria-current="page"],
+.desktop-nav > a.is-current,
 .desktop-nav summary:hover,
 .service-menu[open] summary {
   background: rgb(255 255 255 / 13%);
