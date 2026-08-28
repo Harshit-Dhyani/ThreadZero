@@ -6,6 +6,7 @@ export function renderFlowRoute(ctx) {
   const {
     language,
     state,
+    incidentGuide,
     detailsDraft,
     routeErrors,
     eventEditor,
@@ -63,8 +64,8 @@ export function renderFlowRoute(ctx) {
       : ["Act now", "Incident", "Evidence", "Timeline", "Review and next"];
     return [
       { label: labels[0], routes: ["act-now"] },
-      { label: labels[1], routes: ["incident", "readiness", "details"] },
-      { label: labels[2], routes: ["evidence"] },
+      { label: labels[1], routes: ["incident", "details"] },
+      { label: labels[2], routes: ["readiness", "evidence"] },
       { label: labels[3], routes: ["chronology"] },
       { label: labels[4], routes: ["review", "submit", "next"] }
     ];
@@ -105,10 +106,12 @@ export function renderFlowRoute(ctx) {
     const c = copy();
     const phases = flowPhases();
     const currentPhase = phases.findIndex((phase) => phase.routes.includes(state.route));
+    const routeLabel = c.flow.routes[state.route];
+    const mobileLabel = routeLabel === phases[currentPhase].label ? routeLabel : `${phases[currentPhase].label} · ${routeLabel}`;
     return `<div class="flow-page">
       <div class="flow-mobile-status">
         <span>${esc(c.flow.step)} ${currentPhase + 1} ${esc(c.flow.of)} ${phases.length}</span>
-        <strong>${esc(phases[currentPhase].label)} · ${esc(c.flow.routes[state.route])}</strong>
+        <strong>${esc(mobileLabel)}</strong>
       </div>
       <div class="flow-shell">
         <aside>${flowProgress()}</aside>
@@ -117,7 +120,6 @@ export function renderFlowRoute(ctx) {
           ${options.hideBack ? "" : `<div class="standalone-back">${routeLink(flowBackRoute(), `${icon("arrow-right", "icon icon-inline icon-back")} ${esc(c.common.back)}`, "button button-secondary raw-label")}</div>`}
         </div>
       </div>
-      <div class="flow-boundary"><span>${esc(c.meta.disclosure)}</span><strong>${esc(c.common.callManually)}</strong>${officialAnchor("officialHome", c.common.officialSite, "text-link")}</div>
     </div>`;
   }
   
@@ -130,8 +132,8 @@ export function renderFlowRoute(ctx) {
     const s = c.flow.actNow;
     return flowLayout(`${flowHeading(s)}${errorSummary()}
       <div class="urgent-guidance-card">
-        <div><span class="urgent-symbol" aria-hidden="true">1930</span><strong>${esc(c.common.callManually)}</strong><small>${esc(c.common.noCall)}</small></div>
-        <div>${routeLink("official-tools", routeLabel("official-tools"), "button button-secondary")}</div>
+        <div><span class="urgent-symbol" aria-hidden="true">1930</span><span><strong>${esc(c.common.callManually)}</strong><small>${esc(c.common.noCall)}</small></span></div>
+        <div>${routeLink("official-tools", routeLabel("official-tools"), "text-link")}</div>
       </div>
       <div class="boundary-card"><h2>${esc(s.boundaryTitle)}</h2><p>${esc(s.boundaryBody)}</p><p class="truth-line">${esc(c.meta.disclosure)}</p></div>
       <form class="flow-form" data-route-form="act-now">
@@ -144,14 +146,36 @@ export function renderFlowRoute(ctx) {
   function renderIncident() {
     const c = copy();
     const s = c.flow.incident;
+    const ui = language === "hi" ? {
+      local: "स्थानीय नियतात्मक डेमो", title: "बताइए क्या हुआ", intro: "आप सामान्य भाषा में लिख सकते हैं। कुछ भी भेजा या अपलोड नहीं होगा।", process: "घटना व्यवस्थित करें", review: "सुझाए गए तथ्य जाँचें", suggested: "सुझाव · स्थानीय डेमो", confirmed: "उपयोगकर्ता पुष्टि आवश्यक", category: "घटना प्रकार", amount: "राशि", payment: "भुगतान माध्यम", channel: "संपर्क माध्यम", reference: "लेन-देन संदर्भ", questions: "अभी उपयोगी प्रश्न", optional: "वैकल्पिक — छोड़ सकते हैं", confirm: "पुष्टि करके आगे बढ़ें", manual: "इसके बजाय श्रेणी स्वयं चुनें", unknown: "पता नहीं"
+    } : {
+      local: "Local deterministic demo", title: "Tell us what happened", intro: "You can write naturally. Nothing is sent or uploaded.", process: "Organise incident", review: "Review suggested facts", suggested: "Suggested · local demo", confirmed: "User confirmation required", category: "Incident type", amount: "Amount", payment: "Payment method", channel: "Contact channel", reference: "Transaction reference", questions: "Useful questions", optional: "Optional — you can skip these", confirm: "Confirm and continue", manual: "Choose a category manually instead", unknown: "Unknown"
+    };
+    const draft = incidentGuide?.draft;
+    const categories = [["fake-investment", language === "hi" ? "फर्जी निवेश" : "Fake investment"], ["phishing", language === "hi" ? "फ़िशिंग" : "Phishing"], ["impersonation", language === "hi" ? "प्रतिरूपण" : "Impersonation"], ["payment-fraud", language === "hi" ? "भुगतान धोखाधड़ी" : "Payment fraud"], ["unknown", ui.unknown]];
+    const payments = ["", "UPI", "Bank transfer", "Card"];
+    const channels = ["", "WhatsApp", "Telegram", "Instagram", "SMS", "Phone call"];
+    const questionValue = (id) => id === "transactionReference" ? draft.identifiers.transactionReference : id === "url" ? draft.identifiers.url : id === "happenedAt" ? draft.happenedAt || "" : draft.identifiers.phone || draft.identifiers.upi || draft.identifiers.username;
     return flowLayout(`${flowHeading(s)}${errorSummary()}
-      <form class="flow-form" data-route-form="incident">
-        <fieldset class="choice-grid"><legend>${esc(s.legend)}</legend>
-          ${s.choices.map((choice) => `<label class="choice-card" for="incident-${esc(choice.value)}"><input id="incident-${esc(choice.value)}" name="incidentChoice" type="radio" value="${esc(choice.value)}" data-state="incidentChoice"${checked(state.incidentChoice === choice.value)}${invalidAttributes("flow")}><span><strong>${esc(choice.title)}</strong><small>${esc(choice.body)}</small></span></label>`).join("")}
-        </fieldset>
-        ${fieldError("flow")}
-        <div class="flow-actions"><button class="button button-primary" type="submit">${esc(c.common.continue)} ${icon("arrow-right", "icon icon-inline")}</button></div>
-      </form>`);
+      <section class="incident-guide" aria-labelledby="incident-guide-title">
+        <div class="incident-guide-heading"><div><span>${esc(ui.local)}</span><h2 id="incident-guide-title">${esc(ui.title)}</h2><p>${esc(ui.intro)}</p></div>${icon("clipboard-list", "incident-guide-icon")}</div>
+        <form data-incident-guide-form><label for="guide-narrative">${esc(ui.title)}</label><textarea id="guide-narrative" name="narrative" rows="5" minlength="20" maxlength="600"${invalidAttributes("guide")}>${esc(incidentGuide?.narrative || state.incident.narrative)}</textarea>${fieldError("guide")}<div class="flow-actions"><button class="button button-primary" type="submit">${esc(ui.process)}</button></div></form>
+      </section>
+      ${draft ? `<section class="incident-guide-review" tabindex="-1"><header><div><span class="status-chip state-optional">${esc(ui.suggested)}</span><h2>${esc(ui.review)}</h2></div><small>${esc(ui.confirmed)}</small></header>
+        <form data-route-form="incident" data-guide-confirm>
+          <input type="hidden" name="incidentChoice" value="${esc(draft.incidentType)}">
+          <div class="incident-fact-grid">
+            <label>${esc(ui.category)}<select name="guide-incidentType">${categories.map(([value, label]) => `<option value="${esc(value)}"${selected(draft.incidentType === value)}>${esc(label)}</option>`).join("")}</select></label>
+            <label>${esc(ui.amount)}<input name="guide-amount" type="number" min="1" value="${esc(draft.amount || "")}"></label>
+            <label>${esc(ui.payment)}<select name="guide-paymentMethod">${payments.map((value) => `<option value="${esc(value)}"${selected(draft.paymentMethod === value)}>${esc(value || ui.unknown)}</option>`).join("")}</select></label>
+            <label>${esc(ui.channel)}<select name="guide-contactChannel">${channels.map((value) => `<option value="${esc(value)}"${selected(draft.contactChannels[0] === value)}>${esc(value || ui.unknown)}</option>`).join("")}</select></label>
+            <label class="field-wide">${esc(ui.reference)}<input name="guide-transactionReference" inputmode="numeric" maxlength="12" value="${esc(draft.identifiers.transactionReference)}"></label>
+          </div>
+          ${draft.questions.length ? `<fieldset class="incident-questions"><legend>${esc(ui.questions)} <small>${esc(ui.optional)}</small></legend>${draft.questions.map((question) => `<label for="question-${esc(question.id)}">${esc(question.text)}<input id="question-${esc(question.id)}" name="question-${esc(question.id)}" type="${question.id === "happenedAt" ? "datetime-local" : "text"}" value="${esc(questionValue(question.id))}"></label>`).join("")}</fieldset>` : ""}
+          <div class="flow-actions"><button class="button button-primary" type="submit">${esc(ui.confirm)} ${icon("arrow-right", "icon icon-inline")}</button></div>
+        </form>
+      </section>` : ""}
+      <details class="manual-incident"><summary>${esc(ui.manual)}</summary><form class="flow-form" data-route-form="incident"><fieldset class="choice-grid"><legend>${esc(s.legend)}</legend>${s.choices.map((choice) => `<label class="choice-card" for="incident-${esc(choice.value)}"><input id="incident-${esc(choice.value)}" name="incidentChoice" type="radio" value="${esc(choice.value)}" data-state="incidentChoice"${checked(state.incidentChoice === choice.value)}${invalidAttributes("flow")}><span><strong>${esc(choice.title)}</strong><small>${esc(choice.body)}</small></span></label>`).join("")}</fieldset>${fieldError("flow")}<div class="flow-actions"><button class="button button-primary" type="submit">${esc(c.common.continue)} ${icon("arrow-right", "icon icon-inline")}</button></div></form></details>`);
   }
   
   function renderReadiness() {
@@ -237,7 +261,10 @@ export function renderFlowRoute(ctx) {
   }
   
   function incidentChoiceLabel() {
-    return copy().flow.incident.choices.find((choice) => choice.value === state.incidentChoice)?.title || "—";
+    const manual = copy().flow.incident.choices.find((choice) => choice.value === state.incidentChoice)?.title;
+    if (manual) return manual;
+    const type = incidentGuide?.draft?.incidentType;
+    return type ? type.replaceAll("-", " ").replace(/^./, (letter) => letter.toUpperCase()) : "—";
   }
   
   function renderReview() {
@@ -264,10 +291,14 @@ export function renderFlowRoute(ctx) {
   function renderNext() {
     const c = copy();
     const s = c.flow.next;
+    const pack = language === "hi" ? { title: "तैयारी पैक", body: "घटना सारांश, समयरेखा, पहचानकर्ता, साक्ष्य और आधिकारिक अगले कदम स्थानीय रूप से तैयार करें।", copy: "सारांश कॉपी करें", download: "तैयारी पैक डाउनलोड करें" } : { title: "Preparation pack", body: "Prepare the incident summary, chronology, identifiers, evidence, and official next actions locally.", copy: "Copy summary", download: "Download preparation pack" };
+    const actions = incidentGuide?.draft?.nextActions || [];
+    const actionsTitle = language === "hi" ? "इस घटना के लिए अगले कदम" : "Next actions for this incident";
     return flowLayout(`${flowHeading(s)}
       <div class="reference-card"><span>${esc(c.common.syntheticReference)}</span><strong>${esc(DEMO.reportReference)}</strong><small>${esc(c.common.nothingSent)}</small><p>${esc(s.referenceHelp)}</p></div>
       <ol class="status-track compact-status">${s.states.map((item, index) => `<li class="${index === 0 ? "is-active" : ""}"><span aria-hidden="true">${index + 1}</span><div><strong>${esc(item.title)}</strong><p>${esc(item.body)}</p></div></li>`).join("")}</ol>
-      <div class="official-next"><div><strong>${esc(c.common.actualIncident)}</strong><p>${esc(c.common.callManually)}</p></div>${routeLink("official-tools", routeLabel("official-tools"), "button button-secondary")}</div>
+      <section class="smart-next-actions"><div><p class="eyebrow">${esc(c.common.actualIncident)}</p><h2>${esc(actionsTitle)}</h2><ol>${actions.map((action) => `<li>${icon(action.official ? "external-link" : "check", "icon icon-small")}<span>${esc(action.title)}</span></li>`).join("")}</ol></div>${routeLink("official-tools", routeLabel("official-tools"), "button button-secondary")}</section>
+      <section class="preparation-pack"><div><h2>${esc(pack.title)}</h2><p>${esc(pack.body)}</p><small>${esc(c.common.nothingSent)}</small></div><div class="button-row"><button class="button button-secondary" type="button" data-pack-action="copy">${esc(pack.copy)}</button><button class="button button-secondary" type="button" data-pack-action="download">${esc(pack.download)}</button>${officialAnchor("officialHome", c.common.officialSite, "button button-primary")}</div></section>
       <div class="flow-actions"><button class="button button-primary" type="button" data-reset-report>${esc(c.common.reset)}</button>${routeLink("track", c.nav.track, "button button-secondary")}</div>`, { hideBack: true });
   }
 
