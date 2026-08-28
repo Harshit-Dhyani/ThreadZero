@@ -3,7 +3,7 @@ import { PORTAL_ROUTES, ROUTE_GROUPS } from "../../core/portal-routes.mjs";
 export function renderShell(ctx) {
   const { language, copy, esc, routeLink, routeLabel, icon, officialAnchor } = ctx;
 
-  function serviceMenu(label, content, className = "") {
+  function serviceMenu(label, content, className) {
     return `<details class="service-menu ${esc(className)}">
       <summary>${esc(label)} ${icon("chevron-down", "icon icon-small")}</summary>
       <div class="service-menu-panel">${content}</div>
@@ -14,8 +14,8 @@ export function renderShell(ctx) {
     return `<div class="service-menu-group"><strong>${esc(title)}</strong>${links.join("")}</div>`;
   }
 
-  function menuRoute(route, title, description) {
-    return routeLink(route, `<span><strong>${esc(title)}</strong><small>${esc(description)}</small></span>${icon("arrow-right", "icon icon-small")}`, "service-menu-link service-menu-action raw-label");
+  function menuRoute(route, title, description = "") {
+    return routeLink(route, `<span><strong>${esc(title)}</strong>${description ? `<small>${esc(description)}</small>` : ""}</span>${icon("arrow-right", "icon icon-small")}`, "service-menu-link service-menu-action raw-label");
   }
 
   function renderShellView() {
@@ -24,61 +24,68 @@ export function renderShell(ctx) {
     document.title = c.meta.title;
     document.querySelector("[data-brand-title]").textContent = c.meta.title;
     document.querySelector("[data-brand-qualifier]").textContent = c.meta.qualifier;
-    document.querySelector("[data-header-help-label]").textContent = c.common.actualIncident;
-    document.querySelector("[data-header-help-action]").textContent = c.common.callManually;
+    document.querySelector("[data-header-help-action]").textContent = language === "hi" ? "1930 पर कॉल करें (24x7)" : "Call 1930 (24x7)";
+    document.querySelector("[data-header-support-label]").textContent = c.nav.helpSupport;
     document.querySelector("[data-language-label]").textContent = c.nav.language;
     document.querySelector("[data-header-menu-label]").textContent = c.nav.services;
+    document.querySelector("[data-open-more]").setAttribute("aria-label", c.nav.services);
     const languageSelect = document.querySelector("#languageSelect");
     languageSelect.value = language;
     languageSelect.setAttribute("aria-label", c.nav.language);
     document.querySelector(".brand").setAttribute("aria-label", `${c.meta.title}, ${c.nav.home}`);
+    document.querySelector(".header-primary-action").textContent = c.nav.report;
   
     const primaryNav = document.querySelector("[data-primary-nav]");
     primaryNav.setAttribute("aria-label", c.nav.primary);
-    const complaintMenu = serviceMenu(c.nav.complaint, `
-      ${menuGroup(routeLabel("complaints"), [
-        menuRoute("women-children", routeLabel("women-children"), c.nav.womenChildrenAnonymousNote),
-        menuRoute("act-now", c.nav.financialFraud, c.nav.financialFraudNote),
-        menuRoute("other-cybercrime", routeLabel("other-cybercrime"), c.nav.otherCrimeNote)
-      ])}`, "complaint-menu");
-    const suspectMenu = serviceMenu(c.nav.suspect, `
-      ${menuGroup(routeLabel("official-tools"), [
-        menuRoute("check-identifier", routeLabel("check-identifier"), c.nav.checkIdentifiersNote),
-        menuRoute("check-website", routeLabel("check-website"), c.nav.checkWebsiteNote),
-        menuRoute("report-suspect", routeLabel("report-suspect"), c.nav.reportSuspectNote),
-        menuRoute("report-abuse", routeLabel("report-abuse"), c.nav.reportAbuseNote),
-        menuRoute("mobile-connections", routeLabel("mobile-connections"), c.nav.tafcopNote),
-        menuRoute("appeal", routeLabel("appeal"), c.nav.gacNote)
-      ])}`, "suspect-menu");
-    const learningMenu = serviceMenu(c.nav.learning, menuGroup(c.nav.learning, [
-      routeLink("learning-corner", c.nav.learningOverview, "service-menu-link"),
-      routeLink("guides", c.nav.guides, "service-menu-link"),
-      routeLink("advisories", c.content.advisories.eyebrow, "service-menu-link"),
-      routeLink("safety", c.content.safety.eyebrow, "service-menu-link"),
-      routeLink("awareness", c.content.awareness.eyebrow, "service-menu-link"),
-      routeLink("daily-digest", c.content["daily-digest"].eyebrow, "service-menu-link"),
-      routeLink("training", c.content.training.eyebrow, "service-menu-link"),
-      routeLink("media", c.content.media.eyebrow, "service-menu-link"),
-      routeLink("accessibility", routeLabel("accessibility"), "service-menu-link"),
-      routeLink("faq", routeLabel("faq"), "service-menu-link")
+    const complaintMenu = serviceMenu(c.nav.complaint, menuGroup(c.nav.reportTrackGroup, [
+      menuRoute("act-now", c.nav.report, c.nav.financialFraudNote),
+      menuRoute("complaints", routeLabel("complaints")),
+      menuRoute("anonymous-report", routeLabel("anonymous-report")),
+      menuRoute("registered-report", routeLabel("registered-report")),
+      menuRoute("women-children", routeLabel("women-children")),
+      menuRoute("other-cybercrime", routeLabel("other-cybercrime"))
+    ]), "complaint-menu");
+    const suspectMenu = serviceMenu(c.nav.suspect, menuGroup(c.nav.suspectGroup, [
+      menuRoute("official-tools", routeLabel("official-tools")),
+      menuRoute("check-identifier", routeLabel("check-identifier"), c.nav.checkIdentifiersNote),
+      menuRoute("check-website", routeLabel("check-website"), c.nav.checkWebsiteNote),
+      menuRoute("report-suspect", routeLabel("report-suspect"), c.nav.reportSuspectNote),
+      menuRoute("report-abuse", routeLabel("report-abuse"), c.nav.reportAbuseNote),
+      menuRoute("mobile-connections", routeLabel("mobile-connections"), c.nav.tafcopNote),
+      menuRoute("appeal", routeLabel("appeal"), c.nav.gacNote)
+    ]), "suspect-menu");
+    const learningMenu = serviceMenu(c.nav.guidesLearning, menuGroup(c.nav.learning, [
+      menuRoute("learning-corner", c.nav.learningOverview),
+      menuRoute("guides", routeLabel("guides")),
+      menuRoute("advisories", routeLabel("advisories")),
+      menuRoute("safety", routeLabel("safety")),
+      menuRoute("awareness", routeLabel("awareness")),
+      menuRoute("daily-digest", routeLabel("daily-digest")),
+      menuRoute("training", routeLabel("training")),
+      menuRoute("media", routeLabel("media"))
     ]), "learning-menu");
+    const supportMenu = serviceMenu(c.nav.support, menuGroup(c.nav.helpGroup, [
+      menuRoute("contact", routeLabel("contact")),
+      menuRoute("faq", routeLabel("faq")),
+      menuRoute("feedback", routeLabel("feedback")),
+      menuRoute("grievance", routeLabel("grievance")),
+      menuRoute("accessibility", routeLabel("accessibility"))
+    ]), "support-menu");
     primaryNav.innerHTML = `
-      ${routeLink("home", `${icon("house", "icon icon-small")}<span>${esc(c.nav.home)}</span>`, "service-home raw-label")}
+      ${routeLink("home", `${icon("house", "icon")}<span>${esc(c.nav.home)}</span>`, "service-home raw-label")}
       ${complaintMenu}
-      ${routeLink("track", c.nav.trackComplaint)}
+      ${routeLink("track", c.nav.track, "nav-direct nav-track")}
       ${suspectMenu}
-      ${routeLink("volunteers", routeLabel("volunteers"))}
+      ${routeLink("volunteers", c.nav.volunteers, "nav-direct nav-volunteers")}
       ${learningMenu}
-      ${routeLink("contact", c.nav.contact)}`;
+      ${supportMenu}
+      ${routeLink("act-now", `${esc(c.nav.getStarted)} ${icon("arrow-right", "icon icon-small")}`, "nav-get-started raw-label")}`;
   
-    document.querySelector("[data-mobile-nav]").innerHTML = `
-      ${routeLink("home", `${icon("house")}<span>${esc(c.nav.home)}</span>`, "mobile-nav-link raw-label")}
-      ${routeLink("act-now", `${icon("file-plus-2")}<span>${esc(c.nav.report)}</span>`, "mobile-nav-link raw-label")}
-      ${routeLink("track", `${icon("clipboard-list")}<span>${esc(c.nav.track)}</span>`, "mobile-nav-link raw-label")}
-      ${routeLink("learning-corner", `${icon("book-open")}<span>${esc(c.nav.learning)}</span>`, "mobile-nav-link raw-label")}
-      <button class="mobile-nav-link" type="button" data-open-more aria-haspopup="dialog">
-        ${icon("ellipsis")}<span>${esc(c.nav.more)}</span>
-      </button>`;
+    document.querySelector("[data-mobile-quick-actions]").innerHTML = `
+      ${routeLink("act-now", esc(c.nav.report), "mobile-quick-link")}
+      ${routeLink("track", esc(c.nav.track), "mobile-quick-link")}
+      ${routeLink("guides", esc(c.nav.guides), "mobile-quick-link")}
+      ${routeLink("contact", esc(c.nav.support), "mobile-quick-link")}`;
   
     document.querySelector("[data-more-title]").textContent = c.nav.moreTitle;
     document.querySelector("[data-more-close]").setAttribute("aria-label", c.nav.closeMenu);
@@ -106,28 +113,28 @@ export function renderShell(ctx) {
   
   function renderFooter() {
     const c = copy();
-    const group = (title, links) => `<nav class="footer-group" aria-label="${esc(title)}"><strong>${esc(title)}</strong>${links.map(([route, label]) => routeLink(route, label)).join("")}</nav>`;
     document.querySelector("[data-shell-footer]").innerHTML = `
-      <div class="footer-upper">
-        <div class="footer-brand">
-          <div class="footer-brand-heading">${icon("waypoints", "footer-brand-icon")}<strong>${esc(c.footer.title)}</strong></div>
-          <small>${esc(c.footer.qualifier)}</small>
+      <div class="footer-main">
+        <section class="footer-summary" aria-labelledby="footer-title">
+          <strong id="footer-title">${esc(c.footer.title)}</strong>
+          <span>${esc(c.footer.qualifier)}</span>
           <p>${esc(c.footer.body)}</p>
-        </div>
-        ${group(c.nav.reportTrackGroup, [["act-now", c.nav.report], ["complaints", routeLabel("complaints")], ["track", c.nav.track], ["official-tools", routeLabel("official-tools")]])}
-        ${group(c.nav.guides, [["guides", routeLabel("guides")], ["safety", routeLabel("safety")], ["advisories", routeLabel("advisories")], ["training", routeLabel("training")]])}
-        ${group(c.nav.helpGroup, [["faq", routeLabel("faq")], ["contact", routeLabel("contact")], ["feedback", routeLabel("feedback")], ["grievance", routeLabel("grievance")]])}
-        ${group(c.nav.about, [["about", routeLabel("about")], ["policies", routeLabel("policies")], ["privacy", routeLabel("privacy")], ["accessibility", routeLabel("accessibility")]])}
-        <aside class="footer-help-panel">
-          ${icon("circle-help", "footer-help-icon")}
-          <div><strong>${esc(c.home.help.title)}</strong><p>${esc(c.home.help.intro)}</p>${routeLink("contact", routeLabel("contact"), "text-link")}</div>
+        </section>
+        <nav class="footer-links" aria-label="${esc(c.nav.primary)}">
+          ${routeLink("act-now", c.nav.report)}
+          ${routeLink("track", c.nav.track)}
+          ${routeLink("guides", c.nav.guides)}
+          ${routeLink("contact", c.nav.support)}
+          ${routeLink("accessibility", routeLabel("accessibility"))}
+          ${routeLink("privacy", routeLabel("privacy"))}
+        </nav>
+        <aside class="footer-urgent">
+          <div class="footer-urgent-heading">${icon("phone-call", "footer-urgent-icon")}<div><span>${language === "hi" ? "आधिकारिक कार्रवाई" : "Official action"}</span><strong>${language === "hi" ? "वास्तविक वित्तीय साइबर धोखाधड़ी?" : "Real financial cyber fraud?"}</strong></div></div>
+          <p>${esc(c.common.callManually)} · ${esc(c.common.noCall)}</p>
+          ${officialAnchor("officialHome", c.common.officialSite, "text-link")}
         </aside>
       </div>
-      <div class="footer-lower">
-        <p>${esc(c.footer.boundary)}</p>
-        <strong>${icon("phone-call", "icon icon-small")} ${esc(c.footer.urgent)}</strong>
-        ${officialAnchor("officialHome", c.common.officialSite, "footer-official-link")}
-      </div>`;
+      <div class="footer-meta"><span>${esc(c.footer.boundary)}</span><span>${esc(c.footer.version)}</span></div>`;
   }
 
   renderShellView();
