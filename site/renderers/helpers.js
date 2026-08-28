@@ -12,11 +12,13 @@ export function getServiceUi(language) {
     required: "आवश्यक", submit: "स्थानीय रूप से तैयार करें", reset: "रीसेट", edit: "संपादित करें", back: "सेवा हब पर वापस जाएँ",
     errorsTitle: "कृपया इन समस्याओं को ठीक करें", requiredError: "यह फ़ील्ड भरें।", invalidError: "दिया गया सिंथेटिक उदाहरण उपयोग करें।",
     shortError: "थोड़ा और विवरण जोड़ें।", prepared: "केवल इस ब्राउज़र सत्र में तैयार", nothingSent: "कुछ भी भेजा, अपलोड या सुरक्षित नहीं किया गया।",
+    localBoundary: "केवल काल्पनिक डेमो जानकारी उपयोग करें। वास्तविक कार्रवाई आधिकारिक सेवा पर पूरी करें।",
     example: "डेमो उदाहरण", open: "खोलें"
   } : {
     required: "Required", submit: "Prepare locally", reset: "Reset", edit: "Edit", back: "Back to service hub",
     errorsTitle: "Please fix these problems", requiredError: "Complete this field.", invalidError: "Use the documented synthetic example.",
     shortError: "Add a little more detail.", prepared: "Prepared only for this browser session", nothingSent: "Nothing was sent, uploaded, or saved.",
+    localBoundary: "Use fictional demo information only. Complete real action on the official service.",
     example: "Demo example", open: "Open"
   };
 }
@@ -76,7 +78,7 @@ export function createViewHelpers(language, state) {
   function sourcePanel(keys = []) {
     if (!keys.length) return "";
     const c = copy();
-    return `<aside class="source-panel" aria-label="${esc(c.common.source)}"><strong>${esc(c.common.source)}</strong><div class="source-links">${keys.map((key) => officialAnchor(key)).join("")}</div><small class="source-note">${esc(c.common.lastChecked)} · ${esc(c.common.sourceNote)}</small></aside>`;
+    return `<details class="source-panel"><summary>${icon("external-link", "icon icon-small")}<strong>${esc(c.common.source)}</strong><span>${esc(c.common.officialReferences)}</span>${icon("chevron-down", "icon icon-small")}</summary><div class="source-panel-body"><div class="source-links">${keys.map((key) => officialAnchor(key)).join("")}</div><small class="source-note">${esc(c.common.lastChecked)} · ${esc(c.common.sourceNote)}</small></div></details>`;
   }
 
   return { copy, esc, checked, selected, routeLink, icon, picture, officialAnchor, officialLink, routeLabel, sourcePanel };
