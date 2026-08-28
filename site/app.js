@@ -1,8 +1,9 @@
-import { COPY, assertCatalogParity } from "./copy.js?v=20260828a";
+import { COPY, assertCatalogParity } from "./copy.js?v=20260828f";
 import { DEMO } from "../core/demo-data.mjs";
 import { ROUTE_BY_ID, localizeRoute } from "../core/portal-routes.mjs";
 import { createServiceRecord, translateSelectValues, validateServiceValues } from "../core/service-form-core.mjs";
-import { getEvidenceCopy, getServiceUi, renderPortal } from "./renderers.js?v=20260828a";
+import { createPreparationPack, extractIncident, refreshIncidentDerivedFields } from "../core/incident-intelligence.mjs";
+import { getEvidenceCopy, getServiceUi, renderPortal } from "./renderers.js?v=20260828n";
 import {
   createInitialState,
   resolveRoute,
@@ -34,6 +35,7 @@ const clone = (value) => JSON.parse(JSON.stringify(value));
 let language = "en";
 let state = createInitialState();
 let detailsDraft = clone(state.incident);
+let incidentGuide = { narrative: state.incident.narrative, draft: null, confirmed: false };
 let routeErrors = [];
 let tracker = { value: DEMO.reportReference, status: "idle" };
 let eventEditor = null;
@@ -65,11 +67,13 @@ function closeServiceMenus(except = null) {
 }
 
 function render({ focus = false } = {}) {
+  document.documentElement.lang = language;
   document.body.dataset.route = state.route;
   document.body.classList.toggle("is-flow-route", getStepIndex(state.route) >= 0);
   main.innerHTML = renderPortal({
     language,
     state,
+    incidentGuide,
     detailsDraft,
     routeErrors,
     tracker,
@@ -131,6 +135,88 @@ function routeError(key, message, target) {
   return { key, message, target };
 }
 
+function handleIncidentGuide(form) {
+  const narrative = String(new FormData(form).get("narrative") || "").trim();
+  incidentGuide.narrative = narrative;
+  if (narrative.length < 20) {
+    const message = language === "hi" ? "क्या हुआ, कम से कम 20 अक्षरों में लिखें।" : "Describe what happened in at least 20 characters.";
+    return fail([routeError("guide", message, "guide-narrative")]);
+  }
+  incidentGuide.draft = extractIncident(narrative, language);
+  incidentGuide.confirmed = false;
+  routeErrors = [];
+  render();
+  document.querySelector(".incident-guide-review")?.focus();
+  announce(liveRegion, language === "hi" ? "सुझाए गए तथ्य समीक्षा के लिए तैयार हैं।" : "Suggested facts are ready for review.");
+}
+
+function applyIncidentGuide(form) {
+  const data = new FormData(form);
+  const draft = clone(incidentGuide.draft);
+  draft.incidentType = String(data.get("guide-incidentType") || draft.incidentType);
+  draft.amount = Number(data.get("guide-amount")) || null;
+  draft.paymentMethod = String(data.get("guide-paymentMethod") || "");
+  draft.contactChannels = [String(data.get("guide-contactChannel") || "")].filter(Boolean);
+  draft.identifiers.transactionReference = String(data.get("question-transactionReference") || data.get("guide-transactionReference") || "").trim();
+  const contactIdentifier = String(data.get("question-contactIdentifier") || "").trim();
+  if (contactIdentifier) {
+    if (/^[+\d][\d\s-]+$/.test(contactIdentifier)) draft.identifiers.phone = contactIdentifier;
+    else if (contactIdentifier.includes("@") && draft.paymentMethod === "UPI") draft.identifiers.upi = contactIdentifier;
+    else draft.identifiers.username = contactIdentifier;
+  }
+  draft.identifiers.url = String(data.get("question-url") || draft.identifiers.url || "").trim();
+  draft.happenedAt = String(data.get("question-happenedAt") || draft.happenedAt || "") || null;
+  refreshIncidentDerivedFields(draft, language);
+  draft.confirmedFacts = draft.suggestedFacts.map((fact) => ({ ...fact, status: "confirmed" }));
+  incidentGuide = { narrative: draft.narrative, draft, confirmed: true };
+
+  const occurred = draft.happenedAt ? new Date(draft.happenedAt) : null;
+  const date = occurred && !Number.isNaN(occurred.valueOf()) ? occurred.toISOString().slice(0, 10) : "";
+  const time = occurred && !Number.isNaN(occurred.valueOf()) ? occurred.toTimeString().slice(0, 5) : "";
+  state.incident = {
+    type: draft.incidentType,
+    amount: draft.amount ? String(draft.amount) : "",
+    date,
+    time,
+    paymentMethod: draft.paymentMethod,
+    transactionReference: draft.identifiers.transactionReference,
+    recipientIdentifier: draft.identifiers.upi || draft.identifiers.phone || draft.identifiers.email || draft.identifiers.username,
+    contactChannel: draft.contactChannels[0] || "",
+    narrative: draft.narrative
+  };
+  state.extracted = {
+    amount: state.incident.amount,
+    paymentMethod: state.incident.paymentMethod,
+    time: state.incident.time,
+    recipientIdentifier: state.incident.recipientIdentifier,
+    transactionReference: state.incident.transactionReference
+  };
+  const evidenceLabels = language === "hi"
+    ? { messages: ["संदेश या चैट स्क्रीनशॉट", "संपर्क और बातचीत का क्रम दिखाता है।"], transaction: ["लेन-देन रसीद", "राशि और भुगतान विवरण दिखाती है।"], url: ["संदिग्ध URL", "घटना से जुड़ा लिंक।"], contact: ["फ़ोन या खाता पहचानकर्ता", "दूसरे पक्ष की पहचान में मदद करता है।"] }
+    : { messages: ["Messages or chat screenshot", "Shows the contact and conversation sequence."], transaction: ["Transaction receipt", "Shows the amount and payment details."], url: ["Suspicious URL", "Links the destination to the incident."], contact: ["Phone or account identifier", "Helps identify the other party."] };
+  state.evidence = draft.evidence.map((item) => ({
+    id: item.id,
+    name: evidenceLabels[item.id][0],
+    reason: evidenceLabels[item.id][1],
+    sourceState: item.status,
+    readiness: item.status,
+    handling: item.status,
+    included: item.status === "ready",
+    available: item.status === "ready",
+    extractionRequired: item.id === "transaction" && item.status === "ready",
+    relatedEvent: item.relatedEventIds[0] || ""
+  }));
+  state.events = draft.events.map((event) => ({
+    id: event.id,
+    date,
+    time,
+    description: event.title,
+    detail: event.description,
+    evidenceId: draft.evidence.find((item) => item.relatedEventIds.includes(event.id) && item.status === "ready")?.id || ""
+  }));
+  detailsDraft = clone(state.incident);
+}
+
 function handleRouteForm(form) {
   const c = copy();
   const route = form.dataset.routeForm;
@@ -146,6 +232,7 @@ function handleRouteForm(form) {
   if (route === "incident") {
     state.incidentChoice = String(data.get("incidentChoice") || "");
     if (!state.incidentChoice) return fail([routeError("flow", c.flow.incident.error, "incident-shopping")]);
+    if (form.hasAttribute("data-guide-confirm") && incidentGuide.draft) applyIncidentGuide(form);
     advance(route);
     return;
   }
@@ -165,6 +252,10 @@ function handleRouteForm(form) {
     const localized = Object.keys(errors).map((key) => routeError(key, c.flow.details.errors[key], key));
     if (localized.length) return fail(localized);
     state.incident = clone(detailsDraft);
+    state.events.forEach((event) => {
+      if (!event.date) event.date = state.incident.date;
+      if (!event.time) event.time = state.incident.time;
+    });
     advance(route);
     return;
   }
@@ -311,6 +402,7 @@ function localizeFixtureState(nextLanguage) {
   const from = COPY[language].flow.fixture;
   const to = COPY[nextLanguage].flow.fixture;
   if (state.incident.narrative === from.narrative) state.incident.narrative = to.narrative;
+  if (incidentGuide.narrative === from.narrative) incidentGuide.narrative = to.narrative;
   if (detailsDraft.narrative === from.narrative) detailsDraft.narrative = to.narrative;
   state.events.forEach((event) => {
     const fromEvent = from.events.find((candidate) => candidate.id === event.id);
@@ -335,7 +427,7 @@ function localizeServiceForms(nextLanguage) {
   }
 }
 
-document.addEventListener("click", (event) => {
+document.addEventListener("click", async (event) => {
   if (event.target.closest(".skip-link")) {
     event.preventDefault();
     requestAnimationFrame(() => focusHeadingOrError(document));
@@ -391,6 +483,25 @@ document.addEventListener("click", (event) => {
     return;
   }
 
+  const packAction = event.target.closest("[data-pack-action]")?.dataset.packAction;
+  if (packAction) {
+    const draft = incidentGuide.draft || extractIncident(state.incident.narrative, language);
+    const pack = createPreparationPack(draft, language);
+    if (packAction === "copy") {
+      await navigator.clipboard.writeText(pack.content);
+      announce(liveRegion, language === "hi" ? "तैयारी सारांश कॉपी किया गया।" : "Preparation summary copied.");
+    } else {
+      const url = URL.createObjectURL(new Blob([pack.content], { type: "text/plain;charset=utf-8" }));
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = pack.filename;
+      link.click();
+      URL.revokeObjectURL(url);
+      announce(liveRegion, language === "hi" ? "तैयारी पैक डाउनलोड किया गया।" : "Preparation pack downloaded.");
+    }
+    return;
+  }
+
   if (event.target.closest("[data-reset-report]")) {
     state = createInitialState();
     state.incident.narrative = copy().flow.fixture.narrative;
@@ -398,6 +509,7 @@ document.addEventListener("click", (event) => {
       const localized = copy().flow.fixture.events.find((eventItem) => eventItem.id === item.id);
       if (localized) Object.assign(item, { description: localized.description, detail: localized.detail });
     });
+    incidentGuide = { narrative: state.incident.narrative, draft: null, confirmed: false };
     detailsDraft = clone(state.incident);
     tracker = { value: "", status: "idle" };
     customEventCounter = 1;
@@ -446,12 +558,14 @@ document.addEventListener("keydown", (event) => {
 });
 
 document.addEventListener("submit", (event) => {
+  const incidentGuideForm = event.target.closest("[data-incident-guide-form]");
   const routeForm = event.target.closest("[data-route-form]");
   const trackerForm = event.target.closest("[data-tracker-form]");
   const editorForm = event.target.closest("[data-event-form]");
   const serviceForm = event.target.closest("[data-service-form]");
-  if (!routeForm && !trackerForm && !editorForm && !serviceForm) return;
+  if (!incidentGuideForm && !routeForm && !trackerForm && !editorForm && !serviceForm) return;
   event.preventDefault();
+  if (incidentGuideForm) handleIncidentGuide(incidentGuideForm);
   if (routeForm) handleRouteForm(routeForm);
   if (trackerForm) handleTracker(trackerForm);
   if (editorForm) handleEventForm(editorForm);
