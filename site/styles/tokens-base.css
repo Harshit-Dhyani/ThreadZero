@@ -1,7 +1,7 @@
 /* Tokens and base */
 @font-face {
-  font-family: Inter;
-  src: url("../assets/fonts/inter/Inter-Variable.ttf") format("truetype");
+  font-family: Geist;
+  src: url("../assets/fonts/geist/Geist-Variable.woff2") format("woff2");
   font-style: normal;
   font-weight: 100 900;
   font-display: swap;
@@ -35,7 +35,7 @@
   --amber: #b66a00;
   --amber-soft: #fff7df;
   --focus: #2563eb;
-  --shadow: 0 12px 30px rgb(20 54 107 / 7%);
+  --shadow: 0 8px 24px rgb(20 54 107 / 6%);
   --radius-lg: 12px;
   --radius-md: 10px;
   --radius-sm: 8px;
@@ -45,9 +45,9 @@
   --space-4: 16px;
   --space-5: 24px;
   --space-6: 32px;
-  --space-7: 48px;
-  --space-8: 64px;
-  --page: min(1400px, calc(100% - 96px));
+  --space-7: 40px;
+  --space-8: 56px;
+  --page: min(1280px, calc(100% - 88px));
 }
 
 * {
@@ -64,14 +64,14 @@ body {
   min-width: 280px;
   background: var(--warm);
   color: var(--ink);
-  font-family: Inter, "Noto Sans Devanagari", system-ui, sans-serif;
+  font-family: Geist, "Noto Sans Devanagari", system-ui, sans-serif;
   font-size: 16px;
   line-height: 1.55;
   overflow-wrap: anywhere;
 }
 
 html[lang="hi"] body {
-  font-family: "Noto Sans Devanagari", Inter, system-ui, sans-serif;
+  font-family: "Noto Sans Devanagari", Geist, system-ui, sans-serif;
 }
 
 img,
@@ -120,13 +120,13 @@ h3 {
 
 h1 {
   margin-bottom: 18px;
-  font-size: clamp(2rem, 3vw, 3.5rem);
-  font-weight: 660;
+  font-size: clamp(2.5rem, 3.6vw, 3.5rem);
+  font-weight: 650;
 }
 
 h2 {
-  font-size: clamp(1.5rem, 2.3vw, 2rem);
-  font-weight: 630;
+  font-size: clamp(1.375rem, 2vw, 1.625rem);
+  font-weight: 620;
 }
 
 h3 {
