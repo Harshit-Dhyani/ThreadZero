@@ -180,12 +180,12 @@ export const SUSPECT_ROUTES = [
       "hi": "वेबसाइट और ऐप जाँच"
     },
     "title": {
-      "en": "Check a synthetic website or app",
-      "hi": "सिंथेटिक वेबसाइट या ऐप जाँचें"
+      "en": "Check a website or app address",
+      "hi": "वेबसाइट या ऐप पता जाँचें"
     },
     "intro": {
-      "en": "The example URL is fictional and never requested over the network.",
-      "hi": "उदाहरण URL काल्पनिक है और नेटवर्क पर अनुरोधित नहीं होता।"
+      "en": "Prepare a fictional address locally, then use the official repository for a real check.",
+      "hi": "एक काल्पनिक पता स्थानीय रूप से तैयार करें, फिर वास्तविक जाँच के लिए आधिकारिक रिपॉज़िटरी उपयोग करें।"
     },
     "items": [],
     "fields": [
@@ -193,8 +193,8 @@ export const SUSPECT_ROUTES = [
         "name": "website",
         "type": "url",
         "label": {
-          "en": "Synthetic URL",
-          "hi": "सिंथेटिक URL"
+          "en": "Website or app address",
+          "hi": "वेबसाइट या ऐप पता"
         },
         "required": true,
         "pattern": "^https://example\\.test/?$",

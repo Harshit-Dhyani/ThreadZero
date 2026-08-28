@@ -70,11 +70,10 @@ export default {
   },
   "actNow": {
     "eyebrow": "Step 1 · Urgent official action",
-    "title": "Use official channels first.",
-    "intro": "If money was lost or a financial transaction is still unfolding, contact 1930 manually as soon as possible and use cybercrime.gov.in.",
-    "boundaryTitle": "What this concept can do",
-    "boundaryBody": "It can organise a synthetic example in this browser tab. It cannot contact a bank, freeze funds, call a helpline, or create a complaint.",
-    "choice": "I understand this is a no-submission demonstration and want to continue with synthetic data.",
+    "title": "If money was lost, act now.",
+    "intro": "Call 1930 manually as soon as possible, then use cybercrime.gov.in for the current official reporting process.",
+    "boundaryTitle": "About this local demo",
+    "boundaryBody": "This page only organises a fictional incident in this browser tab. It cannot contact a bank, freeze funds, place a call, or submit a complaint.",
     "error": "Confirm the preparation pathway to continue."
   },
   "incident": {

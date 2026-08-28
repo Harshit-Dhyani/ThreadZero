@@ -1,5 +1,5 @@
-import { EN } from "./copy/en.js";
-import { HI } from "./copy/hi.js";
+import { EN } from "./copy/en.js?v=20260828p";
+import { HI } from "./copy/hi.js?v=20260828p";
 
 export const COPY = Object.freeze({ en: EN, hi: HI });
 
