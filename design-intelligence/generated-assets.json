@@ -182,7 +182,7 @@
       "archive_path": "design-intelligence/assets/images/output/home-preparation-illustration-v5.png",
       "production_path": "site/assets/images/masters/home-preparation-illustration-v5.png",
       "responsive_paths": ["site/assets/images/home-preparation-illustration-v5-640.webp", "site/assets/images/home-preparation-illustration-v5-1200.webp"],
-      "used_in_production": true
+      "used_in_production": false
     },
     {
       "id": "home-evidence-thread-illustration-v5",
@@ -198,7 +198,7 @@
       "archive_path": "design-intelligence/assets/images/output/home-evidence-thread-illustration-v5.png",
       "production_path": "site/assets/images/masters/home-evidence-thread-illustration-v5.png",
       "responsive_paths": ["site/assets/images/home-evidence-thread-illustration-v5-640.webp", "site/assets/images/home-evidence-thread-illustration-v5-1200.webp"],
-      "used_in_production": true
+      "used_in_production": false
     },
     {
       "id": "faq-support-illustration-v5",
@@ -214,6 +214,102 @@
       "archive_path": "design-intelligence/assets/images/output/faq-support-illustration-v5.png",
       "production_path": "site/assets/images/masters/faq-support-illustration-v5.png",
       "responsive_paths": ["site/assets/images/faq-support-illustration-v5-640.webp", "site/assets/images/faq-support-illustration-v5-1200.webp"],
+      "used_in_production": true
+    },
+    {
+      "id": "P06-evidence-thread-v1",
+      "prompt_version": 1,
+      "prompt": "Approved evidence-thread proof with six separable transparent stages and no baked interface text.",
+      "reference_images": ["P05-civic-object-family-v1.png"],
+      "section": "home-evidence-thread",
+      "role": "signature evidence sequence",
+      "dimensions": {"width": 1672, "height": 941},
+      "alt_text": {"decision": "informative", "en": "Illustrated evidence sequence from suspicious contact to a clear next action.", "hi": "संदिग्ध संपर्क से स्पष्ट अगले कदम तक चित्रित साक्ष्य क्रम।"},
+      "sha256": "04340491f311474c5872f0d36093c331e527bd13a0183ec8d01659d2cf7dfc52",
+      "status": "approved-illustration-v1",
+      "archive_path": "THREADZERO_V3_DESIGN_DRAFT/proofs/approved/P06-evidence-thread-v1.png",
+      "production_path": "site/assets/images/masters/P06-evidence-thread-v1.png",
+      "responsive_paths": ["site/assets/images/P06-evidence-thread-v1-640.webp", "site/assets/images/P06-evidence-thread-v1-1200.webp"],
+      "used_in_production": false
+    },
+    {
+      "id": "P07-editorial-help-scene-v1",
+      "prompt_version": 1,
+      "prompt": "Approved wide editorial help scene using the locked recurring cast and a genuine transparent field.",
+      "reference_images": ["P01-character-a-master-v1.png", "style-master-v1-faq-woman-laptop-reference.png"],
+      "section": "home-gateway",
+      "role": "home editorial context",
+      "dimensions": {"width": 1672, "height": 941},
+      "alt_text": {"decision": "informative", "en": "Illustration of citizens reviewing reporting guidance together.", "hi": "रिपोर्टिंग मार्गदर्शन साथ देखते नागरिकों का चित्रण।"},
+      "sha256": "7b396b89229ccb23536490cfc0dc8fc3c123d30a428605daa75a290c6a422dd8",
+      "status": "approved-illustration-v1",
+      "archive_path": "THREADZERO_V3_DESIGN_DRAFT/proofs/approved/P07-editorial-help-scene-v1.png",
+      "production_path": "site/assets/images/masters/P07-editorial-help-scene-v1.png",
+      "responsive_paths": ["site/assets/images/P07-editorial-help-scene-v1-640.webp", "site/assets/images/P07-editorial-help-scene-v1-1200.webp"],
+      "used_in_production": true
+    },
+    {
+      "id": "P08-media-campaign-cover-v1",
+      "prompt_version": 1,
+      "prompt": "Approved campaign cover from the locked media family.",
+      "reference_images": ["style-master-v1-faq-woman-laptop-reference.png"],
+      "section": "media-library",
+      "role": "campaign cover",
+      "dimensions": {"width": 1122, "height": 1402},
+      "alt_text": {"decision": "decorative", "value": ""},
+      "sha256": "2985c33f3b6fa611b24d4e670a1ba9fa8d73a6b74f9eee11acb93aa324cbae3f",
+      "status": "approved-illustration-v1",
+      "archive_path": "THREADZERO_V3_DESIGN_DRAFT/proofs/approved/P08-media-campaign-cover-v1.png",
+      "production_path": "site/assets/images/masters/P08-media-campaign-cover-v1.png",
+      "responsive_paths": ["site/assets/images/P08-media-campaign-cover-v1-640.webp", "site/assets/images/P08-media-campaign-cover-v1-1200.webp"],
+      "used_in_production": true
+    },
+    {
+      "id": "P08-media-guide-cover-v1",
+      "prompt_version": 1,
+      "prompt": "Approved guide cover from the locked media family.",
+      "reference_images": ["style-master-v1-faq-woman-laptop-reference.png"],
+      "section": "media-library",
+      "role": "guide cover",
+      "dimensions": {"width": 1448, "height": 1086},
+      "alt_text": {"decision": "decorative", "value": ""},
+      "sha256": "0adf72741b255d0f09f9fa0be50ce681aad47cfd4647ce5f92b9bc06c8ecc4bc",
+      "status": "approved-illustration-v1",
+      "archive_path": "THREADZERO_V3_DESIGN_DRAFT/proofs/approved/P08-media-guide-cover-v1.png",
+      "production_path": "site/assets/images/masters/P08-media-guide-cover-v1.png",
+      "responsive_paths": ["site/assets/images/P08-media-guide-cover-v1-640.webp", "site/assets/images/P08-media-guide-cover-v1-1200.webp"],
+      "used_in_production": true
+    },
+    {
+      "id": "P08-media-infographic-cover-v1",
+      "prompt_version": 1,
+      "prompt": "Approved infographic cover from the locked media family.",
+      "reference_images": ["style-master-v1-faq-woman-laptop-reference.png"],
+      "section": "media-library",
+      "role": "infographic cover",
+      "dimensions": {"width": 1448, "height": 1086},
+      "alt_text": {"decision": "decorative", "value": ""},
+      "sha256": "16df3e870c47e99ead79d28059c341c5a7fd10be87a72d226df9daa815552bb4",
+      "status": "approved-illustration-v1",
+      "archive_path": "THREADZERO_V3_DESIGN_DRAFT/proofs/approved/P08-media-infographic-cover-v1.png",
+      "production_path": "site/assets/images/masters/P08-media-infographic-cover-v1.png",
+      "responsive_paths": ["site/assets/images/P08-media-infographic-cover-v1-640.webp", "site/assets/images/P08-media-infographic-cover-v1-1200.webp"],
+      "used_in_production": true
+    },
+    {
+      "id": "P08-media-video-cover-v1",
+      "prompt_version": 1,
+      "prompt": "Approved video cover from the locked media family.",
+      "reference_images": ["style-master-v1-faq-woman-laptop-reference.png"],
+      "section": "media-library",
+      "role": "video cover",
+      "dimensions": {"width": 1672, "height": 941},
+      "alt_text": {"decision": "decorative", "value": ""},
+      "sha256": "32af8acd40572a2865bc1fe30378fcd0e166a0833b3c0392653721222a1116a1",
+      "status": "approved-illustration-v1",
+      "archive_path": "THREADZERO_V3_DESIGN_DRAFT/proofs/approved/P08-media-video-cover-v1.png",
+      "production_path": "site/assets/images/masters/P08-media-video-cover-v1.png",
+      "responsive_paths": ["site/assets/images/P08-media-video-cover-v1-640.webp", "site/assets/images/P08-media-video-cover-v1-1200.webp"],
       "used_in_production": true
     }
   ]
