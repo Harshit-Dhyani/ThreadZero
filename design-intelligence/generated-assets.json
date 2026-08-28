@@ -41,7 +41,7 @@
       "used_in_production": false
     },
     {
-      "id": "transaction-review-illustration-v1",
+    "id": "transaction-review-illustration-v1",
       "prompt_version": 1,
       "prompt": "Wide 16:9 civic editorial illustration of an Indian man reviewing a neutral laptop, transaction paper and ordered record cards; calm task-focused pose; no readable text, logos or authority cues.",
       "reference_images": ["reference-03-report-abuse.png"],
@@ -54,10 +54,10 @@
       "archive_path": "design-intelligence/assets/images/output/transaction-review-illustration-v1.png",
       "production_path": "site/assets/images/masters/transaction-review-illustration-v1.png",
       "responsive_paths": ["site/assets/images/transaction-review-illustration-v1-640.webp", "site/assets/images/transaction-review-illustration-v1-1200.webp"],
-      "used_in_production": true
+    "used_in_production": false
     },
     {
-      "id": "guides-learning-illustration-v1",
+    "id": "guides-learning-illustration-v1",
       "prompt_version": 1,
       "prompt": "Wide 16:9 civic editorial illustration of an Indian woman studying clear guidance with a neutral laptop and stacked books; calm educational setting; no readable text, crests, shields or graduation branding.",
       "reference_images": ["reference-01-public-route-grid.png", "reference-06-learning-pages.png"],
@@ -70,10 +70,10 @@
       "archive_path": "design-intelligence/assets/images/output/guides-learning-illustration-v1.png",
       "production_path": "site/assets/images/masters/guides-learning-illustration-v1.png",
       "responsive_paths": ["site/assets/images/guides-learning-illustration-v1-640.webp", "site/assets/images/guides-learning-illustration-v1-1200.webp"],
-      "used_in_production": true
+    "used_in_production": false
     },
     {
-      "id": "safety-advisory-illustration-v1",
+    "id": "safety-advisory-illustration-v1",
       "prompt_version": 1,
       "prompt": "Wide 16:9 civic editorial safety illustration with a neutral laptop, phone, link, alert bell and verification check arranged as a calm explainer; no shields, readable text, fear imagery or official marks.",
       "reference_images": ["reference-01-public-route-grid.png", "reference-05-public-route-batch.png"],
@@ -86,10 +86,10 @@
       "archive_path": "design-intelligence/assets/images/output/safety-advisory-illustration-v1.png",
       "production_path": "site/assets/images/masters/safety-advisory-illustration-v1.png",
       "responsive_paths": ["site/assets/images/safety-advisory-illustration-v1-640.webp", "site/assets/images/safety-advisory-illustration-v1-1200.webp"],
-      "used_in_production": true
+    "used_in_production": false
     },
     {
-      "id": "awareness-community-illustration-v1",
+    "id": "awareness-community-illustration-v1",
       "prompt_version": 1,
       "prompt": "Wide 16:9 civic editorial illustration of three Indian citizens calmly sharing verified phone guidance in a community setting; inclusive, believable clothing and posture; no campaigning, uniforms, logos or monuments.",
       "reference_images": ["reference-01-public-route-grid.png", "reference-05-public-route-batch.png"],
@@ -102,10 +102,10 @@
       "archive_path": "design-intelligence/assets/images/output/awareness-community-illustration-v1.png",
       "production_path": "site/assets/images/masters/awareness-community-illustration-v1.png",
       "responsive_paths": ["site/assets/images/awareness-community-illustration-v1-640.webp", "site/assets/images/awareness-community-illustration-v1-1200.webp"],
-      "used_in_production": true
+    "used_in_production": false
     },
     {
-      "id": "accessibility-illustration-v1",
+    "id": "accessibility-illustration-v1",
       "prompt_version": 1,
       "prompt": "Wide 16:9 civic editorial illustration of an Indian wheelchair user comfortably using a neutral laptop; respectful everyday posture and accessible desk; no medical framing, readable text or institutional identity.",
       "reference_images": ["reference-05-public-route-batch.png", "reference-07-guide-pages-and-footers.png"],
@@ -118,10 +118,10 @@
       "archive_path": "design-intelligence/assets/images/output/accessibility-illustration-v1.png",
       "production_path": "site/assets/images/masters/accessibility-illustration-v1.png",
       "responsive_paths": ["site/assets/images/accessibility-illustration-v1-640.webp", "site/assets/images/accessibility-illustration-v1-1200.webp"],
-      "used_in_production": true
+    "used_in_production": false
     },
     {
-      "id": "help-footer-illustration-v1",
+    "id": "help-footer-illustration-v1",
       "prompt_version": 1,
       "prompt": "Compact civic editorial illustration of three Indian citizens using a phone and printed guidance together, with a neutral question bubble and folder; pale blue background; no support-agent claim, logo, monument or official identity.",
       "reference_images": ["reference-02-faq-and-contacts.png", "reference-04-contact-and-footer.png", "reference-08-footer.png"],
@@ -134,7 +134,7 @@
       "archive_path": "design-intelligence/assets/images/output/help-footer-illustration-v1.png",
       "production_path": "site/assets/images/masters/help-footer-illustration-v1.png",
       "responsive_paths": ["site/assets/images/help-footer-illustration-v1-640.webp", "site/assets/images/help-footer-illustration-v1-1200.webp"],
-      "used_in_production": true
+    "used_in_production": false
     },
     {
       "id": "home-preparation-illustration-v3",
@@ -201,7 +201,7 @@
       "used_in_production": false
     },
     {
-      "id": "faq-support-illustration-v5",
+    "id": "faq-support-illustration-v5",
       "prompt_version": 5,
       "prompt": "RESET-01 FAQ/support editorial scene using the FAQ woman-at-laptop image as sole rendering authority and P03 only for Character C/D identity: two citizens calmly review a phone and plain printed guidance together, with restrained detail and no authority cues. The generator could not produce native alpha, so the verified fallback uses a uniform white canvas for placement only on white page regions.",
       "reference_images": ["style-master-v1-faq-woman-laptop-reference.png", "P03-community-cd-master-v1.png"],
@@ -214,10 +214,10 @@
       "archive_path": "design-intelligence/assets/images/output/faq-support-illustration-v5.png",
       "production_path": "site/assets/images/masters/faq-support-illustration-v5.png",
       "responsive_paths": ["site/assets/images/faq-support-illustration-v5-640.webp", "site/assets/images/faq-support-illustration-v5-1200.webp"],
-      "used_in_production": true
+    "used_in_production": false
     },
     {
-      "id": "P06-evidence-thread-v1",
+    "id": "P06-evidence-thread-v1",
       "prompt_version": 1,
       "prompt": "Approved evidence-thread proof with six separable transparent stages and no baked interface text.",
       "reference_images": ["P05-civic-object-family-v1.png"],
@@ -230,7 +230,7 @@
       "archive_path": "THREADZERO_V3_DESIGN_DRAFT/proofs/approved/P06-evidence-thread-v1.png",
       "production_path": "site/assets/images/masters/P06-evidence-thread-v1.png",
       "responsive_paths": ["site/assets/images/P06-evidence-thread-v1-640.webp", "site/assets/images/P06-evidence-thread-v1-1200.webp"],
-      "used_in_production": false
+    "used_in_production": true
     },
     {
       "id": "P07-editorial-help-scene-v1",
@@ -246,7 +246,7 @@
       "archive_path": "THREADZERO_V3_DESIGN_DRAFT/proofs/approved/P07-editorial-help-scene-v1.png",
       "production_path": "site/assets/images/masters/P07-editorial-help-scene-v1.png",
       "responsive_paths": ["site/assets/images/P07-editorial-help-scene-v1-640.webp", "site/assets/images/P07-editorial-help-scene-v1-1200.webp"],
-      "used_in_production": true
+      "used_in_production": false
     },
     {
       "id": "P08-media-campaign-cover-v1",

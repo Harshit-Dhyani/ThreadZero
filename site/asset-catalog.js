@@ -1,21 +1,7 @@
 export const IMAGE_DIMENSIONS = Object.freeze({
   "P06-evidence-thread-v1": [1672, 941],
-  "P07-editorial-help-scene-v1": [1672, 941],
   "P08-media-campaign-cover-v1": [1122, 1402],
   "P08-media-guide-cover-v1": [1448, 1086],
   "P08-media-infographic-cover-v1": [1448, 1086],
-  "P08-media-video-cover-v1": [1672, 941],
-  "home-preparation-illustration-v5": [1672, 941],
-  "home-evidence-thread-illustration-v5": [1672, 941],
-  "faq-support-illustration-v5": [1536, 1024],
-  "home-preparation-illustration-v3": [1672, 941],
-  "home-evidence-thread-illustration-v3": [1672, 941],
-  "hero-report-preparation-illustration-v1": [1672, 941],
-  "evidence-thread-illustration-v1": [1672, 941],
-  "transaction-review-illustration-v1": [1672, 941],
-  "guides-learning-illustration-v1": [1672, 941],
-  "safety-advisory-illustration-v1": [1672, 941],
-  "awareness-community-illustration-v1": [1672, 941],
-  "accessibility-illustration-v1": [1672, 941],
-  "help-footer-illustration-v1": [1536, 1024]
+  "P08-media-video-cover-v1": [1672, 941]
 });
