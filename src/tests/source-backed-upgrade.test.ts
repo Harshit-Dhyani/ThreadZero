@@ -8,6 +8,7 @@ import { OFFICIAL_DESTINATIONS } from "../data/official-sources.ts";
 import { ASSETS } from "../lib/assets/index.ts";
 import { NAV_GROUPS, navigationContextFor, navigationGroupFor, navigationMenuChildren } from "../lib/navigation.ts";
 import { ALL_ROUTE_IDS, routeDefinition, workspaceFor } from "../lib/routes.ts";
+import { REPORT_ENTRY_REDIRECTS } from "../data/demo.ts";
 
 const productionAssets = ["advisories", "safetyV2", "awarenessV2", "training", "media", "accessibilityV2", "volunteers", "help", "footerHelp"] as const;
 const assetRoot = fileURLToPath(new URL("../../public", import.meta.url));
@@ -61,10 +62,10 @@ test("complaint routes keep deep links and plain bilingual language", () => {
     assert.ok(en && hi, `${id} must remain a valid bilingual route`);
     assert.doesNotMatch(`${en.title} ${en.intro} ${en.items.map((item) => `${item.title} ${item.body}`).join(" ")} ${en.fields.map((field) => field.label).join(" ")}`, /synthetic|registered practice|local simulation|anonymous practice/i);
   }
-  const anonymous = routeDefinition("anonymous-report", "en");
-  const withDetails = routeDefinition("registered-report", "en");
-  assert.deepEqual(anonymous?.fields.map((field) => field.name), ["incidentDate", "category", "description"]);
-  assert.deepEqual(withDetails?.fields.map((field) => field.name), ["fullName", "email", "incidentDate", "category", "description"]);
+  assert.deepEqual(Object.keys(REPORT_ENTRY_REDIRECTS), ["anonymous-report", "registered-report", "other-cybercrime"]);
+  assert.equal(REPORT_ENTRY_REDIRECTS["anonymous-report"].entryMode, "women-child-anonymous");
+  assert.equal(REPORT_ENTRY_REDIRECTS["registered-report"].entryMode, "women-child-details");
+  assert.equal(REPORT_ENTRY_REDIRECTS["other-cybercrime"].entryMode, "other");
 });
 
 test("source-backed resources keep bilingual parity and registered sources", () => {

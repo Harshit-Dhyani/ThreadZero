@@ -36,7 +36,7 @@ test("grievance guidance does not invent local officer contact data", () => {
   assert.ok(grievance.sources.includes("officialContacts"));
 });
 
-test("the deterministic flow keeps guarded routes and validation intact", () => {
+test("the demo flow keeps guarded routes and validation intact", () => {
   const state = createInitialState();
   assert.equal(resolveFlowRoute("submit", state), "home");
   assert.deepEqual(validateDetails(state.incident), {});
