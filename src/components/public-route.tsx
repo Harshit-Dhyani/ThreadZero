@@ -15,6 +15,7 @@ import { ResponsiveIllustration } from "./responsive-illustration";
 import { MediaLibrary } from "@/features/media-library/media-library";
 import { usePortal } from "./portal-provider";
 import { WorkspaceNavigator } from "./workspace-navigator";
+import { SourceStrip } from "./source-strip";
 
 const ICONS = [FileText, SearchCheck, ShieldCheck, BookOpen, Users, CircleHelp];
 const HEROES: Record<string, AssetId> = {
@@ -128,10 +129,4 @@ function ServiceForm({ route, routeId }: { route: LocalizedRoute; routeId: strin
     const error = record.errors.find((item) => item.name === field.name);
     return <label key={field.name} className={`grid gap-2 text-sm font-semibold ${field.type === "textarea" ? "sm:col-span-2" : ""}`}><span>{label}{field.required && <span className="ml-1 text-urgent">*</span>}</span>{field.type === "select" ? <select value={record.values[field.name] || ""} onChange={(event) => update(field.name, event.target.value)} aria-invalid={Boolean(error)} className="min-h-11 rounded-control border border-line bg-white px-3 font-normal"><option value="">—</option>{field.options?.map((option) => <option key={option}>{option}</option>)}</select> : field.type === "textarea" ? <textarea value={record.values[field.name] || ""} onChange={(event) => update(field.name, event.target.value)} aria-invalid={Boolean(error)} className="min-h-32 rounded-control border border-line p-3 font-normal" /> : <input type={field.type} value={record.values[field.name] || ""} onChange={(event) => update(field.name, event.target.value)} aria-invalid={Boolean(error)} className="min-h-11 rounded-control border border-line px-3 font-normal" />}{field.example && <span className="font-normal text-muted">{language === "hi" ? "डेमो उदाहरण" : "Demo example"}: <code>{field.example}</code></span>}{field.name === "identifier" && routeId === "check-identifier" && record.values.identifier && <span className="font-normal text-civic-700">{language === "hi" ? "पहचाना गया प्रकार" : "Detected type"}: {inference}</span>}{error && <span className="font-normal text-urgent">{error.message}</span>}</label>;
   })}</div><div className="mt-6 border-t border-line pt-4 text-sm leading-6 text-muted">{language === "hi" ? "केवल काल्पनिक डेमो जानकारी उपयोग करें। वास्तविक कार्रवाई आधिकारिक सेवा पर पूरी करें।" : "Use fictional demo information only. Complete any real action on the official service."}</div><div className="mt-5 flex flex-wrap gap-3"><button className="min-h-11 rounded-control bg-civic-600 px-5 text-sm font-semibold text-white">{language === "hi" ? "स्थानीय रूप से तैयार करें" : "Prepare locally"}</button><button type="button" className="min-h-11 rounded-control border border-line px-5 text-sm font-semibold" onClick={() => setRecord(createServiceRecord())}>{language === "hi" ? "रीसेट" : "Reset"}</button></div></form>;
-}
-
-function SourceStrip({ route }: { route: LocalizedRoute }) {
-  const { language } = usePortal();
-  if (!route.sources.length) return null;
-  return <details className="mt-6 border-y border-line"><summary className="flex min-h-12 cursor-pointer list-none items-center gap-2 text-sm font-semibold"><ExternalLink className="size-4" />{language === "hi" ? "स्रोत · आधिकारिक संदर्भ" : "Source · Official references"}<span className="ml-auto">+</span></summary><div className="grid gap-2 pb-4 sm:grid-cols-2">{route.sources.map((key) => { const source = (OFFICIAL_DESTINATIONS as Record<string, any>)[key]; return source ? <a key={key} href={source.url} target="_blank" rel="noreferrer" className="flex min-h-11 items-center justify-between gap-3 rounded-control border border-line px-4 text-sm font-semibold text-civic-700 hover:bg-civic-50">{source[language]}<ExternalLink className="size-4" /></a> : null; })}</div></details>;
 }
