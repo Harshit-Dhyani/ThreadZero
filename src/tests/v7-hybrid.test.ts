@@ -27,9 +27,10 @@ test("V7 preserves the restored first-redesign product breadth", () => {
   const home = source("src/components/home.tsx");
   assert.match(shell, /Guide/);
   assert.match(shell, /Search \/ Ask/);
-  assert.match(home, /Citizen services/);
-  assert.match(home, /Learning Corner/);
-  assert.match(home, /Evidence connected to the incident/);
+  assert.match(home, /GUIDE_TASKS/);
+  assert.match(home, /c\.process\.steps/);
+  assert.match(home, /c\.mechanism/);
+  assert.match(home, /c\.resources/);
 });
 
 test("Report family selection changes state, evidence, timeline, and later-stage presentation", () => {
