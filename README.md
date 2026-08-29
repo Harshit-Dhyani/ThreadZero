@@ -1,43 +1,50 @@
 # ThreadZero
 
-ThreadZero is the internal codename for an independent concept redesign of the citizen-facing financial-fraud reporting journey. It is not an NCRP, police, bank, payment-provider, or government system.
+ThreadZero is the internal codename for **Financial Cyber Fraud Reporting Guide**, an independent hackathon concept inspired by India’s public cybercrime reporting journey. It is not an NCRP, police, bank, payment-provider, or government service.
 
-For an actual financial cyber-fraud incident in India, call **1930** and use **cybercrime.gov.in**.
+For actual financial cyber fraud in India, call **1930** manually and use [cybercrime.gov.in](https://cybercrime.gov.in/).
 
-## Current state
+## Live prototype
 
-The approved **Civic Evidence Service v1** direction is implemented as a dependency-free bilingual static portal in `site/`.
+[Open the public V5.3 prototype](https://unrivaled-douhua-e65bf3.netlify.app/)
 
-- English and Hindi share one complete copy catalog and preserve the active route and in-memory report state when switched.
-- The landing page contains exactly four purposeful sections and uses one coordinated illustration family.
-- The guarded financial-fraud preparation journey runs from `#home` through `#next` with deterministic synthetic data.
-- `#track` accepts only the documented demo reference `DEMO-2026-08421`; real complaint actions hand off to official NCRP pages.
-- Thirty-six unguarded public routes cover complaint preparation, tracking, suspect tools, volunteers, learning, help, and legal information.
-- CSS, renderers, bilingual copy, and route data are split into bounded native modules behind stable entry files.
+## Current product
 
-## Preserved foundation
+The active product is a bilingual static Next.js application with six citizen workspaces: Home, Report, Check, Track, Learn, and Help.
 
-- `docs/` — product, service-flow, and accessibility contracts.
-- `core/` — the deterministic synthetic state, route, and validation kernel.
-- `templates/` — the canonical synthetic financial-fraud fixture.
-- `design-intelligence/` — committed provenance, analysis, patterns, and design decisions.
-- `evidence/` — Git-ignored third-party and user-supplied research artifacts; never production assets.
+The financial-report preparation flow has five stages:
 
-## Run locally
+1. What happened?
+2. Details
+3. Evidence
+4. Timeline
+5. Review & next
 
-```text
-python -m http.server 4173
+Evidence uses a fixed bilingual checklist with “I have it”, “I don’t have it”, and “Not sure” states. Evidence can connect to multiple Timeline events. The documented demo tracker reference is `DEMO-2026-08421`.
+
+The recurring boundary is simple: **Demo only. Nothing entered here is sent to the government.**
+
+## Architecture
+
+- Active runtime: `src/app`, `src/components`, `src/content`, `src/data`, `src/domains`, `src/features`, and `src/lib`.
+- Framework: Next.js 16 static export with React 19 and TypeScript.
+- Package/runtime manager: Bun 1.3.14.
+- Build output: `out/`.
+- Hosting configuration: Netlify builds the active Next app and publishes `out/`.
+- No backend, authentication, database, upload, analytics, model call, or external write integration.
+- `site/`, `core/`, V3/V4 records, and the old static builder remain tracked as historical/provenance material; they are not deployed.
+
+## Run and verify
+
+```powershell
+bun install --frozen-lockfile
+bun run dev
+bun run typecheck
+bun run test
+bun run build
+npx netlify build --offline
 ```
 
-Open `http://127.0.0.1:4173/site/#home`.
+Local development starts at `http://localhost:3000`. The production export is generated in `out/`.
 
-## Verify
-
-```text
-node --test core/*.test.mjs site/*.test.mjs
-node tools/validate-design-intelligence.mjs
-node --check site/app.js
-node --check site/renderers.js
-```
-
-Nothing in this repository places a real call, uploads evidence, or submits externally.
+Nothing in this repository places a real call, uploads evidence, or submits a complaint externally.

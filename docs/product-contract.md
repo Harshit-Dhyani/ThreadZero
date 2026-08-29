@@ -1,5 +1,7 @@
 # Product contract
 
+> **Historical V1/V2 baseline.** This contract records the retired vanilla implementation boundary. The active V5.3 static Next.js contract is documented in [THREADZERO_CURRENT_STATE_V5.md](../THREADZERO_CURRENT_STATE_V5.md), [README.md](../README.md), and the root [AGENTS.md](../AGENTS.md).
+
 ## Identity
 
 This repository contains an independent citizen-service concept inspired by the public financial-fraud reporting journey.

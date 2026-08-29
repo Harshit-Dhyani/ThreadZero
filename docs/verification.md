@@ -1,5 +1,7 @@
 # Illustrated civic portal verification
 
+> **Historical V1/V2 verification record.** The counts and vanilla runtime below are retained evidence, not current release proof. Current V5.3 build, Netlify, and browser evidence is in [THREADZERO_CURRENT_STATE_V5.md](../THREADZERO_CURRENT_STATE_V5.md) and [SUBMISSION_PACKET.md](../SUBMISSION_PACKET.md).
+
 Verified on 27 August 2026 against the local static server at `http://127.0.0.1:4173/site/`.
 
 ## Deterministic checks

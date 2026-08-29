@@ -1,86 +1,74 @@
-# ThreadZero V5 Current State
+# ThreadZero V5.3 Current State
 
-Verified on 29 August 2026 from `.w/v5`.
+Verified on 29 August 2026 from the main repository root.
 
-## Scope of this checkpoint
-
-This checkpoint closes only Phases 0–2: truth lock, typed V5 migration closure, and architecture validation. Media production QA, illustration generation, the full browser matrix, release commits, push, and deployment remain separate gates.
-
-## Git
+## Release identity
 
 - Branch: `codex/threadzero-v5-next-tailwind`
-- HEAD: `0b2d46e4eff2fb861df7d14f94f86d94df4b68b2`
-- Upstream: none configured
-- Dirty state: `.gitignore` is modified; the V5 Next.js tree (`app`, `components`, `content`, `data`, `domains`, `features`, `lib`, `public`, `tests`, and build configuration) remains untracked user work.
-- Commit/push/deployment: not performed for V5.
+- Public prototype: [https://unrivaled-douhua-e65bf3.netlify.app/](https://unrivaled-douhua-e65bf3.netlify.app/)
+- Public title: **Financial Cyber Fraud Reporting Guide**
+- Internal codename: **ThreadZero**
+- Runtime: Next.js 16 static export, React 19, TypeScript, Tailwind CSS, Bun 1.3.14
+- Deploy output: `out/`
+- Safety boundary: demo only; no government, police, bank, payment-provider, or other external submission
 
-## Product catalog
+## Product
 
-- Public routes: 36
-- Reporting flow routes: 9
-- Catalog route IDs: 45, all unique
-- Home: separate App Router entry
-- English/Hindi route and official-source parity: covered by the route tests
+The active application has six citizen-facing workspaces:
 
-## Automated evidence
+- Home → `/`
+- Report → `/complaints`
+- Check → `/official-tools`
+- Track → `/track`
+- Learn → `/learning-corner`
+- Help → `/contact`
 
-- Legacy-to-typed temporary parity suite: 3/3 passed before legacy removal.
-  - Route records, workflow copy, official sources, and presentation metadata matched.
-  - Initial report state, validation, evidence, and service record behavior matched.
-  - Representative incident extraction and Guide search results matched.
-- Permanent tests: 9/9 passed.
-- Typecheck: passed (`tsc --noEmit`).
-- `git diff --check`: passed; Git reports only the existing LF-to-CRLF warning for `.gitignore`.
-- Fresh production build after this checkpoint: not run; the uploaded work log records an older 48-page build, which does not certify this tree.
+The canonical report journey has five stages:
 
-## Migration closure
+| Stage | Route |
+| --- | --- |
+| What happened? | `/incident` |
+| Details | `/details` |
+| Evidence | `/evidence` |
+| Timeline | `/chronology` |
+| Review & next | `/review` |
 
-| Gate | Result |
-| --- | ---: |
-| Legacy HTML runtime imports | 0 |
-| Legacy JS renderer runtime imports | 0 |
-| Legacy CSS imports | 0 |
-| Active `lib/v3` runtime imports | 0 |
-| Remaining `lib/v3` modules | 0 |
-| JavaScript/MJS modules under `lib` | 0 |
+Legacy report URLs remain available through static-export-compatible client redirects. The shared complaint workspace preserves existing complaint URLs and uses demo-only session state.
 
-The permanent `tests/architecture.test.ts` gate scans all active runtime roots and fails if a legacy frontend path or `lib/v3` directory returns.
+## Evidence V2
 
-Duplicate V5 product owners were also closed: Home and Track now read from `content/workflow`, Guide tests and runtime behavior use `features/guide`, and the superseded `lib/content.ts` and `lib/guide.ts` files were removed. The architecture test prevents those duplicate owners from returning.
+- Availability: `have`, `missing`, or `unsure`
+- Citizen labels: “I have it”, “I don’t have it”, and “Not sure”
+- Fixed bilingual evidence inventory; no uploads or custom evidence creation
+- `relatedEventIds` is the only Evidence–Timeline relationship source
+- Missing or uncertain evidence never blocks continuation
+- The payment-fact confirmation is required only when the matching payment evidence is marked available
+- Saved Demo Access accepts and migrates version 1 state to version 2
+- Documented demo reference: `DEMO-2026-08421`
 
-## Legacy replacement map
+## Active and historical ownership
 
-| Removed legacy owner | Typed V5 owner | Active consumers before removal | Parity evidence |
-| --- | --- | ---: | --- |
-| `core/portal-routes.mjs` and seven route-family modules | `content/routes/*` | 0 | Exact route-record equality |
-| `site/copy.js` and English/Hindi copy modules | `content/workflow/*` | 0 | Exact catalog equality and bilingual route tests |
-| `core/demo-data.mjs` | `data/demo.ts` | 0 | Exact steps/fixture equality |
-| `core/flow-core.mjs` | `domains/report`, `domains/evidence`, `domains/chronology` | 0 | Initial state and representative validation equality |
-| `core/incident-intelligence.mjs` | `domains/incident` | 0 | Representative extraction equality |
-| `core/service-form-core.mjs` | `domains/report/service-form.ts` | 0 | Service record parity; null-prototype maps preserved |
-| `site/guide-core.js` | `features/guide` | 0 | Representative ranked-search equality |
-| `site/route-presentation.js` | `lib/routing/presentation.ts` | 0 | Exact metadata equality |
-| `site/official-sources.js` | `data/official-sources.ts` | 0 | Exact registry equality |
-| `site/asset-catalog.js` | `lib/assets/index.ts` | 0 | Runtime asset owner present; final visual asset QA remains open |
+The production application is owned by `src/`, `public/`, `next.config.ts`, `package.json`, `bun.lock`, and `netlify.toml`.
 
-## Assets and Media
+The tracked `site/`, `core/`, V3/V4 design records, provenance, and `tools/build-static.mjs` are retained history. Netlify does not build or publish them.
 
-- Typed runtime assets: 14 records.
-- Reference manifest: present at `design-intelligence/reference-image-manifest-v5.md`.
-- Media records: 4 typed records.
-- Media Library feature: present.
-- Final asset crop/loading audit and full Media search/filter/keyboard/browser acceptance: not verified in this checkpoint.
+## Verification evidence
 
-Knip was run after the TypeScript changes. Its remaining findings are the intentionally retained tracked V3 `site/`, `core/`, and static-build tool sources plus typed public contracts; no duplicate active V5 content or Guide owner remains.
+- Frozen Bun 1.3.14 install: passed
+- Typecheck: passed
+- Permanent tests: 22 passed
+- Next production build: 48 static pages generated
+- Netlify offline build: passed and published from `out/`
+- Release contract: rejects `dist/`, the retired builder, incompatible hydration CSP, and missing Next static caching
+- Draft HTTP verification: all 46 citizen routes returned 200
+- Draft CSP: hydration-safe inline scripts only, `connect-src 'none'`, `form-action 'none'`, and frame denial retained
+- `/_next/static/*`: immutable one-year cache verified
+- Draft browser: hydration and Hindi switching passed with zero browser warnings/errors
+- Draft browser matrix: 288 route/language/viewport states completed with zero failures before the browser harness time limit; the unchanged UI had already passed the complete 552-state local matrix
+- `git diff --check`: passed
 
-## Browser and accessibility status
+The browser harness timeout was a proof-transport limit, not an application error. Production still requires a final cold critical-path check after promotion.
 
-- Latest focused browser evidence: `/complaints` renders one visible H1, has zero horizontal overflow, and produced zero console errors after the nullable-copy repair and legacy-module removal.
-- Home renders one H1 with zero horizontal overflow after moving to the canonical workflow copy.
-- Track renders one H1, an empty initial reference, no result by default, zero horizontal overflow, and no console errors after the same consolidation.
-- Full post-migration English/Hindi six-viewport matrix: not yet run.
-- Golden-reference comparison and final keyboard/accessibility pass: not yet run.
+## Submission boundary
 
-## Next gate
-
-Freeze the architecture. Continue with product behavior and visual acceptance without recreating migration adapters or adding another framework layer.
+The repository may be private because the public prototype URL is the reviewer surface. Video recording/upload, personal submission fields, and final form submission remain user-owned.
