@@ -1,5 +1,5 @@
-export type Language = "en" | "hi";
-export type LocalizedText = Record<Language, string>;
+export type Language = "en" | "hi" | "hinglish";
+export type LocalizedText = { en: string; hi: string; hinglish?: string };
 export type Workspace = "home" | "report" | "check" | "track" | "learn" | "help";
 export type Readiness = "ready" | "missing" | "optional";
 export type EvidenceAvailability = "have" | "missing" | "unsure";
@@ -108,7 +108,7 @@ export type GuideTask = {
   body: LocalizedText;
 };
 
-export type OfficialSource = { url: string; en: string; hi: string; verifiedOn?: string };
+export type OfficialSource = { url: string; en: string; hi: string; hinglish?: string; verifiedOn?: string };
 export type SourceBackedResource = {
   id: string;
   title: LocalizedText;
