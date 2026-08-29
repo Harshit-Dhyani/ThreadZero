@@ -56,14 +56,14 @@ export function PortalProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     const storedLanguage = localStorage.getItem(LANGUAGE_KEY);
-    if (storedLanguage === "en" || storedLanguage === "hi") setLanguageState(storedLanguage);
+    if (storedLanguage === "en" || storedLanguage === "hi" || storedLanguage === "hinglish") setLanguageState(storedLanguage);
     const saved = readSavedDemoAccess(localStorage);
     if (saved) { setProfile(saved.profile); setProfileLabel(saved.label); setReport(saved.report); }
     setHydrated(true);
   }, []);
 
   useEffect(() => {
-    document.documentElement.lang = language;
+    document.documentElement.lang = language === "hinglish" ? "hi-Latn" : language;
   }, [language]);
 
   useEffect(() => {
