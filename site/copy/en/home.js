@@ -1,9 +1,9 @@
 export default {
   "hero": {
-    "title": "Report cybercrime with a clearer first step.",
-    "intro": "Start with the type of incident. Organise the facts locally, understand the route, and choose when to consult an official source.",
-    "primary": "Prepare financial-fraud details",
-    "secondary": "Explore complaint services",
+    "title": "Report financial cyber fraud with confidence",
+    "intro": "Clear guidance, practical tools, and a clear handoff to the official reporting portal.",
+    "primary": "Start a report",
+    "secondary": "How it works",
     "pathsLabel": "Complaint options",
     "paths": [
       {
@@ -87,9 +87,9 @@ export default {
     ]
   },
   "mechanism": {
-    "eyebrow": "The evidence thread",
-    "title": "Turn scattered records into one understandable sequence.",
-    "intro": "The concept connects each confirmed fact to the event it supports. This makes gaps visible without treating missing evidence as failure.",
+    "eyebrow": "Your incident timeline",
+    "title": "See how the incident fits together.",
+    "intro": "Connect messages, payments, links, and evidence to the moment they belong to.",
     "steps": [
       "Evidence",
       "Confirmed fact",
@@ -97,7 +97,20 @@ export default {
       "Coherent incident",
       "Clear next action"
     ],
-    "imageAlt": "Illustrated sequence connecting a message, link, payment record, and lost contact"
+    "visualSteps": [
+      "Suspicious message",
+      "Link opened",
+      "₹25,000 payment",
+      "Contact disappears"
+    ],
+    "evidenceLabel": "Evidence connected to the incident timeline",
+    "evidenceLinks": [
+      { "evidence": "WhatsApp screenshot", "connection": "Supports event 1", "status": "ready" },
+      { "evidence": "Suspicious URL", "connection": "Supports event 2", "status": "ready" },
+      { "evidence": "Transaction receipt", "connection": "Supports event 3", "status": "ready" },
+      { "evidence": "Phone identifier", "connection": "Missing for event 4", "status": "missing" }
+    ],
+    "imageAlt": "Two-layer illustration connecting incident events to supporting evidence, with a missing phone identifier"
   },
   "process": {
     "eyebrow": "How the demonstration works",
@@ -105,20 +118,20 @@ export default {
     "intro": "The flow keeps the official action visible and stops before any external submission.",
     "steps": [
       {
-        "title": "Describe what happened",
-        "body": "Choose the closest citizen-language incident and confirm urgent guidance."
+        "title": "Choose your incident",
+        "body": "Find the right category for your situation and start your report."
       },
       {
-        "title": "Check useful evidence",
-        "body": "Mark records Ready, Missing, or Optional. Missing evidence does not block progress."
+        "title": "Prepare your evidence",
+        "body": "Collect and organise important details to support your report."
       },
       {
-        "title": "Build the chronology",
-        "body": "Review, edit, reorder, and connect evidence to the event it supports."
+        "title": "Understand the process",
+        "body": "Know what to expect before the official handoff."
       },
       {
-        "title": "Review and stop",
-        "body": "Create a local synthetic record, then continue only through the official service yourself."
+        "title": "Official handoff",
+        "body": "Continue to the official reporting portal yourself."
       }
     ],
     "action": "See the reporting process",

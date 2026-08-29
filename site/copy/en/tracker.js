@@ -13,16 +13,20 @@ export default {
   "officialBody": "Use the official tracking action at cybercrime.gov.in. This concept cannot access government records.",
   "states": [
     {
-      "title": "Prepared",
-      "body": "A synthetic record has been organised."
+      "title": "Complaint received",
+      "body": "Complete · Synthetic fixture received."
     },
     {
-      "title": "Ready for official reporting",
-      "body": "The citizen can proceed to the official service."
+      "title": "Initial review",
+      "body": "Current · Demo facts are being reviewed."
     },
     {
-      "title": "Keep records available",
-      "body": "Original evidence should remain available."
+      "title": "Provider or action stage",
+      "body": "Pending · No provider was contacted."
+    },
+    {
+      "title": "Investigation",
+      "body": "Not started · This concept cannot investigate."
     }
   ]
 };

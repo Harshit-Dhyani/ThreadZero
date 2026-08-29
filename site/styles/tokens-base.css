@@ -1,7 +1,7 @@
 /* Tokens and base */
 @font-face {
   font-family: Inter;
-  src: url("./assets/fonts/inter/Inter-Variable.ttf") format("truetype");
+  src: url("../assets/fonts/inter/Inter-Variable.ttf") format("truetype");
   font-style: normal;
   font-weight: 100 900;
   font-display: swap;
@@ -9,36 +9,45 @@
 
 @font-face {
   font-family: "Noto Sans Devanagari";
-  src: url("./assets/fonts/noto-sans-devanagari/NotoSansDevanagari-Variable.ttf") format("truetype");
+  src: url("../assets/fonts/noto-sans-devanagari/NotoSansDevanagari-Variable.ttf") format("truetype");
   font-style: normal;
   font-weight: 100 900;
   font-display: swap;
 }
 
 :root {
-  --navy-950: #06152f;
-  --navy-900: #071d41;
+  --navy-950: #051a36;
+  --navy-900: #082343;
   --navy-800: #0a2b5e;
-  --blue-700: #084fc6;
-  --blue-600: #0964e8;
+  --blue-700: #0648a9;
+  --blue-600: #0d5bd4;
   --blue-100: #eaf2ff;
-  --blue-50: #f4f8ff;
-  --ink: #081b3f;
-  --muted: #50617d;
-  --line: #d8e2f0;
+  --blue-50: #f3f7fd;
+  --ink: #081f45;
+  --muted: #40577a;
+  --line: #d6e1f1;
   --surface: #ffffff;
   --warm: #fbfcff;
-  --green: #087a55;
+  --green: #198754;
   --green-soft: #e7f7f0;
-  --red: #c9252d;
-  --red-soft: #fff1f1;
-  --amber: #9b6200;
+  --red: #dd241c;
+  --red-soft: #fff3f1;
+  --amber: #b66a00;
   --amber-soft: #fff7df;
-  --shadow: 0 14px 36px rgb(20 54 107 / 10%);
-  --radius-lg: 22px;
-  --radius-md: 14px;
-  --radius-sm: 9px;
-  --page: min(1240px, calc(100% - 48px));
+  --focus: #2563eb;
+  --shadow: 0 12px 30px rgb(20 54 107 / 7%);
+  --radius-lg: 12px;
+  --radius-md: 10px;
+  --radius-sm: 8px;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 64px;
+  --page: min(1400px, calc(100% - 96px));
 }
 
 * {
@@ -58,7 +67,7 @@ body {
   font-family: Inter, "Noto Sans Devanagari", system-ui, sans-serif;
   font-size: 16px;
   line-height: 1.55;
-  overflow-x: hidden;
+  overflow-wrap: anywhere;
 }
 
 html[lang="hi"] body {
@@ -111,17 +120,18 @@ h3 {
 
 h1 {
   margin-bottom: 18px;
-  font-size: clamp(2.35rem, 5vw, 4.5rem);
-  font-weight: 760;
+  font-size: clamp(2rem, 3vw, 3.5rem);
+  font-weight: 660;
 }
 
 h2 {
-  font-size: clamp(1.55rem, 2.7vw, 2.5rem);
-  font-weight: 730;
+  font-size: clamp(1.5rem, 2.3vw, 2rem);
+  font-weight: 630;
 }
 
 h3 {
   font-size: 1.05rem;
+  font-weight: 600;
 }
 
 main {
@@ -129,8 +139,13 @@ main {
 }
 
 :focus-visible {
-  outline: 3px solid #f3a712;
-  outline-offset: 3px;
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+}
+
+[data-focus-target]:focus,
+#main-content:focus {
+  outline: none;
 }
 
 .sr-only {
@@ -165,7 +180,7 @@ main {
   margin-bottom: 9px;
   color: var(--blue-700);
   font-size: 0.76rem;
-  font-weight: 800;
+  font-weight: 600;
   letter-spacing: 0.11em;
   text-transform: uppercase;
 }
@@ -200,17 +215,21 @@ main {
   gap: 9px;
   padding: 11px 19px;
   border: 1px solid transparent;
-  border-radius: 9px;
-  font-weight: 720;
+  border-radius: 8px;
+  font-weight: 580;
   line-height: 1.2;
   text-decoration: none;
   cursor: pointer;
+  transition: background-color 160ms ease, border-color 160ms ease, color 160ms ease, transform 120ms ease;
+}
+
+.button:active {
+  transform: translateY(1px);
 }
 
 .button-primary {
   background: var(--blue-600);
   color: #fff;
-  box-shadow: 0 8px 18px rgb(9 100 232 / 22%);
 }
 
 .button-primary:hover {
@@ -244,12 +263,11 @@ main {
   align-items: center;
   gap: 7px;
   color: var(--blue-700);
-  font-weight: 720;
+  font-weight: 580;
   text-decoration: none;
 }
 
-.text-link:hover,
-.footer-group a:hover {
+.text-link:hover {
   text-decoration: underline;
   text-underline-offset: 4px;
 }

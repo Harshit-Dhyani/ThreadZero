@@ -3,7 +3,7 @@ export default {
     "language": "English",
     "languageCode": "en",
     "title": "Financial Cyber Fraud Reporting Guide",
-    "qualifier": "Independent concept redesign · Not a government service",
+    "qualifier": "Independent concept · Not a government service",
     "disclosure": "Synthetic data only · No uploads · No real submission"
   },
   "nav": {
@@ -53,7 +53,13 @@ export default {
     "home": "Home",
     "more": "More",
     "moreTitle": "More services",
-    "closeMenu": "Close menu"
+    "closeMenu": "Close menu",
+    "reportCheck": "Report / Check",
+    "evidence": "Evidence",
+    "guidesLearning": "Guides & Learning",
+    "support": "Support",
+    "helpSupport": "Help & Support",
+    "getStarted": "Get Started"
   },
   "common": {
     "continue": "Continue",
@@ -88,8 +94,13 @@ export default {
   },
   "footer": {
     "title": "Financial Cyber Fraud Reporting Guide",
-    "qualifier": "Independent concept redesign · Not a government service",
-    "body": "A bilingual synthetic demonstration for organising financial-fraud facts and evidence before using official channels.",
+    "qualifier": "Independent concept · Not a government service",
+    "body": "A citizen-first guide for organising cyber-fraud information before using official reporting channels.",
+    "helpTitle": "We are here to help you",
+    "helpBody": "Prepare the facts, organise your evidence, and find the right next step.",
+    "socialUnavailable": "Social profiles are not linked in this independent concept",
+    "designed": "Designed for clarity, safety, and confidence.",
+    "version": "Version 1.0 · August 2026",
     "services": "Services",
     "learning": "Learning",
     "project": "Project and policies",

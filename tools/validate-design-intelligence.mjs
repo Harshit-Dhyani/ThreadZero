@@ -46,14 +46,14 @@ for (const board of boards.boards) {
 
 const shipped = generated.assets.filter((asset) => asset.used_in_production);
 assert.equal(generated.schema_version, 3, 'expected illustration manifest schema v3');
-assert.equal(generated.assets.length, 8, 'expected eight coordinated illustration masters');
-assert.equal(shipped.length, 8, 'expected all eight illustrations in production');
+assert.equal(generated.assets.length, 13, 'expected historical masters plus three RESET-01 page proofs');
+assert.equal(shipped.length, 9, 'expected six V2 route masters plus three RESET-01 page proofs in production');
 assert.match(generated.prompt_contract, /no .*photography/i, 'prompt contract must prohibit photography');
 assert.equal((await readdir(generated.input_reference_archive)).filter((name) => name.endsWith('.png')).length, 8, 'expected eight archived user references');
-assert.equal((await readdir(generated.output_master_archive)).filter((name) => name.endsWith('.png')).length, 8, 'expected eight archived generated masters');
+assert.equal((await readdir(generated.output_master_archive)).filter((name) => name.endsWith('.png')).length, 13, 'expected thirteen archived generated masters');
 for (const asset of shipped) {
   assert.match(asset.status, /^approved-illustration/, asset.id + ' must be an approved illustration');
-  assert.match(asset.id, /-illustration-v1$/, asset.id + ' must use the illustration id contract');
+  assert.match(asset.id, /-illustration-v(?:1|5)$/, asset.id + ' must use the active versioned illustration id contract');
   const bytes = await readFile(asset.production_path);
   const actualHash = createHash('sha256').update(bytes).digest('hex');
   assert.equal(actualHash, asset.sha256, asset.id + ' production hash mismatch');

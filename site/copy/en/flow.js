@@ -70,7 +70,7 @@ export default {
   },
   "actNow": {
     "eyebrow": "Step 1 · Urgent official action",
-    "title": "Use the official channel before this demonstration.",
+    "title": "Use official channels first.",
     "intro": "If money was lost or a financial transaction is still unfolding, contact 1930 manually as soon as possible and use cybercrime.gov.in.",
     "boundaryTitle": "What this concept can do",
     "boundaryBody": "It can organise a synthetic example in this browser tab. It cannot contact a bank, freeze funds, call a helpline, or create a complaint.",

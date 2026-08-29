@@ -14,7 +14,8 @@
       content="An independent bilingual concept for preparing a synthetic financial cyber-fraud report. It does not submit to any government system."
     >
     <title>Financial Cyber Fraud Reporting Guide</title>
-    <link rel="stylesheet" href="./styles.css?v=20260827l">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230b3b75'/%3E%3Cpath d='M9 10h14M9 16h9M9 22h14' stroke='white' stroke-width='2.5' stroke-linecap='round'/%3E%3C/svg%3E">
+    <link rel="stylesheet" href="./styles.css?v=20260828o">
   </head>
   <body>
     <a class="skip-link" href="#main-content">Skip to main content</a>
@@ -22,21 +23,28 @@
     <header class="site-header" data-shell-header>
       <div class="header-identity">
         <a class="brand" href="#home" data-route-link="home" aria-label="Financial Cyber Fraud Reporting Guide, home">
-          <img class="brand-mark" src="./assets/icons/lucide-1.27.0/waypoints.svg" width="42" height="42" alt="" aria-hidden="true">
           <span class="brand-copy">
             <strong data-brand-title>Financial Cyber Fraud Reporting Guide</strong>
-            <span data-brand-qualifier>Synthetic preparation demo · No government submission</span>
+            <span data-brand-qualifier>Independent concept · Not a government service</span>
           </span>
         </a>
 
-        <button class="header-menu-button" type="button" data-open-more aria-haspopup="dialog">
+        <button class="header-menu-button" type="button" data-open-more aria-haspopup="dialog" aria-label="Services">
           <span data-header-menu-label>Services</span><img src="./assets/icons/lucide-1.27.0/plus.svg" width="20" height="20" alt="" aria-hidden="true">
         </button>
 
         <div class="header-utilities">
-          <div class="flow-header-help"><span data-header-help-label>Actual incident?</span><strong data-header-help-action>Call 1930 manually</strong></div>
+          <a class="header-primary-action" href="#act-now" data-route-link="act-now">Prepare a report</a>
+          <div class="flow-header-help">
+            <img src="./assets/icons/lucide-1.27.0/phone-call.svg" width="24" height="24" alt="" aria-hidden="true">
+            <strong data-header-help-action>Call 1930 (24x7)</strong>
+          </div>
+          <a class="header-support-button" href="#contact" data-route-link="contact">
+            <img src="./assets/icons/lucide-1.27.0/circle-help.svg" width="24" height="24" alt="" aria-hidden="true">
+            <span data-header-support-label>Help &amp; Support</span>
+          </a>
           <label class="language-control">
-            <span data-language-label>Language</span>
+            <span class="sr-only" data-language-label>Language</span>
             <select id="languageSelect" aria-label="Language">
               <option value="en">English</option>
               <option value="hi">हिन्दी</option>
@@ -46,19 +54,19 @@
       </div>
 
       <nav class="desktop-nav" aria-label="Primary" data-primary-nav></nav>
+      <nav class="mobile-quick-actions" aria-label="Primary actions" data-mobile-quick-actions></nav>
     </header>
 
     <main id="main-content" tabindex="-1"></main>
 
     <footer class="site-footer" data-shell-footer></footer>
 
-    <nav class="mobile-nav" aria-label="Mobile primary" data-mobile-nav></nav>
 
-    <dialog id="simulationDialog" class="dialog">
+    <dialog id="simulationDialog" class="dialog" aria-labelledby="simulation-dialog-title" aria-describedby="simulation-dialog-body">
       <form method="dialog" class="dialog-card" data-simulation-dialog-form>
         <img class="dialog-symbol" src="./assets/icons/lucide-1.27.0/triangle-alert.svg" width="28" height="28" alt="" aria-hidden="true">
-        <h2 data-dialog-title>This demonstration will not send anything.</h2>
-        <p data-dialog-body></p>
+        <h2 id="simulation-dialog-title" data-dialog-title>This demonstration will not send anything.</h2>
+        <p id="simulation-dialog-body" data-dialog-body></p>
         <div class="dialog-actions">
           <button class="button button-secondary" value="cancel" data-dialog-cancel>Go back</button>
           <button class="button button-primary" value="confirm" data-dialog-confirm>Continue simulation</button>
@@ -66,10 +74,10 @@
       </form>
     </dialog>
 
-    <dialog id="moreDialog" class="dialog dialog-menu">
+    <dialog id="moreDialog" class="dialog dialog-menu" aria-labelledby="more-dialog-title">
       <div class="dialog-card">
         <div class="dialog-heading-row">
-          <h2 data-more-title>More services</h2>
+          <h2 id="more-dialog-title" data-more-title>More services</h2>
           <button class="icon-button" type="button" data-more-close aria-label="Close menu"><img src="./assets/icons/lucide-1.27.0/x.svg" width="22" height="22" alt="" aria-hidden="true"></button>
         </div>
         <nav aria-label="More services" data-more-links></nav>
@@ -77,6 +85,6 @@
     </dialog>
 
     <div id="live-region" class="sr-only" role="status" aria-live="polite" aria-atomic="true"></div>
-    <script type="module" src="./app.js?v=20260827m"></script>
+    <script type="module" src="./app.js?v=20260828n"></script>
   </body>
 </html>

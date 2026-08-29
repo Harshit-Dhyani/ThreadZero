@@ -1,5 +1,8 @@
 # Local tooling and temporary work
 .tmp/
+dist/
+.netlify/
+.playwright-cli/
 .serena/
 .codex/
 .agents/

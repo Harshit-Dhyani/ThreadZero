@@ -76,7 +76,7 @@ export function createViewHelpers(language, state) {
   function sourcePanel(keys = []) {
     if (!keys.length) return "";
     const c = copy();
-    return `<aside class="source-panel" aria-label="${esc(c.common.source)}"><strong>${esc(c.common.source)}</strong><p>${esc(c.common.sourceNote)}</p><div>${keys.map((key) => officialLink(key)).join("")}</div></aside>`;
+    return `<aside class="source-panel" aria-label="${esc(c.common.source)}"><strong>${esc(c.common.source)}</strong><div class="source-links">${keys.map((key) => officialAnchor(key)).join("")}</div><small class="source-note">${esc(c.common.lastChecked)} · ${esc(c.common.sourceNote)}</small></aside>`;
   }
 
   return { copy, esc, checked, selected, routeLink, icon, picture, officialAnchor, officialLink, routeLabel, sourcePanel };

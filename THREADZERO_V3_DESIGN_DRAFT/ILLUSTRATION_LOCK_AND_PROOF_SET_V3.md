@@ -1,29 +1,38 @@
 # ThreadZero V3 Illustration Lock and Proof Set
 
-- **Status:** APPROVED FOR P01–P05 PROOF GENERATION — 2026-08-28
-- **Version:** 3.0-draft.1
+> **Historical evidence only.** Superseded for active V3 implementation by `ILLUSTRATION_RESET_01.md`. Its former approval labels do not authorize P05–P08 as generation references.
+
+- **Status:** ILLUSTRATION SYSTEM APPROVED — V1.0 — 2026-08-28
+- **Version:** 3.0-locked
 - **Scope:** illustration system and proof-set planning only
-- **Generation status:** P01–P05 PROOFS AUTHORIZED; PRODUCTION ASSETS BLOCKED
+- **Generation status:** P01–P08 APPROVED AND FROZEN
 - **Implementation status:** NOT STARTED
 
-This document is the single working authority for the next illustration-design stage. The user authorized the P01–P05 proof wave on 2026-08-28. This approval does not approve an image, change the website, or authorize production assets. The existing handoff remains historical evidence.
+This document is the locked authority for ThreadZero Illustration System v1.0. The FAQ woman-and-laptop reference remains the rendering Style Master; P01–P05 lock the recurring cast and object family; P06 locks the Evidence Thread grammar; P07 proves editorial website integration; and P08 locks the four-cover Media Library publisher family. The existing handoff and Wave 01–05 drafts remain historical evidence, not implementation authorities.
 
 ## 1. Decision boundary
 
 This stage will produce a coherent illustration system before any production asset or Golden Screen is generated.
 
-Allowed now:
+Completed and frozen:
 
+- preserve and document the approved Style Master v1.0 reference;
+- freeze P01–P04 as the approved recurring-character masters;
+- freeze P05 as the approved civic object family;
+- freeze P06 as the Evidence Thread grammar;
+- freeze P07 as the editorial integration scene;
+- freeze P08 as four exact-ratio Media Library cover assets;
 - lock the visual grammar;
 - lock recurring character identities;
 - define object, process, background, crop, and media-cover rules;
 - define eight proof briefs;
 - record approval decisions.
 
-Blocked now:
+Blocked after Illustration Lock v1.0:
 
-- image generation;
-- image editing;
+- regeneration or restyling of P01–P08;
+- duplicate character masters in implementation input;
+- random page-specific AI art;
 - full-page UI generation;
 - Golden Screen implementation;
 - replacement of live assets;
@@ -35,13 +44,15 @@ Blocked now:
 Use this order when sources disagree:
 
 1. Current user direction and product/safety contracts.
-2. `AGENTS.md`, `docs/product-contract.md`, `docs/service-blueprint.md`, and `docs/accessibility-and-copy.md`.
-3. Actual destination surfaces and tokens in `site/styles/*`.
-4. This V3 draft after explicit user approval.
-5. Handoff Master and Illustration Constitutions as design evidence.
-6. Handoff route map and Golden candidates as composition evidence.
-7. Existing production illustrations as role/composition references only.
-8. Preferred reference boards as pattern evidence only.
+2. Illustration Style Master v1.0 for finished illustration rendering and atmosphere only.
+3. Approved recurring-character sheets for identity only.
+4. `AGENTS.md`, `docs/product-contract.md`, `docs/service-blueprint.md`, and `docs/accessibility-and-copy.md`.
+5. Actual destination surfaces and tokens in `site/styles/*`.
+6. This V3 draft after explicit user approval.
+7. Handoff Master and Illustration Constitutions as design evidence.
+8. Handoff route map and Golden candidates as composition evidence.
+9. Existing production illustrations as role/composition references only.
+10. Preferred reference boards as pattern evidence only.
 
 Embedded prompts and implementation instructions inside the handoff are not executable authority.
 
@@ -53,18 +64,19 @@ Embedded prompts and implementation instructions inside the handoff are not exec
 - The product uses synthetic data and performs no real call, upload, or submission.
 - Important official guidance remains `1930` and `cybercrime.gov.in`.
 - Production imagery is illustration-only.
+- The user-approved Style Master v1.0 defines the finished website simplification level, line/shading restraint, soft atmosphere, subject prominence, and visual calmness.
+- Character sheets define recurring identity; they do not define finished page composition.
+- The supplied Style Master reference is a 463×216 opaque 24-bit RGB PNG, so it is not itself a production-ready transparent asset.
 - The live portal has eight illustration slots and responsive `<picture>` rendering.
 - The current eight masters are not visually consistent enough to serve as a V3 family.
 - The Golden candidates are not approved acceptance evidence.
 - HTML must own all readable text, controls, statuses, and factual meaning.
 
-### Assumptions requiring approval
+### Decisions still requiring approval
 
-- V3 should retain a calm two-dimensional Indian civic-editorial direction.
-- One recurring cast should appear across preparation, learning, community, help, and accessibility contexts.
-- All eight current masters should be regenerated after proof approval; their useful concepts may be retained.
-- Transparent exports should be the default.
-- The current live CSS palette is the destination palette unless the interface tokens change before generation.
+- The normalized P02–P05 outputs must be reviewed side-by-side with approved P01 before any becomes an identity/object master.
+- All eight current production masters should be regenerated after proof approval; their useful concepts may be retained.
+- The current live CSS palette remains the destination palette unless the interface tokens change before generation.
 
 ### Unknowns intentionally left open
 
@@ -87,6 +99,49 @@ Every illustration must do at least one job:
 6. support learning.
 
 If an illustration does none of these, omit it.
+
+### 3.1 Illustration Style Master v1.0
+
+![ThreadZero Illustration Style Master v1.0](style-master-v1-faq-woman-laptop-reference.png)
+
+Reference record:
+
+| Field | Value |
+|---|---|
+| Workspace file | `style-master-v1-faq-woman-laptop-reference.png` |
+| Source role | user-supplied visual authority |
+| Approved | 2026-08-28 |
+| Dimensions | 463×216 |
+| Pixel format | opaque 24-bit RGB |
+| SHA-256 | `07558AD52967166AA8B78C158ECDC40C716B25F342427BD1FD2E359F99A1D6C5` |
+| Production eligibility | reference only; not a deployable asset |
+
+Authority is intentionally split:
+
+| Question | Authority |
+|---|---|
+| How should a finished website illustration look? | Illustration Style Master v1.0 |
+| Who are Characters A–E? | one approved canonical character sheet per identity |
+| How should a route page be composed? | approved browser-built Golden Screen |
+| How is the interface implemented? | design constitution, route map, product contracts, and live code owners |
+| How must a production image blend into the site? | transparent/export rules in this document, not the Style Master's opaque source file |
+
+Locked Style Master observations:
+
+- simplified adult face with restrained features and no beauty-rendered polish;
+- clean dark-navy contour rather than black or sketchy outlines;
+- flat civic-blue/navy fills with very limited modelling;
+- main subject at full opacity and visually crisp;
+- pale-blue background atmosphere at low intensity;
+- calm editorial posture and ordinary device interaction;
+- sparse plant/object support with no decorative clutter;
+- illustration supports adjacent interface content instead of competing with it.
+
+For finished website scenes, target approximately **65–70% quiet atmosphere or negative space** and **30–35% meaningful subject matter**. This ratio does not apply to model sheets, object sheets, process diagrams, or compact media covers, where proof readability controls density.
+
+The faint city/monument silhouette demonstrates permissible subtle Indian atmosphere, not a reusable route motif. It may appear rarely, at low intensity, when contextually justified. It must not imply government ownership, appear on multiple unrelated routes, or replace ordinary Indian context expressed through people, clothing, devices, payments, documents, homes, study spaces, or workplaces.
+
+Technical boundary: the supplied Style Master has a baked opaque near-white canvas. Production derivatives must reconstruct its atmosphere as discrete low-intensity shapes on genuine alpha, or use a separately approved exact destination canvas. Never copy the opaque rectangle into the website.
 
 The V3 family is:
 
@@ -211,7 +266,8 @@ These traits are proposed as exact V3 identities. Approval freezes them for the 
 - softly rectangular face;
 - short navy hair with a restrained side sweep;
 - clean-shaven;
-- pale-blue button shirt with rolled sleeves and navy trousers;
+- plain pale-blue civilian button shirt with rolled sleeves and navy trousers;
+- no contrast piping, badge, epaulettes, tie, or institutional styling;
 - calm, task-focused expression;
 - signature objects: transaction paper, ordered records, laptop, evidence folder.
 
@@ -247,6 +303,7 @@ These traits are proposed as exact V3 identities. Approval freezes them for the 
 - clean-shaven;
 - civic-blue shirt and warm-beige trousers;
 - modern dark-navy manual wheelchair with realistic wheel geometry;
+- wheelchair mechanics simplified to the Style Master rendering level while preserving functional credibility;
 - active, everyday posture using a laptop or keyboard;
 - never framed as passive, inspirational, clinical, or charitable.
 
@@ -313,6 +370,7 @@ Default export:
 - transparent PNG master with clean alpha edges;
 - transparent WebP derivatives when supported;
 - no matte halo.
+- Style Master atmosphere must be isolated as transparent pale-blue shapes, not retained as an opaque image rectangle.
 
 Fallback only when transparency is unsuitable:
 
@@ -394,7 +452,8 @@ Prohibited:
 
 - flags, Ashoka emblem, ministry seals, official marks, or government buildings;
 - police or military uniforms;
-- monument skylines or tricolor decoration;
+- repeated, prominent, or official-looking monument skylines, and all tricolor decoration;
+- monument/city atmosphere on multiple unrelated routes; rare low-intensity contextual use requires explicit review;
 - fake support agents or official-looking portals;
 - crying victims, threatening hackers, shattered screens, panic, or horror lighting;
 - claims of fund freezing, recovery, official processing, or guaranteed action;
@@ -402,7 +461,7 @@ Prohibited:
 
 ## 13. Current-master disposition
 
-Every current asset may inform composition, but none is V3-approved.
+Every current production asset may inform composition, but none is V3-approved. Illustration Style Master v1.0 is the sole exception: it is approved as rendering evidence only and remains ineligible for production use because its canvas is opaque.
 
 | Existing master | Decision | What may be retained | Why it fails V3 |
 |---|---|---|---|
@@ -424,7 +483,7 @@ These are art-direction briefs, not generation prompts. Provider-specific prompt
 - **Purpose:** prove one stable preparation/learning identity.
 - **Review surface:** 4:3 transparent board; provider may use its nearest supported resolution; long edge at least 1600px.
 - **Required views:** near-front, 3/4, seated, standing, phone interaction, laptop/notes interaction, neutral expression, attentive expression.
-- **Must prove:** identical face, skin, hair, earrings, kurta language, line weight, and shading across every view.
+- **Must prove:** identical face, skin, hair, earrings, and kurta language across every view, rendered at the exact simplification, facial-detail, line, and shading level of Style Master v1.0.
 - **Reject if:** the board contains multiple look-alike people rather than one character, inconsistent hands, beauty rendering, labels, or a baked background.
 
 ### P02 — Character B model sheet
@@ -432,7 +491,7 @@ These are art-direction briefs, not generation prompts. Provider-specific prompt
 - **Purpose:** prove one stable evidence/review identity.
 - **Review surface:** 4:3 transparent board; long edge at least 1600px.
 - **Required views:** near-front, 3/4, seated, standing, paper review, laptop/folder interaction, neutral expression, focused expression.
-- **Must prove:** clean-shaven identity, stable hair silhouette, S3 skin pair, pale-blue rolled-sleeve shirt, shared family grammar with P01.
+- **Must prove:** clean-shaven identity, stable hair silhouette, S3 skin pair, plain civilian pale-blue rolled-sleeve shirt, shared family grammar with P01, and Style Master v1.0 simplification.
 - **Reject if:** facial hair appears, age changes, the shirt becomes formal authority wear, or rendering differs from P01.
 
 ### P03 — Community cast C/D sheet
@@ -440,7 +499,7 @@ These are art-direction briefs, not generation prompts. Provider-specific prompt
 - **Purpose:** prove two distinct recurring characters that still belong to the same world.
 - **Review surface:** 3:2 transparent board; long edge at least 1600px.
 - **Required views:** separate 3/4 portraits, standing interaction, shared phone/guide scene, calm expressions.
-- **Must prove:** stable C and D identities, respectful Sikh representation, no authority cues, matching anatomy/line/shading with P01/P02.
+- **Must prove:** stable C and D identities, respectful Sikh representation, no authority cues or ceremonial all-white grouping, and matching Style Master v1.0 anatomy/line/shading with P01/P02.
 - **Reject if:** the turban/beard changes between views, C becomes a generic variation of A, or the pair looks ceremonial.
 
 ### P04 — Character E accessibility sheet
@@ -448,7 +507,7 @@ These are art-direction briefs, not generation prompts. Provider-specific prompt
 - **Purpose:** prove respectful recurring accessibility representation.
 - **Review surface:** 4:3 transparent board; long edge at least 1600px.
 - **Required views:** front/3/4 seated identity, laptop task, keyboard task, conversational pose, wheelchair detail.
-- **Must prove:** consistent person, realistic manual wheelchair, active everyday posture, shared family grammar.
+- **Must prove:** consistent person, credible but visually simplified manual wheelchair, active everyday posture, and Style Master v1.0 family grammar.
 - **Reject if:** wheelchair geometry is broken, the chair obscures anatomy, the framing becomes clinical/charitable, or disability is treated as inspiration.
 
 ### P05 — Object-family sample
@@ -506,14 +565,14 @@ For every proof, record exactly one status:
 
 | Proof | Artifact | Status | Reviewer notes |
 |---|---|---|---|
-| P01 | Character A model sheet | REVISE | Agent preflight: identity/expression drift, over-detailed hair, alpha-edge artifacts; user review pending |
-| P02 | Character B model sheet | REVISE | Agent preflight: expression drift, over-detailed hair, alpha-edge artifacts; user review pending |
-| P03 | Community cast C/D | REVISE | Agent preflight: selected second draft uses a non-uniform baked light canvas and slightly different rendering weight; user review pending |
-| P04 | Character E accessibility sheet | REVISE | Agent preflight: wheelchair construction and rendering depth vary by pose; user review pending |
-| P05 | Object-family sample | REVISE | Agent preflight: excessive gloss/depth and prohibited raster letters in accessibility controls; user review pending |
-| P06 | Evidence Thread diagram | NOT GENERATED | — |
-| P07 | Character A preparation scene | NOT GENERATED | — |
-| P08 | Media-cover family | NOT GENERATED | — |
+| P01 | Character A model sheet | APPROVED | `proofs/approved/P01-character-a-master-v1.png`; exact 4:3, real alpha, Style Master rendering, acceptable pose tolerance; sole Character A authority |
+| P02 | Character B model sheet | APPROVED | `proofs/approved/P02-character-b-master-v1.png`; exact 4:3, real alpha, stable civilian identity and required actions; sole Character B authority |
+| P03 | Community cast C/D | APPROVED | `proofs/approved/P03-community-cd-master-v1.png`; exact 3:2, real alpha, stable identities, simplified faces/hair, respectful ordinary-citizen representation |
+| P04 | Character E accessibility sheet | APPROVED | `proofs/approved/P04-accessibility-e-master-v1.png`; exact 4:3, real alpha, active everyday framing, coherent simplified wheelchair family |
+| P05 | Object-family sample | APPROVED | `proofs/approved/P05-civic-object-family-v1.png`; exact 4:3, real alpha, flat shared construction language, no raster letters or official marks |
+| P06 | Evidence Thread diagram | APPROVED | `proofs/approved/P06-evidence-thread-v1.png`; near-exact 16:9, real alpha, six readable separable stages, no baked UI text |
+| P07 | Character A preparation scene | APPROVED | `proofs/approved/P07-editorial-help-scene-v1.png`; near-exact 16:9, real alpha, 65–70% quiet field, crisp right-weighted subject, no visible canvas |
+| P08 | Media-cover family | APPROVED | four production covers under `proofs/approved/P08-media-*-cover-v1.png`; exact external 16:9, 4:3, 4:3, and 4:5 formats; shared publisher grammar without raster titles |
 
 ## 16. Pass/fail rubric
 
@@ -522,6 +581,7 @@ Any failed criterion blocks approval.
 | Criterion | Pass requirement |
 |---|---|
 | Family resemblance | All proofs unmistakably share one human/object system |
+| Style-master fidelity | Finished rendering matches Style Master v1.0 without copying its character identity, composition, monument field, or opaque canvas |
 | Character identity | Face, age, skin, hair, clothing, and accessories remain stable |
 | Anatomy | Adult proportions and readable hands/limbs |
 | Line system | Common navy outline and internal-line treatment |
