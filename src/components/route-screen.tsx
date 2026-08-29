@@ -8,6 +8,7 @@ import { PublicRoute } from "./public-route";
 import { TrackWorkspace } from "./track";
 import { LearnHub } from "./learn-hub";
 import { HelpHub } from "./help-hub";
+import { applyReportKindSelection, createInitialState } from "@/domains/report";
 import { FLOW_ROUTE_SET, LEGACY_FLOW_REDIRECTS } from "@/lib/routes";
 import { REPORT_ENTRY_REDIRECTS } from "@/data/demo";
 import type { ReportKind, ReportingMode } from "@/lib/types";
@@ -73,22 +74,16 @@ function ReportEntryRedirect({ entry }: { entry: ReportEntry }) {
   useEffect(() => {
     if (!hydrated) return;
     mutateReport((draft) => {
-      draft.reportKind = entry.reportKind;
+      if (entry.reportKind === "unselected") Object.assign(draft, createInitialState());
+      else applyReportKindSelection(draft, entry.reportKind);
       draft.reportingMode = entry.reportingMode;
-      draft.womenChildCategory = "";
-      draft.incidentChoice = "";
       draft.route = "incident";
-      draft.completed = [];
-      draft.reviewed = false;
-      draft.submission = "idle";
-      draft.locked = false;
-      draft.extractionConfirmed = false;
     });
     router.replace("/incident");
     // `mutateReport` intentionally follows report state; route hydration owns this one-time redirect.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [entry.reportKind, entry.reportingMode, hydrated, router]);
-  return <RedirectNotice title={language === "hi" ? "रिपोर्ट कार्यक्षेत्र खुल रहा है" : "Opening the report workspace"} body={language === "hi" ? "यह पुराना रास्ता अब उसी पाँच-चरण वाली रिपोर्ट में जारी रहता है।" : "This older entry now continues in the same five-stage report."} destination="/incident" />;
+  return <RedirectNotice title={language === "hi" ? "रिपोर्ट कार्यक्षेत्र खुल रहा है" : "Opening the report workspace"} body={language === "hi" ? "यह पुराना रास्ता अब उसी पाँच-चरण वाली अनुकूल रिपोर्ट में जारी रहता है।" : "This older entry now continues in the same adaptive five-stage report."} destination="/incident" />;
 }
 
 function LegacyFlowRedirect({ target }: { target: string }) {
