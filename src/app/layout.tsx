@@ -4,7 +4,7 @@ import { PortalProvider } from "@/components/portal-provider";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Financial Cyber Fraud Reporting Guide",
+  title: "ThreadZero",
   description: "Independent ThreadZero concept using demo data. Nothing is sent to the government."
 };
 
