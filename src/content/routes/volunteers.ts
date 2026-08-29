@@ -22,47 +22,47 @@ export const VOLUNTEERS_ROUTES = [
     "items": [
       {
         "title": {
-          "en": "Programme overview",
-          "hi": "कार्यक्रम परिचय"
+          "en": "Choose how you could help",
+          "hi": "चुनें कि आप कैसे मदद कर सकते हैं"
         },
         "body": {
-          "en": "Understand scope, responsibilities, and boundaries.",
-          "hi": "दायरा, जिम्मेदारियाँ और सीमाएँ समझें।"
-        },
-        "route": "volunteer-terms"
-      },
-      {
-        "title": {
-          "en": "Unlawful-content guidance",
-          "hi": "गैरकानूनी सामग्री मार्गदर्शन"
-        },
-        "body": {
-          "en": "Learn what to preserve and how to avoid resharing harm.",
-          "hi": "क्या सुरक्षित रखें और हानिकारक सामग्री दोबारा साझा न करें।"
-        },
-        "route": "unlawful-content"
-      },
-      {
-        "title": {
-          "en": "Registration practice",
-          "hi": "पंजीकरण अभ्यास"
-        },
-        "body": {
-          "en": "Complete a demo interest form.",
-          "hi": "डेमो रुचि फ़ॉर्म भरें।"
+          "en": "Compare Unlawful Content Flagger, Cyber Awareness Promoter, and Cyber Expert roles.",
+          "hi": "गैरकानूनी सामग्री फ्लैगर, साइबर जागरूकता प्रमोटर और साइबर विशेषज्ञ भूमिकाओं की तुलना करें।"
         },
         "route": "volunteer-register"
       },
       {
         "title": {
-          "en": "Login practice",
-          "hi": "लॉगिन अभ्यास"
+          "en": "Read the programme limits",
+          "hi": "कार्यक्रम की सीमाएँ पढ़ें"
         },
         "body": {
-          "en": "Use a demo identity.",
-          "hi": "डेमो पहचान का उपयोग करें।"
+          "en": "Understand confidentiality, truthful-information, identity, and authority boundaries.",
+          "hi": "गोपनीयता, सही जानकारी, पहचान और अधिकार की सीमाएँ समझें।"
+        },
+        "route": "volunteer-terms"
+      },
+      {
+        "title": {
+          "en": "Declaration and demo login",
+          "hi": "घोषणा और डेमो लॉगिन"
+        },
+        "body": {
+          "en": "Acknowledge the rules before any demo login controls appear.",
+          "hi": "डेमो लॉगिन नियंत्रण दिखने से पहले नियम स्वीकार करें।"
         },
         "route": "volunteer-login"
+      },
+      {
+        "title": {
+          "en": "Handle unlawful content safely",
+          "hi": "गैरकानूनी सामग्री सुरक्षित ढंग से संभालें"
+        },
+        "body": {
+          "en": "Record minimal context without downloading, forwarding, or making a legal determination.",
+          "hi": "डाउनलोड, अग्रेषित या कानूनी निर्णय किए बिना न्यूनतम संदर्भ दर्ज करें।"
+        },
+        "route": "unlawful-content"
       }
     ],
     "fields": [],
@@ -137,8 +137,28 @@ export const VOLUNTEERS_ROUTES = [
         "route": ""
       },
       {
-        "title": { "en": "State Nodal review", "hi": "राज्य नोडल समीक्षा" },
-        "body": { "en": "The official programme says a State/UT Nodal Officer may contact applicants; KYC requirements depend on the selected role.", "hi": "आधिकारिक कार्यक्रम के अनुसार राज्य/केंद्रशासित प्रदेश नोडल अधिकारी संपर्क कर सकते हैं; KYC चयनित भूमिका पर निर्भर है।" },
+        "title": { "en": "Follow Indian law", "hi": "भारतीय कानून का पालन करें" },
+        "body": { "en": "Volunteer activity stays within Indian law and the programme terms; participation can be ended for a breach.", "hi": "स्वयंसेवक गतिविधि भारतीय कानून और कार्यक्रम नियमों के भीतर रहती है; उल्लंघन पर भागीदारी समाप्त की जा सकती है।" },
+        "route": ""
+      },
+      {
+        "title": { "en": "No programme-named social account", "hi": "कार्यक्रम नाम से सोशल खाता नहीं" },
+        "body": { "en": "Do not create a social account in the programme name or present personal activity as programme activity.", "hi": "कार्यक्रम के नाम से सोशल खाता न बनाएँ और निजी गतिविधि को कार्यक्रम गतिविधि के रूप में प्रस्तुत न करें।" },
+        "route": ""
+      },
+      {
+        "title": { "en": "No public statements on its behalf", "hi": "कार्यक्रम की ओर से सार्वजनिक बयान नहीं" },
+        "body": { "en": "Do not issue statements, run discussions, or publish opinions on behalf of the programme.", "hi": "कार्यक्रम की ओर से बयान, चर्चा या राय प्रकाशित न करें।" },
+        "route": ""
+      },
+      {
+        "title": { "en": "Do not share programme material", "hi": "कार्यक्रम सामग्री साझा न करें" },
+        "body": { "en": "Do not share programme information, logos, or slogans on social media or public platforms.", "hi": "कार्यक्रम की जानकारी, लोगो या नारे सोशल मीडिया या सार्वजनिक मंचों पर साझा न करें।" },
+        "route": ""
+      },
+      {
+        "title": { "en": "Declaration and consequences", "hi": "घोषणा और परिणाम" },
+        "body": { "en": "The official process requires a declaration and says a breach may lead to de-registration or action under applicable law.", "hi": "आधिकारिक प्रक्रिया में घोषणा आवश्यक है और उल्लंघन पर पंजीकरण रद्द या लागू कानून के तहत कार्रवाई हो सकती है।" },
         "route": ""
       }
     ],
@@ -223,7 +243,7 @@ export const VOLUNTEERS_ROUTES = [
   {
     "id": "volunteer-register",
     "group": "volunteers",
-    "composition": "form",
+    "composition": "guidance",
     "label": {
       "en": "Volunteer registration",
       "hi": "स्वयंसेवक पंजीकरण"
@@ -233,67 +253,87 @@ export const VOLUNTEERS_ROUTES = [
       "hi": "स्वयंसेवक पंजीकरण"
     },
     "title": {
-      "en": "Practise a volunteer registration",
-      "hi": "स्वयंसेवक पंजीकरण का अभ्यास करें"
+      "en": "Prepare for the official registration",
+      "hi": "आधिकारिक पंजीकरण की तैयारी करें"
     },
     "intro": {
-      "en": "No account is created and no personal data is retained.",
-      "hi": "कोई खाता नहीं बनता और व्यक्तिगत डेटा नहीं रखा जाता।"
+      "en": "Compare the published roles and prepare what the official process may request. Nothing can be entered or uploaded here.",
+      "hi": "प्रकाशित भूमिकाओं की तुलना करें और आधिकारिक प्रक्रिया में माँगी जा सकने वाली सामग्री तैयार करें। यहाँ कुछ दर्ज या अपलोड नहीं किया जा सकता।"
     },
-    "items": [],
-    "fields": [
+    "items": [
       {
-        "name": "fullName",
-        "type": "text",
-        "label": {
-          "en": "Demo name",
-          "hi": "डेमो नाम"
+        "title": {
+          "en": "Role 1: Unlawful Content Flagger",
+          "hi": "भूमिका 1: गैरकानूनी सामग्री फ्लैगर"
         },
-        "required": true,
-        "example": "Demo Volunteer"
+        "body": {
+          "en": "Flags the limited content categories named by the official programme. The published instructions say no prior KYC is required for this role.",
+          "hi": "आधिकारिक कार्यक्रम में बताई गई सीमित सामग्री श्रेणियाँ चिह्नित करता है। प्रकाशित निर्देशों के अनुसार इस भूमिका के लिए पूर्व KYC आवश्यक नहीं है।"
+        },
+        "route": ""
       },
       {
-        "name": "region",
-        "type": "text",
-        "label": {
-          "en": "Demo region",
-          "hi": "डेमो क्षेत्र"
+        "title": {
+          "en": "Role 2: Cyber Awareness Promoter",
+          "hi": "भूमिका 2: साइबर जागरूकता प्रमोटर"
         },
-        "required": true,
-        "example": "Demo District"
+        "body": {
+          "en": "Supports public cyber-safety awareness. The published instructions say this application undergoes KYC.",
+          "hi": "जन-साइबर सुरक्षा जागरूकता में सहायता करता है। प्रकाशित निर्देशों के अनुसार इस आवेदन में KYC होता है।"
+        },
+        "route": ""
       },
       {
-        "name": "interest",
-        "type": "select",
-        "label": {
-          "en": "Area of interest",
-          "hi": "रुचि क्षेत्र"
+        "title": {
+          "en": "Role 3: Cyber Expert",
+          "hi": "भूमिका 3: साइबर विशेषज्ञ"
         },
-        "required": true,
-        "options": [
-          {
-            "en": "Cyber Awareness Promoter",
-            "hi": "साइबर जागरूकता प्रमोटर"
-          },
-          {
-            "en": "Unlawful Content Flagger",
-            "hi": "गैरकानूनी सामग्री फ्लैगर"
-          },
-          {
-            "en": "Cyber Expert",
-            "hi": "साइबर विशेषज्ञ"
-          }
-        ]
+        "body": {
+          "en": "Contributes relevant specialist skills. The published instructions say this application undergoes KYC.",
+          "hi": "प्रासंगिक विशेषज्ञ कौशल से योगदान करता है। प्रकाशित निर्देशों के अनुसार इस आवेदन में KYC होता है।"
+        },
+        "route": ""
+      },
+      {
+        "title": {
+          "en": "Document checklist",
+          "hi": "दस्तावेज़ चेकलिस्ट"
+        },
+        "body": {
+          "en": "The official instructions request a resume, identity proof, address proof, and passport-size photograph where applicable. Prepare them privately; upload nothing here.",
+          "hi": "आधिकारिक निर्देश लागू होने पर रिज़्यूमे, पहचान प्रमाण, पता प्रमाण और पासपोर्ट आकार फोटो माँगते हैं। इन्हें निजी रूप से तैयार रखें; यहाँ कुछ अपलोड न करें।"
+        },
+        "route": ""
+      },
+      {
+        "title": {
+          "en": "Application steps",
+          "hi": "आवेदन चरण"
+        },
+        "body": {
+          "en": "Create the official login ID, select State/UT, verify the mobile OTP, complete profile and skills, then use Preview before Final Submit.",
+          "hi": "आधिकारिक लॉगिन आईडी बनाएँ, राज्य/केंद्रशासित प्रदेश चुनें, मोबाइल OTP सत्यापित करें, प्रोफ़ाइल और कौशल पूरा करें, फिर अंतिम जमा से पहले पूर्वावलोकन उपयोग करें।"
+        },
+        "route": ""
+      },
+      {
+        "title": {
+          "en": "Start with the declaration",
+          "hi": "घोषणा से शुरू करें"
+        },
+        "body": {
+          "en": "Review the programme terms, acknowledge the instructional demo declaration, and rehearse the login boundary without sharing personal information.",
+          "hi": "कार्यक्रम नियम पढ़ें, निर्देशात्मक डेमो घोषणा स्वीकार करें और व्यक्तिगत जानकारी साझा किए बिना लॉगिन सीमा का अभ्यास करें।"
+        },
+        "route": "volunteer-login"
       }
     ],
+    "fields": [],
     "sources": [
       "officialVolunteerConcept",
       "officialVolunteerInstructions"
     ],
-    "result": {
-      "en": "Demo volunteer interest draft ready",
-      "hi": "डेमो स्वयंसेवक रुचि मसौदा तैयार"
-    }
+    "result": null
   },
   {
     "id": "volunteer-login",
@@ -308,15 +348,38 @@ export const VOLUNTEERS_ROUTES = [
       "hi": "स्वयंसेवक लॉगिन"
     },
     "title": {
-      "en": "Open the demo volunteer area",
-      "hi": "डेमो स्वयंसेवक क्षेत्र खोलें"
+      "en": "Review the rules before demo login",
+      "hi": "डेमो लॉगिन से पहले नियम पढ़ें"
     },
     "intro": {
-      "en": "Use VOL-DEMO-001 and demo-only. This is not authentication.",
-      "hi": "VOL-DEMO-001 और demo-only उपयोग करें। यह प्रमाणीकरण नहीं है।"
+      "en": "This local walkthrough mirrors the official terms, declaration, State/UT, login ID, mobile, and OTP sequence. It is not authentication.",
+      "hi": "यह स्थानीय अभ्यास आधिकारिक नियम, घोषणा, राज्य/केंद्रशासित प्रदेश, लॉगिन आईडी, मोबाइल और OTP क्रम दिखाता है। यह प्रमाणीकरण नहीं है।"
     },
     "items": [],
     "fields": [
+      {
+        "name": "state",
+        "type": "select",
+        "label": {
+          "en": "Sample State / UT",
+          "hi": "नमूना राज्य / केंद्रशासित प्रदेश"
+        },
+        "required": true,
+        "options": [
+          {
+            "en": "Delhi (demo)",
+            "hi": "दिल्ली (डेमो)"
+          },
+          {
+            "en": "Karnataka (demo)",
+            "hi": "कर्नाटक (डेमो)"
+          },
+          {
+            "en": "Maharashtra (demo)",
+            "hi": "महाराष्ट्र (डेमो)"
+          }
+        ]
+      },
       {
         "name": "volunteerId",
         "type": "text",
@@ -329,18 +392,31 @@ export const VOLUNTEERS_ROUTES = [
         "example": "VOL-DEMO-001"
       },
       {
-        "name": "password",
-        "type": "password",
+        "name": "mobile",
+        "type": "tel",
         "label": {
-          "en": "Demo password",
-          "hi": "डेमो पासवर्ड"
+          "en": "Demo mobile number",
+          "hi": "डेमो मोबाइल नंबर"
         },
         "required": true,
-        "pattern": "^demo-only$",
-        "example": "demo-only"
+        "pattern": "^9000000000$",
+        "example": "9000000000"
+      },
+      {
+        "name": "otp",
+        "type": "text",
+        "label": {
+          "en": "Fixed demo OTP",
+          "hi": "निश्चित डेमो OTP"
+        },
+        "required": true,
+        "pattern": "^123456$",
+        "example": "123456"
       }
     ],
     "sources": [
+      "officialVolunteerTerms",
+      "officialVolunteerInstructions",
       "officialVolunteerLogin"
     ],
     "result": {
