@@ -89,3 +89,8 @@ export function readSavedDemoAccess(storage: Storage): SavedDemoAccess | null {
 }
 
 export function writeSavedDemoAccess(storage: Storage, value: SavedDemoAccess) { storage.setItem(ACCESS_KEY, JSON.stringify(value)); }
+
+export function eraseSavedDemoData(storage: Storage) {
+  storage.removeItem(ACCESS_KEY);
+  storage.removeItem(LANGUAGE_KEY);
+}
