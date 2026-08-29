@@ -5,6 +5,7 @@ import { fileURLToPath } from "node:url";
 import test from "node:test";
 
 const root = dirname(dirname(fileURLToPath(import.meta.url)));
+const projectRoot = dirname(root);
 const runtimeRoots = ["app", "components", "content", "data", "domains", "features", "lib"];
 const sourceExtensions = new Set([".ts", ".tsx", ".js", ".jsx", ".mjs", ".css"]);
 
@@ -35,4 +36,17 @@ test("review annotations keep dialogs centered and boundary notes unboxed", () =
   assert.equal(dialogs.match(/className="m-auto/g)?.length, 2, "search and profile dialogs must stay centered");
   assert.doesNotMatch(annotatedSurfaces, /border-l-(?:4|\[3px\]) border-civic-600 bg-civic-50/, "informational boundaries must not use the rejected blue callout treatment");
   assert.match(shell, /border-b border-line bg-white text-ink/, "desktop navigation must use the calmer white surface");
+});
+
+test("Netlify publishes the static Next export with hydration-safe headers", () => {
+  const config = readFileSync(join(projectRoot, "netlify.toml"), "utf8");
+  assert.match(config, /command = "bun install --frozen-lockfile && bun run build"/);
+  assert.match(config, /publish = "out"/);
+  assert.doesNotMatch(config, /publish = "dist"|tools\/build-static\.mjs/);
+  assert.match(config, /script-src 'self' 'unsafe-inline'/);
+  assert.match(config, /connect-src 'none'/);
+  assert.match(config, /form-action 'none'/);
+  assert.match(config, /frame-ancestors 'none'/);
+  assert.match(config, /for = "\/_next\/static\/\*"[\s\S]*?max-age=31536000, immutable/);
+  assert.match(config, /for = "\/assets\/\*"[\s\S]*?max-age=31536000, immutable/);
 });

@@ -3,7 +3,7 @@
   "configVersion": 1,
   "workspaces": {
     "": {
-      "name": "threadzero-v5-proof",
+      "name": "threadzero-v5-next",
       "dependencies": {
         "@tailwindcss/postcss": "4.3.3",
         "lucide-react": "1.35.0",
