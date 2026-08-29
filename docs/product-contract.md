@@ -50,6 +50,6 @@ Reload starts a fresh synthetic report at Home. Current and completed steps are 
 
 ## Current delivery gate
 
-Three small Civic Evidence Ledger concepts compare the Evidence + Incident mechanism. They are temporary decision artifacts, not three production themes. Only a human-approved winner receives the complete route flow.
+The rejected visual system has been removed. The repository is now at a three-territory first-viewport selection gate. The three artifacts must keep this product contract constant while changing composition, hierarchy, typography, visual medium, and trust strategy.
 
-No source check, generated screenshot, or agent score may select the winner.
+Only a human-approved direction may receive responsive HTML proof, a design constitution, downstream section assets, or the complete route flow. No source check, generated image, or agent score may select the winner.

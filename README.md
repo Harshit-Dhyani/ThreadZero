@@ -1,23 +1,33 @@
-# NCRP Civic Evidence Ledger concept
+# ThreadZero
 
-This repository explores a clearer citizen-facing financial-fraud reporting journey. It is an independent concept, not an NCRP, police, bank, payment-provider, or government system.
+ThreadZero is the internal codename for an independent concept redesign of the citizen-facing financial-fraud reporting journey. It is not an NCRP, police, bank, payment-provider, or government system.
 
 For an actual financial cyber-fraud incident in India, call **1930** and use **cybercrime.gov.in**.
 
-## Current status
+## Current state
 
-The former A/B/C full-flow visual implementations were rejected and preserved under `archive/`. Three new, deliberately narrow Evidence + Incident concepts now establish a professional visual direction before the full journey is rebuilt.
+The rejected visual prototypes and their supporting research machinery have been removed. The repository is intentionally paused at the visual-direction gate:
 
-No winner is selected. No external submission exists.
+1. preserve verified product and accessibility truth;
+2. maintain a provenance-backed design-intelligence library;
+3. compare three first-viewport visual territories;
+4. let a human select or reject them;
+5. only then prove the winner in responsive HTML and build the full journey.
 
-See [Start here](README_START_HERE.md), [authoritative docs](docs/README.md), and [the live comparison](prototype/comparison/index.html).
+There is currently no public runnable prototype and no selected design direction.
 
-## Local checks
+## Preserved foundation
+
+- `docs/` — product, service-flow, and accessibility contracts.
+- `core/` — the deterministic synthetic state, route, and validation kernel.
+- `templates/` — the canonical synthetic financial-fraud fixture.
+- `design-intelligence/` — committed provenance, analysis, patterns, and design decisions.
+- `evidence/` — Git-ignored third-party and user-supplied research artifacts; never production assets.
+
+## Local check
 
 ```text
-node prototype/qa/static-check.mjs
-python tools/build_manifest.py
-python tools/validate_package.py --root .
+node --test core/flow-core.test.mjs
 ```
 
-Rendered approval requires the Codex in-app browser and cannot be replaced by these commands.
+Nothing in this repository places a real call, uploads evidence, or submits externally.

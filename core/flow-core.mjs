@@ -1,4 +1,4 @@
-import { DEMO, STEPS } from "./demo-data.js";
+import { DEMO, STEPS } from "./demo-data.mjs";
 
 export const HOME_ROUTE = "home";
 export const ROUTES = Object.freeze([HOME_ROUTE, ...STEPS.map((step) => step.id)]);

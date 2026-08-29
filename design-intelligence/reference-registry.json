@@ -1,0 +1,594 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-08-26T00:00:00+05:30",
+  "project": "ThreadZero internal design reset",
+  "statistics": {
+    "candidates_discovered": 36,
+    "inspected_deep": 19,
+    "inspection_attempts_blocked": 1,
+    "saved_sources": 13,
+    "retained_references": 12,
+    "core_references": 8,
+    "user_supplied_rejected_originals": 12,
+    "user_supplied_selected_references": 1,
+    "landing_raster_assets_visually_inspected": 56,
+    "component_svg_or_icon_assets_deferred": 10
+  },
+  "candidates": [
+    {"id": "candidate-001", "title": "National Cyber Crime Reporting Portal", "url": "https://cybercrime.gov.in/", "status": "inspected"},
+    {"id": "candidate-002", "title": "GOV.UK Design System", "url": "https://design-system.service.gov.uk/", "status": "inspected"},
+    {"id": "candidate-003", "title": "Singapore Government Design System", "url": "https://www.designsystem.tech.gov.sg/", "status": "inspected"},
+    {"id": "candidate-004", "title": "U.S. Web Design System", "url": "https://designsystem.digital.gov/", "status": "inspected"},
+    {"id": "candidate-005", "title": "NHS Design System", "url": "https://service-manual.nhs.uk/design-system", "status": "inspected"},
+    {"id": "candidate-006", "title": "UX4G", "url": "https://www.ux4g.gov.in/", "status": "inspected"},
+    {"id": "candidate-007", "title": "Scamwatch report a scam", "url": "https://www.scamwatch.gov.au/report-a-scam", "status": "inspected"},
+    {"id": "candidate-008", "title": "CFPB submit a complaint", "url": "https://www.consumerfinance.gov/complaint/", "status": "inspected"},
+    {"id": "candidate-009", "title": "ReportFraud.ftc.gov", "url": "https://reportfraud.ftc.gov/", "status": "inspected"},
+    {"id": "candidate-010", "title": "ReportFraud assistant", "url": "https://reportfraud.ftc.gov/assistant", "status": "inspected"},
+    {"id": "candidate-011", "title": "IdentityTheft.gov", "url": "https://www.identitytheft.gov/", "status": "inspected"},
+    {"id": "candidate-012", "title": "GOV.UK phishing guidance", "url": "https://www.gov.uk/report-suspicious-emails-websites-phishing", "status": "inspected"},
+    {"id": "candidate-013", "title": "Canadian Anti-Fraud Centre reporting guidance", "url": "https://antifraudcentre-centreantifraude.ca/report-signalez-eng.htm", "status": "inspected"},
+    {"id": "candidate-014", "title": "Netsafe report an online incident", "url": "https://report.netsafe.org.nz/hc/en-au/requests/new", "status": "inspected"},
+    {"id": "candidate-015", "title": "Service NSW", "url": "https://www.service.nsw.gov.au/", "status": "inspected"},
+    {"id": "candidate-016", "title": "Boston.gov", "url": "https://www.boston.gov/", "status": "inspected"},
+    {"id": "candidate-017", "title": "Redesigning Boston.gov case study", "url": "https://www.behance.net/gallery/49905651/Redesigning-Bostongov", "status": "inspected"},
+    {"id": "candidate-018", "title": "Helsinki Design System", "url": "https://hds.hel.fi/", "status": "inspected"},
+    {"id": "candidate-019", "title": "NYC Design System", "url": "https://designsystem.nyc.gov/", "status": "inspected"},
+    {"id": "candidate-020", "title": "Australian Government Design System", "url": "https://designsystem.gov.au/", "status": "blocked-dns"},
+    {"id": "candidate-021", "title": "GOV.UK question pages", "url": "https://design-system.service.gov.uk/patterns/question-pages/", "status": "discovered"},
+    {"id": "candidate-022", "title": "GOV.UK error summary", "url": "https://design-system.service.gov.uk/components/error-summary/", "status": "discovered"},
+    {"id": "candidate-023", "title": "GOV.UK check answers", "url": "https://design-system.service.gov.uk/patterns/check-answers/", "status": "discovered"},
+    {"id": "candidate-024", "title": "USWDS banner", "url": "https://designsystem.digital.gov/components/banner/", "status": "discovered"},
+    {"id": "candidate-025", "title": "NHS error summary", "url": "https://service-manual.nhs.uk/design-system/components/error-summary", "status": "discovered"},
+    {"id": "candidate-026", "title": "NSW Design System", "url": "https://digitalnsw.github.io/nsw-design-system/", "status": "discovered"},
+    {"id": "candidate-027", "title": "CFPB Design System", "url": "https://cfpb.github.io/design-system/", "status": "discovered"},
+    {"id": "candidate-028", "title": "NCSC phishing reporting", "url": "https://www.ncsc.gov.uk/collection/phishing-scams/report-scam-email", "status": "discovered"},
+    {"id": "candidate-029", "title": "Action Fraud", "url": "https://www.actionfraud.police.uk/", "status": "discovered"},
+    {"id": "candidate-030", "title": "Report Fraud UK", "url": "https://www.reportfraud.police.uk/", "status": "discovered"},
+    {"id": "candidate-031", "title": "NYC.gov", "url": "https://www.nyc.gov/", "status": "discovered"},
+    {"id": "candidate-032", "title": "gov.sg", "url": "https://www.gov.sg/", "status": "discovered"},
+    {"id": "candidate-033", "title": "Digital India", "url": "https://www.digitalindia.gov.in/", "status": "discovered"},
+    {"id": "candidate-034", "title": "UMANG", "url": "https://web.umang.gov.in/", "status": "discovered"},
+    {"id": "candidate-035", "title": "Canada design system", "url": "https://design.canada.ca/", "status": "discovered"},
+    {"id": "candidate-036", "title": "Ontario Design System", "url": "https://designsystem.ontario.ca/", "status": "discovered"}
+  ],
+  "references": [
+    {
+      "id": "ref-0001",
+      "title": "National Cyber Crime Reporting Portal",
+      "url": "https://cybercrime.gov.in/",
+      "captured_on": "2026-08-26",
+      "source_role": "authoritative product and content truth",
+      "classification": ["government", "high-stress-reporting"],
+      "inspection_status": "full-page-inspected",
+      "status": "core",
+      "core_reference": true,
+      "viewports": ["1440x900", "390x844"],
+      "evidence_paths": [
+        "evidence/design-references/government/ref-0001/desktop-viewport.png",
+        "evidence/design-references/government/ref-0001/desktop-full.png",
+        "evidence/design-references/government/ref-0001/mobile.png",
+        "evidence/design-references/government/ref-0001/source-assets/"
+      ],
+      "confirmed_observations": [
+        "The service prioritizes reporting cybercrime and separates financial fraud from other reporting routes.",
+        "The page exposes the official 1930 helpline and cybercrime.gov.in as urgent financial-fraud actions.",
+        "The inspected page reported a last-updated date of 05/06/2026.",
+        "All 35 extracted raster assets were visually inspected; most are official identity, social icons, institutional event photos, or prohibited fear-based cyber stock."
+      ],
+      "inferred_principles": [
+        "Urgent official action must precede concept onboarding.",
+        "Task wording should be citizen-facing before legal or procedural detail."
+      ],
+      "unknowns": ["Authenticated NCRP form behavior was not inspected."],
+      "score": {"product_truth": 25, "stress_fit": 20, "accessibility": 12, "composition": 12, "media_fit": 6, "total": 75},
+      "permitted_influence": ["verified content hierarchy", "official-action prominence"],
+      "prohibited_copying": ["government identity", "emblems", "exact layout", "protected imagery"],
+      "copyright_note": "Internal research evidence only; no third-party asset may ship."
+    },
+    {
+      "id": "ref-0002",
+      "title": "GOV.UK Design System",
+      "url": "https://design-system.service.gov.uk/",
+      "captured_on": "2026-08-26",
+      "source_role": "accessible government interaction system",
+      "classification": ["government-design-system", "accessibility", "forms"],
+      "inspection_status": "full-page-inspected",
+      "status": "core",
+      "core_reference": true,
+      "viewports": ["1440x900", "390x844"],
+      "evidence_paths": [
+        "evidence/design-references/government/ref-0002/desktop-viewport.png",
+        "evidence/design-references/government/ref-0002/desktop-full.png",
+        "evidence/design-references/government/ref-0002/mobile.png"
+      ],
+      "confirmed_observations": [
+        "The system uses direct headings, high-contrast actions, and restrained component geometry.",
+        "Navigation and content remain legible when reflowed to a narrow viewport."
+      ],
+      "inferred_principles": [
+        "Prefer progressive disclosure and one clear decision per form step.",
+        "Validation should be summarized and linked back to fields."
+      ],
+      "unknowns": ["The current project did not inspect authenticated service implementations."],
+      "score": {"product_truth": 16, "stress_fit": 19, "accessibility": 25, "composition": 17, "media_fit": 5, "total": 82},
+      "permitted_influence": ["form hierarchy", "error recovery", "content restraint"],
+      "prohibited_copying": ["crown identity", "brand palette as identity", "exact component compositions"],
+      "copyright_note": "Patterns only; do not clone identity."
+    },
+    {
+      "id": "ref-0003",
+      "title": "Singapore Government Design System",
+      "url": "https://www.designsystem.tech.gov.sg/",
+      "captured_on": "2026-08-26",
+      "source_role": "mobile public-service system and media treatment",
+      "classification": ["government-design-system", "mobile", "navigation"],
+      "inspection_status": "full-page-inspected-with-assets",
+      "status": "core",
+      "core_reference": true,
+      "viewports": ["1440x900", "390x844"],
+      "evidence_paths": [
+        "evidence/design-references/government/ref-0003/desktop-viewport.png",
+        "evidence/design-references/government/ref-0003/desktop-full.png",
+        "evidence/design-references/government/ref-0003/mobile.png",
+        "evidence/design-references/government/ref-0003/source-assets/"
+      ],
+      "confirmed_observations": [
+        "The system balances institutional navigation with warmer editorial modules.",
+        "Four photographic raster assets were visually inspected for landing-page composition; ten SVG or icon system assets are preserved and intentionally deferred."
+      ],
+      "inferred_principles": [
+        "A public-service interface can feel contemporary without decorative technology motifs.",
+        "Editorial media should support task comprehension rather than sit as a generic hero."
+      ],
+      "unknowns": ["Downstream service transaction patterns were not inspected."],
+      "score": {"product_truth": 14, "stress_fit": 15, "accessibility": 21, "composition": 20, "media_fit": 15, "total": 85},
+      "permitted_influence": ["mobile navigation rhythm", "institutional-to-editorial balance"],
+      "prohibited_copying": ["lion identity", "national identity", "source artwork", "exact modules"],
+      "copyright_note": "Extracted files are internal evidence only."
+    },
+    {
+      "id": "ref-0004",
+      "title": "U.S. Web Design System",
+      "url": "https://designsystem.digital.gov/",
+      "captured_on": "2026-08-26",
+      "source_role": "federal accessibility, trust, and component guidance",
+      "classification": ["government-design-system", "accessibility", "navigation"],
+      "inspection_status": "full-page-inspected",
+      "status": "core",
+      "core_reference": true,
+      "viewports": ["1440x900", "390x844"],
+      "evidence_paths": [
+        "evidence/design-references/government/ref-0004/desktop-viewport.png",
+        "evidence/design-references/government/ref-0004/desktop-full.png",
+        "evidence/design-references/government/ref-0004/mobile.png"
+      ],
+      "confirmed_observations": [
+        "The system makes trust and accessibility guidance explicit instead of relying on visual authority.",
+        "The layout uses predictable reading order and conspicuous focusable actions."
+      ],
+      "inferred_principles": [
+        "The independent-concept disclaimer should be structural, not buried in a footer.",
+        "Trust language should say what the prototype cannot do."
+      ],
+      "unknowns": ["Agency-specific adaptations were outside this inspection."],
+      "score": {"product_truth": 15, "stress_fit": 17, "accessibility": 25, "composition": 17, "media_fit": 5, "total": 79},
+      "permitted_influence": ["trust disclosure", "accessibility contracts", "predictable navigation"],
+      "prohibited_copying": ["US federal identity", "banner copy", "exact component styling"],
+      "copyright_note": "Patterns only."
+    },
+    {
+      "id": "ref-0005",
+      "title": "NHS Design System",
+      "url": "https://service-manual.nhs.uk/design-system",
+      "captured_on": "2026-08-26",
+      "source_role": "high-stress service content and form calmness",
+      "classification": ["public-service", "high-stress", "accessibility"],
+      "inspection_status": "full-page-inspected",
+      "status": "retained",
+      "core_reference": false,
+      "viewports": ["1440x900", "390x844"],
+      "evidence_paths": [
+        "evidence/design-references/public-service/ref-0005/desktop-viewport.png",
+        "evidence/design-references/public-service/ref-0005/desktop-full.png",
+        "evidence/design-references/public-service/ref-0005/mobile.png"
+      ],
+      "confirmed_observations": [
+        "The system uses plain language, generous vertical spacing, and clear task boundaries.",
+        "Visual emphasis is reserved for decisions and safety-critical information."
+      ],
+      "inferred_principles": [
+        "Calmness comes from editing and pacing, not muted contrast.",
+        "Supporting guidance should sit adjacent to the decision it affects."
+      ],
+      "unknowns": ["No patient transaction was exercised."],
+      "score": {"product_truth": 12, "stress_fit": 22, "accessibility": 24, "composition": 17, "media_fit": 4, "total": 79},
+      "permitted_influence": ["plain-language pacing", "high-stress form hierarchy"],
+      "prohibited_copying": ["NHS identity", "brand color as authority", "exact templates"],
+      "copyright_note": "Patterns only."
+    },
+    {
+      "id": "ref-0006",
+      "title": "UX4G",
+      "url": "https://www.ux4g.gov.in/",
+      "captured_on": "2026-08-26",
+      "source_role": "India-specific government accessibility and components",
+      "classification": ["government-design-system", "india", "accessibility"],
+      "inspection_status": "full-page-inspected",
+      "status": "core",
+      "core_reference": true,
+      "viewports": ["1440x900", "390x844"],
+      "evidence_paths": [
+        "evidence/design-references/government/ref-0006/desktop-viewport.png",
+        "evidence/design-references/government/ref-0006/desktop-full.png",
+        "evidence/design-references/government/ref-0006/mobile.png"
+      ],
+      "confirmed_observations": [
+        "The site exposes practical HTML component examples for Indian public-service interfaces.",
+        "Its examples emphasize visible labels, simple controls, and responsive behavior."
+      ],
+      "inferred_principles": [
+        "Use locally familiar official-action language without imitating a government identity.",
+        "Semantic HTML can support the entire deterministic prototype."
+      ],
+      "unknowns": ["The inspected examples do not establish service-specific content quality."],
+      "score": {"product_truth": 18, "stress_fit": 16, "accessibility": 23, "composition": 15, "media_fit": 5, "total": 77},
+      "permitted_influence": ["India-specific accessibility checks", "semantic control patterns"],
+      "prohibited_copying": ["government marks", "decorative patriotism", "exact components"],
+      "copyright_note": "Patterns only."
+    },
+    {
+      "id": "ref-0007",
+      "title": "Scamwatch report a scam",
+      "url": "https://www.scamwatch.gov.au/report-a-scam",
+      "captured_on": "2026-08-26",
+      "source_role": "urgent scam-reporting entry and branching",
+      "classification": ["high-stress-reporting", "recovery", "routing"],
+      "inspection_status": "full-page-inspected",
+      "status": "core",
+      "core_reference": true,
+      "viewports": ["1440x900", "390x844"],
+      "evidence_paths": [
+        "evidence/design-references/reporting-flow/ref-0007/desktop-viewport.png",
+        "evidence/design-references/reporting-flow/ref-0007/desktop-full.png",
+        "evidence/design-references/reporting-flow/ref-0007/mobile.png"
+      ],
+      "confirmed_observations": [
+        "The page separates immediate safety action from preparing and submitting a report.",
+        "Users are told what to gather before entering the reporting route."
+      ],
+      "inferred_principles": [
+        "Place urgent action and reporting preparation in distinct visual zones.",
+        "Route by what happened before asking for detailed evidence."
+      ],
+      "unknowns": ["A real report was not submitted."],
+      "score": {"product_truth": 20, "stress_fit": 24, "accessibility": 20, "composition": 17, "media_fit": 6, "total": 87},
+      "permitted_influence": ["urgent-versus-report separation", "preparation framing", "incident routing"],
+      "prohibited_copying": ["Australian government identity", "exact copy", "exact page layout"],
+      "copyright_note": "Patterns only."
+    },
+    {
+      "id": "ref-0008",
+      "title": "Consumer Financial Protection Bureau complaint",
+      "url": "https://www.consumerfinance.gov/complaint/",
+      "captured_on": "2026-08-26",
+      "source_role": "financial complaint preflight and after-submission expectations",
+      "classification": ["financial-reporting", "preflight", "recovery"],
+      "inspection_status": "full-page-inspected",
+      "status": "core",
+      "core_reference": true,
+      "viewports": ["1440x900", "390x844"],
+      "evidence_paths": [
+        "evidence/design-references/reporting-flow/ref-0008/desktop-viewport.png",
+        "evidence/design-references/reporting-flow/ref-0008/desktop-full.png",
+        "evidence/design-references/reporting-flow/ref-0008/mobile.png"
+      ],
+      "confirmed_observations": [
+        "The page answers common preflight questions before presenting the start action.",
+        "It explains the complaint process and what happens after submission."
+      ],
+      "inferred_principles": [
+        "Set expectations before asking for effort.",
+        "Explain post-submission next actions without implying guaranteed outcomes."
+      ],
+      "unknowns": ["Authenticated complaint entry was not inspected."],
+      "score": {"product_truth": 20, "stress_fit": 22, "accessibility": 21, "composition": 18, "media_fit": 7, "total": 88},
+      "permitted_influence": ["preflight questions", "process explanation", "expectation setting"],
+      "prohibited_copying": ["CFPB identity", "exact copy", "exact information architecture"],
+      "copyright_note": "Patterns only."
+    },
+    {
+      "id": "ref-0009",
+      "title": "ReportFraud assistant",
+      "url": "https://reportfraud.ftc.gov/assistant",
+      "captured_on": "2026-08-26",
+      "source_role": "guided incident categorization",
+      "classification": ["reporting-flow", "progressive-disclosure", "routing"],
+      "inspection_status": "first-step-inspected",
+      "status": "retained",
+      "core_reference": false,
+      "viewports": ["1440x900", "390x844"],
+      "evidence_paths": [
+        "evidence/design-references/reporting-flow/ref-0009/desktop-viewport.png",
+        "evidence/design-references/reporting-flow/ref-0009/desktop-full.png",
+        "evidence/design-references/reporting-flow/ref-0009/mobile.png"
+      ],
+      "confirmed_observations": [
+        "The assistant begins with broad incident categories and a visible progress indicator.",
+        "The first screen limits simultaneous decisions."
+      ],
+      "inferred_principles": [
+        "A stressed user benefits from bounded choices.",
+        "Progress should communicate position without pretending certainty."
+      ],
+      "unknowns": ["The full live submission was not exercised."],
+      "score": {"product_truth": 16, "stress_fit": 22, "accessibility": 19, "composition": 17, "media_fit": 4, "total": 78},
+      "permitted_influence": ["bounded choice count", "progress communication"],
+      "prohibited_copying": ["FTC identity", "category wording", "exact interaction styling"],
+      "copyright_note": "Patterns only."
+    },
+    {
+      "id": "ref-0010",
+      "title": "IdentityTheft.gov",
+      "url": "https://www.identitytheft.gov/",
+      "captured_on": "2026-08-26",
+      "source_role": "tell-plan-act recovery framing",
+      "classification": ["recovery", "sequencing", "high-stress"],
+      "inspection_status": "full-page-inspected",
+      "status": "retained",
+      "core_reference": false,
+      "viewports": ["1440x900", "390x844"],
+      "evidence_paths": [
+        "evidence/design-references/reporting-flow/ref-0010/desktop-viewport.png",
+        "evidence/design-references/reporting-flow/ref-0010/desktop-full.png",
+        "evidence/design-references/reporting-flow/ref-0010/mobile.png"
+      ],
+      "confirmed_observations": [
+        "The service explains a three-part mechanism: tell what happened, receive a plan, take action.",
+        "Recovery is presented as a sequence rather than a dashboard."
+      ],
+      "inferred_principles": [
+        "A short service model can reduce uncertainty before form entry.",
+        "Next actions should be actionable and ordered."
+      ],
+      "unknowns": ["Personalized plan output was not generated."],
+      "score": {"product_truth": 15, "stress_fit": 23, "accessibility": 20, "composition": 18, "media_fit": 7, "total": 83},
+      "permitted_influence": ["tell-plan-act framing", "ordered recovery steps"],
+      "prohibited_copying": ["FTC identity", "exact three-step copy", "illustration style"],
+      "copyright_note": "Patterns only."
+    },
+    {
+      "id": "ref-0011",
+      "title": "Service NSW",
+      "url": "https://www.service.nsw.gov.au/",
+      "captured_on": "2026-08-26",
+      "source_role": "image-led service discovery context",
+      "classification": ["public-service", "editorial", "navigation"],
+      "inspection_status": "full-page-inspected",
+      "status": "context-only",
+      "core_reference": false,
+      "viewports": ["1440x900", "390x844"],
+      "evidence_paths": [
+        "evidence/design-references/public-service/ref-0011/desktop-viewport.png",
+        "evidence/design-references/public-service/ref-0011/desktop-full.png",
+        "evidence/design-references/public-service/ref-0011/mobile.png"
+      ],
+      "confirmed_observations": [
+        "The homepage mixes service navigation with restrained contextual imagery.",
+        "Tasks remain more prominent than media."
+      ],
+      "inferred_principles": ["Use images as orientation, not as the interaction surface."],
+      "unknowns": ["The site was not retained because its broad-service scope is less relevant than reporting references."],
+      "score": {"product_truth": 8, "stress_fit": 9, "accessibility": 18, "composition": 18, "media_fit": 15, "total": 68},
+      "permitted_influence": ["task-over-media hierarchy"],
+      "prohibited_copying": ["NSW identity", "source photography", "exact service cards"],
+      "copyright_note": "Context only; not a retained reference."
+    },
+    {
+      "id": "ref-0012",
+      "title": "Boston.gov",
+      "url": "https://www.boston.gov/",
+      "captured_on": "2026-08-26",
+      "source_role": "live image-led civic editorial system",
+      "classification": ["civic-editorial", "public-service", "media"],
+      "inspection_status": "full-page-inspected-with-assets",
+      "status": "retained",
+      "core_reference": false,
+      "viewports": ["1440x900", "390x844"],
+      "evidence_paths": [
+        "evidence/design-references/editorial/ref-0012/desktop-viewport.png",
+        "evidence/design-references/editorial/ref-0012/desktop-full.png",
+        "evidence/design-references/editorial/ref-0012/mobile.png",
+        "evidence/design-references/editorial/ref-0012/source-assets/"
+      ],
+      "confirmed_observations": [
+        "The live site combines strong editorial scale with direct city-service navigation.",
+        "All three exposed page images were visually inspected as internal composition evidence."
+      ],
+      "inferred_principles": [
+        "Civic warmth can come from human-scale editorial composition while actions stay literal.",
+        "Asymmetry can create identity without weakening task clarity."
+      ],
+      "unknowns": ["The live implementation has evolved since the original redesign case study."],
+      "score": {"product_truth": 10, "stress_fit": 12, "accessibility": 17, "composition": 24, "media_fit": 22, "total": 85},
+      "permitted_influence": ["editorial scale", "asymmetrical civic composition", "task-over-media hierarchy"],
+      "prohibited_copying": ["Boston identity", "source photography", "exact type treatment", "exact layout"],
+      "copyright_note": "Extracted files are internal evidence only."
+    },
+    {
+      "id": "ref-0013",
+      "title": "Redesigning Boston.gov",
+      "url": "https://www.behance.net/gallery/49905651/Redesigning-Bostongov",
+      "captured_on": "2026-08-26",
+      "source_role": "full-system civic redesign case study",
+      "classification": ["civic-editorial", "case-study", "full-system-forensic"],
+      "inspection_status": "full-case-study-inspected-with-assets",
+      "status": "core",
+      "core_reference": true,
+      "viewports": ["1440x900", "390x844"],
+      "evidence_paths": [
+        "evidence/design-references/editorial/ref-0013/desktop-viewport.png",
+        "evidence/design-references/editorial/ref-0013/desktop-full.png",
+        "evidence/design-references/editorial/ref-0013/mobile.png",
+        "evidence/design-references/editorial/ref-0013/source-assets/"
+      ],
+      "confirmed_observations": [
+        "The case study shows a coherent civic system across navigation, content, mobile, and service entry.",
+        "All fourteen unique exposed case-study modules were visually inspected as internal composition evidence."
+      ],
+      "inferred_principles": [
+        "A visual direction must prove both homepage identity and transaction behavior.",
+        "A repeated editorial grammar can bind ten distinct landing-page sections."
+      ],
+      "unknowns": ["Case-study claims were not independently verified against project analytics."],
+      "score": {"product_truth": 11, "stress_fit": 13, "accessibility": 18, "composition": 25, "media_fit": 24, "total": 91},
+      "permitted_influence": ["system coherence", "editorial rhythm", "responsive composition reasoning"],
+      "prohibited_copying": ["Boston identity", "source artwork", "photography", "exact layouts", "case-study claims"],
+      "copyright_note": "Extracted files are internal evidence only; principles may inform original work."
+    }
+  ],
+  "user_supplied_selected": [
+    {
+      "id": "ref-user-013",
+      "title": "Safer Digital India screen reference",
+      "url": null,
+      "captured_on": "2026-08-26",
+      "source_role": "user-supplied positive composition reference",
+      "status": "selected-reference",
+      "sha256": "f9c55eeb4a5fc68c0fe3b870f55d45460d95e3379fa3ac4a94b5f0f7d71870b6",
+      "evidence_path": "evidence/design-references/user-supplied/selected/ref-user-013/original.png",
+      "confirmed_observations": [
+        "The photographed screen uses a two-level navigation, wide light hero, large navy headline, and four simple action columns.",
+        "The hero combines a strong left visual field with a right-aligned message and a subtle halftone background.",
+        "The visible identity includes ministry styling, the Indian flag, monument silhouettes, patriotic accents, and authority-oriented claims."
+      ],
+      "inferred_principles": [
+        "Use the split composition, decisive headline scale, quiet patterned field, and four-action rhythm.",
+        "Keep the opening unmistakably civic in seriousness while explicitly identifying the prototype as independent."
+      ],
+      "unknowns": [
+        "The original author, source URL, license, and whether this is an official implementation or a concept are unknown."
+      ],
+      "permitted_influence": [
+        "wide split hero",
+        "strong navy typographic hierarchy",
+        "light technical texture",
+        "four-action rhythm",
+        "two-level navigation proportion"
+      ],
+      "prohibited_copying": [
+        "Ministry identity",
+        "government marks",
+        "Indian flag",
+        "monument silhouettes",
+        "patriotic decoration",
+        "authority claims",
+        "exact layout",
+        "shield and headset iconography"
+      ]
+    }
+  ],
+  "user_supplied_rejected": [
+    {
+      "id": "ref-user-001",
+      "sha256": "84e06e19e0158eeaac05ebf689725fbd6f450319924f5bb16324886c571b520f",
+      "evidence_path": "evidence/design-references/user-supplied/rejected/ref-user-001/original.png",
+      "design_dna": "Dark navy outsourcing SaaS, cinematic split hero, large serif display, white workflow panels.",
+      "permitted_influence": "Only the contrast between emotional opening and procedural explanation.",
+      "rejection_reason": "Dark commercial SaaS framing, synthetic team proof, and a non-civic service model."
+    },
+    {
+      "id": "ref-user-002",
+      "sha256": "3bb987b6a877b835a4636c7ee2aa9ed9bda776c2adc38d5db62712327ed34003",
+      "evidence_path": "evidence/design-references/user-supplied/rejected/ref-user-002/original.png",
+      "design_dna": "Black-and-cream commerce montage, large image collage, huge proof metrics.",
+      "permitted_influence": "Image-led section rhythm only.",
+      "rejection_reason": "Commercial identity, fake metrics, and collage-first hierarchy."
+    },
+    {
+      "id": "ref-user-003",
+      "sha256": "6c8f0b47c65ead871706a82eb88f165f50a02ccf57d34e63c8e342626498adff",
+      "evidence_path": "evidence/design-references/user-supplied/rejected/ref-user-003/original.png",
+      "design_dna": "Cyan EV map hero, app overlays, trust logos, testimonial panel.",
+      "permitted_influence": "Clear media-text split.",
+      "rejection_reason": "Generic tech cyan, map metaphor, social-proof fabrication, and irrelevant mobility cues."
+    },
+    {
+      "id": "ref-user-004",
+      "sha256": "61cfa8f1fef504402554628635cfa98b48354b3a4ae4d36e3976f883ca78beb4",
+      "evidence_path": "evidence/design-references/user-supplied/rejected/ref-user-004/original.png",
+      "design_dna": "Black and beige customer-operations SaaS, relief texture, floating product UI.",
+      "permitted_influence": "Tactile texture paired with a functional surface.",
+      "rejection_reason": "Dark SaaS operations framing, fake client proof, and unrelated automation imagery."
+    },
+    {
+      "id": "ref-user-005",
+      "sha256": "dd9a7abe09c8422e2852d6decaf236564a1c971710d2e81fb9f4eee04eca0239",
+      "evidence_path": "evidence/design-references/user-supplied/rejected/ref-user-005/original.png",
+      "design_dna": "Minimal black studio landing page with a stacked portfolio-site montage.",
+      "permitted_influence": "Disciplined whitespace around a sequence.",
+      "rejection_reason": "Generic agency promise, dark SaaS mood, and embedded website collage."
+    },
+    {
+      "id": "ref-user-006",
+      "sha256": "260a024884c98f377b715fe8580e45766567547731703d0830d47afcea872893",
+      "evidence_path": "evidence/design-references/user-supplied/rejected/ref-user-006/original.png",
+      "design_dna": "Centered AI robot mascot, chat product UI, pink-blue gradient frame.",
+      "permitted_influence": "Single-focus whitespace.",
+      "rejection_reason": "AI mascot, generic gradient, simulated coworker, and product-chat imagery."
+    },
+    {
+      "id": "ref-user-007",
+      "sha256": "f8adcf993635875b4f9db0d9faaade94e8bfafbd3f1858d9da457315342f210d",
+      "evidence_path": "evidence/design-references/user-supplied/rejected/ref-user-007/original.png",
+      "design_dna": "Black intelligence dashboard, perspective grid, metrics, charts, customer logos.",
+      "permitted_influence": "None.",
+      "rejection_reason": "It is exactly the prohibited dark cyber-dashboard and fake-proof aesthetic."
+    },
+    {
+      "id": "ref-user-008",
+      "sha256": "70787849d61b3c3a083d8d4af528095887e4a7e98bc1e0cc011d16e38fe40dea",
+      "evidence_path": "evidence/design-references/user-supplied/rejected/ref-user-008/original.png",
+      "design_dna": "Full-bleed human photo, oversized serif statement, warm editorial lower section.",
+      "permitted_influence": "Human-scale editorial composition and image-to-guidance transition.",
+      "rejection_reason": "Commercial AI-doctor narrative, persona-led promise, and embedded product UI."
+    },
+    {
+      "id": "ref-user-009",
+      "sha256": "537046c7b538c055abe784d4e1aa5fd37c4eeb034c5b1680620c8bed57c711bc",
+      "evidence_path": "evidence/design-references/user-supplied/rejected/ref-user-009/original.png",
+      "design_dna": "Neo-classical statue with laptop, pale editorial grid, dotted technical texture.",
+      "permitted_influence": "Asymmetric editorial art direction.",
+      "rejection_reason": "AI novelty, appropriated sculptural identity, and decorative technology symbolism."
+    },
+    {
+      "id": "ref-user-010",
+      "sha256": "dc09a0659b7225dd1487640e618298cb4bc28ac9f28d2c2e548225f34c9eed9f",
+      "evidence_path": "evidence/design-references/user-supplied/rejected/ref-user-010/original.png",
+      "design_dna": "Bright blue-purple gradient, floating AI editor, two-column card grid.",
+      "permitted_influence": "Clear content-category grouping only.",
+      "rejection_reason": "Generic gradients, AI framing, card spam, and decorative clouds."
+    },
+    {
+      "id": "ref-user-011",
+      "sha256": "9d92a413733b85cdb47df06be85af6391092adf676fc33b4a083513e4f656633",
+      "evidence_path": "evidence/design-references/user-supplied/rejected/ref-user-011/original.png",
+      "design_dna": "White and orange analytics SaaS, annotated dashboard, growth proof.",
+      "permitted_influence": "Restrained annotation as explanation.",
+      "rejection_reason": "Dashboard metrics, revenue claims, SaaS conversion hierarchy, and fake proof."
+    },
+    {
+      "id": "ref-user-012",
+      "sha256": "d84dfc9f83c45b05fbae1dd3b91bfa84346634e1a87668084628daf47b4cbf03",
+      "evidence_path": "evidence/design-references/user-supplied/rejected/ref-user-012/original.png",
+      "design_dna": "Neutral white gallery product, oversized sans headline, embedded browser grid.",
+      "permitted_influence": "Calm neutral hierarchy.",
+      "rejection_reason": "Source-product identity, gallery chrome, product screenshot dependency, and non-service framing."
+    }
+  ],
+  "policy": {
+    "third_party_assets": "Internal evidence only. No retained or user-supplied source asset may ship in production.",
+    "screenshots": "Supplementary context only; actual source image files were preserved through Browser extraction when exposed.",
+    "generated_assets": "Only original generated assets explicitly approved after the human visual gate may enter production."
+  }
+}
