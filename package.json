@@ -3,12 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
+  "packageManager": "bun@1.3.14",
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "next build && bun run verify:export",
     "start": "next start",
     "typecheck": "tsc --noEmit",
-    "test": "node --test src/tests/*.test.ts"
+    "test": "node --test src/tests/*.test.ts",
+    "verify:export": "bun tools/verify-export.ts"
   },
   "dependencies": {
     "@tailwindcss/postcss": "4.3.3",
