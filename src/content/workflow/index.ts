@@ -1,7 +1,9 @@
 import { EN } from "./en.ts";
 import { HI } from "./hi.ts";
+import { romanizeCatalog } from "../../lib/i18n.ts";
 
-export const WORKFLOW_COPY = { en: EN, hi: HI } as const;
+export const HINGLISH = Object.freeze(romanizeCatalog(HI));
+export const WORKFLOW_COPY = { en: EN, hi: HI, hinglish: HINGLISH } as const;
 
 export function assertCatalogParity(left: unknown = EN, right: unknown = HI, path = "copy"): true {
   if (Array.isArray(left) || Array.isArray(right)) {
