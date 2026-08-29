@@ -16,14 +16,15 @@ test("creator attribution uses only verified public accounts", () => {
 
 test("creator links stay in secondary attribution surfaces", () => {
   const shell = source("src/components/shell.tsx");
-  const publicRoute = source("src/components/public-route.tsx");
+  const sourceStrip = source("src/components/source-strip.tsx");
   const creatorLinks = source("src/components/creator-social-links.tsx");
 
   assert.match(shell, /CreatorSocialLinks/);
   assert.match(shell, /Built by/);
   assert.doesNotMatch(shell, /https:\/\/x\.com\/HarshBuilds_1|https:\/\/github\.com\/Harshit-Dhyani/);
-  assert.match(publicRoute, /routeId === "about"/);
-  assert.match(publicRoute, /AboutCreator/);
+  assert.match(sourceStrip, /route\.id === "about"/);
+  assert.match(sourceStrip, /Project creator/);
+  assert.match(sourceStrip, /CreatorSocialLinks/);
   assert.match(creatorLinks, /rel="me noreferrer"/);
   assert.match(creatorLinks, /Creator links/);
   assert.match(creatorLinks, /not government|सरकारी/i);
