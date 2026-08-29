@@ -1,22 +1,37 @@
 "use client";
 
 import { useRef, useState } from "react";
-import { Check, Circle, Clock3, ExternalLink, Search } from "lucide-react";
+import { ArrowRight, Check, Circle, Clock3, ExternalLink, Search } from "lucide-react";
 import { WORKFLOW_COPY as COPY } from "@/content/workflow";
-import { formatDateTime, formatMoney } from "@/domains/report";
+import { evidenceForReportKind, formatDateTime, formatMoney } from "@/domains/report";
 import { resolveTrackRecord, type TrackRecord } from "@/features/track";
 import { DEMO_FIXTURE } from "@/data/demo";
+import { FLOW_STAGES } from "@/lib/routes";
 import { localized } from "@/lib/i18n";
 import { usePortal } from "./portal-provider";
 
 export function TrackWorkspace() {
-  const { language, report: savedReport } = usePortal();
+  const { language, report: savedReport, navigate } = usePortal();
   const c = COPY[language].tracker;
+  const flowCopy = COPY[language].flow;
   const [reference, setReference] = useState("");
   const [record, setRecord] = useState<TrackRecord | null>(null);
   const [error, setError] = useState("");
   const inputRef = useRef<HTMLInputElement>(null);
   const errorRef = useRef<HTMLParagraphElement>(null);
+
+  const relevantEvidence = evidenceForReportKind(savedReport.evidence, savedReport.reportKind);
+  const evidenceCounts = {
+    have: relevantEvidence.filter((item) => item.availability === "have").length,
+    missing: relevantEvidence.filter((item) => item.availability === "missing").length,
+    unsure: relevantEvidence.filter((item) => item.availability === "unsure").length
+  };
+  const completedStages = FLOW_STAGES.filter((stage) => savedReport.completed.includes(stage.id));
+  const nextStage = savedReport.locked
+    ? "review"
+    : savedReport.route !== "home"
+      ? savedReport.route
+      : FLOW_STAGES.find((stage) => !savedReport.completed.includes(stage.id))?.id ?? "incident";
 
   const submit = (event: React.FormEvent) => {
     event.preventDefault();
@@ -48,7 +63,42 @@ export function TrackWorkspace() {
   return <div className="mx-auto max-w-content px-5 py-8 md:px-8 md:py-10">
     <p className="text-xs text-civic-700">{c.breadcrumb}</p>
     <header className="mt-7 max-w-document border-b border-line pb-8"><h1 className="max-w-[22ch] text-[38px] font-semibold leading-[1.08] tracking-[-0.035em] sm:text-[44px]">{c.title}</h1><p className="mt-4 max-w-2xl text-base leading-7 text-muted">{c.intro}</p></header>
-    <section className="mt-7 rounded-panel border border-line bg-white p-5 sm:p-7">
+
+    <section className="mt-7 overflow-hidden rounded-panel border border-line bg-white" aria-labelledby="preparation-progress-title">
+      <div className="grid gap-5 border-b border-line bg-civic-50 p-5 sm:grid-cols-[1fr_auto] sm:items-center sm:p-7">
+        <div>
+          <p className="text-xs font-semibold uppercase tracking-[0.12em] text-civic-700">{language === "hi" ? "इस डिवाइस पर स्थानीय स्थिति" : "Local status on this device"}</p>
+          <h2 id="preparation-progress-title" className="mt-2 text-2xl font-semibold">{language === "hi" ? "तैयारी की प्रगति" : "Preparation progress"}</h2>
+          <p className="mt-2 text-sm leading-6 text-muted">{language === "hi" ? `${completedStages.length} / ${FLOW_STAGES.length} तैयारी चरण पूरे हैं। यह सरकारी केस स्थिति नहीं है।` : `${completedStages.length} of ${FLOW_STAGES.length} preparation stages are complete. This is not government case status.`}</p>
+        </div>
+        <button type="button" className="inline-flex min-h-11 items-center justify-center gap-2 rounded-control bg-civic-600 px-5 text-sm font-semibold text-white" onClick={() => navigate(nextStage)}>{language === "hi" ? "तैयारी जारी रखें" : "Continue preparation"}<ArrowRight className="size-4" /></button>
+      </div>
+      <div className="grid lg:grid-cols-[1fr_280px]">
+        <ol className="grid gap-0 p-5 sm:grid-cols-5 sm:p-7">{FLOW_STAGES.map((stage, index) => {
+          const done = savedReport.completed.includes(stage.id);
+          const active = stage.id === savedReport.route && !done;
+          return <li key={stage.id} className="relative flex gap-3 border-b border-line py-3 last:border-b-0 sm:block sm:border-b-0 sm:py-0 sm:pr-3">
+            {index < FLOW_STAGES.length - 1 ? <span className="absolute left-[13px] top-8 h-[calc(100%-1rem)] w-px bg-line sm:left-7 sm:right-0 sm:top-[13px] sm:h-px sm:w-auto" aria-hidden="true" /> : null}
+            <span className={`relative z-10 grid size-7 shrink-0 place-items-center rounded-full text-xs font-semibold ${done ? "bg-success text-white" : active ? "bg-civic-600 text-white" : "border border-line bg-white text-muted"}`}>{done ? <Check className="size-4" /> : index + 1}</span>
+            <span className="text-sm font-medium sm:mt-3 sm:block">{flowCopy.routes[stage.id as keyof typeof flowCopy.routes]}</span>
+          </li>;
+        })}</ol>
+        <div className="border-t border-line bg-canvas p-5 sm:p-7 lg:border-l lg:border-t-0">
+          <h3 className="text-sm font-semibold">{language === "hi" ? "साक्ष्य की तैयारी" : "Evidence readiness"}</h3>
+          <dl className="mt-4 grid grid-cols-3 gap-3 text-center lg:grid-cols-1 lg:text-left">
+            <div><dt className="text-xs text-muted">{language === "hi" ? "मेरे पास है" : "I have it"}</dt><dd className="mt-1 text-xl font-semibold text-success">{evidenceCounts.have}</dd></div>
+            <div><dt className="text-xs text-muted">{language === "hi" ? "नहीं है" : "Missing"}</dt><dd className="mt-1 text-xl font-semibold text-warning">{evidenceCounts.missing}</dd></div>
+            <div><dt className="text-xs text-muted">{language === "hi" ? "पता नहीं" : "Not sure"}</dt><dd className="mt-1 text-xl font-semibold">{evidenceCounts.unsure}</dd></div>
+          </dl>
+        </div>
+      </div>
+    </section>
+
+    <aside className="mt-6 border-y border-line py-4 text-sm leading-6 text-muted">
+      {language === "hi" ? "ThreadZero सरकारी, NCRP या पुलिस केस की स्थिति नहीं देख सकता। नीचे का रेफरेंस ट्रैकर केवल डेमो या इस ब्राउज़र में सहेजी गई रिपोर्ट स्थिति दिखाता है।" : "ThreadZero cannot see government, NCRP, or police case status. The reference tracker below only shows deterministic demo or browser-saved report state."}
+    </aside>
+
+    <section className="mt-6 rounded-panel border border-line bg-white p-5 sm:p-7">
       <form className="flex max-w-form flex-col gap-3 sm:flex-row sm:items-end" onSubmit={submit} noValidate>
         <label className="grid flex-1 gap-2"><span className="text-sm font-medium">{c.label}</span><input ref={inputRef} value={reference} onChange={(event) => setReference(event.target.value)} className="min-h-11 rounded-control border border-line px-3 font-mono text-sm uppercase" aria-invalid={Boolean(error)} aria-describedby="track-boundary" /></label>
         <div className="flex gap-2"><button className="inline-flex min-h-11 items-center gap-2 rounded-control bg-civic-600 px-5 text-sm font-semibold text-white"><Search className="size-4" />{c.submit}</button><button type="button" className="min-h-11 rounded-control border border-line px-4 text-sm font-medium" onClick={clear}>{c.reset}</button></div>

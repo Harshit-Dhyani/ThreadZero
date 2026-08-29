@@ -23,6 +23,7 @@ type PortalContextValue = {
   guideOpen: boolean;
   guidePreset: string;
   openGuide: (preset?: string) => void;
+  openAssistant: (preset?: string) => void;
   closeGuide: () => void;
   searchOpen: boolean;
   openSearch: () => void;
@@ -117,6 +118,9 @@ export function PortalProvider({ children }: { children: React.ReactNode }) {
     guideOpen,
     guidePreset,
     openGuide(preset = "") { setGuidePreset(preset); setGuideOpen(true); },
+    // V7 keeps Guide and Search as separate first-redesign surfaces. Adaptive Report uses
+    // this compatibility name internally, but it intentionally opens the existing Guide.
+    openAssistant(preset = "") { setGuidePreset(preset); setGuideOpen(true); },
     closeGuide() { setGuideOpen(false); },
     searchOpen,
     openSearch() { setSearchOpen(true); },

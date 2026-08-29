@@ -7,11 +7,20 @@
 - Every public route must make the demo boundary clear: “Demo only. Nothing entered here is sent to the government.”
 - Keep official emergency guidance visible: for actual financial cyber fraud in India, call `1930` manually and use `cybercrime.gov.in`.
 
-## Active V5.3 scope
+## Active V7 Hybrid scope
 
 - The active application is the static Next.js runtime under `src/`, with assets in `public/`.
 - The six public workspaces are Home, Report, Check, Track, Learn, and Help.
+- V7 is a hybrid of the restored first redesign plus proven adaptive behavior. **Keep useful breadth; fix confusion. Do not create simplicity by deleting useful citizen capabilities.**
+- Home intentionally keeps its richer hero, incident timeline, process explanation, citizen-service choices, Evidence–Timeline explainer, and Learning Corner preview.
+- Check intentionally stays one canonical workspace with Overview, Person / account, Website / app, Mobile, Platform abuse, Report suspect, and Appeal modes. Improve grouping or clarity without deleting those modes.
+- Learn intentionally keeps its broad learning routes and formats; Help intentionally keeps FAQ, feedback, escalation, legal/privacy/accessibility, and related support routes.
+- Guide and Search / Ask remain separate first-redesign surfaces unless a later user-approved experiment proves consolidation is better.
 - The canonical report flow is What happened? → Details → Evidence → Timeline → Review & next.
+- Report family selection is a state boundary, not only a label. Financial, Women/Child, Other Cybercrime, and Unsure must drive their own Details, Evidence, Timeline, and Review context.
+- Non-financial report families must never inherit the financial demo amount, payment method, UTR/reference, recipient identifier, extracted payment facts, payment evidence, or payment timeline event.
+- Saved non-financial reports must be sanitized on load if an older version contains incompatible financial fixture data.
+- Track is a hybrid workspace: local ThreadZero preparation progress may appear together with the deterministic demo/saved reference tracker, but ThreadZero must never imply access to NCRP, police, or government case status.
 - Evidence uses `have`, `missing`, and `unsure`; `relatedEventIds` is the only Evidence–Timeline relationship source.
 - Keep existing public URLs and static-export-compatible legacy redirects.
 - All report, account, tracker, extraction, and submission behavior is deterministic demo behavior.
@@ -59,8 +68,9 @@
 
 ## Verification
 
-- Use the Codex in-app browser for user-facing acceptance.
+- Use the Codex in-app browser for user-facing acceptance when available.
 - Exercise navigation, dialogs, language switching, the five-stage report journey, Evidence–Timeline links, Review actions, Track, redirects, history, reload, and reset.
+- For V7 specifically, verify all four report families through downstream stages, all seven Check modes remain reachable, rich Learn/Help routes remain present, and Track shows both local preparation progress and the restored demo/reference tracker.
 - Check keyboard access, validation recovery, reduced motion, exactly one visible `h1`, 44px targets, overflow, image loading, and browser console output.
 - Never claim pixel-perfect, production-ready, or complete without current browser evidence and explicit user approval.
 - Keep unrelated or user-owned changes intact. Do not reset, clean, or delete them.
