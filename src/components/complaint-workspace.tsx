@@ -16,7 +16,7 @@ export function ComplaintWorkspace({ routeId }: { routeId: string }) {
   return <div className="mx-auto max-w-content px-5 py-8 md:px-8 md:py-10">
     <nav aria-label="Breadcrumb" className="flex flex-wrap items-center gap-2 text-xs text-civic-700"><Link className="inline-flex min-h-11 min-w-11 items-center" href="/">{language === "hi" ? "होम" : "Home"}</Link><span>/</span>{parent && <><Link className="inline-flex min-h-11 min-w-11 items-center" href={`/${parent.route}`}>{navigationLabel(parent, language)}</Link><span>/</span></>}<span aria-current="page">{route.label}</span>{parent && <Link href={`/${parent.route}`} className="ml-auto inline-flex min-h-11 items-center font-semibold underline underline-offset-4">{language === "hi" ? `${navigationLabel(parent, language)} पर वापस` : `Back to ${navigationLabel(parent, language)}`}</Link>}</nav>
     <WorkspaceNavigator routeId={routeId} />
-    <header className="mt-7 max-w-3xl border-b border-line pb-7"><p className="text-xs font-semibold uppercase tracking-[0.12em] text-civic-700">{language === "hi" ? "रिपोर्ट" : "Report"}</p><h1 className="mt-3 max-w-[22ch] text-[38px] font-semibold leading-[1.08] tracking-[-0.035em] sm:text-[44px]">{route.title}</h1><p className="mt-4 max-w-2xl text-base leading-7 text-muted">{route.intro}</p></header>
+    <header className="mt-7 max-w-3xl border-b border-line pb-8"><h1 className="max-w-[22ch] text-[38px] font-semibold leading-[1.08] tracking-[-0.035em] sm:text-[44px]">{route.title}</h1><p className="mt-4 max-w-2xl text-base leading-7 text-muted">{route.intro}</p></header>
     <WomenChildChoices route={route} />
     <SourceStrip route={route} />
   </div>;
