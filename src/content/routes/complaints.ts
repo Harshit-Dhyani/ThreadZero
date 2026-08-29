@@ -4,20 +4,20 @@ export const COMPLAINTS_ROUTES = [
     "group": "complaints",
     "composition": "hub",
     "label": {
-      "en": "Complaint services",
-      "hi": "शिकायत सेवाएँ"
+      "en": "Report options",
+      "hi": "रिपोर्ट विकल्प"
     },
     "eyebrow": {
-      "en": "Complaint services",
-      "hi": "शिकायत सेवाएँ"
+      "en": "Report options",
+      "hi": "रिपोर्ट विकल्प"
     },
     "title": {
-      "en": "Choose the right complaint path",
-      "hi": "सही शिकायत मार्ग चुनें"
+      "en": "Choose how to report",
+      "hi": "रिपोर्ट करने का तरीका चुनें"
     },
     "intro": {
-      "en": "Start locally with clear preparation. Nothing here reaches a government system.",
-      "hi": "स्पष्ट तैयारी के साथ स्थानीय रूप से शुरू करें। यहाँ से कोई जानकारी सरकारी प्रणाली तक नहीं जाती।"
+      "en": "Prepare a demo report, organise evidence, or continue to the official portal.",
+      "hi": "डेमो रिपोर्ट तैयार करें, साक्ष्य व्यवस्थित करें या आधिकारिक पोर्टल पर जाएँ।"
     },
     "items": [
       {
@@ -26,8 +26,8 @@ export const COMPLAINTS_ROUTES = [
           "hi": "महिलाएँ और बच्चे"
         },
         "body": {
-          "en": "Understand anonymous and registered options.",
-          "hi": "गुमनाम और पंजीकृत विकल्प समझें।"
+          "en": "Choose whether to continue with or without your name.",
+          "hi": "चुनें कि नाम के साथ या बिना नाम के आगे बढ़ना है।"
         },
         "route": "women-children"
       },
@@ -37,8 +37,8 @@ export const COMPLAINTS_ROUTES = [
           "hi": "वित्तीय धोखाधड़ी"
         },
         "body": {
-          "en": "Prepare evidence through the complete guided flow.",
-          "hi": "पूर्ण निर्देशित प्रवाह में साक्ष्य तैयार करें।"
+          "en": "Organise the incident, evidence, and timeline in a guided flow.",
+          "hi": "निर्देशित प्रक्रिया में घटना, साक्ष्य और समयरेखा व्यवस्थित करें।"
         },
         "route": "act-now"
       },
@@ -48,8 +48,8 @@ export const COMPLAINTS_ROUTES = [
           "hi": "अन्य साइबर अपराध"
         },
         "body": {
-          "en": "Create a synthetic complaint draft.",
-          "hi": "एक सिंथेटिक शिकायत मसौदा बनाएँ।"
+          "en": "Prepare the key details for another type of cybercrime.",
+          "hi": "किसी अन्य साइबर अपराध के मुख्य विवरण तैयार करें।"
         },
         "route": "other-cybercrime"
       }
@@ -73,44 +73,44 @@ export const COMPLAINTS_ROUTES = [
       "hi": "महिलाएँ और बच्चे"
     },
     "title": {
-      "en": "Reporting options for women and children",
-      "hi": "महिलाओं और बच्चों के लिए रिपोर्टिंग विकल्प"
+      "en": "Report concerning a woman or child",
+      "hi": "महिला या बच्चे से जुड़ी रिपोर्ट"
     },
     "intro": {
-      "en": "Choose an anonymous practice route or a registered practice route. Both remain local simulations.",
-      "hi": "गुमनाम या पंजीकृत अभ्यास मार्ग चुनें। दोनों स्थानीय सिमुलेशन हैं।"
+      "en": "Choose whether to continue without your name or with your details.",
+      "hi": "चुनें कि नाम साझा किए बिना या अपने विवरण के साथ आगे बढ़ना है।"
     },
     "items": [
       {
         "title": {
-          "en": "Report anonymously",
-          "hi": "गुमनाम रिपोर्ट"
+          "en": "Without sharing your name",
+          "hi": "नाम साझा किए बिना"
         },
         "body": {
-          "en": "Practice describing an incident without identity fields.",
-          "hi": "पहचान फ़ील्ड के बिना घटना बताने का अभ्यास करें।"
+          "en": "Prepare the report without adding your name or contact details.",
+          "hi": "अपना नाम या संपर्क विवरण जोड़े बिना रिपोर्ट तैयार करें।"
         },
         "route": "anonymous-report"
       },
       {
         "title": {
-          "en": "Registered complaint",
-          "hi": "पंजीकृत शिकायत"
+          "en": "With your details",
+          "hi": "अपने विवरण के साथ"
         },
         "body": {
-          "en": "Practice a fuller complaint with synthetic contact details.",
-          "hi": "सिंथेटिक संपर्क विवरण के साथ पूरी शिकायत का अभ्यास करें।"
+          "en": "Add example contact details and prepare a fuller report.",
+          "hi": "उदाहरण संपर्क विवरण जोड़कर अधिक पूरी रिपोर्ट तैयार करें।"
         },
         "route": "registered-report"
       },
       {
         "title": {
-          "en": "Immediate safety",
-          "hi": "तत्काल सुरक्षा"
+          "en": "Someone in immediate danger?",
+          "hi": "कोई तत्काल खतरे में है?"
         },
         "body": {
-          "en": "If anyone is in immediate danger, contact local emergency services directly.",
-          "hi": "तत्काल खतरे में स्थानीय आपात सेवा से सीधे संपर्क करें।"
+          "en": "Contact local emergency services directly.",
+          "hi": "स्थानीय आपात सेवाओं से सीधे संपर्क करें।"
         },
         "route": ""
       }
@@ -126,20 +126,20 @@ export const COMPLAINTS_ROUTES = [
     "group": "complaints",
     "composition": "form",
     "label": {
-      "en": "Anonymous practice",
-      "hi": "गुमनाम अभ्यास"
+      "en": "Without my name",
+      "hi": "नाम साझा किए बिना"
     },
     "eyebrow": {
-      "en": "Anonymous practice",
-      "hi": "गुमनाम अभ्यास"
+      "en": "Without my name",
+      "hi": "नाम साझा किए बिना"
     },
     "title": {
-      "en": "Prepare an anonymous complaint draft",
-      "hi": "गुमनाम शिकायत मसौदा तैयार करें"
+      "en": "Report without sharing your name",
+      "hi": "नाम साझा किए बिना रिपोर्ट करें"
     },
     "intro": {
-      "en": "Use fictional details only. This draft is erased when the page reloads.",
-      "hi": "केवल काल्पनिक विवरण दें। पेज रीलोड होने पर मसौदा मिट जाएगा।"
+      "en": "Use demo information only. The draft clears when this page reloads.",
+      "hi": "केवल डेमो जानकारी दें। पेज रीलोड होने पर मसौदा मिट जाएगा।"
     },
     "items": [],
     "fields": [
@@ -194,8 +194,8 @@ export const COMPLAINTS_ROUTES = [
       "officialComplaint"
     ],
     "result": {
-      "en": "Anonymous draft prepared locally",
-      "hi": "गुमनाम मसौदा स्थानीय रूप से तैयार"
+      "en": "Demo report prepared",
+      "hi": "डेमो रिपोर्ट तैयार है"
     }
   },
   {
@@ -203,20 +203,20 @@ export const COMPLAINTS_ROUTES = [
     "group": "complaints",
     "composition": "form",
     "label": {
-      "en": "Registered practice",
-      "hi": "पंजीकृत अभ्यास"
+      "en": "With my details",
+      "hi": "मेरे विवरण के साथ"
     },
     "eyebrow": {
-      "en": "Registered practice",
-      "hi": "पंजीकृत अभ्यास"
+      "en": "With my details",
+      "hi": "मेरे विवरण के साथ"
     },
     "title": {
-      "en": "Prepare a registered complaint draft",
-      "hi": "पंजीकृत शिकायत मसौदा तैयार करें"
+      "en": "Report with your details",
+      "hi": "अपने विवरण के साथ रिपोर्ट करें"
     },
     "intro": {
-      "en": "Use the synthetic examples shown; do not enter real personal information.",
-      "hi": "दिए गए सिंथेटिक उदाहरणों का उपयोग करें; वास्तविक व्यक्तिगत जानकारी न भरें।"
+      "en": "Use the example contact details shown. Do not enter real personal information.",
+      "hi": "दिए गए उदाहरण संपर्क विवरण उपयोग करें। वास्तविक व्यक्तिगत जानकारी न भरें।"
     },
     "items": [],
     "fields": [
@@ -224,8 +224,8 @@ export const COMPLAINTS_ROUTES = [
         "name": "fullName",
         "type": "text",
         "label": {
-          "en": "Synthetic full name",
-          "hi": "सिंथेटिक पूरा नाम"
+          "en": "Example full name",
+          "hi": "उदाहरण पूरा नाम"
         },
         "required": true,
         "minLength": 3,
@@ -235,8 +235,8 @@ export const COMPLAINTS_ROUTES = [
         "name": "email",
         "type": "email",
         "label": {
-          "en": "Synthetic email",
-          "hi": "सिंथेटिक ईमेल"
+          "en": "Example email",
+          "hi": "उदाहरण ईमेल"
         },
         "required": true,
         "example": "citizen@example.test"
@@ -292,8 +292,8 @@ export const COMPLAINTS_ROUTES = [
       "officialComplaint"
     ],
     "result": {
-      "en": "Registered draft prepared locally",
-      "hi": "पंजीकृत मसौदा स्थानीय रूप से तैयार"
+      "en": "Demo report prepared",
+      "hi": "डेमो रिपोर्ट तैयार है"
     }
   },
   {
@@ -313,8 +313,8 @@ export const COMPLAINTS_ROUTES = [
       "hi": "अन्य साइबर अपराध शिकायत तैयार करें"
     },
     "intro": {
-      "en": "Organise the basic facts before using an official channel.",
-      "hi": "आधिकारिक माध्यम उपयोग करने से पहले मूल तथ्य व्यवस्थित करें।"
+      "en": "Organise the key facts before continuing on the official portal.",
+      "hi": "आधिकारिक पोर्टल पर जाने से पहले मुख्य तथ्य व्यवस्थित करें।"
     },
     "items": [],
     "fields": [
@@ -369,8 +369,8 @@ export const COMPLAINTS_ROUTES = [
       "officialComplaint"
     ],
     "result": {
-      "en": "Cybercrime draft prepared locally",
-      "hi": "साइबर अपराध मसौदा स्थानीय रूप से तैयार"
+      "en": "Demo report prepared",
+      "hi": "डेमो रिपोर्ट तैयार है"
     }
   }
 ];
