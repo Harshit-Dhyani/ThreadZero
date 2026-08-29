@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { ArrowRight, ChevronDown, CircleHelp, Globe2, Menu, Phone, Search, ShieldCheck, UserRound } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
-import { NAV_GROUPS, navigationGroupFor, navigationLabel, type NavigationItem } from "@/lib/navigation";
+import { NAV_GROUPS, navigationGroupFor, navigationLabel, navigationMenuChildren, type NavigationItem } from "@/lib/navigation";
 import { usePortal } from "./portal-provider";
 import { ResponsiveIllustration } from "./responsive-illustration";
 
@@ -45,12 +45,13 @@ export function Shell({ children }: { children: React.ReactNode }) {
             <nav className="grid gap-1" aria-label={language === "hi" ? "मोबाइल सेवाएँ" : "Mobile services"}>{NAV_GROUPS.map((entry) => {
               const active = navigationGroupFor(currentRoute)?.route === entry.route;
               const expanded = mobileOpen === entry.route;
+              const children = navigationMenuChildren(entry);
               return <div key={entry.route} className="rounded-control border border-transparent has-[a[aria-current=page]]:border-line">
                 <div className="flex items-stretch">
                   <Link href={pathFor(entry.route)} aria-current={currentRoute === entry.route ? "page" : undefined} onClick={closeMobile} className={`flex min-h-11 flex-1 items-center rounded-control px-3 text-sm font-semibold hover:bg-civic-50 ${active ? "text-civic-700" : ""}`}>{navigationLabel(entry, language)}</Link>
-                  {entry.children && <button type="button" aria-expanded={expanded} aria-label={`${expanded ? (language === "hi" ? "बंद करें" : "Close") : (language === "hi" ? "खोलें" : "Open")} ${navigationLabel(entry, language)}`} onClick={() => setMobileOpen(expanded ? null : entry.route)} className="grid min-h-11 min-w-11 place-items-center rounded-control hover:bg-civic-50"><ChevronDown className={`size-4 transition-transform ${expanded ? "rotate-180" : ""}`} /></button>}
+                  {children.length > 0 && <button type="button" aria-expanded={expanded} aria-label={`${expanded ? (language === "hi" ? "बंद करें" : "Close") : (language === "hi" ? "खोलें" : "Open")} ${navigationLabel(entry, language)}`} onClick={() => setMobileOpen(expanded ? null : entry.route)} className="grid min-h-11 min-w-11 place-items-center rounded-control hover:bg-civic-50"><ChevronDown className={`size-4 transition-transform ${expanded ? "rotate-180" : ""}`} /></button>}
                 </div>
-                {entry.children && expanded && <div className="grid gap-1 border-l-2 border-civic-100 pb-2 pl-3 pr-2">{entry.children.map((child) => <Link key={child.route} href={pathFor(child.route)} aria-current={currentRoute === child.route ? "page" : undefined} onClick={closeMobile} className="flex min-h-11 items-center rounded-control px-3 text-sm text-muted hover:bg-civic-50 hover:text-civic-700">{navigationLabel(child, language)}</Link>)}</div>}
+                {children.length > 0 && expanded && <div className="grid gap-1 border-l-2 border-civic-100 pb-2 pl-3 pr-2">{children.map((child) => <Link key={child.route} href={pathFor(child.route)} aria-current={currentRoute === child.route ? "page" : undefined} onClick={closeMobile} className="flex min-h-11 items-center rounded-control px-3 text-sm text-muted hover:bg-civic-50 hover:text-civic-700">{navigationLabel(child, language)}</Link>)}</div>}
               </div>;
             })}</nav>
             <div className="mt-2 grid gap-2 border-t border-line pt-3 sm:grid-cols-2">
@@ -77,14 +78,15 @@ export function Shell({ children }: { children: React.ReactNode }) {
 
 function DesktopNavigationItem({ entry, language, currentRoute, open, setOpen }: { entry: NavigationItem; language: "en" | "hi"; currentRoute: string; open: boolean; setOpen: (route: string | null) => void }) {
   const active = navigationGroupFor(currentRoute)?.route === entry.route;
+  const children = navigationMenuChildren(entry);
   const [hovered, setHovered] = useState(false);
   const expanded = open || hovered;
   const base = `my-2 flex min-w-0 flex-1 items-center justify-center rounded-control px-3 text-center text-[13px] font-semibold leading-tight transition-colors hover:bg-civic-50 hover:text-civic-700 ${active ? "bg-civic-50 text-civic-700" : "text-ink"}`;
-  if (!entry.children) return <Link href={pathFor(entry.route)} aria-current={currentRoute === entry.route ? "page" : undefined} className={base}>{navigationLabel(entry, language)}</Link>;
+  if (children.length === 0) return <Link href={pathFor(entry.route)} aria-current={currentRoute === entry.route ? "page" : undefined} className={base}>{navigationLabel(entry, language)}</Link>;
   return <div className="relative flex min-w-0 flex-1" onPointerEnter={() => setHovered(true)} onPointerLeave={() => setHovered(false)} onFocusCapture={() => setOpen(entry.route)} onBlurCapture={(event) => { if (!event.currentTarget.contains(event.relatedTarget as Node)) setOpen(null); }}>
     <Link href={pathFor(entry.route)} aria-current={currentRoute === entry.route ? "page" : undefined} className={base}>{navigationLabel(entry, language)}</Link>
     <button type="button" aria-expanded={expanded} aria-label={`${expanded ? (language === "hi" ? "बंद करें" : "Close") : (language === "hi" ? "खोलें" : "Open")} ${navigationLabel(entry, language)}`} onClick={() => setOpen(open ? null : entry.route)} className={`my-2 grid min-w-10 place-items-center rounded-control transition-colors hover:bg-civic-50 hover:text-civic-700 ${active ? "bg-civic-50 text-civic-700" : "text-muted"}`}><ChevronDown className={`size-3.5 transition-transform ${expanded ? "rotate-180" : ""}`} /></button>
-    {expanded && <div className="absolute left-0 top-[calc(100%-0.25rem)] z-50 w-64 rounded-panel border border-line bg-white p-2 text-ink shadow-xl">{entry.children.map((child) => <Link key={child.route} href={pathFor(child.route)} aria-current={currentRoute === child.route ? "page" : undefined} onClick={() => setOpen(null)} className={`flex min-h-11 items-center rounded-control px-3 text-left text-sm font-medium hover:bg-civic-50 hover:text-civic-700 ${currentRoute === child.route ? "bg-civic-50 text-civic-700" : ""}`}>{navigationLabel(child, language)}</Link>)}</div>}
+    {expanded && <div className="absolute left-0 top-[calc(100%-0.25rem)] z-50 w-64 rounded-panel border border-line bg-white p-2 text-ink shadow-xl">{children.map((child) => <Link key={child.route} href={pathFor(child.route)} aria-current={currentRoute === child.route ? "page" : undefined} onClick={() => setOpen(null)} className={`flex min-h-11 items-center rounded-control px-3 text-left text-sm font-medium hover:bg-civic-50 hover:text-civic-700 ${currentRoute === child.route ? "bg-civic-50 text-civic-700" : ""}`}>{navigationLabel(child, language)}</Link>)}</div>}
   </div>;
 }
 

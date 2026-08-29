@@ -13,11 +13,11 @@ const route = (workspace: Workspace, mode: string, archetype: string, actionMode
 
 export const WORKSPACES = Object.freeze({
   home: Object.freeze({ route: "home", en: "Home", hi: "होम" }),
-  report: Object.freeze({ route: "act-now", en: "Report", hi: "रिपोर्ट" }),
+  report: Object.freeze({ route: "complaints", en: "Report", hi: "रिपोर्ट" }),
   check: Object.freeze({ route: "official-tools", en: "Check", hi: "जाँच" }),
   track: Object.freeze({ route: "track", en: "Track", hi: "ट्रैक" }),
   learn: Object.freeze({ route: "learning-corner", en: "Learn", hi: "सीखें" }),
-  help: Object.freeze({ route: "faq", en: "Help", hi: "सहायता" })
+  help: Object.freeze({ route: "contact", en: "Help", hi: "सहायता" })
 });
 
 const FLOW_ROUTES = new Set(["act-now", "incident", "readiness", "details", "evidence", "chronology", "review", "submit", "next"]);
@@ -41,14 +41,14 @@ const ROUTE_PRESENTATION = Object.freeze({
   "volunteer-register": route("learn", "community-register", "local-form", "prepare-volunteer-details", "", "compact"),
   "volunteer-login": route("learn", "community-access", "local-form", "prepare-demo-access", "", "compact"),
   "learning-corner": route("learn", "overview", "learning-hub", "browse-learning", "", "standard"),
-  guides: route("learn", "guides", "evidence-guide", "prepare-evidence", "P06-evidence-thread-v1"),
+  guides: route("report", "guides", "evidence-guide", "prepare-evidence", "P06-evidence-thread-v1"),
   advisories: route("learn", "advisories", "advisories", "browse-current-sources", "", "standard"),
   safety: route("learn", "safety", "safety", "browse-practical-actions", "", "standard"),
   awareness: route("learn", "awareness", "awareness", "browse-awareness", "", "standard"),
   "daily-digest": route("learn", "digest", "advisories", "open-current-digest", "", "compact"),
   training: route("learn", "training", "training", "browse-modules", "", "standard"),
   media: route("learn", "media", "media-library", "browse-media", "", "compact"),
-  accessibility: route("help", "accessibility", "accessibility", "review-access-needs", "", "standard"),
+  accessibility: route("learn", "accessibility", "accessibility", "review-access-needs", "", "standard"),
   faq: route("help", "faq", "faq-help", "find-answer", "", "standard"),
   contact: route("help", "contact", "contact-help", "choose-help-path", "", "standard"),
   feedback: route("help", "feedback", "local-form", "prepare-feedback", "", "compact"),

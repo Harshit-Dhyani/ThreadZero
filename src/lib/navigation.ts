@@ -3,72 +3,88 @@ import type { Language, LocalizedText } from "./types.ts";
 export type NavigationItem = {
   route: string;
   label: LocalizedText;
+  contextFamily?: string;
+  contextLabel?: LocalizedText;
+  showInMenu?: boolean;
   children?: readonly NavigationItem[];
 };
 
-const item = (route: string, en: string, hi: string): NavigationItem => ({ route, label: { en, hi } });
+const item = (route: string, en: string, hi: string, options: Omit<NavigationItem, "route" | "label" | "children"> = {}): NavigationItem => ({ route, label: { en, hi }, ...options });
+const context = (contextFamily: string) => ({ contextFamily });
+const hidden = { showInMenu: false } as const;
 
 export const NAV_GROUPS: readonly NavigationItem[] = [
   item("home", "Home", "होम"),
   {
-    ...item("complaints", "Prepare", "तैयारी"),
+    ...item("complaints", "Report", "रिपोर्ट"),
     children: [
-      item("complaints", "Complaint paths", "शिकायत मार्ग"),
-      item("women-children", "Women / Children", "महिला / बच्चे"),
-      item("anonymous-report", "Anonymous report", "गुमनाम रिपोर्ट"),
-      item("registered-report", "Registered report", "पंजीकृत रिपोर्ट"),
-      item("other-cybercrime", "Other cybercrime", "अन्य साइबर अपराध")
+      item("complaints", "Overview", "परिचय", context("report")),
+      item("act-now", "Financial fraud report", "वित्तीय धोखाधड़ी रिपोर्ट"),
+      item("women-children", "Women & Children", "महिलाएँ और बच्चे", context("report")),
+      item("anonymous-report", "Without my name", "नाम साझा किए बिना", context("report")),
+      item("registered-report", "With my details", "मेरे विवरण के साथ", context("report")),
+      item("guides", "Evidence", "साक्ष्य", context("report")),
+      item("other-cybercrime", "Other cybercrime", "अन्य साइबर अपराध", context("report")),
+      item("incident", "Incident", "घटना", hidden),
+      item("readiness", "Readiness", "तैयारी", hidden),
+      item("details", "Details", "विवरण", hidden),
+      item("evidence", "Evidence step", "साक्ष्य चरण", hidden),
+      item("chronology", "Timeline", "समयरेखा", hidden),
+      item("review", "Review", "समीक्षा", hidden),
+      item("submit", "Demo submission", "डेमो सबमिशन", hidden),
+      item("next", "Next steps", "अगले कदम", hidden)
+    ]
+  },
+  {
+    ...item("official-tools", "Check", "जाँच"),
+    children: [
+      item("official-tools", "Overview", "परिचय", context("check")),
+      item("check-identifier", "Person / account", "व्यक्ति / खाता", context("check")),
+      item("check-website", "Website / app", "वेबसाइट / ऐप", context("check")),
+      item("mobile-connections", "Mobile", "मोबाइल", context("check")),
+      item("report-abuse", "Platform abuse", "प्लेटफ़ॉर्म दुरुपयोग", context("check")),
+      item("report-suspect", "Report suspect", "संदिग्ध रिपोर्ट करें", context("check")),
+      item("appeal", "Appeal", "अपील", context("check"))
     ]
   },
   item("track", "Track", "ट्रैक"),
   {
-    ...item("official-tools", "Report / Check", "रिपोर्ट / जाँच"),
+    ...item("learning-corner", "Learn", "सीखें"),
     children: [
-      item("official-tools", "Official tools", "आधिकारिक उपकरण"),
-      item("check-identifier", "Check identifier", "पहचानकर्ता जाँचें"),
-      item("check-website", "Check website / app", "वेबसाइट / ऐप जाँचें"),
-      item("report-suspect", "Report suspect", "संदिग्ध रिपोर्ट करें"),
-      item("report-abuse", "Report platform abuse", "प्लेटफ़ॉर्म दुरुपयोग रिपोर्ट करें"),
-      item("mobile-connections", "Mobile connections", "मोबाइल कनेक्शन"),
-      item("appeal", "Appeal with GAC", "GAC में अपील")
-    ]
-  },
-  item("guides", "Evidence", "साक्ष्य"),
-  {
-    ...item("learning-corner", "Learning", "सीखें"),
-    children: [
-      item("learning-corner", "Learning Corner", "लर्निंग कॉर्नर"),
-      item("advisories", "Advisories", "सलाह"),
-      item("safety", "Online safety", "ऑनलाइन सुरक्षा"),
-      item("awareness", "Cyber awareness", "साइबर जागरूकता"),
-      item("daily-digest", "Daily digest", "दैनिक डाइजेस्ट"),
-      item("training", "Training resources", "प्रशिक्षण संसाधन"),
-      item("media", "Media library", "मीडिया लाइब्रेरी"),
-      item("accessibility", "Accessibility", "सुगम्यता")
+      item("learning-corner", "Overview", "परिचय", context("learn")),
+      item("safety", "Safety", "सुरक्षा", context("learn")),
+      item("awareness", "Awareness", "जागरूकता", context("learn")),
+      item("advisories", "Advisories", "सलाह", context("learn")),
+      item("daily-digest", "Daily digest", "दैनिक डाइजेस्ट", context("learn")),
+      item("training", "Training", "प्रशिक्षण", context("learn")),
+      item("media", "Media", "मीडिया", context("learn")),
+      item("accessibility", "Accessibility", "सुगम्यता", context("learn")),
+      item("volunteers", "Cyber Volunteers", "साइबर स्वयंसेवक", { contextFamily: "volunteers", contextLabel: { en: "Cyber Volunteers", hi: "साइबर स्वयंसेवक" } }),
+      item("volunteer-terms", "Volunteer terms", "स्वयंसेवक नियम", { ...context("volunteers"), ...hidden }),
+      item("unlawful-content", "Content guidance", "सामग्री मार्गदर्शन", { ...context("volunteers"), ...hidden }),
+      item("volunteer-register", "Registration demo", "पंजीकरण डेमो", { ...context("volunteers"), ...hidden }),
+      item("volunteer-login", "Login demo", "लॉगिन डेमो", { ...context("volunteers"), ...hidden })
     ]
   },
   {
-    ...item("volunteers", "Cyber Volunteers", "साइबर स्वयंसेवक"),
+    ...item("contact", "Help", "सहायता"),
     children: [
-      item("volunteers", "Programme overview", "कार्यक्रम परिचय"),
-      item("volunteer-terms", "Terms and limits", "नियम और सीमाएँ"),
-      item("unlawful-content", "Unlawful-content guidance", "गैरकानूनी सामग्री मार्गदर्शन"),
-      item("volunteer-register", "Registration practice", "पंजीकरण अभ्यास"),
-      item("volunteer-login", "Login practice", "लॉगिन अभ्यास")
-    ]
-  },
-  {
-    ...item("faq", "Help", "सहायता"),
-    children: [
-      item("faq", "Frequently asked questions", "सामान्य प्रश्न"),
-      item("contact", "Contact and help", "संपर्क और मदद"),
-      item("feedback", "Portal feedback", "पोर्टल प्रतिक्रिया"),
-      item("grievance", "Grievance guidance", "शिकायत मार्गदर्शन")
+      item("contact", "Help options", "सहायता विकल्प", context("help")),
+      item("faq", "Frequently asked questions", "सामान्य प्रश्न", context("help")),
+      item("feedback", "Portal feedback", "पोर्टल प्रतिक्रिया", context("help")),
+      item("grievance", "Complaint / escalation help", "शिकायत / आगे की मदद", context("help")),
+      item("policies", "Policies", "नीतियाँ", hidden),
+      item("privacy", "Privacy", "गोपनीयता", hidden),
+      item("disclaimer", "Disclaimer", "अस्वीकरण", hidden),
+      item("notices", "Notices", "सूचनाएँ", hidden),
+      item("about", "About", "परिचय", hidden)
     ]
   }
 ];
 
 export const navigationLabel = (entry: NavigationItem, language: Language) => entry.label[language];
+
+export const navigationMenuChildren = (entry: NavigationItem) => entry.children?.filter((child) => child.showInMenu !== false) ?? [];
 
 export function navigationParent(route: string): NavigationItem | null {
   return NAV_GROUPS.find((entry) => entry.route !== route && entry.children?.some((child) => child.route === route)) ?? null;
@@ -76,4 +92,13 @@ export function navigationParent(route: string): NavigationItem | null {
 
 export function navigationGroupFor(route: string): NavigationItem | null {
   return NAV_GROUPS.find((entry) => entry.route === route || entry.children?.some((child) => child.route === route)) ?? null;
+}
+
+export function navigationContextFor(route: string) {
+  const group = navigationGroupFor(route);
+  const current = group?.children?.find((child) => child.route === route);
+  if (!group || !current?.contextFamily) return null;
+  const items = group.children?.filter((child) => child.contextFamily === current.contextFamily) ?? [];
+  const label = items.find((child) => child.contextLabel)?.contextLabel ?? group.label;
+  return { group, label, items };
 }
