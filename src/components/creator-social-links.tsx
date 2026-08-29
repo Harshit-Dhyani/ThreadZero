@@ -1,12 +1,11 @@
 "use client";
 
-import { ExternalLink, Github } from "lucide-react";
+import { ExternalLink } from "lucide-react";
 import { CREATOR_PROFILE } from "@/config/creator";
 import type { Language } from "@/lib/types";
 
 function SocialIcon({ platform }: { platform: (typeof CREATOR_PROFILE.socials)[number]["platform"] }) {
-  if (platform === "github") return <Github className="size-4" aria-hidden="true" />;
-  return <span aria-hidden="true" className="grid size-4 place-items-center text-[13px] font-bold leading-none">X</span>;
+  return <span aria-hidden="true" className="grid size-4 place-items-center text-[11px] font-bold leading-none">{platform === "github" ? "GH" : "X"}</span>;
 }
 
 export function CreatorSocialLinks({ language, compact = false, showBoundary = true }: { language: Language; compact?: boolean; showBoundary?: boolean }) {
