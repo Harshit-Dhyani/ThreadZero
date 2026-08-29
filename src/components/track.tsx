@@ -45,7 +45,7 @@ export function TrackWorkspace() {
         <label className="grid flex-1 gap-2"><span className="text-sm font-medium">{c.label}</span><input ref={inputRef} value={reference} onChange={(event) => setReference(event.target.value)} className="min-h-11 rounded-control border border-line px-3 font-mono text-sm uppercase" aria-invalid={Boolean(error)} aria-describedby="track-boundary" /></label>
         <div className="flex gap-2"><button className="inline-flex min-h-11 items-center gap-2 rounded-control bg-civic-600 px-5 text-sm font-semibold text-white"><Search className="size-4" />{c.submit}</button><button type="button" className="min-h-11 rounded-control border border-line px-4 text-sm font-medium" onClick={clear}>{c.reset}</button></div>
       </form>
-      <p id="track-boundary" className="mt-4 border-l-[3px] border-civic-600 bg-civic-50 p-3 text-sm leading-6 text-muted">{c.boundary}</p>
+      <p id="track-boundary" className="mt-4 max-w-3xl text-sm leading-6 text-muted">{c.boundary}</p>
       {error ? <p ref={errorRef} tabIndex={-1} role="alert" className="mt-4 border-l-[3px] border-urgent bg-urgent-soft p-3 text-sm text-urgent">{error}</p> : null}
     </section>
     {record ? <TrackResult record={record} /> : null}
