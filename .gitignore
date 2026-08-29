@@ -1,6 +1,12 @@
 # Local tooling and temporary work
 .tmp/
 dist/
+.w/
+.worktrees/
+.next/
+out/
+node_modules/
+*.tsbuildinfo
 .netlify/
 .playwright-cli/
 .serena/
