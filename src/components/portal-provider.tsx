@@ -3,6 +3,7 @@
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { createInitialState } from "@/domains/report";
+import { createServiceRecord, type ServiceRecord } from "@/domains/report/service-form";
 import type { Language, ReportState, Workspace } from "@/lib/types";
 import { ACCESS_KEY, LANGUAGE_KEY, readSavedDemoAccess, writeSavedDemoAccess, type DemoProfile } from "@/lib/storage";
 import { workspaceFor } from "@/lib/routes";
@@ -16,6 +17,9 @@ type PortalContextValue = {
   report: ReportState;
   mutateReport: (change: (draft: ReportState) => void) => void;
   resetReport: () => void;
+  complaintDraft: ServiceRecord;
+  mutateComplaintDraft: (change: (draft: ServiceRecord) => void) => void;
+  resetComplaintDraft: () => void;
   profile: DemoProfile;
   profileLabel: string;
   selectProfile: (profile: DemoProfile, label?: string) => void;
@@ -45,6 +49,7 @@ export function PortalProvider({ children }: { children: React.ReactNode }) {
   const currentWorkspace = workspaceFor(currentRoute);
   const [language, setLanguageState] = useState<Language>("en");
   const [report, setReport] = useState<ReportState>(() => createInitialState());
+  const [complaintDraft, setComplaintDraft] = useState<ServiceRecord>(() => createServiceRecord());
   const [profile, setProfile] = useState<DemoProfile>("anonymous");
   const [profileLabel, setProfileLabel] = useState("");
   const [hydrated, setHydrated] = useState(false);
@@ -104,6 +109,15 @@ export function PortalProvider({ children }: { children: React.ReactNode }) {
       });
     },
     resetReport() { setReport(createInitialState()); },
+    complaintDraft,
+    mutateComplaintDraft(change) {
+      setComplaintDraft((previous) => {
+        const draft = clone(previous);
+        change(draft);
+        return draft;
+      });
+    },
+    resetComplaintDraft() { setComplaintDraft(createServiceRecord()); },
     profile,
     profileLabel,
     selectProfile(next, label = "") {
@@ -122,7 +136,7 @@ export function PortalProvider({ children }: { children: React.ReactNode }) {
     profileOpen,
     openProfile() { setProfileOpen(true); },
     closeProfile() { setProfileOpen(false); }
-  }), [currentRoute, currentWorkspace, guideOpen, guidePreset, hydrated, language, profile, profileLabel, profileOpen, report, router, searchOpen]);
+  }), [complaintDraft, currentRoute, currentWorkspace, guideOpen, guidePreset, hydrated, language, profile, profileLabel, profileOpen, report, router, searchOpen]);
 
   return <PortalContext.Provider value={value}>{children}</PortalContext.Provider>;
 }
