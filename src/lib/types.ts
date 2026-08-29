@@ -2,6 +2,9 @@ export type Language = "en" | "hi";
 export type LocalizedText = Record<Language, string>;
 export type Workspace = "home" | "report" | "check" | "track" | "learn" | "help";
 export type Readiness = "ready" | "missing" | "optional";
+export type EvidenceAvailability = "have" | "missing" | "unsure";
+export type EvidenceCategory = "payment" | "messages" | "person-account" | "links";
+export type ReportEntryMode = "financial" | "women-child-anonymous" | "women-child-details" | "other";
 
 export type RouteFieldOption = LocalizedText;
 export type RouteField = {
@@ -65,15 +68,13 @@ export type Incident = {
 
 export type EvidenceItem = {
   id: string;
-  name: string;
-  sourceState: string;
-  readiness: "Ready" | "Missing" | "Optional";
-  reason: string;
-  relatedEvent: string;
-  available: boolean;
+  name: LocalizedText;
+  category: EvidenceCategory;
+  whyUseful: LocalizedText;
+  whereToFind: LocalizedText;
+  availability: EvidenceAvailability;
+  relatedEventIds: string[];
   extractionRequired: boolean;
-  handling: Readiness;
-  included: boolean;
 };
 
 export type ChronologyEvent = {
@@ -82,21 +83,18 @@ export type ChronologyEvent = {
   time: string;
   description: string;
   detail: string;
-  evidenceId: string;
 };
 
 export type ReportState = {
   route: string;
   completed: string[];
+  entryMode: ReportEntryMode;
   incident: Incident;
   evidence: EvidenceItem[];
   events: ChronologyEvent[];
   extracted: Record<string, string>;
-  actNowAcknowledged: boolean;
   incidentChoice: string;
-  readinessAcknowledged: boolean;
   extractionConfirmed: boolean;
-  chronologyDecision: string;
   reviewed: boolean;
   submission: "idle" | "prepared";
   locked: boolean;

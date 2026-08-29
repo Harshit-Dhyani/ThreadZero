@@ -6,18 +6,18 @@ export default {
   "current": "Current",
   "unavailable": "Complete the earlier steps first",
   "routes": {
-    "act-now": "Act now",
-    "incident": "Incident",
-    "readiness": "Readiness",
+    "act-now": "What happened?",
+    "incident": "What happened?",
+    "readiness": "Evidence",
     "details": "Details",
     "evidence": "Evidence",
-    "chronology": "Chronology",
-    "review": "Review",
-    "submit": "Simulation",
-    "next": "Next actions"
+    "chronology": "Timeline",
+    "review": "Review & next",
+    "submit": "Review & next",
+    "next": "Review & next"
   },
   "fixture": {
-    "narrative": "A synthetic investment contact promised returns, asked for a UPI payment, and stopped responding after payment.",
+    "narrative": "A demo investment contact promised returns, asked for a UPI payment, and stopped responding after payment.",
     "evidence": [
       {
         "id": "payment",
@@ -36,7 +36,7 @@ export default {
       },
       {
         "id": "phone-account",
-        "name": "Phone or account identifier",
+        "name": "Phone or account detail",
         "reason": "Add it later if the number or account name becomes visible."
       },
       {
@@ -49,7 +49,7 @@ export default {
       {
         "id": "event-message",
         "description": "Received WhatsApp message",
-        "detail": "A synthetic investment opportunity was introduced."
+        "detail": "A demo investment opportunity was introduced."
       },
       {
         "id": "event-link",
@@ -73,14 +73,14 @@ export default {
     "title": "If money was lost, act now.",
     "intro": "Call 1930 manually as soon as possible, then use cybercrime.gov.in for the current official reporting process.",
     "boundaryTitle": "About this local demo",
-    "boundaryBody": "This page only organises a fictional incident in this browser tab. It cannot contact a bank, freeze funds, place a call, or submit a complaint.",
+    "boundaryBody": "This page only organises a demo incident in this browser tab. It cannot contact a bank, freeze funds, place a call, or submit a complaint.",
     "error": "Confirm the preparation pathway to continue."
   },
   "incident": {
-    "eyebrow": "Step 1 · Incident",
-    "title": "Choose the closest incident description.",
-    "intro": "Use citizen language; the official service may ask you to select a formal category later.",
-    "legend": "What best describes the synthetic incident?",
+    "eyebrow": "Step 1 of 5 · What happened?",
+    "title": "What happened?",
+    "intro": "Choose the closest description. The official portal may use a more formal category later.",
+    "legend": "Which description is closest?",
     "choices": [
       {
         "value": "shopping",
@@ -121,9 +121,9 @@ export default {
     "error": "Choose the incident description that is closest."
   },
   "readiness": {
-    "eyebrow": "Step 3 · Evidence readiness",
+    "eyebrow": "Step 3 of 5 · Evidence",
     "title": "Bring what you have. Missing is not failure.",
-    "intro": "The demonstration uses three plain states so gaps remain visible without blocking progress.",
+    "intro": "Missing evidence does not stop you from preparing the demo report.",
     "states": [
       {
         "title": "Ready",
@@ -138,13 +138,13 @@ export default {
         "body": "May help, but never blocks preparation."
       }
     ],
-    "choice": "I understand the readiness states and want to check the synthetic evidence list.",
+    "choice": "Continue to the evidence checklist.",
     "error": "Confirm the evidence-readiness check."
   },
   "details": {
-    "eyebrow": "Step 2 · Details",
+    "eyebrow": "Step 2 of 5 · Details",
     "title": "Check the transaction and contact facts.",
-    "intro": "These editable values are synthetic. Nothing you type leaves this tab and a reload resets the example.",
+    "intro": "Use the example details or edit them. Nothing entered here is sent to the government.",
     "amount": "Amount sent",
     "date": "Incident date",
     "time": "Incident time",
@@ -158,7 +158,7 @@ export default {
       "Other"
     ],
     "transactionReference": "12-digit transaction or UTR reference",
-    "recipientIdentifier": "Recipient identifier",
+    "recipientIdentifier": "Recipient account or UPI ID",
     "contactChannel": "Contact channel",
     "chooseChannel": "Choose a contact channel",
     "channelOptions": [
@@ -177,30 +177,30 @@ export default {
       "time": "Enter the incident time.",
       "paymentMethod": "Choose how the payment was made.",
       "transactionReference": "Enter the 12-digit transaction or UTR reference.",
-      "recipientIdentifier": "Enter the recipient identifier.",
+      "recipientIdentifier": "Enter the recipient account or UPI ID.",
       "contactChannel": "Choose the contact channel.",
       "narrative": "Add a description between 40 and 600 characters."
     }
   },
   "evidence": {
-    "eyebrow": "Step 3 · Evidence",
-    "title": "Decide how each synthetic record should be handled.",
-    "intro": "No file upload exists. Mark every item Ready, Missing, or Optional and include only the available demo records you want in the review.",
-    "handling": "Readiness",
-    "include": "Include",
+    "eyebrow": "Step 3 of 5 · Evidence",
+    "title": "Build your evidence checklist.",
+    "intro": "Mark what you have, what is missing, and what you are unsure about. No files are uploaded.",
+    "handling": "Availability",
+    "include": "Use in review",
     "extractionTitle": "Confirm suggested payment facts",
-    "extractionBody": "The values below are deterministic suggestions from the fixture, not OCR or an uploaded image.",
+    "extractionBody": "These suggested values come from the demo example. They were not read from an uploaded image.",
     "extractionChoice": "I checked the amount, method, time, recipient, and transaction reference.",
     "imageAlt": "Hands holding a neutral phone above a desk with a receipt and notebook; no readable account information is shown",
     "errors": {
-      "item": "Choose Ready, Missing, or Optional.",
+      "item": "Choose I have it, I don’t have it, or Not sure.",
       "extraction": "Confirm the suggested payment details before continuing."
     }
   },
   "chronology": {
-    "eyebrow": "Step 4 · Timeline",
+    "eyebrow": "Step 4 of 5 · Timeline",
     "title": "Build the event sequence.",
-    "intro": "Edit, add, and move events one position at a time. Associate one synthetic evidence item when it supports an event.",
+    "intro": "Edit, add, and reorder events. Evidence connected in the previous step appears with each event.",
     "add": "Add another event",
     "edit": "Edit event",
     "moveUp": "Move earlier",
@@ -214,38 +214,38 @@ export default {
     "save": "Save event",
     "cancel": "Cancel editing",
     "choiceLegend": "How do you want to continue?",
-    "keep": "Keep this chronology",
-    "skip": "Continue without further chronology editing",
+    "keep": "Keep this timeline",
+    "skip": "Continue without further timeline editing",
     "errors": {
       "date": "Enter the event date.",
       "time": "Enter the event time.",
       "description": "Describe the event in 8 to 240 characters.",
-      "decision": "Keep the chronology or explicitly skip editing it."
+      "decision": "Continue when the timeline is ready."
     }
   },
   "review": {
-    "eyebrow": "Step 5 · Review and next",
-    "title": "Review the synthetic citizen record.",
-    "intro": "Check the incident, evidence, and chronology before reaching the unmistakable simulation boundary.",
+    "eyebrow": "Step 5 of 5 · Review & next",
+    "title": "Review your demo report.",
+    "intro": "Check the incident, evidence, and timeline before preparing the demo result.",
     "incident": "Incident summary",
     "evidence": "Evidence summary",
-    "chronology": "Chronology",
+    "chronology": "Timeline",
     "readiness": "Readiness",
-    "choice": "I reviewed this synthetic record and understand that it is not an official complaint.",
-    "error": "Confirm that the synthetic record has been reviewed."
+    "choice": "I reviewed this demo report and understand that it is not an official complaint.",
+    "error": "Confirm that the demo report has been reviewed."
   },
   "submit": {
     "eyebrow": "Step 5 · Review and next",
-    "title": "Stop before any real submission.",
-    "intro": "The next action creates only a local illustrative reference. It does not contact NCRP, police, a bank, a payment provider, or any government system.",
+    "title": "Prepare the demo result.",
+    "intro": "This creates only a demo reference. It does not contact NCRP, police, a bank, a payment provider, or any government system.",
     "cardTitle": "Ready to demonstrate the final state",
     "cardBody": "Confirm in the dialog that nothing will be sent.",
-    "action": "Open simulation confirmation",
+    "action": "Open demo confirmation",
     "dialogTitle": "This demonstration will not send anything.",
     "dialogBody": "Continuing creates only a demo reference on this page. No evidence, incident detail, or status leaves this browser tab.",
     "cancel": "Go back",
-    "confirm": "Continue simulation",
-    "error": "Confirm the simulation boundary before continuing."
+    "confirm": "Prepare demo",
+    "error": "Confirm the demo boundary before continuing."
   },
   "next": {
     "eyebrow": "Step 5 · Review and next",
@@ -254,7 +254,7 @@ export default {
     "states": [
       {
         "title": "Prepared",
-        "body": "The local synthetic details are organised."
+        "body": "The demo details are organised."
       },
       {
         "title": "Ready for official reporting",
