@@ -1,4 +1,5 @@
 import type { RoutePresentation, Workspace } from "../types.ts";
+import { FLOW_ROUTE_IDS } from "../../data/demo.ts";
 
 const route = (workspace: Workspace, mode: string, archetype: string, actionModel: string, heroAsset = "", heroStyle = "standard"): RoutePresentation => ({
   workspace,
@@ -20,7 +21,7 @@ export const WORKSPACES = Object.freeze({
   help: Object.freeze({ route: "contact", en: "Help", hi: "सहायता" })
 });
 
-const FLOW_ROUTES = new Set(["act-now", "incident", "readiness", "details", "evidence", "chronology", "review", "submit", "next"]);
+const FLOW_ROUTES = new Set(FLOW_ROUTE_IDS);
 
 const ROUTE_PRESENTATION = Object.freeze({
   complaints: route("report", "paths", "task-chooser", "choose-report-path", "", "compact"),

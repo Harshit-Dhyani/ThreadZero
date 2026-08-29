@@ -19,20 +19,20 @@ export const NAV_GROUPS: readonly NavigationItem[] = [
     ...item("complaints", "Report", "रिपोर्ट"),
     children: [
       item("complaints", "Overview", "परिचय", context("report")),
-      item("act-now", "Financial fraud report", "वित्तीय धोखाधड़ी रिपोर्ट"),
+      item("incident", "Financial fraud report", "वित्तीय धोखाधड़ी रिपोर्ट"),
       item("women-children", "Women & Children", "महिलाएँ और बच्चे", context("report")),
       item("anonymous-report", "Without my name", "नाम साझा किए बिना", context("report")),
       item("registered-report", "With my details", "मेरे विवरण के साथ", context("report")),
       item("guides", "Evidence", "साक्ष्य", context("report")),
       item("other-cybercrime", "Other cybercrime", "अन्य साइबर अपराध", context("report")),
-      item("incident", "Incident", "घटना", hidden),
-      item("readiness", "Readiness", "तैयारी", hidden),
+      item("act-now", "Old report link", "पुराना रिपोर्ट लिंक", hidden),
+      item("readiness", "Old evidence link", "पुराना साक्ष्य लिंक", hidden),
       item("details", "Details", "विवरण", hidden),
       item("evidence", "Evidence step", "साक्ष्य चरण", hidden),
       item("chronology", "Timeline", "समयरेखा", hidden),
       item("review", "Review", "समीक्षा", hidden),
-      item("submit", "Demo submission", "डेमो सबमिशन", hidden),
-      item("next", "Next steps", "अगले कदम", hidden)
+      item("submit", "Old review link", "पुराना समीक्षा लिंक", hidden),
+      item("next", "Old next-step link", "पुराना अगला-कदम लिंक", hidden)
     ]
   },
   {
