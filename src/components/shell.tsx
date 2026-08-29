@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowRight, ChevronDown, CircleHelp, Globe2, Menu, Phone, Search, ShieldCheck, UserRound } from "lucide-react";
+import { ArrowRight, ChevronDown, CircleHelp, Globe2, Menu, Phone, Search, UserRound, Waypoints } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { NAV_GROUPS, navigationGroupFor, navigationLabel, navigationMenuChildren, type NavigationItem } from "@/lib/navigation";
 import { usePortal } from "./portal-provider";
@@ -26,10 +26,11 @@ export function Shell({ children }: { children: React.ReactNode }) {
   }, []);
 
   return <div className="min-h-screen bg-canvas">
+    <a href="#main-content" className="fixed left-4 top-4 z-[100] -translate-y-24 rounded-control bg-white px-4 py-3 text-sm font-semibold text-civic-700 shadow-xl focus:translate-y-0">{language === "hi" ? "मुख्य सामग्री पर जाएँ" : "Skip to main content"}</a>
     <header ref={header} className="text-white" data-no-print onKeyDown={(event) => { if (event.key === "Escape") setDesktopOpen(null); }}>
-      <div className="bg-navy-950"><div className="mx-auto flex min-h-[76px] max-w-shell items-center justify-between gap-4 px-5 py-3 md:px-8 lg:px-12">
+      <div className="bg-navy-950"><div className="mx-auto flex min-h-[76px] max-w-content items-center justify-between gap-4 px-5 py-3 md:px-8">
         <Link href="/" className="flex min-w-0 items-center gap-3" aria-label={title}>
-          <span className="grid size-11 shrink-0 place-items-center rounded-panel border border-white/35"><ShieldCheck className="size-7" strokeWidth={1.8} /></span>
+          <span className="grid size-11 shrink-0 place-items-center rounded-panel border border-white/35"><Waypoints className="size-7" strokeWidth={1.8} /></span>
           <span className="min-w-0"><span className="block max-w-[22rem] text-[16px] font-semibold leading-[1.08] sm:text-[19px]">{title}</span><span className="mt-1 hidden text-[11px] text-white/70 sm:block">{language === "hi" ? "स्वतंत्र अवधारणा · सरकारी सेवा नहीं" : "Independent concept · Not a government service"}</span></span>
         </Link>
         <div className="hidden items-center gap-2 nav:flex">
@@ -64,12 +65,12 @@ export function Shell({ children }: { children: React.ReactNode }) {
         </details>
       </div></div>
 
-      <div className="hidden min-h-[60px] border-b border-line bg-white text-ink shadow-[0_8px_24px_rgb(6_26_54/0.06)] nav:block"><div className="mx-auto flex h-[60px] max-w-shell items-stretch px-6 lg:px-10">
+      <div className="hidden min-h-[60px] border-b border-line bg-white text-ink shadow-[0_8px_24px_rgb(6_26_54/0.06)] nav:block"><div className="mx-auto flex h-[60px] max-w-content items-stretch px-5 md:px-8">
         <nav className="flex min-w-0 flex-1" aria-label={language === "hi" ? "मुख्य सेवाएँ" : "Primary services"}>{NAV_GROUPS.map((entry) => <DesktopNavigationItem key={entry.route} entry={entry} language={language} currentRoute={currentRoute} open={desktopOpen === entry.route} setOpen={setDesktopOpen} />)}</nav>
         <Link href="/incident" className="my-2 ml-4 inline-flex min-h-11 items-center gap-2 rounded-control bg-civic-600 px-4 text-xs font-semibold text-white shadow-sm hover:bg-civic-700">{language === "hi" ? "शुरू करें" : "Get Started"}<ArrowRight className="size-4" /></Link>
       </div></div>
 
-      <div className="border-b border-[#f1c6c2] bg-urgent-soft text-ink"><div className="mx-auto flex min-h-10 max-w-content flex-wrap items-center justify-between gap-x-6 gap-y-1 px-5 py-2 text-xs md:px-8"><p><strong className="text-urgent">{language === "hi" ? "वास्तविक वित्तीय साइबर धोखाधड़ी?" : "Actual financial cyber fraud in India?"}</strong> <span className="ml-1 text-muted">{language === "hi" ? "तत्काल सहायता के लिए 1930 पर स्वयं कॉल करें। यह अवधारणा कॉल नहीं करती।" : "Call 1930 manually for urgent help. This concept does not place a call."}</span></p><a className="inline-flex min-h-11 items-center gap-1 font-semibold text-civic-700 hover:underline" href="https://cybercrime.gov.in/" target="_blank" rel="noreferrer">{language === "hi" ? "cybercrime.gov.in उपयोग करें" : "Use cybercrime.gov.in"}<ArrowRight className="size-3.5" /></a></div></div>
+      <div className="border-b border-[#f1c6c2] bg-urgent-soft text-ink"><div className="mx-auto grid max-w-content items-center gap-2 px-5 py-3 text-xs sm:grid-cols-[minmax(0,1fr)_auto] md:px-8"><p className="leading-5"><strong className="block text-urgent sm:inline">{language === "hi" ? "वास्तविक वित्तीय साइबर धोखाधड़ी?" : "Actual financial cyber fraud in India?"}</strong> <span className="text-muted sm:ml-1">{language === "hi" ? "तत्काल सहायता के लिए 1930 पर स्वयं कॉल करें। यह अवधारणा कॉल नहीं करती।" : "Call 1930 manually for urgent help. This concept does not place a call."}</span></p><a className="inline-flex min-h-11 w-full items-center justify-center gap-1 rounded-control border border-[#efaaa3] bg-white px-3 font-semibold text-civic-700 hover:underline sm:w-auto" href="https://cybercrime.gov.in/" target="_blank" rel="noreferrer">{language === "hi" ? "cybercrime.gov.in उपयोग करें" : "Use cybercrime.gov.in"}<ArrowRight className="size-3.5" /></a></div></div>
     </header>
     <main id="main-content">{children}</main>
     <Footer />
@@ -110,11 +111,11 @@ function Footer() {
   ];
   const brand = language === "hi" ? "वित्तीय साइबर धोखाधड़ी रिपोर्टिंग मार्गदर्शिका" : "Financial Cyber Fraud Reporting Guide";
   return <footer className="mt-16 border-t border-line bg-white">
-    <div className="mx-auto grid max-w-shell gap-x-7 gap-y-8 px-5 py-9 md:grid-cols-2 md:px-8 lg:grid-cols-5 lg:px-12 lg:py-10 xl:grid-cols-[1.25fr_repeat(4,0.72fr)_1.7fr]">
-      <section><div className="flex items-start gap-3"><span className="grid size-11 shrink-0 place-items-center rounded-panel border border-line text-civic-700"><ShieldCheck className="size-7" strokeWidth={1.8} /></span><div><h2 className="max-w-[15rem] text-[16px] font-semibold leading-tight">{brand}</h2><p className="mt-2 text-xs leading-5 text-muted">{language === "hi" ? "स्वतंत्र अवधारणा पुनर्रचना" : "Independent concept redesign"}<br />{language === "hi" ? "सरकारी सेवा नहीं" : "Not a government service"}</p></div></div></section>
+    <div className="mx-auto grid max-w-content grid-cols-2 gap-x-5 gap-y-8 px-5 py-9 md:grid-cols-3 md:px-8 lg:grid-cols-5 lg:py-10 xl:grid-cols-[1.25fr_repeat(4,0.72fr)_1.7fr]">
+      <section className="col-span-2 md:col-span-1"><div className="flex items-start gap-3"><span className="grid size-11 shrink-0 place-items-center rounded-panel border border-line text-civic-700"><Waypoints className="size-7" strokeWidth={1.8} /></span><div><h2 className="max-w-[15rem] text-[16px] font-semibold leading-tight">{brand}</h2><p className="mt-2 text-xs leading-5 text-muted">{language === "hi" ? "स्वतंत्र अवधारणा पुनर्रचना" : "Independent concept redesign"}<br />{language === "hi" ? "सरकारी सेवा नहीं" : "Not a government service"}</p></div></div></section>
       {groups.map(([group, links]) => <section key={group as string}><h2 className="text-xs font-semibold">{group as string}</h2><ul className="mt-2 text-xs text-muted">{(links as string[][]).map(([label, route]) => <li key={`${route}-${label}`}><Link className="inline-flex min-h-11 min-w-11 items-center hover:text-civic-700 hover:underline" href={pathFor(route)}>{label}</Link></li>)}</ul></section>)}
-      <section className="relative min-h-64 overflow-hidden rounded-special border border-line bg-civic-50 p-5 md:col-span-2 md:min-h-56 lg:col-span-2 xl:col-span-1 xl:min-h-72"><div className="relative z-10 max-w-[15rem]"><h2 className="text-base font-semibold">{language === "hi" ? "सही मदद तक पहुँचें" : "Find the right next step"}</h2><p className="mt-2 text-sm leading-6 text-muted">{language === "hi" ? "तथ्य और साक्ष्य तैयार करें, फिर सही आधिकारिक गंतव्य खोलें।" : "Prepare the facts and evidence, then open the right official destination."}</p><Link href={pathFor("contact")} className="mt-3 inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-civic-700 hover:underline">{language === "hi" ? "मदद विकल्प देखें" : "View help options"}<ArrowRight className="size-4" /></Link></div><ResponsiveIllustration assetId="footerHelp" language={language} className="absolute bottom-0 right-0 h-[76%] w-auto max-w-[78%] object-contain object-bottom" /></section>
+      <section className="relative col-span-2 min-h-64 overflow-hidden rounded-special border border-line bg-civic-50 p-5 md:min-h-56 lg:col-span-2 xl:col-span-1 xl:min-h-72"><div className="relative z-10 max-w-[15rem]"><h2 className="text-base font-semibold">{language === "hi" ? "सही मदद तक पहुँचें" : "Find the right next step"}</h2><p className="mt-2 text-sm leading-6 text-muted">{language === "hi" ? "तथ्य और साक्ष्य तैयार करें, फिर सही आधिकारिक गंतव्य खोलें।" : "Prepare the facts and evidence, then open the right official destination."}</p><Link href={pathFor("contact")} className="mt-3 inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-civic-700 hover:underline">{language === "hi" ? "मदद विकल्प देखें" : "View help options"}<ArrowRight className="size-4" /></Link></div><ResponsiveIllustration assetId="footerHelp" language={language} className="absolute bottom-0 right-0 h-[76%] w-auto max-w-[78%] object-contain object-bottom" /></section>
     </div>
-    <div className="bg-navy-950 text-white/70"><div className="mx-auto grid min-h-12 max-w-shell items-center gap-2 px-5 py-3 text-center text-[11px] sm:grid-cols-3 md:px-8 lg:px-12"><span>{language === "hi" ? "स्वतंत्र अवधारणा पुनर्रचना" : "Independent concept redesign"}</span><span>{language === "hi" ? "स्पष्टता, सुरक्षा और आत्मविश्वास के लिए तैयार" : "Prepared for clarity, safety, and confidence"}</span><span>{language === "hi" ? "केवल डेमो डेटा · कोई सरकारी संबद्धता नहीं" : "Demo data only · No government affiliation"}</span></div></div>
+    <div className="bg-navy-950 text-white/70"><div className="mx-auto grid min-h-12 max-w-content items-center gap-2 px-5 py-3 text-center text-[11px] sm:grid-cols-3 md:px-8"><span>{language === "hi" ? "स्वतंत्र अवधारणा पुनर्रचना" : "Independent concept redesign"}</span><span>{language === "hi" ? "स्पष्टता, सुरक्षा और आत्मविश्वास के लिए तैयार" : "Prepared for clarity, safety, and confidence"}</span><span>{language === "hi" ? "केवल डेमो डेटा · कोई सरकारी संबद्धता नहीं" : "Demo data only · No government affiliation"}</span></div></div>
   </footer>;
 }

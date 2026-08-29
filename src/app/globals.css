@@ -93,6 +93,22 @@ label:has(> input[type="checkbox"]) { min-height: 2.75rem; }
 
 ::selection { background: var(--color-civic-100); }
 
+.flow-step-scrollbar {
+  scrollbar-color: var(--color-civic-600) var(--color-civic-100);
+  scrollbar-width: thin;
+}
+
+.flow-step-scrollbar::-webkit-scrollbar { height: 0.5rem; }
+.flow-step-scrollbar::-webkit-scrollbar-track {
+  background: var(--color-civic-100);
+  border-radius: 999px;
+}
+.flow-step-scrollbar::-webkit-scrollbar-thumb {
+  background: var(--color-civic-600);
+  border: 2px solid var(--color-civic-100);
+  border-radius: 999px;
+}
+
 dialog::backdrop { background: rgb(6 26 54 / 0.58); }
 
 @media (prefers-reduced-motion: reduce) {
