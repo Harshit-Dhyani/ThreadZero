@@ -94,7 +94,7 @@ export function TrackWorkspace() {
       </div>
     </section>
 
-    <aside className="mt-6 border-l-4 border-civic-600 bg-civic-50 p-4 text-sm leading-6 text-muted">
+    <aside className="mt-6 border-y border-line py-4 text-sm leading-6 text-muted">
       {language === "hi" ? "ThreadZero सरकारी, NCRP या पुलिस केस की स्थिति नहीं देख सकता। नीचे का रेफरेंस ट्रैकर केवल डेमो या इस ब्राउज़र में सहेजी गई रिपोर्ट स्थिति दिखाता है।" : "ThreadZero cannot see government, NCRP, or police case status. The reference tracker below only shows deterministic demo or browser-saved report state."}
     </aside>
 
