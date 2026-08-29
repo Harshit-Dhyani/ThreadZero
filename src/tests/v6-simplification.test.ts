@@ -1,8 +1,10 @@
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import test from "node:test";
+import { applyReportKindSelection, createInitialState, evidenceForReportKind, refreshTimelineForReport, reportPresentation } from "../domains/report/index.ts";
 import { CHECK_MODES, CHECK_MODE_REDIRECTS } from "../features/check/index.ts";
 import { NAV_GROUPS, navigationMenuChildren } from "../lib/navigation.ts";
+import type { ReportKind } from "../lib/types.ts";
 
 const source = (path: string) => readFileSync(new URL(`../../${path}`, import.meta.url), "utf8");
 
@@ -44,6 +46,46 @@ test("changing Report family resets incompatible demo timeline and evidence stat
   assert.match(reportDomain, /timelineSeedForReport/);
   assert.match(flow, /applyReportKindSelection/);
   assert.doesNotMatch(flow, /function resetAfterReportKindChange/);
+});
+
+test("Report family selection changes state, evidence, timeline, and later-stage presentation", () => {
+  const kinds: Array<Exclude<ReportKind, "unselected">> = ["financial", "women-child", "other", "unsure"];
+  const titles = new Set<string>();
+
+  for (const kind of kinds) {
+    const report = createInitialState();
+    applyReportKindSelection(report, kind);
+    const presentation = reportPresentation(report, "en");
+    titles.add(presentation.details.title);
+
+    assert.equal(report.reportKind, kind);
+    assert.ok(report.events.length >= 4, `${kind} should have a useful seeded timeline`);
+    assert.ok(presentation.details.title && presentation.evidence.title && presentation.timeline.title && presentation.review.title);
+
+    const relevant = evidenceForReportKind(report.evidence, kind);
+    if (kind === "financial") {
+      assert.ok(report.events.some((event) => event.id === "event-payment"), "financial reports should keep the payment event");
+      assert.ok(relevant.some((item) => item.category === "payment"), "financial reports should keep payment evidence");
+      assert.notEqual(report.incident.amount, "");
+    } else {
+      assert.equal(report.incident.amount, "", `${kind} must not inherit the financial amount fixture`);
+      assert.equal(report.incident.transactionReference, "", `${kind} must not inherit a UTR fixture`);
+      assert.equal(report.events.some((event) => event.id === "event-payment"), false, `${kind} must not inherit the financial payment event`);
+      assert.equal(relevant.some((item) => item.category === "payment"), false, `${kind} must not expose financial evidence`);
+    }
+  }
+
+  assert.equal(titles.size, 4, "each report family should have distinct Details guidance");
+});
+
+test("Women/Child category changes its own timeline context without reintroducing payment content", () => {
+  const report = createInitialState();
+  applyReportKindSelection(report, "women-child");
+  report.womenChildCategory = "cseam";
+  refreshTimelineForReport(report);
+  assert.match(report.events[0].description, /child-related/i);
+  assert.equal(report.events.some((event) => /payment sent|₹|utr/i.test(`${event.description} ${event.detail}`)), false);
+  assert.match(reportPresentation(report, "en").timeline.title, /harmful content|contact/i);
 });
 
 test("all later Report stages use family-specific presentation", () => {
