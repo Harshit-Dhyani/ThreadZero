@@ -10,7 +10,7 @@ const serviceIcons = [FileCheck2, SearchCheck, FileText, BookOpen, Users, Circle
 
 export function Home() {
   const { language, navigate, openGuide } = usePortal();
-  const onNavigate = (view: "home" | "report" | "track") => navigate(view === "report" ? "act-now" : view);
+  const onNavigate = (view: "home" | "report" | "track") => navigate(view === "report" ? "incident" : view);
   const onGuide = openGuide;
   const c = COPY[language].home;
   const events = c.mechanism.visualSteps.map((title, index) => ({ id: index + 1, title, ...c.mechanism.evidenceLinks[index] }));
@@ -62,7 +62,7 @@ export function Home() {
 
       <section className="border-y border-line bg-white">
         <div className="mx-auto max-w-content px-5 py-12 md:px-8 lg:py-16">
-          <div className="grid gap-5 md:grid-cols-[1fr_0.75fr] md:items-end"><div><p className="text-xs font-semibold uppercase tracking-[0.14em] text-civic-700">{c.mechanism.eyebrow}</p><h2 className="mt-3 text-[28px] font-semibold tracking-[-0.02em]">{c.mechanism.title}</h2></div><p className="text-sm leading-6 text-muted">{c.mechanism.intro}</p></div>
+          <div className="grid gap-5 md:grid-cols-[1fr_0.75fr] md:items-end"><div><p className="text-xs font-semibold uppercase tracking-[0.14em] text-civic-700">{c.mechanism.evidenceEyebrow}</p><h2 className="mt-3 text-[28px] font-semibold tracking-[-0.02em]">{c.mechanism.evidenceTitle}</h2></div><p className="text-sm leading-6 text-muted">{c.mechanism.evidenceIntro}</p></div>
           <div className="mt-7 grid overflow-hidden rounded-panel border border-line lg:grid-cols-[1fr_310px]">
             <div className="p-6">
               <ol className="relative grid grid-cols-2 gap-6 sm:grid-cols-4 sm:before:absolute sm:before:left-4 sm:before:right-4 sm:before:top-4 sm:before:h-px sm:before:bg-line">

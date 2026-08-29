@@ -1,8 +1,8 @@
 export default {
-  "eyebrow": "Synthetic tracking",
+  "eyebrow": "Demo tracking",
   "breadcrumb": "Home / Track",
   "title": "Check a report status",
-  "intro": "Enter a fictional report reference to view a documented local status record.",
+  "intro": "Enter the demo report reference to view an example status record.",
   "label": "Report reference",
   "placeholder": "DEMO-2026-08421",
   "submit": "Check status",
@@ -16,7 +16,7 @@ export default {
   "found": "Report reference found",
   "status": "Initial review",
   "facts": "Incident facts",
-  "readiness": "Evidence readiness",
+  "readiness": "Evidence checklist",
   "ready": "Ready",
   "missing": "Missing · can be added later",
   "timeline": "Status timeline",
@@ -28,7 +28,7 @@ export default {
   "states": [
     {
       "title": "Complaint received",
-      "body": "Complete · Synthetic fixture received."
+      "body": "Complete · Demo record received."
     },
     {
       "title": "Initial review",

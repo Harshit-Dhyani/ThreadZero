@@ -7,7 +7,7 @@ export default {
     "pathsLabel": "Complaint options",
     "paths": [
       {
-        "route": "act-now",
+        "route": "incident",
         "title": "Financial fraud",
         "body": "Prepare the transaction, evidence, and timeline."
       },
@@ -19,7 +19,7 @@ export default {
       {
         "route": "other-cybercrime",
         "title": "Other cybercrime",
-        "body": "Prepare a clear synthetic complaint draft."
+        "body": "Prepare a clear demo complaint draft."
       }
     ],
     "imageAlt": "Illustration of an Indian citizen organising a phone, transaction receipt, and notes at a desk"
@@ -36,19 +36,19 @@ export default {
     "intro": "Local preparation tools stay separate from real government actions.",
     "items": [
       {
-        "route": "act-now",
+        "route": "incident",
         "title": "Prepare a report",
-        "body": "Organise a synthetic financial-fraud incident."
+        "body": "Organise a demo financial-fraud incident."
       },
       {
         "route": "track",
         "title": "Track a complaint",
-        "body": "Use the deterministic demo tracker without leaving the portal."
+        "body": "Use the demo tracker without leaving the portal."
       },
       {
         "route": "official-tools",
         "title": "Check or report a suspect",
-        "body": "Use local identifier, website, abuse, and appeal simulations."
+        "body": "Use demo contact, website, abuse, and appeal tools."
       },
       {
         "route": "volunteers",
@@ -90,6 +90,9 @@ export default {
     "eyebrow": "Your incident timeline",
     "title": "See how the incident fits together.",
     "intro": "Connect messages, payments, links, and evidence to the moment they belong to.",
+    "evidenceEyebrow": "Evidence connected to the incident",
+    "evidenceTitle": "See what you already have—and what is still missing.",
+    "evidenceIntro": "Connect each useful record to the moment it supports, without delaying official reporting when something is unavailable.",
     "steps": [
       "Evidence",
       "Confirmed fact",
@@ -108,14 +111,14 @@ export default {
       { "evidence": "WhatsApp screenshot", "connection": "Supports event 1", "status": "ready" },
       { "evidence": "Suspicious URL", "connection": "Supports event 2", "status": "ready" },
       { "evidence": "Transaction receipt", "connection": "Supports event 3", "status": "ready" },
-      { "evidence": "Phone identifier", "connection": "Missing for event 4", "status": "missing" }
+      { "evidence": "Phone number", "connection": "Missing for event 4", "status": "missing" }
     ],
     "readiness": [
-      { "label": "Ready", "body": "A transaction receipt can show the amount, time, recipient, and reference.", "tone": "success" },
-      { "label": "Missing", "body": "Add a phone or account identifier later if it becomes visible.", "tone": "warning" },
-      { "label": "Optional", "body": "A public profile or website address can help when available.", "tone": "muted" }
+      { "label": "I have it", "body": "A transaction receipt can show the amount, time, recipient, and reference.", "tone": "success" },
+      { "label": "I don’t have it", "body": "Add a phone number or account detail later if it becomes visible.", "tone": "warning" },
+      { "label": "Not sure", "body": "Check whether a public profile or website address is still available.", "tone": "muted" }
     ],
-    "imageAlt": "Two-layer illustration connecting incident events to supporting evidence, with a missing phone identifier"
+    "imageAlt": "Two-layer illustration connecting incident events to supporting evidence, with a missing phone number"
   },
   "process": {
     "eyebrow": "How the demonstration works",
@@ -132,10 +135,10 @@ export default {
       },
       {
         "title": "Understand the process",
-        "body": "Know what to expect before the official handoff."
+        "body": "Know what to expect before continuing on the official portal."
       },
       {
-        "title": "Official handoff",
+        "title": "Continue on the official portal",
         "body": "Continue to the official reporting portal yourself."
       }
     ],
@@ -156,11 +159,11 @@ export default {
         "body": "Chat exports, SMS, email, caller number, and the sequence of contact."
       },
       {
-        "title": "Account identifiers",
+        "title": "Account and contact details",
         "body": "UPI ID, bank account, wallet, profile name, website, or app link."
       },
       {
-        "title": "Your chronology",
+        "title": "Your timeline",
         "body": "A short event-by-event record written while details are still fresh."
       },
       {
@@ -210,18 +213,18 @@ export default {
       },
       {
         "key": "officialSuspectSearch",
-        "title": "Check a demo identifier",
-        "body": "Practise checking a fictional email, mobile, account, or social handle."
+        "title": "Check demo contact or account details",
+        "body": "Practise checking an example email, mobile, account, or social handle."
       },
       {
         "key": "officialTafcop",
         "title": "Review demo mobile connections",
-        "body": "Understand a TAFCOP-style result using fictional connections."
+        "body": "Understand a TAFCOP-style result using example connections."
       },
       {
         "key": "officialGac",
         "title": "Prepare an appeal draft",
-        "body": "Organise a fictional appeal without contacting GAC or a platform."
+        "body": "Organise a demo appeal without contacting GAC or a platform."
       }
     ]
   },
@@ -248,11 +251,11 @@ export default {
   "help": {
     "eyebrow": "Help and legal directory",
     "title": "Answers, contacts, and trusted destinations",
-    "intro": "Find answers, local simulations, policies, notices, and deliberately separated source references.",
+    "intro": "Find answers, demos, policies, notices, and clearly separated source references.",
     "faqs": [
       {
         "q": "Does this submit a complaint?",
-        "a": "No. It prepares only a synthetic record in memory and never sends data anywhere."
+        "a": "No. It prepares only a demo record in memory and never sends data anywhere."
       },
       {
         "q": "Can I continue with missing evidence?",
@@ -260,7 +263,7 @@ export default {
       },
       {
         "q": "Can I upload a real screenshot here?",
-        "a": "No. There is no file input or upload. Every evidence item shown is synthetic."
+        "a": "No. There is no file input or upload. Every evidence item shown is an example."
       },
       {
         "q": "Where do I track a real complaint?",

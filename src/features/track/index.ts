@@ -1,4 +1,5 @@
 import { DEMO_FIXTURE } from "../../data/demo.ts";
+import { createInitialState } from "../../domains/report/index.ts";
 import { parseReportState } from "../../lib/storage/index.ts";
 import type { ReportState } from "../../lib/types.ts";
 
@@ -16,20 +17,13 @@ export function resolveTrackRecord(query: string, saved: unknown): TrackResoluti
 }
 
 function fixtureReport(): ReportState {
-  return {
-    route: "next",
-    completed: ["act-now", "incident", "details", "readiness", "evidence", "chronology", "review", "submit"],
-    incident: structuredClone(DEMO_FIXTURE.incident),
-    evidence: DEMO_FIXTURE.evidence.map((item) => ({ ...item, handling: item.readiness.toLowerCase() as "ready" | "missing" | "optional", included: item.available })),
-    events: structuredClone(DEMO_FIXTURE.events),
-    extracted: structuredClone(DEMO_FIXTURE.extracted),
-    actNowAcknowledged: true,
-    incidentChoice: "investment",
-    readinessAcknowledged: true,
-    extractionConfirmed: true,
-    chronologyDecision: "keep",
-    reviewed: true,
-    submission: "prepared",
-    locked: true
-  };
+  const report = createInitialState();
+  report.route = "review";
+  report.completed = ["incident", "details", "evidence", "chronology", "review"];
+  report.incidentChoice = "investment";
+  report.extractionConfirmed = true;
+  report.reviewed = true;
+  report.submission = "prepared";
+  report.locked = true;
+  return report;
 }
