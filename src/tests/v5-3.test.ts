@@ -30,11 +30,17 @@ test("the report flow has five canonical stages and four compatible legacy route
   assert.equal(canEnterRoute("details", report), true);
 });
 
-test("legacy complaint entries select one shared report workspace mode", () => {
-  assert.deepEqual(Object.keys(REPORT_ENTRY_REDIRECTS), ["anonymous-report", "registered-report", "other-cybercrime"]);
-  assert.deepEqual(new Set(Object.values(REPORT_ENTRY_REDIRECTS).map(({ entryMode }) => entryMode)), new Set(["women-child-anonymous", "women-child-details", "other"]));
+test("legacy complaint entries seed one shared adaptive report workspace", () => {
+  assert.deepEqual(REPORT_ENTRY_REDIRECTS, {
+    complaints: { reportKind: "unselected", reportingMode: "standard" },
+    "women-children": { reportKind: "women-child", reportingMode: "standard" },
+    "anonymous-report": { reportKind: "women-child", reportingMode: "anonymous" },
+    "registered-report": { reportKind: "women-child", reportingMode: "registered" },
+    "other-cybercrime": { reportKind: "other", reportingMode: "standard" }
+  });
   const report = createInitialState();
-  assert.equal(report.entryMode, "financial");
+  assert.equal(report.reportKind, "unselected");
+  assert.equal(report.reportingMode, "standard");
 });
 
 test("the curated evidence checklist is bilingual, non-blocking, and links to many timeline events", () => {
@@ -58,8 +64,12 @@ test("the curated evidence checklist is bilingual, non-blocking, and links to ma
   assert.deepEqual(receipt.relatedEventIds, linkedBefore);
 });
 
-test("saved demo access migrates version 1 evidence and flow progress to version 2", () => {
+test("saved demo access migrates version 1 evidence, legacy entry mode, and flow progress to version 2", () => {
   const legacyReport: any = createInitialState();
+  legacyReport.entryMode = "women-child-anonymous";
+  delete legacyReport.reportKind;
+  delete legacyReport.reportingMode;
+  delete legacyReport.womenChildCategory;
   legacyReport.route = "submit";
   legacyReport.completed = ["act-now", "incident", "readiness", "details", "evidence", "chronology", "submit"];
   legacyReport.evidence = [{ id: "payment", handling: "ready", relatedEvent: legacyReport.events[0].id }];
@@ -72,6 +82,8 @@ test("saved demo access migrates version 1 evidence and flow progress to version
   assert.equal(saved.version, 2);
   assert.equal(saved.report.route, "review");
   assert.deepEqual(saved.report.completed, ["incident", "details", "evidence", "chronology", "review"]);
+  assert.equal(saved.report.reportKind, "women-child");
+  assert.equal(saved.report.reportingMode, "anonymous");
   assert.equal(saved.report.submission, "prepared");
   const receipt = saved.report.evidence.find(({ id }) => id === "payment-receipt")!;
   assert.equal(receipt.availability, "have");

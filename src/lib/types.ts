@@ -4,7 +4,9 @@ export type Workspace = "home" | "report" | "check" | "track" | "learn" | "help"
 export type Readiness = "ready" | "missing" | "optional";
 export type EvidenceAvailability = "have" | "missing" | "unsure";
 export type EvidenceCategory = "payment" | "messages" | "person-account" | "links";
-export type ReportEntryMode = "financial" | "women-child-anonymous" | "women-child-details" | "other";
+export type ReportKind = "unselected" | "financial" | "women-child" | "other" | "unsure";
+export type ReportingMode = "standard" | "anonymous" | "registered";
+export type WomenChildCategory = "" | "cseam" | "sexually-explicit" | "sexually-obscene" | "rgr-content" | "other";
 
 export type RouteFieldOption = LocalizedText;
 export type RouteField = {
@@ -88,7 +90,9 @@ export type ChronologyEvent = {
 export type ReportState = {
   route: string;
   completed: string[];
-  entryMode: ReportEntryMode;
+  reportKind: ReportKind;
+  reportingMode: ReportingMode;
+  womenChildCategory: WomenChildCategory;
   incident: Incident;
   evidence: EvidenceItem[];
   events: ChronologyEvent[];

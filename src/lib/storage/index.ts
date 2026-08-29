@@ -1,6 +1,6 @@
 import { canonicalFlowRoute, createInitialState } from "../../domains/report/index.ts";
 import { FLOW_STAGES } from "../../data/demo.ts";
-import type { EvidenceAvailability, Language, ReportState } from "../types.ts";
+import type { EvidenceAvailability, Language, ReportKind, ReportingMode, ReportState, WomenChildCategory } from "../types.ts";
 
 export type DemoProfile = "anonymous" | "local" | "account";
 export type SavedDemoAccess = { version: 2; profile: Exclude<DemoProfile, "anonymous">; label: string; language: Language; report: ReportState };
@@ -17,6 +17,17 @@ const legacyEvidenceIds: Record<string, string> = {
   "phone-account": "phone",
   "profile-url": "profile-url"
 };
+const REPORT_KINDS = new Set<ReportKind>(["unselected", "financial", "women-child", "other", "unsure"]);
+const REPORTING_MODES = new Set<ReportingMode>(["standard", "anonymous", "registered"]);
+const WOMEN_CHILD_CATEGORIES = new Set<WomenChildCategory>(["", "cseam", "sexually-explicit", "sexually-obscene", "rgr-content", "other"]);
+
+function legacyEntryMode(value: unknown): { reportKind: ReportKind; reportingMode: ReportingMode } {
+  if (value === "women-child-anonymous") return { reportKind: "women-child", reportingMode: "anonymous" };
+  if (value === "women-child-details") return { reportKind: "women-child", reportingMode: "registered" };
+  if (value === "other") return { reportKind: "other", reportingMode: "standard" };
+  if (value === "financial") return { reportKind: "financial", reportingMode: "standard" };
+  return { reportKind: "unselected", reportingMode: "standard" };
+}
 
 export function parseReportState(value: unknown): ReportState | null {
   if (!value || typeof value !== "object") return null;
@@ -27,7 +38,10 @@ export function parseReportState(value: unknown): ReportState | null {
 
   const report = createInitialState();
   report.route = source.route === "home" ? "home" : canonicalFlowRoute(String(source.route || "incident"));
-  report.entryMode = ["financial", "women-child-anonymous", "women-child-details", "other"].includes(String(source.entryMode)) ? source.entryMode : "financial";
+  const migrated = legacyEntryMode(source.entryMode);
+  report.reportKind = REPORT_KINDS.has(source.reportKind as ReportKind) ? source.reportKind : migrated.reportKind;
+  report.reportingMode = REPORTING_MODES.has(source.reportingMode as ReportingMode) ? source.reportingMode : migrated.reportingMode;
+  report.womenChildCategory = WOMEN_CHILD_CATEGORIES.has(source.womenChildCategory as WomenChildCategory) ? source.womenChildCategory : "";
   const completed = new Set((Array.isArray(source.completed) ? source.completed : []).map((route) => canonicalFlowRoute(String(route))));
   report.completed = FLOW_STAGES.map(({ id }) => id).filter((id) => completed.has(id));
   report.incident = structuredClone(source.incident);
@@ -50,7 +64,7 @@ export function parseReportState(value: unknown): ReportState | null {
     const target = report.evidence.find((candidate) => candidate.id === (legacyEvidenceIds[item.id] || item.id));
     if (!target) continue;
     target.availability = availability(item.availability ?? item.handling);
-    const links: string[] = Array.isArray(item.relatedEventIds) ? item.relatedEventIds.filter((value: unknown): value is string => isString(value)) : isString(item.relatedEvent) && item.relatedEvent ? [item.relatedEvent] : [];
+    const links: string[] = Array.isArray(item.relatedEventIds) ? item.relatedEventIds.filter((entry: unknown): entry is string => isString(entry)) : isString(item.relatedEvent) && item.relatedEvent ? [item.relatedEvent] : [];
     target.relatedEventIds = [...new Set(links)];
   }
   for (const event of source.events) {

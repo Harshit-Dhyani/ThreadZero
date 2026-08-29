@@ -18,9 +18,11 @@ export const LEGACY_FLOW_REDIRECTS = {
 export const FLOW_ROUTE_IDS = [...FLOW_STAGES.map((stage) => stage.id), ...Object.keys(LEGACY_FLOW_REDIRECTS)] as const;
 
 export const REPORT_ENTRY_REDIRECTS = {
-  "anonymous-report": { entryMode: "women-child-anonymous", incidentChoice: "identity" },
-  "registered-report": { entryMode: "women-child-details", incidentChoice: "identity" },
-  "other-cybercrime": { entryMode: "other", incidentChoice: "unsure" }
+  complaints: { reportKind: "unselected", reportingMode: "standard" },
+  "women-children": { reportKind: "women-child", reportingMode: "standard" },
+  "anonymous-report": { reportKind: "women-child", reportingMode: "anonymous" },
+  "registered-report": { reportKind: "women-child", reportingMode: "registered" },
+  "other-cybercrime": { reportKind: "other", reportingMode: "standard" }
 } as const;
 
 const incident: Incident = {
