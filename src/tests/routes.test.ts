@@ -17,7 +17,7 @@ test("the complete V5 route catalog is exported as real Next pages", () => {
 test("every public route has English, Hindi, presentation, and valid official sources", () => {
   assert.equal(assertCatalogParity(), true);
   for (const route of PORTAL_ROUTES as any[]) {
-    for (const language of ["en", "hi"] as const) {
+    for (const language of ["en", "hi", "hinglish"] as const) {
       const localized = routeDefinition(route.id, language);
       assert.ok(localized?.title, `${route.id} is missing ${language} title`);
       assert.ok(localized?.intro, `${route.id} is missing ${language} introduction`);
