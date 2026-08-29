@@ -2,7 +2,7 @@ export default {
   "meta": {
     "language": "English",
     "languageCode": "en",
-    "title": "Financial Cyber Fraud Reporting Guide",
+    "title": "ThreadZero",
     "qualifier": "Independent concept · Not a government service",
     "disclosure": "Demo information only"
   },
@@ -94,7 +94,7 @@ export default {
     "nothingSent": "Nothing has been submitted"
   },
   "footer": {
-    "title": "Financial Cyber Fraud Reporting Guide",
+    "title": "ThreadZero",
     "qualifier": "Independent concept · Not a government service",
     "body": "A citizen-first guide for organising cyber-fraud information before using official reporting channels.",
     "helpTitle": "We are here to help you",

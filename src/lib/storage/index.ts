@@ -64,7 +64,7 @@ export function parseReportState(value: unknown): ReportState | null {
 export function parseSavedDemoAccess(value: unknown): SavedDemoAccess | null {
   if (!value || typeof value !== "object") return null;
   const saved = value as Record<string, unknown>;
-  if ((saved.version !== 1 && saved.version !== 2) || (saved.profile !== "local" && saved.profile !== "account") || !isString(saved.label) || (saved.language !== "en" && saved.language !== "hi")) return null;
+  if ((saved.version !== 1 && saved.version !== 2) || (saved.profile !== "local" && saved.profile !== "account") || !isString(saved.label) || (saved.language !== "en" && saved.language !== "hi" && saved.language !== "hinglish")) return null;
   const report = parseReportState(saved.report);
   return report ? { version: 2, profile: saved.profile, label: saved.label, language: saved.language, report } : null;
 }

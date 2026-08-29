@@ -4,6 +4,9 @@ import test from "node:test";
 import { fileURLToPath } from "node:url";
 
 import { CHECK_MODE_REDIRECTS, normalizeCheckMode, resolveCheckOutcome } from "../features/check/index.ts";
+import { PORTAL_ROUTES, localizeRoute } from "../content/routes/index.ts";
+import { WORKFLOW_COPY, assertCatalogParity } from "../content/workflow/index.ts";
+import { localized, romanizeHindi } from "../lib/i18n.ts";
 
 const source = (path: string) => readFileSync(fileURLToPath(new URL(path, import.meta.url)), "utf8");
 
@@ -46,6 +49,51 @@ test("shared shell aligns to content width and report progress owns its scrollba
   assert.doesNotMatch(shell, /max-w-shell/);
   assert.match(flow, /flow-step-scrollbar/);
   assert.match(css, /\.flow-step-scrollbar::-webkit-scrollbar-thumb/);
+});
+
+test("workspace families share quiet navigation and Check keeps canonical mode URLs", () => {
+  const navigator = source("../components/workspace-navigator.tsx");
+  const check = source("../components/check-workspace.tsx");
+  assert.match(navigator, /CHECK_MODE_REDIRECTS/);
+  assert.match(navigator, /\/official-tools\?mode=\$\{mode\}/);
+  assert.match(navigator, /border-b-2/);
+  assert.match(navigator, /md:hidden/);
+  assert.match(check, /WorkspaceNavigator routeId=\{activeRoute\}/);
+  assert.doesNotMatch(check, /Check tools|Local demo tools|स्थानीय डेमो उपकरण|CHECK_MODES|modeLabel/);
+});
+
+test("demo identity and footer guidance stay compact without losing their boundaries", () => {
+  const shell = source("../components/shell.tsx");
+  assert.doesNotMatch(shell, /profileLabel|DEMO-08421/);
+  assert.match(shell, /Demo profile/);
+  assert.match(shell, /assetId="footerHelp"/);
+  assert.doesNotMatch(shell, /min-h-64|md:min-h-56|xl:min-h-72|absolute bottom-0/);
+});
+
+test("Hinglish is a complete persisted locale with Roman-script route and workflow copy", () => {
+  assert.equal(romanizeHindi("साक्ष्य तैयार करें"), "saakshya taiyaar karen");
+  assert.equal(localized({ en: "Evidence", hi: "साक्ष्य" }, "hinglish"), "saakshya");
+  assert.equal(assertCatalogParity(WORKFLOW_COPY.hi, WORKFLOW_COPY.hinglish, "hinglish"), true);
+  const copy = JSON.stringify(WORKFLOW_COPY.hinglish) + PORTAL_ROUTES.map((route) => JSON.stringify(localizeRoute(route, "hinglish"))).join("");
+  assert.doesNotMatch(copy, /[\u0900-\u097f]/);
+  const provider = source("../components/portal-provider.tsx");
+  const shell = source("../components/shell.tsx");
+  assert.match(provider, /storedLanguage === "hinglish"/);
+  assert.match(provider, /"hi-Latn"/);
+  assert.equal((shell.match(/value="hinglish"/g) || []).length, 2);
+});
+
+test("shared brand, topic rows, urgent strip, and Guide transitions reflect browser feedback", () => {
+  const shell = source("../components/shell.tsx");
+  const topics = source("../components/public-route.tsx");
+  const guide = source("../components/guide-drawer.tsx");
+  assert.match(shell, /const title = "ThreadZero"/);
+  assert.doesNotMatch(shell, /Financial Cyber Fraud Reporting Guide/);
+  assert.match(shell, /Lost money\? Call 1930 manually/);
+  assert.match(shell, /border-b-2/);
+  assert.match(topics, /function TopicGuide[\s\S]*className="divide-y divide-line"/);
+  assert.match(guide, /setChoice\(CHOICES\.includes/);
+  assert.match(guide, /requestAnimationFrame\(openSearch\)/);
 });
 
 test("production components do not bypass the central image registry", () => {

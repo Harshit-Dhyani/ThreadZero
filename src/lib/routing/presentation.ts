@@ -39,7 +39,7 @@ const ROUTE_PRESENTATION = Object.freeze({
   volunteers: route("learn", "community", "task-chooser", "learn-or-open-official", "", "compact"),
   "volunteer-terms": route("learn", "community-terms", "practical-guidance", "read-official-terms", "", "compact"),
   "unlawful-content": route("learn", "community-content", "practical-guidance", "preserve-and-report", "", "compact"),
-  "volunteer-register": route("learn", "community-register", "local-form", "prepare-volunteer-details", "", "compact"),
+  "volunteer-register": route("learn", "community-register", "practical-guidance", "prepare-volunteer-details", "", "compact"),
   "volunteer-login": route("learn", "community-access", "local-form", "prepare-demo-access", "", "compact"),
   "learning-corner": route("learn", "overview", "learning-hub", "browse-learning", "", "standard"),
   guides: route("report", "guides", "evidence-guide", "prepare-evidence", "P06-evidence-thread-v1"),

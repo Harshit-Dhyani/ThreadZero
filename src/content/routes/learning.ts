@@ -359,50 +359,46 @@ export const LEARNING_ROUTES = [
     "items": [
       {
         "title": {
-          "en": "Cyber hygiene",
-          "hi": "साइबर स्वच्छता"
+          "en": "Accounts and devices",
+          "hi": "खाते और डिवाइस"
         },
         "body": {
-          "en": "Protect accounts, devices, recovery channels, and personal information.",
-          "hi": "खाते, डिवाइस, रिकवरी माध्यम और निजी जानकारी सुरक्षित रखें।"
+          "en": "Use unique passwords, multi-factor authentication, trusted app stores, updates, and protected recovery channels.",
+          "hi": "अलग पासवर्ड, बहु-कारक प्रमाणीकरण, विश्वसनीय ऐप स्टोर, अपडेट और सुरक्षित रिकवरी माध्यम उपयोग करें।"
         },
         "route": ""
       },
       {
         "title": {
-          "en": "Financial fraud",
-          "hi": "वित्तीय धोखाधड़ी"
+          "en": "Money and payments",
+          "hi": "पैसा और भुगतान"
         },
         "body": {
-          "en": "Pause before payment and independently verify the recipient and request.",
-          "hi": "भुगतान से पहले रुकें और प्राप्तकर्ता तथा अनुरोध की स्वतंत्र पुष्टि करें।"
+          "en": "Pause before every urgent transfer, verify the recipient independently, and remember that a UPI PIN sends money.",
+          "hi": "हर जल्दबाज़ी वाले हस्तांतरण से पहले रुकें, प्राप्तकर्ता की स्वतंत्र पुष्टि करें और याद रखें कि UPI PIN पैसा भेजता है।"
         },
         "route": ""
       },
       {
         "title": {
-          "en": "Job fraud",
-          "hi": "नौकरी धोखाधड़ी"
+          "en": "Identity and social pressure",
+          "hi": "पहचान और सामाजिक दबाव"
         },
         "body": {
-          "en": "Verify employers and avoid fees, deposits, or identity requests from unverified recruiters.",
-          "hi": "नियोक्ता की पुष्टि करें और अप्रमाणित भर्ती करने वालों की फीस, जमा या पहचान माँग से बचें।"
+          "en": "Verify unusual contacts through another trusted channel and never send money because of secrecy, fear, romance, or an emergency story.",
+          "hi": "असामान्य संपर्क की दूसरे विश्वसनीय माध्यम से पुष्टि करें और गोपनीयता, डर, संबंध या आपात कहानी के कारण पैसे न भेजें।"
         },
         "route": ""
       },
       {
-        "title": { "en": "Matrimonial fraud", "hi": "वैवाहिक धोखाधड़ी" },
-        "body": { "en": "Verify identities over time and never send money because of pressure or an emergency story.", "hi": "समय लेकर पहचान सत्यापित करें और दबाव या आपात कहानी के कारण पैसे न भेजें।" },
-        "route": ""
-      },
-      {
-        "title": { "en": "Social-media safety", "hi": "सोशल मीडिया सुरक्षा" },
-        "body": { "en": "Review privacy settings, verify unusual contacts, and preserve evidence of abuse.", "hi": "गोपनीयता सेटिंग देखें, असामान्य संपर्क सत्यापित करें और दुरुपयोग का साक्ष्य रखें।" },
-        "route": ""
-      },
-      {
-        "title": { "en": "Awareness booklet", "hi": "जागरूकता पुस्तिका" },
-        "body": { "en": "Use the official collection for the current downloadable booklet and language versions.", "hi": "वर्तमान डाउनलोड योग्य पुस्तिका और भाषा संस्करण के लिए आधिकारिक संग्रह उपयोग करें।" },
+        "title": {
+          "en": "Family, children, and workplaces",
+          "hi": "परिवार, बच्चे और कार्यस्थल"
+        },
+        "body": {
+          "en": "Discuss grooming, bullying, privacy, and reporting without blame. Do not forward suspicious links or harmful private material while raising awareness.",
+          "hi": "दोष दिए बिना ग्रूमिंग, बुलिंग, गोपनीयता और रिपोर्टिंग पर बात करें। जागरूकता फैलाते समय संदिग्ध लिंक या हानिकारक निजी सामग्री आगे न भेजें।"
+        },
         "route": ""
       }
     ],
@@ -425,48 +421,14 @@ export const LEARNING_ROUTES = [
       "hi": "दैनिक डाइजेस्ट"
     },
     "title": {
-      "en": "A calmer way to review advisories",
-      "hi": "सलाह देखने का सरल तरीका"
+      "en": "The latest practical alerts",
+      "hi": "नवीनतम व्यावहारिक चेतावनियाँ"
     },
     "intro": {
-      "en": "Use this local reading structure; verify dates and notices in the cited official source.",
-      "hi": "इस स्थानीय पढ़ने की संरचना का उपयोग करें; तारीख और सूचना आधिकारिक स्रोत में सत्यापित करें।"
+      "en": "Review the five newest source-backed advisory records with an immediate action for each; verify dates and full notices at the official source.",
+      "hi": "हर एक के तत्काल कदम के साथ पाँच नवीनतम स्रोत-आधारित सलाह रिकॉर्ड देखें; तारीख और पूरी सूचना आधिकारिक स्रोत पर जाँचें।"
     },
-    "items": [
-      {
-        "title": {
-          "en": "Payment requests",
-          "hi": "भुगतान अनुरोध"
-        },
-        "body": {
-          "en": "Check recent payment-fraud patterns.",
-          "hi": "नए भुगतान धोखाधड़ी पैटर्न देखें।"
-        },
-        "route": "advisories"
-      },
-      {
-        "title": {
-          "en": "Account safety",
-          "hi": "खाता सुरक्षा"
-        },
-        "body": {
-          "en": "Review practical protective steps.",
-          "hi": "व्यावहारिक सुरक्षा चरण देखें।"
-        },
-        "route": "safety"
-      },
-      {
-        "title": {
-          "en": "Evidence checklist",
-          "hi": "साक्ष्य तैयारी"
-        },
-        "body": {
-          "en": "Prepare before an incident becomes harder to reconstruct.",
-          "hi": "घटना का पुनर्निर्माण कठिन होने से पहले तैयारी करें।"
-        },
-        "route": "guides"
-      }
-    ],
+    "items": [],
     "fields": [],
     "sources": [
       "officialDigest"

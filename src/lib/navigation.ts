@@ -1,4 +1,5 @@
 import type { Language, LocalizedText } from "./types.ts";
+import { localized } from "./i18n.ts";
 
 export type NavigationItem = {
   route: string;
@@ -82,7 +83,7 @@ export const NAV_GROUPS: readonly NavigationItem[] = [
   }
 ];
 
-export const navigationLabel = (entry: NavigationItem, language: Language) => entry.label[language];
+export const navigationLabel = (entry: NavigationItem, language: Language) => localized(entry.label, language);
 
 export const navigationMenuChildren = (entry: NavigationItem) => entry.children?.filter((child) => child.showInMenu !== false) ?? [];
 

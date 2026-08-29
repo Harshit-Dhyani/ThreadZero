@@ -1,6 +1,7 @@
 import { DEMO_FIXTURE, FLOW_STAGES, LEGACY_FLOW_REDIRECTS } from "../../data/demo.ts";
 import { validateEvidence } from "../evidence/index.ts";
 import type { Incident, Language, ReportState } from "../../lib/types.ts";
+import { localized } from "../../lib/i18n.ts";
 
 const FLOW_ROUTE_IDS = FLOW_STAGES.map((step) => step.id);
 const clone = <T,>(value: T): T => structuredClone(value);
@@ -52,10 +53,10 @@ export function createReportPreparationPack(report: ReportState, language: Langu
   const availability = { have: hi ? "मेरे पास है" : "I have it", missing: hi ? "मेरे पास नहीं है" : "I don't have it", unsure: hi ? "पता नहीं" : "Not sure" };
   const evidence = report.evidence.map((item) => {
     const events = report.events.filter((event) => item.relatedEventIds.includes(event.id)).map((event) => event.description).join(", ");
-    return `${availability[item.availability]}: ${item.name[language]}${events ? ` — ${hi ? "समयरेखा" : "Timeline"}: ${events}` : ""}`;
+    return `${availability[item.availability]}: ${localized(item.name, language)}${events ? ` — ${hi ? "समयरेखा" : "Timeline"}: ${events}` : ""}`;
   }).join("\n");
   const timeline = report.events.map((event, index) => {
-    const linked = report.evidence.filter((item) => item.relatedEventIds.includes(event.id)).map((item) => item.name[language]).join(", ");
+    const linked = report.evidence.filter((item) => item.relatedEventIds.includes(event.id)).map((item) => localized(item.name, language)).join(", ");
     return `${index + 1}. ${event.date} ${event.time} — ${event.description}${linked ? ` [${hi ? "साक्ष्य" : "Evidence"}: ${linked}]` : ""}`;
   }).join("\n");
   const sections = [
