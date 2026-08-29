@@ -59,6 +59,33 @@ body {
 
 button, input, select, textarea { font: inherit; }
 
+:is(button, summary, select, a[href]) {
+  transition: color 160ms ease-out, background-color 160ms ease-out, border-color 160ms ease-out, box-shadow 160ms ease-out, transform 160ms ease-out, opacity 160ms ease-out;
+}
+
+:is(button, summary, select, a[href]):not(:disabled) { cursor: pointer; }
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+@media (hover: hover) {
+  button:not(:disabled):hover,
+  a[href].rounded-control:hover {
+    box-shadow: 0 3px 10px rgb(7 31 74 / 0.1);
+  }
+
+  :is(button, a[href])[class*="bg-civic-600"]:not(:disabled):hover {
+    transform: translateY(-1px);
+  }
+}
+
+button:not(:disabled):active,
+a[href].rounded-control:active { transform: scale(0.99); }
+
+label:has(> input[type="checkbox"]) { min-height: 2.75rem; }
+
 :focus-visible {
   outline: 3px solid #f5b400;
   outline-offset: 3px;
