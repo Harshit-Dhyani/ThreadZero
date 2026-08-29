@@ -19,9 +19,9 @@ function assertWebp(path: string) {
   assert.equal(bytes.subarray(8, 12).toString("ascii"), "WEBP", `invalid WEBP header: ${path}`);
 }
 
-test("release build is pinned and verifies the exported artifact", () => {
+test("release build is pinned, tested, and verifies the exported artifact", () => {
   assert.equal(packageJson.packageManager, "bun@1.3.14");
-  assert.match(packageJson.scripts?.build ?? "", /next build\s*&&\s*bun run verify:export/);
+  assert.match(packageJson.scripts?.build ?? "", /bun run test\s*&&\s*next build\s*&&\s*bun run verify:export/);
   assert.equal(packageJson.scripts?.["verify:export"], "bun tools/verify-export.ts");
   assert.equal(existsSync(pathFromTest("../../tools/verify-export.ts")), true);
 
