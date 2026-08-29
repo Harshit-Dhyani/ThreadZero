@@ -1,4 +1,4 @@
-import { canonicalFlowRoute, createInitialState } from "../../domains/report/index.ts";
+import { canonicalFlowRoute, createInitialState, refreshTimelineForReport } from "../../domains/report/index.ts";
 import { FLOW_STAGES } from "../../data/demo.ts";
 import type { EvidenceAvailability, Language, ReportKind, ReportingMode, ReportState, WomenChildCategory } from "../types.ts";
 
@@ -27,6 +27,16 @@ function legacyEntryMode(value: unknown): { reportKind: ReportKind; reportingMod
   if (value === "other") return { reportKind: "other", reportingMode: "standard" };
   if (value === "financial") return { reportKind: "financial", reportingMode: "standard" };
   return { reportKind: "unselected", reportingMode: "standard" };
+}
+
+function sanitiseNonFinancialState(report: ReportState) {
+  if (report.reportKind === "financial" || report.reportKind === "unselected") return;
+  report.incident.amount = "";
+  report.incident.paymentMethod = "";
+  report.incident.transactionReference = "";
+  report.incident.recipientIdentifier = "";
+  report.extracted = {};
+  if (report.events.some((event) => event.id === "event-payment")) refreshTimelineForReport(report);
 }
 
 export function parseReportState(value: unknown): ReportState | null {
@@ -72,6 +82,8 @@ export function parseReportState(value: unknown): ReportState | null {
     const target = report.evidence.find((item) => item.id === (legacyEvidenceIds[event.evidenceId] || event.evidenceId));
     if (target && !target.relatedEventIds.includes(event.id)) target.relatedEventIds.push(event.id);
   }
+
+  sanitiseNonFinancialState(report);
   return report;
 }
 
@@ -89,3 +101,8 @@ export function readSavedDemoAccess(storage: Storage): SavedDemoAccess | null {
 }
 
 export function writeSavedDemoAccess(storage: Storage, value: SavedDemoAccess) { storage.setItem(ACCESS_KEY, JSON.stringify(value)); }
+
+export function eraseSavedDemoData(storage: Storage) {
+  storage.removeItem(ACCESS_KEY);
+  storage.removeItem(LANGUAGE_KEY);
+}

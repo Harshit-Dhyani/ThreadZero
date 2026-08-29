@@ -31,27 +31,19 @@ test("grouped navigation uses valid, unique sibling targets", () => {
   assert.equal(navigationGroupFor("evidence")?.route, "incident");
   assert.equal(navigationGroupFor("volunteer-login")?.route, "learning-corner");
   assert.equal(navigationGroupFor("privacy")?.route, "contact");
+  assert.equal(navigationGroupFor("accessibility")?.route, "contact");
   assert.equal(workspaceFor("guides"), "report");
-  assert.equal(workspaceFor("accessibility"), "learn");
+  assert.equal(workspaceFor("accessibility"), "help");
   assert.equal(workspaceFor("contact"), "help");
 });
 
-test("contextual navigation exposes approved non-report route families while Report keeps its own stepper", () => {
-  const expected = {
-    check: ["official-tools", "check-identifier", "check-website", "mobile-connections", "report-abuse", "report-suspect", "appeal"],
-    learn: ["learning-corner", "safety", "awareness", "advisories", "daily-digest", "training", "media", "accessibility"],
-    volunteers: ["volunteers", "volunteer-terms", "unlawful-content", "volunteer-register", "volunteer-login"],
-    help: ["contact", "faq", "feedback", "grievance"]
-  } as const;
-  for (const [family, routes] of Object.entries(expected)) {
-    const context = navigationContextFor(routes[0]);
-    assert.ok(context, `${family} is missing contextual navigation`);
-    assert.deepEqual(context.items.map((item) => item.route), routes);
-    context.items.forEach((item) => assert.ok(item.label.en && item.label.hi, `${item.route} is missing contextual labels`));
+test("V6 canonical hubs stay flat while hidden legacy routes retain grouping metadata", () => {
+  for (const route of ["official-tools", "learning-corner", "contact", "incident", "details", "evidence", "chronology", "review", "complaints", "women-children", "anonymous-report", "registered-report", "other-cybercrime"]) {
+    assert.equal(navigationContextFor(route), null, `${route} should not require a second citizen navigation layer`);
   }
-  for (const route of ["incident", "details", "evidence", "chronology", "review", "complaints", "women-children", "anonymous-report", "registered-report", "other-cybercrime"]) {
-    assert.equal(navigationContextFor(route), null, `${route} should remain inside the single report workspace`);
-  }
+  assert.deepEqual(navigationContextFor("check-identifier")?.items.map((item) => item.route), ["check-identifier", "check-website", "mobile-connections"]);
+  assert.deepEqual(navigationContextFor("safety")?.items.map((item) => item.route), ["safety", "awareness", "advisories", "daily-digest", "training", "media"]);
+  assert.deepEqual(navigationContextFor("faq")?.items.map((item) => item.route), ["faq", "feedback", "grievance", "accessibility"]);
 });
 
 test("complaint routes keep deep links and now seed the single adaptive report workspace", () => {

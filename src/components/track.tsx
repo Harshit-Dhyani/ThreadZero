@@ -1,81 +1,45 @@
 "use client";
 
-import { useRef, useState } from "react";
-import { Check, Circle, Clock3, ExternalLink, Search } from "lucide-react";
-import { WORKFLOW_COPY as COPY } from "@/content/workflow";
-import { formatDateTime, formatMoney } from "@/domains/report";
-import { resolveTrackRecord, type TrackRecord } from "@/features/track";
-import { DEMO_FIXTURE } from "@/data/demo";
+import Link from "next/link";
+import { ArrowRight, Check, Circle, ExternalLink, FileCheck2 } from "lucide-react";
+import { evidenceForReportKind, reportProgressSummary } from "@/domains/report";
+import { FLOW_STAGES } from "@/data/demo";
+import { OFFICIAL_DESTINATIONS } from "@/data/official-sources";
 import { localized } from "@/lib/i18n";
 import { usePortal } from "./portal-provider";
 
 export function TrackWorkspace() {
-  const { language, report: savedReport } = usePortal();
-  const c = COPY[language].tracker;
-  const [reference, setReference] = useState("");
-  const [record, setRecord] = useState<TrackRecord | null>(null);
-  const [error, setError] = useState("");
-  const inputRef = useRef<HTMLInputElement>(null);
-  const errorRef = useRef<HTMLParagraphElement>(null);
-
-  const submit = (event: React.FormEvent) => {
-    event.preventDefault();
-    const result = resolveTrackRecord(reference, savedReport);
-    if (result.status !== "found" || !result.record) {
-      setRecord(null);
-      setError(result.status === "empty" ? c.empty : c.invalid);
-      requestAnimationFrame(() => errorRef.current?.focus());
-      return;
-    }
-    setReference(result.normalized);
-    setError("");
-    setRecord(result.record);
-  };
-
-  const clear = () => {
-    setReference("");
-    setRecord(null);
-    setError("");
-    requestAnimationFrame(() => inputRef.current?.focus());
-  };
-  const openDemo = () => {
-    const result = resolveTrackRecord(DEMO_FIXTURE.reportReference, savedReport);
-    setReference(DEMO_FIXTURE.reportReference);
-    setError("");
-    setRecord(result.record ?? null);
-  };
+  const { language, report, navigate } = usePortal();
+  const progress = reportProgressSummary(report);
+  const relevantEvidence = evidenceForReportKind(report.evidence, report.reportKind);
+  const official = OFFICIAL_DESTINATIONS.officialTrack;
+  const hasStarted = report.reportKind !== "unselected" || report.completed.length > 0;
 
   return <div className="mx-auto max-w-content px-5 py-8 md:px-8 md:py-10">
-    <p className="text-xs text-civic-700">{c.breadcrumb}</p>
-    <header className="mt-7 max-w-document border-b border-line pb-8"><h1 className="max-w-[22ch] text-[38px] font-semibold leading-[1.08] tracking-[-0.035em] sm:text-[44px]">{c.title}</h1><p className="mt-4 max-w-2xl text-base leading-7 text-muted">{c.intro}</p></header>
-    <section className="mt-7 rounded-panel border border-line bg-white p-5 sm:p-7">
-      <form className="flex max-w-form flex-col gap-3 sm:flex-row sm:items-end" onSubmit={submit} noValidate>
-        <label className="grid flex-1 gap-2"><span className="text-sm font-medium">{c.label}</span><input ref={inputRef} value={reference} onChange={(event) => setReference(event.target.value)} className="min-h-11 rounded-control border border-line px-3 font-mono text-sm uppercase" aria-invalid={Boolean(error)} aria-describedby="track-boundary" /></label>
-        <div className="flex gap-2"><button className="inline-flex min-h-11 items-center gap-2 rounded-control bg-civic-600 px-5 text-sm font-semibold text-white"><Search className="size-4" />{c.submit}</button><button type="button" className="min-h-11 rounded-control border border-line px-4 text-sm font-medium" onClick={clear}>{c.reset}</button></div>
-      </form>
-      <p id="track-boundary" className="mt-4 max-w-3xl text-sm leading-6 text-muted">{c.boundary}</p>
-      {error ? <p ref={errorRef} tabIndex={-1} role="alert" className="mt-4 border-l-[3px] border-urgent bg-urgent-soft p-3 text-sm text-urgent">{error}</p> : null}
-    </section>
-    {!record && !error ? <aside className="mt-6 grid gap-4 border-t border-line py-5 sm:grid-cols-[1fr_auto] sm:items-center"><div><h2 className="text-lg font-semibold">{language === "hi" ? "डेमो स्थिति देखें" : "Try the demo status"}</h2><p className="mt-2 text-sm leading-6 text-muted">{language === "hi" ? `उदाहरण रिपोर्ट देखने के लिए ${DEMO_FIXTURE.reportReference} उपयोग करें। यह NCRP या पुलिस स्थिति नहीं है।` : `Use ${DEMO_FIXTURE.reportReference} to view an example report. It is not an NCRP or police status.`}</p></div><button type="button" className="min-h-11 rounded-control border border-civic-600 bg-white px-5 text-sm font-semibold text-civic-700" onClick={openDemo}>{language === "hi" ? "डेमो स्थिति खोलें" : "Show demo status"}</button></aside> : null}
-    {record ? <TrackResult record={record} /> : null}
+    <nav aria-label="Breadcrumb" className="text-xs text-civic-700"><Link className="inline-flex min-h-11 items-center" href="/">{language === "hi" ? "होम" : "Home"}</Link><span className="mx-2">/</span><span>{language === "hi" ? "प्रगति" : "Progress"}</span></nav>
+    <header className="mt-6 max-w-3xl"><h1 className="text-[38px] font-semibold leading-[1.08] tracking-[-0.035em] sm:text-[44px]">{language === "hi" ? "आपकी प्रगति" : "Your progress"}</h1><p className="mt-4 text-base leading-7 text-muted">{language === "hi" ? "यह पेज केवल इस ThreadZero डेमो में आपकी रिपोर्ट तैयारी दिखाता है। यह सरकारी शिकायत की स्थिति नहीं है।" : "This page shows only your report preparation inside this ThreadZero demo. It is not government complaint status."}</p></header>
+
+    <section className="mt-8 border-y border-line py-6"><div className="grid gap-6 lg:grid-cols-[1fr_320px] lg:items-start"><div><div className="flex flex-wrap items-end justify-between gap-3"><div><p className="text-xs font-semibold uppercase tracking-[0.12em] text-civic-700">{language === "hi" ? "रिपोर्ट तैयारी" : "Report preparation"}</p><h2 className="mt-2 text-2xl font-semibold">{hasStarted ? (language === "hi" ? `${progress.completed}/${progress.totalStages} चरण पूरे` : `${progress.completed}/${progress.totalStages} stages complete`) : (language === "hi" ? "अभी शुरू नहीं किया" : "Not started yet")}</h2></div><span className="text-sm font-semibold text-civic-700">{Math.round(progress.completed / progress.totalStages * 100)}%</span></div><div className="mt-4 h-2 overflow-hidden rounded-full bg-civic-100" aria-label={language === "hi" ? "रिपोर्ट प्रगति" : "Report progress"}><div className="h-full bg-civic-600" style={{ width: `${Math.round(progress.completed / progress.totalStages * 100)}%` }} /></div><ol className="mt-6 divide-y divide-line border-y border-line">{FLOW_STAGES.map((stage, index) => {
+      const done = report.completed.includes(stage.id);
+      const current = !done && progress.next === stage.id;
+      return <li key={stage.id} className="flex min-h-14 items-center gap-3 py-2"><span className={`grid size-8 shrink-0 place-items-center rounded-full ${done ? "bg-success text-white" : current ? "bg-civic-600 text-white" : "border border-line bg-white text-muted"}`}>{done ? <Check className="size-4" /> : index + 1}</span><span className="flex-1 text-sm font-semibold">{stageLabel(stage.id, language)}</span><span className="text-xs text-muted">{done ? (language === "hi" ? "पूरा" : "Done") : current ? (language === "hi" ? "अगला" : "Next") : ""}</span></li>;
+    })}</ol><button className="mt-5 inline-flex min-h-11 items-center gap-2 rounded-control bg-civic-600 px-5 text-sm font-semibold text-white" onClick={() => navigate(hasStarted ? progress.next : "incident")}>{hasStarted ? (language === "hi" ? "तैयारी जारी रखें" : "Continue preparation") : (language === "hi" ? "रिपोर्ट तैयारी शुरू करें" : "Start report preparation")}<ArrowRight className="size-4" /></button></div>
+
+    <aside className="border-l border-line pl-5"><FileCheck2 className="size-6 text-civic-700" /><h2 className="mt-3 text-lg font-semibold">{language === "hi" ? "साक्ष्य तैयारी" : "Evidence readiness"}</h2>{progress.evidence.total === 0 ? <p className="mt-2 text-sm leading-6 text-muted">{language === "hi" ? "पहले What happened? चरण में घटना प्रकार चुनें।" : "Choose the incident type in What happened? first."}</p> : <dl className="mt-4 grid grid-cols-3 gap-3 text-center"><div><dt className="text-xs text-muted">{language === "hi" ? "है" : "Have"}</dt><dd className="mt-1 text-xl font-semibold text-success">{progress.evidence.have}</dd></div><div><dt className="text-xs text-muted">{language === "hi" ? "नहीं" : "Missing"}</dt><dd className="mt-1 text-xl font-semibold text-warning">{progress.evidence.missing}</dd></div><div><dt className="text-xs text-muted">{language === "hi" ? "पता नहीं" : "Unsure"}</dt><dd className="mt-1 text-xl font-semibold">{progress.evidence.unsure}</dd></div></dl>}<p className="mt-4 text-xs leading-5 text-muted">{language === "hi" ? "गायब साक्ष्य को विफलता न मानें। तात्कालिक रिपोर्टिंग को केवल हर बॉक्स भरने के लिए न रोकें।" : "Missing evidence is not failure. Do not delay urgent reporting just to fill every box."}</p></aside></div></section>
+
+    {relevantEvidence.length > 0 && <section className="mt-8"><h2 className="text-xl font-semibold">{language === "hi" ? "अभी क्या उपलब्ध है" : "What you have right now"}</h2><ul className="mt-4 divide-y divide-line border-y border-line">{relevantEvidence.slice(0, 6).map((item) => <li key={item.id} className="flex min-h-14 items-center gap-3 py-2"><span className={`grid size-7 shrink-0 place-items-center rounded-full ${item.availability === "have" ? "bg-success-soft text-success" : "bg-canvas text-muted"}`}>{item.availability === "have" ? <Check className="size-4" /> : <Circle className="size-3" />}</span><span className="flex-1 text-sm font-medium">{localized(item.name, language)}</span><span className="text-xs text-muted">{item.availability === "have" ? (language === "hi" ? "मेरे पास है" : "I have it") : item.availability === "missing" ? (language === "hi" ? "नहीं है" : "Missing") : (language === "hi" ? "पता नहीं" : "Not sure")}</span></li>)}</ul></section>}
+
+    <section className="mt-9 border-t border-line pt-7"><div className="grid gap-4 md:grid-cols-[1fr_auto] md:items-center"><div><h2 className="text-xl font-semibold">{language === "hi" ? "पहले से आधिकारिक रिपोर्ट की है?" : "Already reported officially?"}</h2><p className="mt-2 max-w-3xl text-sm leading-6 text-muted"><strong className="text-ink">{language === "hi" ? "ThreadZero सरकारी केस की स्थिति नहीं देख सकता।" : "ThreadZero cannot see government case status."}</strong> {language === "hi" ? "अपने आधिकारिक acknowledgement/reference के साथ NCRP की आधिकारिक ट्रैकिंग सेवा उपयोग करें।" : "Use the official NCRP tracking service with your official acknowledgement/reference."}</p></div><a className="inline-flex min-h-11 items-center gap-2 rounded-control border border-civic-600 px-5 text-sm font-semibold text-civic-700" href={official.url} target="_blank" rel="noreferrer">{localized(official, language)}<ExternalLink className="size-4" /></a></div><p className="mt-4 text-xs text-muted">{language === "hi" ? `आधिकारिक लिंक जाँचा गया: ${official.verifiedOn}` : `Official link checked: ${official.verifiedOn}`}</p></section>
   </div>;
 }
 
-function TrackResult({ record }: { record: TrackRecord }) {
-  const { language } = usePortal();
-  const c = COPY[language].tracker;
-  const report = record.report;
-  const ready = report.evidence.filter((item) => item.availability === "have");
-  const missing = report.evidence.filter((item) => item.availability === "missing");
-  return <div className="mt-6 grid gap-6">
-    <section className="overflow-hidden rounded-panel border border-line bg-white">
-      <div className="flex flex-wrap items-start justify-between gap-4 border-b border-line bg-civic-50 p-5 sm:p-7"><div><p className="text-xs font-semibold uppercase tracking-[0.12em] text-success">{c.found}</p><h2 className="mt-2 text-2xl font-semibold">{record.reference}</h2></div><div className="border-l-[3px] border-civic-600 bg-white px-4 py-3"><span className="block text-xs font-medium uppercase tracking-[0.1em] text-muted">{language === "hi" ? "वर्तमान स्थिति" : "Current state"}</span><strong className="mt-1 block font-medium text-civic-700">{c.status}</strong></div></div>
-      <div className="grid lg:grid-cols-[1.2fr_0.8fr]">
-        <div className="p-5 sm:p-7"><h2 className="text-xl font-semibold">{c.facts}</h2><dl className="mt-5 grid gap-x-8 gap-y-5 sm:grid-cols-3">{[[language === "hi" ? "राशि" : "Amount", formatMoney(report.incident.amount)], [language === "hi" ? "माध्यम" : "Method", report.incident.paymentMethod], [language === "hi" ? "संपर्क माध्यम" : "Channel", report.incident.contactChannel], [language === "hi" ? "दिनांक और समय" : "Date and time", formatDateTime(report.incident.date, report.incident.time)], [language === "hi" ? "प्राप्तकर्ता" : "Recipient", report.incident.recipientIdentifier], ["UTR", report.incident.transactionReference]].map(([label, value]) => <div key={`${label}-${value}`}><dt className="text-xs font-medium uppercase tracking-[0.1em] text-muted">{label}</dt><dd className="mt-1 text-sm font-medium">{value}</dd></div>)}</dl></div>
-        <div className="border-t border-line bg-canvas p-5 sm:p-7 lg:border-l lg:border-t-0"><h2 className="text-xl font-semibold">{c.readiness}</h2><ul className="mt-4 space-y-4">{[...ready.slice(0, 2), ...missing.slice(0, 1)].map((item) => <li key={item.id} className="flex items-center gap-3 text-sm"><span className={`grid size-7 shrink-0 place-items-center rounded-full ${item.availability === "have" ? "bg-success-soft text-success" : "bg-warning-soft text-warning"}`}>{item.availability === "have" ? <Check className="size-4" /> : <Circle className="size-3" />}</span><span><strong className="font-medium">{localized(item.name, language)}</strong><span className="block text-xs text-muted">{item.availability === "have" ? c.ready : c.missing}</span></span></li>)}</ul></div>
-      </div>
-    </section>
-    <section className="rounded-panel border border-line bg-white p-5 sm:p-7"><h2 className="text-xl font-semibold">{c.timeline}</h2><ol className="mt-5 grid gap-5 md:grid-cols-4">{c.states.map((state, index) => <li key={state.title} className="relative grid grid-cols-[34px_1fr] gap-3 md:grid-cols-1">{index < c.states.length - 1 ? <span className="absolute left-4 top-7 h-full w-px bg-line md:left-8 md:right-0 md:top-4 md:h-px md:w-auto" /> : null}<span className={`relative z-10 grid size-8 place-items-center rounded-full ${index === 0 ? "bg-success text-white" : index === 1 ? "bg-civic-600 text-white" : "border border-line bg-white text-muted"}`}>{index === 0 ? <Check className="size-4" /> : index === 1 ? <Clock3 className="size-4" /> : index + 1}</span><div><h3 className="text-sm font-medium">{state.title}</h3><p className="mt-1 text-sm leading-6 text-muted">{state.body}</p></div></li>)}</ol></section>
-    <aside className="flex flex-col gap-4 rounded-panel border border-line border-l-4 border-l-civic-600 bg-white p-5 sm:flex-row sm:items-center sm:justify-between sm:p-6"><div><h2 className="text-lg font-semibold">{c.next}</h2><p className="mt-2 max-w-3xl text-sm leading-6 text-muted">{c.nextBody}</p></div><a className="inline-flex min-h-11 shrink-0 items-center justify-center gap-2 rounded-control bg-civic-600 px-5 text-sm font-semibold text-white" href="https://cybercrime.gov.in/" target="_blank" rel="noreferrer">{c.official}<ExternalLink className="size-4" /></a></aside>
-  </div>;
+function stageLabel(id: string, language: "en" | "hi" | "hinglish") {
+  const labels: Record<string, { en: string; hi: string }> = {
+    incident: { en: "What happened?", hi: "क्या हुआ?" },
+    details: { en: "Details", hi: "विवरण" },
+    evidence: { en: "Evidence", hi: "साक्ष्य" },
+    chronology: { en: "Timeline", hi: "समयरेखा" },
+    review: { en: "Review & next", hi: "समीक्षा और अगला कदम" }
+  };
+  return localized(labels[id], language);
 }

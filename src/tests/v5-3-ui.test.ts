@@ -7,37 +7,43 @@ import { CHECK_MODE_REDIRECTS, normalizeCheckMode, resolveCheckOutcome } from ".
 import { PORTAL_ROUTES, localizeRoute } from "../content/routes/index.ts";
 import { WORKFLOW_COPY, assertCatalogParity } from "../content/workflow/index.ts";
 import { localized, romanizeHindi } from "../lib/i18n.ts";
+import { NAV_GROUPS, navigationMenuChildren } from "../lib/navigation.ts";
 
 const source = (path: string) => readFileSync(fileURLToPath(new URL(path, import.meta.url)), "utf8");
 
-test("Check keeps one canonical workspace and deterministic fixture truth", () => {
+test("V6 Check keeps one canonical workspace and only three coherent modes", () => {
   assert.deepEqual(CHECK_MODE_REDIRECTS, {
-    "check-identifier": "identifier", "check-website": "website", "mobile-connections": "mobile",
-    "report-abuse": "abuse", "report-suspect": "suspect", appeal: "appeal"
+    "check-identifier": "identifier",
+    "check-website": "website",
+    "mobile-connections": "mobile"
   });
-  assert.equal(normalizeCheckMode("not-a-mode"), "overview");
+  assert.equal(normalizeCheckMode("not-a-mode"), "identifier");
   assert.deepEqual(resolveCheckOutcome("demo@example.test", "identifier"), { value: "demo@example.test", detectedType: "email", status: "match", destination: "officialSuspectSearch" });
   assert.equal(resolveCheckOutcome("https://example.test/", "website").status, "match");
   assert.equal(resolveCheckOutcome("9000000000", "identifier").detectedType, "phone");
   assert.equal(resolveCheckOutcome("123456789012", "identifier").detectedType, "bank-account");
   assert.equal(resolveCheckOutcome("not-listed@example.test", "identifier").status, "no-match");
+  assert.equal(resolveCheckOutcome("9000000000", "mobile").destination, "officialTafcop");
 });
 
-test("Check copy is bilingual and inputs remain outside URLs and storage", () => {
+test("Check is truthful, bilingual, and keeps entered values out of URLs and storage", () => {
   const check = source("../components/check-workspace.tsx");
   const redirect = source("../components/route-screen.tsx");
+  assert.match(check, /not a live fraud database/);
   assert.match(check, /Absence from this demo does not mean the item is safe/);
   assert.match(check, /डेमो में अनुपस्थिति का अर्थ यह नहीं/);
   assert.doesNotMatch(check + redirect, /localStorage|sessionStorage/);
   assert.match(redirect, /\/official-tools\?mode=\$\{mode\}/);
   assert.doesNotMatch(redirect, /value=|identifier=/);
+  assert.doesNotMatch(check, /WorkspaceNavigator|Overview/);
 });
 
-test("V5.3 identity exposes a skip link and static icon without shield identity", () => {
+test("V6 identity exposes a skip link and static icon without fake official identity", () => {
   const owners = [source("../components/shell.tsx"), source("../components/home.tsx"), source("../components/public-route.tsx")].join("\n");
   assert.doesNotMatch(owners, /ShieldCheck/);
   assert.match(owners, /Skip to main content/);
   assert.match(owners, /Waypoints/);
+  assert.match(owners, /Not a government service/);
   assert.ok(existsSync(fileURLToPath(new URL("../app/icon.svg", import.meta.url))));
 });
 
@@ -51,26 +57,30 @@ test("shared shell aligns to content width and report progress owns its scrollba
   assert.match(css, /\.flow-step-scrollbar::-webkit-scrollbar-thumb/);
 });
 
-test("workspace families share quiet navigation and Check keeps canonical mode URLs", () => {
-  const navigator = source("../components/workspace-navigator.tsx");
-  const check = source("../components/check-workspace.tsx");
-  assert.match(navigator, /CHECK_MODE_REDIRECTS/);
-  assert.match(navigator, /\/official-tools\?mode=\$\{mode\}/);
-  assert.match(navigator, /border-b-2/);
-  assert.match(navigator, /md:hidden/);
-  assert.match(check, /WorkspaceNavigator routeId=\{activeRoute\}/);
-  assert.doesNotMatch(check, /Check tools|Local demo tools|स्थानीय डेमो उपकरण|CHECK_MODES|modeLabel/);
-});
-
-test("demo identity and footer guidance stay compact without losing their boundaries", () => {
+test("primary navigation is flat and legacy category routes are hidden", () => {
+  assert.deepEqual(NAV_GROUPS.map((entry) => entry.label.en), ["Home", "Report", "Check", "Progress", "Learn", "Help"]);
+  for (const route of ["incident", "official-tools", "learning-corner", "contact"]) {
+    const entry = NAV_GROUPS.find((item) => item.route === route)!;
+    assert.equal(navigationMenuChildren(entry).length, 0);
+  }
   const shell = source("../components/shell.tsx");
-  assert.doesNotMatch(shell, /profileLabel|DEMO-08421/);
-  assert.match(shell, /Demo profile/);
-  assert.match(shell, /assetId="footerHelp"/);
-  assert.doesNotMatch(shell, /min-h-64|md:min-h-56|xl:min-h-72|absolute bottom-0/);
+  assert.doesNotMatch(shell, /ChevronDown|DesktopNavigationItem/);
 });
 
-test("Hinglish is a complete persisted locale with Roman-script route and workflow copy", () => {
+test("evaluator profile is secondary and the primary helper is singular", () => {
+  const shell = source("../components/shell.tsx");
+  const dialogs = source("../components/portal-dialogs.tsx");
+  const provider = source("../components/portal-provider.tsx");
+  assert.match(shell, /Help me choose/);
+  assert.doesNotMatch(shell, /Demo profile|Search \/ Ask/);
+  assert.match(shell, /Evaluator demo/);
+  assert.match(dialogs, /AssistantDialog/);
+  assert.doesNotMatch(dialogs, /GuideDrawer|SearchDialog/);
+  assert.match(provider, /assistantOpen/);
+  assert.doesNotMatch(provider, /guideOpen|searchOpen/);
+});
+
+test("Hinglish remains a persisted Roman-script locale", () => {
   assert.equal(romanizeHindi("साक्ष्य तैयार करें"), "saakshya taiyaar karen");
   assert.equal(localized({ en: "Evidence", hi: "साक्ष्य" }, "hinglish"), "saakshya");
   assert.equal(assertCatalogParity(WORKFLOW_COPY.hi, WORKFLOW_COPY.hinglish, "hinglish"), true);
@@ -83,22 +93,22 @@ test("Hinglish is a complete persisted locale with Roman-script route and workfl
   assert.equal((shell.match(/value="hinglish"/g) || []).length, 2);
 });
 
-test("shared brand, topic rows, urgent strip, and Guide transitions reflect browser feedback", () => {
+test("urgent guidance stays singular and visible without duplicating the old helpers", () => {
   const shell = source("../components/shell.tsx");
-  const topics = source("../components/public-route.tsx");
-  const guide = source("../components/guide-drawer.tsx");
+  const flow = source("../components/flow-route.tsx");
   assert.match(shell, /const title = "ThreadZero"/);
-  assert.doesNotMatch(shell, /Financial Cyber Fraud Reporting Guide/);
   assert.match(shell, /Lost money\? Call 1930 manually/);
-  assert.match(shell, /border-b-2/);
-  assert.match(topics, /function TopicGuide[\s\S]*className="divide-y divide-line"/);
-  assert.match(guide, /setChoice\(CHOICES\.includes/);
-  assert.match(guide, /requestAnimationFrame\(openSearch\)/);
+  assert.match(shell, /Help me choose/);
+  assert.doesNotMatch(shell, /Search \/ Ask/);
+  assert.match(flow, /Lost money recently\? Call 1930 now/);
+  assert.doesNotMatch(flow, /openGuide|openSearch/);
 });
 
 test("production components do not bypass the central image registry", () => {
   const home = source("../components/home.tsx");
-  const evidence = source("../components/flow-route.tsx");
-  assert.doesNotMatch(home + evidence, /\/assets\/images\//);
+  const flow = source("../components/flow-route.tsx");
+  const shell = source("../components/shell.tsx");
+  assert.doesNotMatch(home + flow + shell, /\/assets\/images\//);
   assert.match(home, /ResponsiveIllustration/);
+  assert.match(shell, /ResponsiveIllustration/);
 });

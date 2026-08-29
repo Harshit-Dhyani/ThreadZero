@@ -4,7 +4,7 @@ import { createContext, useContext, useEffect, useMemo, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { createInitialState } from "@/domains/report";
 import type { Language, ReportState, Workspace } from "@/lib/types";
-import { ACCESS_KEY, LANGUAGE_KEY, readSavedDemoAccess, writeSavedDemoAccess, type DemoProfile } from "@/lib/storage";
+import { ACCESS_KEY, LANGUAGE_KEY, eraseSavedDemoData, readSavedDemoAccess, writeSavedDemoAccess, type DemoProfile } from "@/lib/storage";
 import { workspaceFor } from "@/lib/routes";
 
 type PortalContextValue = {
@@ -20,16 +20,14 @@ type PortalContextValue = {
   profile: DemoProfile;
   profileLabel: string;
   selectProfile: (profile: DemoProfile, label?: string) => void;
-  guideOpen: boolean;
-  guidePreset: string;
-  openGuide: (preset?: string) => void;
-  closeGuide: () => void;
-  searchOpen: boolean;
-  openSearch: () => void;
-  closeSearch: () => void;
+  assistantOpen: boolean;
+  assistantPreset: string;
+  openAssistant: (preset?: string) => void;
+  closeAssistant: () => void;
   profileOpen: boolean;
   openProfile: () => void;
   closeProfile: () => void;
+  eraseLocalData: () => void;
 };
 
 const PortalContext = createContext<PortalContextValue | null>(null);
@@ -49,9 +47,8 @@ export function PortalProvider({ children }: { children: React.ReactNode }) {
   const [profile, setProfile] = useState<DemoProfile>("anonymous");
   const [profileLabel, setProfileLabel] = useState("");
   const [hydrated, setHydrated] = useState(false);
-  const [guideOpen, setGuideOpen] = useState(false);
-  const [guidePreset, setGuidePreset] = useState("");
-  const [searchOpen, setSearchOpen] = useState(false);
+  const [assistantOpen, setAssistantOpen] = useState(false);
+  const [assistantPreset, setAssistantPreset] = useState("");
   const [profileOpen, setProfileOpen] = useState(false);
 
   useEffect(() => {
@@ -77,7 +74,8 @@ export function PortalProvider({ children }: { children: React.ReactNode }) {
       if (editable) return;
       if ((event.key === "/" && !event.ctrlKey && !event.metaKey && !event.altKey) || ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === "k")) {
         event.preventDefault();
-        setSearchOpen(true);
+        setAssistantPreset("search");
+        setAssistantOpen(true);
       }
     };
     document.addEventListener("keydown", shortcut);
@@ -114,17 +112,23 @@ export function PortalProvider({ children }: { children: React.ReactNode }) {
       if (next === "anonymous") localStorage.removeItem(ACCESS_KEY);
       else writeSavedDemoAccess(localStorage, { version: 2, profile: next, label, language, report });
     },
-    guideOpen,
-    guidePreset,
-    openGuide(preset = "") { setGuidePreset(preset); setGuideOpen(true); },
-    closeGuide() { setGuideOpen(false); },
-    searchOpen,
-    openSearch() { setSearchOpen(true); },
-    closeSearch() { setSearchOpen(false); },
+    assistantOpen,
+    assistantPreset,
+    openAssistant(preset = "") { setAssistantPreset(preset); setAssistantOpen(true); },
+    closeAssistant() { setAssistantOpen(false); },
     profileOpen,
     openProfile() { setProfileOpen(true); },
-    closeProfile() { setProfileOpen(false); }
-  }), [currentRoute, currentWorkspace, guideOpen, guidePreset, hydrated, language, profile, profileLabel, profileOpen, report, router, searchOpen]);
+    closeProfile() { setProfileOpen(false); },
+    eraseLocalData() {
+      eraseSavedDemoData(localStorage);
+      setLanguageState("en");
+      setProfile("anonymous");
+      setProfileLabel("");
+      setReport(createInitialState());
+      setAssistantOpen(false);
+      setProfileOpen(false);
+    }
+  }), [assistantOpen, assistantPreset, currentRoute, currentWorkspace, hydrated, language, profile, profileLabel, profileOpen, report, router]);
 
   return <PortalContext.Provider value={value}>{children}</PortalContext.Provider>;
 }
