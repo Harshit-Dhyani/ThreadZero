@@ -6,6 +6,7 @@ import { SUSPECT_ROUTES } from "./suspect.ts";
 import { TRACKING_ROUTES } from "./tracking.ts";
 import { VOLUNTEERS_ROUTES } from "./volunteers.ts";
 import type { Language, LocalizedRoute, LocalizedText, RouteDefinition } from "../../lib/types.ts";
+import { localized } from "../../lib/i18n.ts";
 
 export const PORTAL_ROUTES = [
   ...COMPLAINTS_ROUTES,
@@ -19,7 +20,7 @@ export const PORTAL_ROUTES = [
 
 export const ROUTE_BY_ID = Object.fromEntries(PORTAL_ROUTES.map((route) => [route.id, route])) as Record<string, RouteDefinition>;
 
-const text = (value: LocalizedText | null | undefined, language: Language) => value?.[language] || value?.en || "";
+const text = (value: LocalizedText | null | undefined, language: Language) => localized(value, language);
 export function localizeRoute(route: RouteDefinition | undefined, language: Language): LocalizedRoute | null {
   if (!route) return null;
   return {

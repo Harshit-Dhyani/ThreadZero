@@ -22,12 +22,23 @@ export const HELP_ROUTES = [
     "items": [
       {
         "title": {
+          "en": "What should I do after financial fraud?",
+          "hi": "वित्तीय धोखाधड़ी के बाद क्या करें?"
+        },
+        "body": {
+          "en": "Call 1930 manually and use cybercrime.gov.in as soon as possible. Preserve transaction references, messages, URLs, and timestamps.",
+          "hi": "जितनी जल्दी हो 1930 पर स्वयं कॉल करें और cybercrime.gov.in उपयोग करें। लेन-देन संदर्भ, संदेश, URL और समय सुरक्षित रखें।"
+        },
+        "route": ""
+      },
+      {
+        "title": {
           "en": "Does this submit a complaint?",
           "hi": "क्या यह शिकायत जमा करता है?"
         },
         "body": {
-          "en": "No. It prepares demo information in this browser and never contacts NCRP.",
-          "hi": "नहीं। यह इस ब्राउज़र में डेमो जानकारी तैयार करता है और NCRP से संपर्क नहीं करता।"
+          "en": "No. It prepares demo information in this browser and never contacts NCRP, a bank, or the police.",
+          "hi": "नहीं। यह इस ब्राउज़र में डेमो जानकारी तैयार करता है और NCRP, बैंक या पुलिस से संपर्क नहीं करता।"
         },
         "route": ""
       },
@@ -37,19 +48,30 @@ export const HELP_ROUTES = [
           "hi": "क्या हर फ़ाइल के बिना आगे बढ़ सकते हैं?"
         },
         "body": {
-          "en": "Yes. Mark missing evidence and preserve what is available.",
-          "hi": "हाँ। गायब साक्ष्य चिन्हित करें और उपलब्ध सामग्री सुरक्षित रखें।"
+          "en": "Yes. Mark evidence as missing or unsure, preserve what is available, and continue preparing the record.",
+          "hi": "हाँ। साक्ष्य को गायब या अनिश्चित चिन्हित करें, उपलब्ध सामग्री सुरक्षित रखें और रिकॉर्ड तैयार करना जारी रखें।"
         },
         "route": ""
       },
       {
         "title": {
-          "en": "What should I do after financial fraud?",
-          "hi": "वित्तीय धोखाधड़ी के बाद क्या करें?"
+          "en": "How is an official complaint tracked?",
+          "hi": "आधिकारिक शिकायत कैसे ट्रैक होती है?"
         },
         "body": {
-          "en": "Call 1930 manually and use cybercrime.gov.in as soon as possible.",
-          "hi": "जितनी जल्दी हो 1930 पर स्वयं कॉल करें और cybercrime.gov.in उपयोग करें।"
+          "en": "The official portal uses the acknowledgement number issued after an eligible report. ThreadZero Track accepts only its documented demo reference.",
+          "hi": "आधिकारिक पोर्टल पात्र रिपोर्ट के बाद जारी पावती संख्या उपयोग करता है। ThreadZero Track केवल दर्ज डेमो संदर्भ स्वीकार करता है।"
+        },
+        "route": ""
+      },
+      {
+        "title": {
+          "en": "Why must I accept volunteer terms before demo login?",
+          "hi": "डेमो लॉगिन से पहले स्वयंसेवक नियम क्यों स्वीकार करने हैं?"
+        },
+        "body": {
+          "en": "The official volunteer journey places programme terms and a declaration before login. ThreadZero rehearses that boundary locally and creates no account.",
+          "hi": "आधिकारिक स्वयंसेवक यात्रा लॉगिन से पहले कार्यक्रम नियम और घोषणा रखती है। ThreadZero उसी सीमा का स्थानीय अभ्यास करता है और कोई खाता नहीं बनाता।"
         },
         "route": ""
       }
