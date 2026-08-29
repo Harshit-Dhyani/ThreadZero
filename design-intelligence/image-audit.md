@@ -1,10 +1,10 @@
 # Extracted landing-image audit
 
-Status: complete for landing-page raster imagery.
+Status: complete historical research evidence. The later user decision supersedes its photographic production recommendations: active production is now illustration-only.
 
 Scope: 56 of 56 extracted raster files were visually opened and inspected. Ten SGDS SVG/icon files are preserved for the later component-system phase and are not used to direct landing imagery. Five SVGs were technically rendered before that scope clarification; no landing decision was taken from them.
 
-All third-party files remain internal evidence. Production may use only original generated imagery after human approval.
+All third-party files remain internal evidence. Production may use only original generated illustrations after visual review; no reference or photographic asset ships.
 
 ## NCRP — 35 of 35 rasters inspected
 

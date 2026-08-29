@@ -1,6 +1,8 @@
 # Visual territories
 
-Status: candidate prompts ready; human selection required after rendering.
+Status: superseded by the user-approved **Civic Evidence Service v1** ten-board reference set. Retained only as decision history.
+
+See `design-intelligence/decision.md`, `design-intelligence/board-manifest.json`, and `design-intelligence/visual-constitution.md` for the active direction.
 
 ## Shared first-viewport facts
 

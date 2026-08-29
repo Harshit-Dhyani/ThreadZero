@@ -1,7 +1,10 @@
 import { DEMO, STEPS } from "./demo-data.mjs";
+import { CONTENT_ROUTES } from "./portal-routes.mjs";
 
 export const HOME_ROUTE = "home";
-export const ROUTES = Object.freeze([HOME_ROUTE, ...STEPS.map((step) => step.id)]);
+export const FLOW_ROUTES = Object.freeze([HOME_ROUTE, ...STEPS.map((step) => step.id)]);
+export { CONTENT_ROUTES };
+export const ROUTES = Object.freeze([...FLOW_ROUTES, ...CONTENT_ROUTES]);
 const STEP_IDS = STEPS.map((step) => step.id);
 const copy = (value) => JSON.parse(JSON.stringify(value));
 
@@ -42,14 +45,14 @@ export function highestCompletedIndex(state) {
 }
 
 export function canEnterRoute(route, state) {
-  if (route === HOME_ROUTE) return true;
+  if (route === HOME_ROUTE || CONTENT_ROUTES.includes(route)) return true;
   const index = getStepIndex(route);
   return index >= 0 && index <= highestCompletedIndex(state) + 1;
 }
 
 export function resolveRoute(requested, state) {
   const route = parseRoute(requested);
-  if (route === HOME_ROUTE || canEnterRoute(route, state)) return route;
+  if (CONTENT_ROUTES.includes(route) || route === HOME_ROUTE || canEnterRoute(route, state)) return route;
   if (state.route !== HOME_ROUTE && canEnterRoute(state.route, state)) return state.route;
   return HOME_ROUTE;
 }
@@ -101,6 +104,27 @@ export function validateChronologyEvent(event) {
   return errors;
 }
 
+export function moveChronologyEvent(events, id, direction) {
+  const index = events.findIndex((event) => event.id === id);
+  const target = direction === "up" ? index - 1 : direction === "down" ? index + 1 : index;
+  if (index < 0 || target < 0 || target >= events.length || target === index) return false;
+  const [event] = events.splice(index, 1);
+  events.splice(target, 0, event);
+  return true;
+}
+
+export function validateDemoReference(value) {
+  const normalized = String(value || "").trim().toUpperCase();
+  return { normalized, status: !normalized ? "empty" : normalized === DEMO.reportReference ? "found" : "invalid" };
+}
+
+export function prepareSimulation(state) {
+  state.submission = "prepared";
+  state.locked = true;
+  markRouteComplete(state, "submit");
+  return state;
+}
+
 export function validateCurrentRoute(state) {
   const errors = {};
   if (state.route === "act-now" && !state.actNowAcknowledged) errors.flow = "Choose the preparation pathway to continue.";
@@ -142,7 +166,5 @@ export function announce(liveRegion, message) {
 }
 
 export function focusHeadingOrError(root = document) {
-  const focus = () => root.querySelector("#errorSummary, [data-focus-target], main h1")?.focus();
-  if (typeof globalThis.requestAnimationFrame === "function") globalThis.requestAnimationFrame(focus);
-  else queueMicrotask(focus);
+  (root.querySelector("#errorSummary") || root.querySelector("[data-focus-target], main h1"))?.focus();
 }

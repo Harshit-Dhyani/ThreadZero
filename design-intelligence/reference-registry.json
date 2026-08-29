@@ -10,7 +10,11 @@
     "retained_references": 12,
     "core_references": 8,
     "user_supplied_rejected_originals": 12,
-    "user_supplied_selected_references": 1,
+    "user_supplied_selected_references": 11,
+    "approved_visual_boards": 10,
+    "ncrp_homepage_unique_destinations": 54,
+    "ncrp_routes_inspected": 37,
+    "ncrp_source_media_items_extracted": 97,
     "landing_raster_assets_visually_inspected": 56,
     "component_svg_or_icon_assets_deferred": 10
   },
@@ -485,6 +489,48 @@
         "authority claims",
         "exact layout",
         "shield and headset iconography"
+      ]
+    },
+    {
+      "id": "ref-user-civic-evidence-v1",
+      "title": "Civic Evidence Service v1 — ten-board reference set",
+      "url": null,
+      "captured_on": "2026-08-26",
+      "source_role": "user-approved visual specification and measurement source",
+      "status": "approved-reference-set",
+      "manifest_path": "design-intelligence/board-manifest.json",
+      "evidence_path": "evidence/design-references/user-supplied/selected/civic-evidence-v1/boards/",
+      "confirmed_observations": [
+        "All ten originals are 1672 by 941 pixels and were inspected at original detail.",
+        "The set defines one institutional shell across the hero, reporting process, evidence guidance, flow pages, tracker, guides, and footer.",
+        "The recurring geometry uses a 101–110px navy header, broad white surfaces, restrained blue structure, urgent red only for official action, and 12–16px radii.",
+        "Photography is warm, documentary, desk-based, and tightly connected to reporting or evidence preparation."
+      ],
+      "inferred_principles": [
+        "Use the boards as measured composition references while keeping essential UI as semantic HTML.",
+        "Correct authority and outcome claims without weakening the calm institutional hierarchy.",
+        "Keep evidence and chronology as the signature mechanism across landing and flow pages."
+      ],
+      "unknowns": [
+        "The boards do not establish a license for their embedded imagery or icons, so none may ship.",
+        "Production now uses the approved coordinated illustration family; photography is archived and must not ship."
+      ],
+      "permitted_influence": [
+        "measured geometry",
+        "spacing rhythm",
+        "typographic hierarchy",
+        "image-role hierarchy",
+        "information architecture",
+        "responsive composition intent"
+      ],
+      "prohibited_copying": [
+        "shield or government identity",
+        "official-looking copyright",
+        "public ThreadZero brand",
+        "fake status or agency processing",
+        "invented email or support team",
+        "rasterized UI or readable generated screens",
+        "hooded hacker, 3D shield/books, monuments, or fake people"
       ]
     }
   ],

@@ -30,27 +30,22 @@
 - Preserve backward navigation without losing synthetic session state.
 - Review should summarize facts and uncertainties, not manufacture confidence.
 
-## Editorial imagery
+## Editorial illustration
 
 - Media supports orientation or explanation.
-- Prefer original documentary still life, material detail, and calm civic scale.
+- Prefer coordinated two-dimensional civic illustration with believable people only when they clarify a task.
 - Never rely on stock victims, hacker silhouettes, police imagery, maps, dashboards, or official symbols.
+- Do not ship photography.
 - HTML owns every word, form control, status, and interactive affordance.
 
 ## Landing-page rhythm
 
-Each of the ten sections should answer one question:
+Each of the four sections should answer one group of related questions:
 
-1. Where do I start?
-2. What must I do urgently?
-3. Which incident route applies?
-4. Why does speed and preservation matter?
-5. How does evidence become an incident thread?
-6. What is the full reporting process?
-7. What should I prepare?
-8. What scams and safety guidance are sourced?
-9. What happens after submission?
-10. Where can I get help?
+1. Where do I start, and what must I do urgently?
+2. Which service route applies?
+3. How do scattered records become an understandable evidence thread?
+4. Where do I learn, get help, and reach the official destination?
 
 ## Anti-patterns
 
@@ -59,4 +54,3 @@ Each of the ten sections should answer one question:
 - Fake trust markers, proof, numbers, recovery claims, or testimonials.
 - Raster text inside production imagery.
 - A visual metaphor that becomes the interaction model.
-

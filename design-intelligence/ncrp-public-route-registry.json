@@ -1,0 +1,97 @@
+{
+  "schema_version": 1,
+  "audited_on": "2026-08-26",
+  "source_homepage": "https://cybercrime.gov.in/Default.aspx",
+  "method": "Complete-page inspection in the Codex in-app Browser. No authenticated area, CAPTCHA, OTP, upload, feedback, complaint, or acceptance form was submitted.",
+  "statistics": {
+    "homepage_unique_destinations": 54,
+    "same_domain_destinations": 31,
+    "same_domain_non_home_routes": 29,
+    "child_html_routes_discovered_and_inspected": 7,
+    "child_documents_inventoried": 36,
+    "external_or_non_http_destinations": 23,
+    "external_destinations_opened": 6,
+    "source_media_items_extracted": 97
+  },
+  "evidence": {
+    "board_and_route_evidence_root": "evidence/design-references/ncrp-2026-08-26/",
+    "source_media_root": "evidence/design-references/ncrp-2026-08-26/source-media/bundles/",
+    "policy": "Research evidence is internal and Git-ignored. No official or third-party media may enter site/."
+  },
+  "classification_legend": {
+    "public-content": "Public information suitable for paraphrased, cited concept content.",
+    "external-official-service": "An official destination that must remain an external handoff.",
+    "login-captcha-boundary": "A real transaction boundary requiring login, OTP, CAPTCHA, acknowledgement, or personal data.",
+    "legacy-postback": "ASP.NET postback navigation or form behavior; link to the official entry only.",
+    "unavailable": "The destination did not return inspectable content during the audit.",
+    "unsuitable": "Social, identity, promotional, or otherwise unsuitable for recreation."
+  },
+  "routes": [
+    {"id":"ncrp-001","title":"NCRP home","url":"https://cybercrime.gov.in/Default.aspx","classification":["public-content","legacy-postback"],"use":"Official-action facts, public information architecture, and outbound handoffs only."},
+    {"id":"ncrp-002","title":"NCRP Hindi home","url":"https://cybercrime.gov.in/Hindi/Defaulthn.aspx","classification":["public-content","legacy-postback"],"use":"Hindi terminology reference; concept copy remains independently written."},
+    {"id":"ncrp-003","title":"Complaint category index","url":"https://cybercrime.gov.in/Webform/Index.aspx","classification":["external-official-service","legacy-postback"],"use":"Official handoff only."},
+    {"id":"ncrp-004","title":"Check suspect identifiers","url":"https://cybercrime.gov.in/Webform/suspect_search_repository.aspx","classification":["external-official-service","login-captcha-boundary"],"use":"Describe and link; do not recreate the search."},
+    {"id":"ncrp-005","title":"Check suspect website or app","url":"https://cybercrime.gov.in/Webform/suspect_search_websites.aspx","classification":["external-official-service","login-captcha-boundary"],"use":"Describe and link; do not recreate the search."},
+    {"id":"ncrp-006","title":"Report suspect","url":"https://cybercrime.gov.in/Webform/cyber_suspect.aspx","classification":["external-official-service","login-captcha-boundary"],"use":"Official handoff only; the live page requests a state, identifier, optional file, description, and CAPTCHA."},
+    {"id":"ncrp-007","title":"Report abuse to social media intermediary","url":"https://cybercrime.gov.in/Webform/report_abuse_social_media.aspx","classification":["public-content","external-official-service"],"use":"Paraphrase the intermediary-contact guidance and retain external handoffs."},
+    {"id":"ncrp-008","title":"Cyber Volunteer concept","url":"https://cybercrime.gov.in/Webform/cyber_volunteers_concept.aspx","classification":["public-content"],"use":"Sourced overview only."},
+    {"id":"ncrp-009","title":"Cyber Volunteer terms","url":"https://cybercrime.gov.in/Webform/cyber_volunteers_TnC.aspx","classification":["public-content","external-official-service"],"use":"Summarize prerequisites; registration remains official."},
+    {"id":"ncrp-010","title":"Cyber Volunteer instructions","url":"https://cybercrime.gov.in/Webform/CyberVolunteerinstruction.aspx","classification":["public-content","external-official-service"],"use":"Summarize steps; registration remains official."},
+    {"id":"ncrp-011","title":"Unlawful content guidance","url":"https://cybercrime.gov.in/Webform/about_unlawful_content.aspx","classification":["public-content"],"use":"Paraphrased explanatory content."},
+    {"id":"ncrp-012","title":"Cyber Volunteer login","url":"https://cybercrime.gov.in/Webform/crmcondivol.aspx?vol=1","classification":["external-official-service","login-captcha-boundary"],"use":"Official handoff only."},
+    {"id":"ncrp-013","title":"FAQ","url":"https://cybercrime.gov.in/Webform/FAQ.aspx","classification":["public-content"],"use":"Source for plain-language FAQ topics; do not copy verbatim."},
+    {"id":"ncrp-014","title":"Advisories","url":"https://cybercrime.gov.in/Webform/Advisory.aspx","classification":["public-content"],"use":"Current advisory directory and citation source."},
+    {"id":"ncrp-015","title":"Online safety tips","url":"https://cybercrime.gov.in/Webform/Crime_OnlineSafetyTips.aspx","classification":["public-content"],"use":"Paraphrased safety guidance."},
+    {"id":"ncrp-016","title":"Cyber awareness","url":"https://cybercrime.gov.in/Webform/CyberAware.aspx","classification":["public-content"],"use":"Topic inventory only; third-party/official imagery stays internal."},
+    {"id":"ncrp-017","title":"Photo gallery","url":"https://cybercrime.gov.in/Webform/photoGallery.aspx","classification":["public-content","unsuitable"],"use":"Directory link only; event photography is not concept media."},
+    {"id":"ncrp-018","title":"Video categories","url":"https://cybercrime.gov.in/Webform/video-category.aspx","classification":["public-content"],"use":"Learning-media directory."},
+    {"id":"ncrp-019","title":"Radio gallery","url":"https://cybercrime.gov.in/Webform/radioGallery.aspx","classification":["public-content"],"use":"Learning-media directory."},
+    {"id":"ncrp-020","title":"Daily digest","url":"https://cybercrime.gov.in/Webform/daily-digest.aspx","classification":["public-content","legacy-postback"],"use":"Directory and official link; no copied archive."},
+    {"id":"ncrp-021","title":"Training resources","url":"https://cybercrime.gov.in/Webform/training-resource.aspx","classification":["public-content"],"use":"Training directory."},
+    {"id":"ncrp-022","title":"RTI public notice","url":"https://cybercrime.gov.in/UploadMedia/PublicNotice.pdf","classification":["public-content"],"use":"Official PDF handoff."},
+    {"id":"ncrp-023","title":"CPGRAMS public notice","url":"https://cybercrime.gov.in/UploadMedia/PublicNotice_CPGRAMS.pdf","classification":["public-content"],"use":"Official PDF handoff."},
+    {"id":"ncrp-024","title":"Nodal and grievance contacts","url":"https://cybercrime.gov.in/Webform/Crime_NodalGrivanceList.aspx","classification":["public-content","legacy-postback"],"use":"Official searchable directory; concept links to it and does not reproduce personal contact data."},
+    {"id":"ncrp-025","title":"Fake email alert","url":"https://cybercrime.gov.in/pdf/Fake%20EMail%20Alert%20Content.pdf","classification":["public-content"],"use":"Official advisory PDF handoff."},
+    {"id":"ncrp-026","title":"Citizen manuals","url":"https://cybercrime.gov.in/Webform/Citizen_Manual.aspx","classification":["public-content"],"use":"Official manual directory."},
+    {"id":"ncrp-027","title":"Feedback","url":"https://cybercrime.gov.in/Webform/Crime_Feedback.aspx","classification":["external-official-service","login-captcha-boundary"],"use":"Official handoff only; live form requests personal details, OTP/acknowledgement, file, and CAPTCHA."},
+    {"id":"ncrp-028","title":"Website policies","url":"https://cybercrime.gov.in/Webform/Wbsitepolice.aspx","classification":["public-content"],"use":"Official policy handoff."},
+    {"id":"ncrp-029","title":"Cyber Dost privacy policy","url":"https://cybercrime.gov.in/Webform/privacy_policy.aspx","classification":["public-content"],"use":"Official policy handoff; it is not the concept privacy policy."},
+    {"id":"ncrp-030","title":"Disclaimer","url":"https://cybercrime.gov.in/Webform/Disclaimer.aspx","classification":["public-content"],"use":"Official disclaimer handoff."}
+  ],
+  "child_routes": [
+    {"title":"Hindi FAQ","url":"https://cybercrime.gov.in/Hindi/FAQhn.aspx","classification":"public-content","status":"inspected"},
+    {"title":"Hindi online safety tips","url":"https://cybercrime.gov.in/Hindi/Crime_OnlineSafetyTipshn.aspx","classification":"public-content","status":"inspected"},
+    {"title":"Video gallery","url":"https://cybercrime.gov.in/Webform/videoGallery.aspx","classification":"public-content","status":"inspected"},
+    {"title":"Daily digest item","url":"https://cybercrime.gov.in/Webform/dailyDigest.aspx","classification":"public-content","status":"inspected"},
+    {"title":"Hindi website policies","url":"https://cybercrime.gov.in/Hindi/Wbsitepolicehn.aspx","classification":"public-content","status":"inspected"},
+    {"title":"Hindi disclaimer","url":"https://cybercrime.gov.in/Hindi/Disclaimerhn.aspx","classification":"public-content","status":"inspected"},
+    {"title":"Cyber Volunteer registration terms","url":"https://cybercrime.gov.in/Webform/crmcondivol.aspx","classification":"login-captcha-boundary","status":"inspected-no-acceptance"}
+  ],
+  "document_collections": [
+    {"title":"Current advisory documents","count":20,"source":"https://cybercrime.gov.in/Webform/Advisory.aspx","classification":"public-content"},
+    {"title":"Cyber safety handbooks","count":4,"source":"https://cybercrime.gov.in/Webform/Crime_OnlineSafetyTips.aspx","classification":"public-content"},
+    {"title":"Citizen awareness brochures","count":8,"source":"https://cybercrime.gov.in/Webform/CyberAware.aspx","classification":"public-content"},
+    {"title":"Training and citizen manuals","count":4,"source":"https://cybercrime.gov.in/Webform/Citizen_Manual.aspx","classification":"public-content"}
+  ],
+  "external_destinations": [
+    {"title":"Ministry of Home Affairs Hindi","url":"https://mha.gov.in/hi","classification":"external-official-service","status":"inspected"},
+    {"title":"Ministry of Home Affairs","url":"https://mha.gov.in/","classification":"external-official-service","status":"inspected-redirected-to-hindi"},
+    {"title":"TAFCOP / Sanchar Saathi","url":"https://tafcop.sancharsaathi.gov.in/telecomUser/","classification":"login-captcha-boundary","status":"inspected-no-login"},
+    {"title":"Grievance Appellate Committee","url":"https://gac.gov.in/","classification":"login-captcha-boundary","status":"inspected-no-login"},
+    {"title":"NVDA screen reader download","url":"https://www.nvaccess.org/download/","classification":"external-official-service","status":"inspected"},
+    {"title":"IndiaAI CyberGuard hackathon article","url":"https://indiaai.gov.in/article/ai-for-citizen-safety-join-the-indiaai-cyberguard-ai-hackathon","classification":"unavailable","status":"navigation-timeout"},
+    {"title":"CyberDost social profiles and embed","count":10,"classification":"unsuitable","status":"inventoried-not-recreated"}
+  ],
+  "postback_boundaries": [
+    {"action":"Financial fraud","observed":"Home postback opens Accept.aspx, then a terms-and-conditions step.","stopped_before":"I Accept submission"},
+    {"action":"Other cyber crime","observed":"Home postback opens the official complaint category index.","stopped_before":"Complaint form entry"},
+    {"action":"Track complaint","observed":"Home postback opens chkackstatus.aspx and asks for an acknowledgement number.","stopped_before":"Status lookup"},
+    {"action":"Cyber Volunteers","observed":"Home postback expands public volunteer navigation.","stopped_before":"Registration/login"}
+  ],
+  "production_rules": [
+    "The concept may paraphrase public guidance and cite the exact official URL.",
+    "Real reporting, status, suspect search, registration, feedback, OTP, CAPTCHA, upload, and login actions remain external official handoffs.",
+    "No official emblem, identity, media, email address, status, metric, or processing claim is reproduced.",
+    "Every official link shown in the concept displays or exposes the last-verified date 2026-08-26."
+  ]
+}

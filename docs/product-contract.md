@@ -4,7 +4,8 @@
 
 This repository contains an independent citizen-service concept inspired by the public financial-fraud reporting journey.
 
-- Public service label: **National Cyber Crime Reporting Portal**
+- Public concept label: **Financial Cyber Fraud Reporting Guide**
+- Official service reference: **National Cyber Crime Reporting Portal**, used only at clearly labelled official handoffs.
 - Required qualifier: **Independent concept redesign**
 - Internal codename: ThreadZero; never use it as the public service identity.
 - Required truth: all incident details, evidence, extraction, chronology, status, and report references are synthetic.
@@ -33,7 +34,7 @@ The product mechanism is:
 
 V1 is semantic vanilla HTML, CSS, and JavaScript with deterministic local fixtures. It has no framework, package manager, backend, account, database, OCR, RAG, model call, analytics, or external write integration.
 
-The active route contract is:
+The guarded financial-fraud route contract is:
 
 - `#home`
 - `#act-now`
@@ -46,10 +47,21 @@ The active route contract is:
 - `#submit`
 - `#next`
 
-Reload starts a fresh synthetic report at Home. Current and completed steps are reachable; future steps are guarded. Draft edits commit only after validation.
+The portal also keeps the 36 bilingual public guidance, directory, tracker, and local-practice routes defined in `core/portal-routes.mjs`. Reload clears every synthetic draft and result; an inaccessible guarded hash resolves to the current safe route. Current and completed steps are reachable, future steps are guarded, and draft edits commit only after validation.
 
 ## Current delivery gate
 
-The rejected visual system has been removed. The repository is now at a three-territory first-viewport selection gate. The three artifacts must keep this product contract constant while changing composition, hierarchy, typography, visual medium, and trust strategy.
+**Civic Evidence Portal v2** is the active full-portal implementation. The human-approved **Civic Evidence Service v1** boards, hashes, generated masters, and provenance remain unchanged reference evidence rather than production page images.
 
-Only a human-approved direction may receive responsive HTML proof, a design constitution, downstream section assets, or the complete route flow. No source check, generated image, or agent score may select the winner.
+The static implementation now includes:
+
+- a four-section bilingual landing page with all six citizen-service categories;
+- a two-tier desktop header with the full navigation in its lower row, a compact tablet Services menu, and phone bottom navigation with a complete More menu;
+- the complete guarded report-preparation route contract;
+- all 36 unguarded public-information and local-practice routes, including the synthetic report tracker;
+- eight coordinated civic illustrations, a locally vendored Lucide subset, and local fonts; and
+- deterministic flow, catalog, safety, and asset-integrity checks.
+
+The dependency-free frontend keeps stable entry files while splitting implementation by responsibility: ordered CSS modules, shell/public/flow renderers, language-and-section copy modules, and route-group data modules.
+
+Future visual changes must be versioned. They may not overwrite V1 reference evidence or generated masters, weaken the independent-concept qualifier, or introduce real submission behavior.

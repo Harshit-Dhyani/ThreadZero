@@ -1,0 +1,129 @@
+/* Shared components */
+.section,
+.home-gateway {
+  width: var(--page);
+  margin: 0 auto;
+}
+
+.section {
+  padding: 76px 0;
+}
+
+.section + .section {
+  border-top: 1px solid var(--line);
+}
+
+.section-heading {
+  margin-bottom: 32px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(260px, 0.72fr);
+  align-items: end;
+  gap: 48px;
+}
+
+.section-heading h2,
+.section-heading p:last-child {
+  margin-bottom: 0;
+}
+
+.section-heading > p,
+.section-heading > div > p:last-child {
+  color: var(--muted);
+}
+
+.section-heading-action {
+  grid-template-columns: minmax(0, 1fr) auto;
+}
+
+.info-note,
+.truth-line {
+  padding: 12px 14px;
+  border-left: 4px solid var(--blue-600);
+  background: var(--blue-50);
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.error-summary {
+  margin-bottom: 20px;
+  padding: 18px 20px;
+  border: 2px solid var(--red);
+  border-radius: var(--radius-sm);
+  background: var(--red-soft);
+}
+
+.error-summary h2 {
+  margin-bottom: 8px;
+  font-size: 1.12rem;
+}
+
+.error-summary ul {
+  margin: 0;
+}
+
+.field-error {
+  margin: 7px 0 0;
+  color: var(--red);
+  font-weight: 680;
+}
+
+.field-help {
+  display: block;
+  margin-top: 7px;
+  color: var(--muted);
+  font-size: 0.8rem;
+}
+
+.source-panel {
+  margin-top: 32px;
+  padding: 20px;
+  border: 1px solid #b9ccea;
+  border-radius: var(--radius-md);
+  background: var(--blue-50);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+.source-panel h2 {
+  margin-bottom: 7px;
+  font-size: 1.16rem;
+}
+
+.source-panel p {
+  margin-bottom: 0;
+  color: var(--muted);
+}
+
+.official-directory {
+  display: grid;
+  gap: 8px;
+  align-content: start;
+}
+
+.official-link-wrap {
+  display: grid;
+  gap: 2px;
+}
+
+.directory-official-link,
+.official-link {
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 9px 12px;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  background: #fff;
+  color: var(--blue-700);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.official-link-wrap small {
+  color: var(--muted);
+  font-size: 0.7rem;
+}
+
