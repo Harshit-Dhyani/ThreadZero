@@ -3,6 +3,7 @@
 import { ArrowRight, BookOpen, CircleHelp, FileCheck2, FileText, SearchCheck, Users, Waypoints } from "lucide-react";
 import { WORKFLOW_COPY as COPY } from "@/content/workflow";
 import { GUIDE_TASKS } from "@/features/guide";
+import { localized } from "@/lib/i18n";
 import { usePortal } from "./portal-provider";
 import { ResponsiveIllustration } from "./responsive-illustration";
 
@@ -18,8 +19,8 @@ export function Home() {
     <>
       <section className="bg-white">
         <div className="mx-auto grid max-w-content items-center gap-10 px-5 py-12 md:px-8 lg:grid-cols-[0.92fr_1.08fr] lg:py-16">
-          <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.14em] text-civic-700">{language === "en" ? "Independent concept" : "स्वतंत्र अवधारणा"}</p>
+          <div className="min-w-0">
+            <p className="text-xs font-semibold uppercase tracking-[0.14em] text-civic-700">{language === "hi" ? "स्वतंत्र अवधारणा" : "Independent concept"}</p>
             <h1 className="mt-4 max-w-[13ch] text-[42px] font-semibold leading-[1.04] tracking-[-0.035em] sm:text-[50px] lg:text-[52px]">{c.hero.title}</h1>
             <p className="mt-5 max-w-xl text-[17px] leading-7 text-muted">{c.hero.intro}</p>
             <div className="mt-7 flex flex-wrap gap-3">
@@ -28,7 +29,7 @@ export function Home() {
             </div>
           </div>
 
-          <div className="rounded-panel border border-line bg-white p-6 sm:p-8">
+          <div className="min-w-0 rounded-panel border border-line bg-white p-6 sm:p-8">
             <p className="text-xs font-semibold uppercase tracking-[0.12em] text-civic-700">{c.mechanism.eyebrow}</p>
             <ol className="mt-5 space-y-0">
               {events.map((event, index) => <li key={event.id} className="relative grid grid-cols-[28px_1fr] gap-4 pb-5 last:pb-0">
@@ -55,7 +56,7 @@ export function Home() {
         <div className="mt-7 grid overflow-hidden rounded-panel border border-line bg-white sm:grid-cols-2 lg:grid-cols-3">
           {GUIDE_TASKS.map((task, index) => {
             const Icon = serviceIcons[index];
-            return <button key={task.id} className="group grid min-h-24 grid-cols-[44px_1fr_20px] items-center gap-3 border-b border-line p-4 text-left sm:min-h-28 sm:border-r sm:[&:nth-child(even)]:border-r-0 lg:[&:nth-child(even)]:border-r lg:[&:nth-child(3n)]:border-r-0 lg:[&:nth-last-child(-n+3)]:border-b-0" onClick={() => navigate(task.route)}><span className="grid size-11 place-items-center rounded-panel bg-civic-50 text-civic-700"><Icon className="size-5" /></span><span><strong className="block text-sm font-medium">{task.title[language]}</strong><span className="mt-1 block text-xs leading-5 text-muted">{task.body[language]}</span></span><ArrowRight className="size-4 transition-transform group-hover:translate-x-1" /></button>;
+            return <button key={task.id} className="group grid min-h-24 grid-cols-[44px_1fr_20px] items-center gap-3 border-b border-line p-4 text-left sm:min-h-28 sm:border-r sm:[&:nth-child(even)]:border-r-0 lg:[&:nth-child(even)]:border-r lg:[&:nth-child(3n)]:border-r-0 lg:[&:nth-last-child(-n+3)]:border-b-0" onClick={() => navigate(task.route)}><span className="grid size-11 place-items-center rounded-panel bg-civic-50 text-civic-700"><Icon className="size-5" /></span><span><strong className="block text-sm font-medium">{localized(task.title, language)}</strong><span className="mt-1 block text-xs leading-5 text-muted">{localized(task.body, language)}</span></span><ArrowRight className="size-4 transition-transform group-hover:translate-x-1" /></button>;
           })}
         </div>
       </section>
@@ -79,7 +80,7 @@ export function Home() {
       <section className="mx-auto max-w-content px-5 py-12 md:px-8 lg:py-16">
         <div className="flex items-end justify-between gap-5"><div><p className="text-xs font-semibold uppercase tracking-[0.14em] text-civic-700">{c.resources.eyebrow}</p><h2 className="mt-3 text-[28px] font-semibold tracking-[-0.02em]">{c.resources.title}</h2></div><button className="hidden min-h-11 items-center gap-2 text-sm font-semibold text-civic-700 sm:flex" onClick={() => onGuide("learn")}>{c.resources.action}<ArrowRight className="size-4" /></button></div>
         <div className="mt-7 grid overflow-hidden rounded-panel border border-line bg-white lg:grid-cols-[1.35fr_0.65fr]">
-          <article className="grid min-h-72 md:grid-cols-[0.9fr_1.1fr]"><div className="bg-civic-50 p-5"><ResponsiveIllustration assetId="training" language={language} className="h-full max-h-64 w-full object-contain" /></div><div className="flex flex-col justify-center p-6"><p className="text-xs font-semibold uppercase tracking-[0.12em] text-civic-700">{language === "hi" ? "विशेष संसाधन" : "Featured resource"}</p><h3 className="mt-3 text-2xl font-semibold">{c.resources.cards[0].title}</h3><p className="mt-2 text-sm leading-6 text-muted">{c.resources.cards[0].body}</p><button className="mt-4 inline-flex min-h-11 items-center gap-2 self-start text-sm font-semibold text-civic-700" onClick={() => navigate("training")}>{language === "en" ? "Browse training" : "प्रशिक्षण देखें"}<ArrowRight className="size-4" /></button></div></article>
+          <article className="grid min-h-72 md:grid-cols-[0.9fr_1.1fr]"><div className="bg-civic-50 p-5"><ResponsiveIllustration assetId="training" language={language} className="h-full max-h-64 w-full object-contain" /></div><div className="flex flex-col justify-center p-6"><p className="text-xs font-semibold uppercase tracking-[0.12em] text-civic-700">{language === "hi" ? "विशेष संसाधन" : "Featured resource"}</p><h3 className="mt-3 text-2xl font-semibold">{c.resources.cards[0].title}</h3><p className="mt-2 text-sm leading-6 text-muted">{c.resources.cards[0].body}</p><button className="mt-4 inline-flex min-h-11 items-center gap-2 self-start text-sm font-semibold text-civic-700" onClick={() => navigate("training")}>{language === "hi" ? "प्रशिक्षण देखें" : "Browse training"}<ArrowRight className="size-4" /></button></div></article>
           <div className="divide-y divide-line border-t border-line lg:border-l lg:border-t-0">{c.resources.cards.slice(1).map((card, index) => <button key={card.title} className="group flex min-h-36 w-full items-center gap-4 p-5 text-left" onClick={() => navigate(index === 0 ? "safety" : "awareness")}><span className="grid size-11 shrink-0 place-items-center rounded-panel bg-civic-50 text-civic-700">{index === 0 ? <BookOpen className="size-5" /> : <CircleHelp className="size-5" />}</span><span className="flex-1"><strong className="block text-base">{card.title}</strong><span className="mt-1 block text-sm leading-6 text-muted">{card.body}</span></span><ArrowRight className="size-4 transition-transform group-hover:translate-x-1" /></button>)}</div>
         </div>
       </section>
