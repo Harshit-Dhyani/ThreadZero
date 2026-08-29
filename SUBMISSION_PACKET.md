@@ -1,79 +1,65 @@
-# ThreadZero submission packet
+# ThreadZero V5.3 submission packet
 
-Prepared for **Build What Moves India** on 27 August 2026. ThreadZero is the internal codename; the public prototype title is **Financial Cyber Fraud Reporting Guide**.
+Prepared for **Build What Moves India** on 29 August 2026. ThreadZero is the internal codename; the public prototype title is **Financial Cyber Fraud Reporting Guide**.
 
-## Submission status
+## Submission details
 
-**Blocked on a live public browser URL.** The configured GitHub repository is private, has no homepage, no GitHub Pages site, no recorded deployment, and no deployment workflow. Deployment, publication, pushing, and merging require separate authorization.
+- Public demo URL: [https://unrivaled-douhua-e65bf3.netlify.app/](https://unrivaled-douhua-e65bf3.netlify.app/)
+- Repository: `https://github.com/Harshit-Dhyani/ThreadZero` (private)
+- Demo tracker reference: `DEMO-2026-08421`
+- Video URL: **TODO — record and upload**
+- Partner registered email: **leave blank if solo; otherwise add the teammate’s registered email**
+- Deadline: **29 August 2026 at 10:00 PM IST**
+- Official requirements: [FAQ](https://buildwhatmovesindia.com/faq)
 
-- Public demo URL: **TODO — no public deployment exists**
-- Repository URL: `https://github.com/Harshit-Dhyani/ThreadZero` (**private; not reviewer-accessible**)
-- Video URL: **TODO — record and upload after the public URL is verified**
-- Partner registered email: **leave blank if solo; otherwise add the teammate's registered email**
-- Deadline: **28 August 2026 at 8:00 PM IST; no grace period**
+## Project summary — under 250 words
 
-Official requirements: [Builder brief](https://buildwhatmovesindia.com/brief) and [FAQ](https://buildwhatmovesindia.com/faq).
+Financial Cyber Fraud Reporting Guide is an independent concept that helps a person organise a financial cyber-fraud incident before continuing on official channels.
 
-## Project summary — 250 words
+The bilingual prototype begins with urgent guidance to call 1930 manually and use cybercrime.gov.in for a real incident. Its five-stage journey—What happened, Details, Evidence, Timeline, and Review & next—uses plain language and calm, accessible interactions. A fixed evidence checklist explains why each item helps, where to find it, whether the person has it, and which Timeline events it supports. Missing or uncertain evidence guides the citizen without blocking progress.
 
-Financial Cyber Fraud Reporting Guide is an independent concept redesign of the citizen-facing National Cyber Crime Reporting Portal experience. It focuses on a stressful first problem: helping someone organise a financial-fraud incident before they use official channels.
+Six workspaces bring reporting, official checking tools, tracking, learning resources, and help into one coherent route system. Source-backed content links to official NCRP resources without copying government identity or implying authority.
 
-The prototype starts with urgent guidance to call 1930 manually and visit cybercrime.gov.in for real reporting. It then guides a citizen through plain-language incident selection, evidence readiness, editable transaction details, an incident chronology, a human-readable review, an unmistakable simulation boundary, and clear next actions. Missing evidence is labelled Ready, Missing, or Optional, so the interface guides without pretending every record is complete.
+Everything is a deterministic demo. Nothing entered is uploaded, stored permanently, or sent to NCRP, police, banks, payment providers, or any government system. The tracker accepts only a documented demo reference.
 
-A deterministic synthetic scenario keeps the full journey safe and reliable. Nothing is uploaded, stored, called, or submitted to NCRP, police, banks, payment providers, or any government system. The demo tracker accepts only a documented fictional reference.
+Codex helped audit the citizen journey, consolidate the information architecture, implement the static Next.js application, migrate the report state, connect Evidence to Timeline, enforce bilingual and accessibility contracts, repair the release path, and run automated and browser verification.
 
-Compared with the current experience, this redesign puts the citizen's story before institutional taxonomy, keeps urgent official actions visible, explains why evidence helps, and makes chronology editable. The bilingual portal includes English and Hindi, mobile navigation, semantic forms, visible focus, error-summary recovery, reduced-motion support, and responsive reflow.
+## Two-minute recording script
 
-Codex was used throughout the build to audit the public journey, shape the service blueprint, implement the dependency-free HTML, CSS, and JavaScript portal, create deterministic tests, and run browser QA across routes and viewports. The result is a complete working citizen journey that demonstrates safer information architecture and interaction design without claiming official status or live integration. It prioritises clarity, safety, accessibility, and truthful practical civic guidance.
-
-## Two-minute demo script
-
-Keep the recording at **1:55–2:00 maximum**. Record the real browser UI in one continuous route sequence; do not use Golden Screen mockups.
+Keep the recording between **1:50 and 2:00**. Record the real public URL, not mockups.
 
 ### 0:00–1:00 — citizen journey
 
-- **0:00–0:08 — Home:** “This is an independent, synthetic redesign of the financial-fraud reporting journey. It does not submit anything.”
-- **0:08–0:18 — Act now:** Show the manual 1930 guidance and official `cybercrime.gov.in` handoff. “Urgent action stays visible before the demo begins.”
-- **0:18–0:30 — Incident:** Select “Investment or trading fraud.” “The citizen starts with what happened, not institutional taxonomy.”
-- **0:30–0:42 — Evidence:** Show Ready, Missing, and Optional plus the deterministic payment suggestions. “Missing evidence is guidance, not failure.”
-- **0:42–0:52 — Timeline:** Move the payment event earlier, restore it, and show editing. “Scattered records become one editable incident chronology.”
-- **0:52–1:00 — Review and boundary:** Review, open the confirmation, continue, and show “Nothing was sent” with `DEMO-2026-08421`.
+- **0:00–0:08 — Home:** “This is an independent demo that helps people prepare a financial cyber-fraud report. It sends nothing to the government.”
+- **0:08–0:16 — Report:** Open Report and choose the financial-fraud journey. Point out manual 1930 guidance and the official portal link.
+- **0:16–0:27 — What happened?:** Select an example incident. “The journey starts with what the citizen knows.”
+- **0:27–0:37 — Details:** Show the structured payment and contact facts.
+- **0:37–0:48 — Evidence:** Mark an item “I have it” and connect it to more than one Timeline event. “Missing evidence never blocks the demo.”
+- **0:48–0:56 — Timeline:** Add or reorder an event and show the evidence derived from its links.
+- **0:56–1:00 — Review & next:** Show the prepared review, demo reference, copy/download action, and official next step.
 
-### 1:00–2:00 — build and decisions
+### 1:00–2:00 — architecture and Codex
 
-- **1:00–1:15 — Product decision:** “I redesigned the journey around what a stressed citizen knows: the incident, available evidence, sequence, review, and next action.”
-- **1:15–1:29 — Architecture:** “The portal is dependency-free semantic HTML, CSS, and JavaScript with deterministic synthetic fixtures. There is no backend, account, storage, upload, or live integration.”
-- **1:29–1:43 — Codex:** “Codex helped audit the public journey, create the service blueprint and visual system, implement the modular portal, test validation and route guards, and run responsive browser QA.”
-- **1:43–1:53 — Accessibility:** Show Hindi mobile Home and the mobile More menu. “English and Hindi share the same routes, with visible focus, error recovery, and responsive reflow.”
-- **1:53–2:00 — Honest close:** “For a real incident, call 1930 manually and use cybercrime.gov.in. This prototype is independent and sends nothing.”
+- **1:00–1:13 — Citizen-first architecture:** Show the six workspace navigation groups and contextual route navigation.
+- **1:13–1:26 — Codex contribution:** “Codex helped audit, plan, implement, migrate, test, and release the product while preserving safety boundaries.”
+- **1:26–1:38 — Bilingual/accessibility:** Switch to Hindi and show mobile reflow, visible focus, semantic controls, and 44px targets.
+- **1:38–1:49 — Source-backed learning:** Open a Learning resource and its official source link.
+- **1:49–2:00 — Honest close:** “This is a static, demo-only concept. For a real incident, call 1930 manually and use cybercrime.gov.in.”
 
-## Screenshot shot list
+## Verification snapshot
 
-1. Desktop Home with independent-concept and urgent-action boundaries visible.
-2. Evidence readiness with Ready, Missing, Optional, and no-upload copy.
-3. Editable incident chronology.
-4. Review or final “Nothing was sent” state.
-5. Hindi mobile Home or tracker.
+- Bun 1.3.14 frozen install, typecheck, 22 tests, and 48-page production build: passed
+- Netlify offline build: passed from the active Next.js `out/` export
+- Public draft: all 46 citizen routes returned 200
+- CSP and immutable Next static caching: verified
+- Hydration and Hindi language switching: verified with zero browser warnings/errors
+- Complete local English/Hindi six-viewport matrix: 552 states passed
+- Public draft English/Hindi six-viewport matrix: 288 completed states passed before the browser harness time limit
+- Remaining release gate: production promotion followed by one cold critical-path check
 
-Current-run captures are stored outside the repository under:
+## User-owned final actions
 
-`C:\Users\user\.codex\visualizations\2026\08\27\01a04402-d940-7c40-af4c-8fb41d93eba4\threadzero-submission-qa`
-
-## Current verification evidence
-
-- Frozen product baseline: `01f5315e2aaed05f7166e607974e4f384505a51c` on `codex/threadzero-civic-evidence-v1`.
-- Three submission-safe patches are intentionally uncommitted: skip-link activation now moves focus into the main content, Review evidence labels no longer collide, and Hindi mobile-navigation labels stay inside their grid cells. Related cache keys and the skip-link contract test were updated.
-- Node tests: 4 passed, 0 failed.
-- Design-intelligence validator: passed.
-- JavaScript syntax checks and `git diff --check`: passed after the submission-safe patches.
-- In-app browser: 222 checks (37 citizen-facing routes × 6 viewports) passed across 1672×941, 1440×900, 1024×768, 390×844, 320×568, and 720×450 after allowing local images to settle.
-- Repaired Review evidence rows have a measured 10px chip/content gap and no text overlap; all five Hindi bottom-navigation labels stay inside their cells with no pairwise overlap.
-- Complete guarded journey passed, including focused validation recovery, chronology edit/reorder/restore, simulation cancel/confirm, history, and reload reset.
-- Tracker initial, invalid, and valid states passed.
-- Hindi Home, Mobile Connections, Track, and the 36-link mobile More dialog passed at 320×568 with no overflow or broken images.
-- Console: no warnings or errors in the final checks.
-- Remaining manual gate: perform one human keyboard-only Tab sweep because the in-app browser driver does not advance sequential Tab focus reliably.
-
-## Post-submission V3 gate
-
-Do not create or implement `THREADZERO_V3_DESIGN_DRAFT` until the current submission is confirmed. Preserve the audited V1 handoff unchanged. V3 must be isolated, use real semantic browser-rendered Golden routes, generate illustrations only, and require explicit approval for every Golden Screen before rollout.
+1. Record and upload the two-minute video.
+2. Add the video URL and any required personal or teammate fields.
+3. Submit the official form before the deadline.
+4. Reopen the submitted entry once to confirm the URL and video are saved.

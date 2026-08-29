@@ -127,7 +127,6 @@ export function prepareSimulation(state) {
 
 export function validateCurrentRoute(state) {
   const errors = {};
-  if (state.route === "act-now" && !state.actNowAcknowledged) errors.flow = "Choose the preparation pathway to continue.";
   if (state.route === "incident" && !state.incidentChoice) errors.flow = "Choose the incident description that is closest.";
   if (state.route === "readiness" && !state.readinessAcknowledged) errors.flow = "Confirm the evidence-readiness check.";
   if (state.route === "details") Object.assign(errors, validateDetails(state.incident));

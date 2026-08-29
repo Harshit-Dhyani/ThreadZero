@@ -17,6 +17,6 @@ The direction combines a sober institutional shell, an illustrated split hero, p
 ## Approval contract
 
 - `design-intelligence/board-manifest.json` is the immutable hash manifest for the ten boards.
-- `design-intelligence/visual-constitution.md` is the implementation contract.
+- `design-intelligence/visual-constitution.md` remains the historical V1 contract; `design-intelligence/visual-contract-v5-3.md` is the active additive V5.3 contract.
 - The opening viewport must be proven in responsive HTML; production media belongs to the coordinated generated illustration family, never the board image.
 - Any later V2 must be versioned and must not overwrite the V1 evidence or generated masters.

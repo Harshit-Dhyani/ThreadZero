@@ -37,8 +37,6 @@ test("the deterministic report kernel preserves route guards and validation", ()
   assert.equal(resolveRoute("#faq", state), "faq");
 
   state.route = "act-now";
-  assert.equal(validateCurrentRoute(state).flow, "Choose the preparation pathway to continue.");
-  state.actNowAcknowledged = true;
   assert.deepEqual(validateCurrentRoute(state), {});
   markRouteComplete(state);
   assert.equal(resolveRoute("#incident", state), "incident");

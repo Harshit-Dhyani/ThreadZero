@@ -20,18 +20,21 @@
 
   .desktop-nav {
     padding-inline: 32px;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
   }
-
-  .desktop-nav .service-home { min-width: 90px; }
-  .desktop-nav .complaint-menu { min-width: 158px; }
-  .desktop-nav .nav-track { min-width: 84px; }
-  .desktop-nav .suspect-menu { min-width: 164px; }
-  .desktop-nav .support-menu { min-width: 102px; }
-  .desktop-nav .nav-get-started { min-width: 140px; }
 
   .header-menu-button {
     display: inline-flex;
     margin-left: auto;
+  }
+
+  .demo-profile-button {
+    width: 44px;
+    padding-inline: 11px;
+  }
+
+  .demo-profile-button span {
+    display: none;
   }
 
   .tracker-timeline .compact-status {
@@ -49,9 +52,12 @@
     min-height: 78px;
   }
 
-  .header-support-button,
-  .flow-header-help {
+  .header-support-button {
     display: none;
+  }
+
+  .official-action-strip {
+    padding-inline: 20px;
   }
 
   .brand-copy strong {
@@ -106,6 +112,12 @@
     background: rgb(255 255 255 / 14%);
   }
 
+  .official-action-strip > div {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 1px;
+  }
+
   .home-hero,
   .content-hero,
   .tracker-heading {
@@ -125,27 +137,11 @@
     order: 1;
   }
 
-  .hero-media {
-    position: relative;
-    inset: auto;
+  .hero-thread-preview {
     order: 2;
-    width: 100%;
-    min-width: 0;
-    max-width: 100%;
-    pointer-events: auto;
+    margin: 0 0 24px;
   }
 
-  .hero-media::after {
-    top: 22px;
-    right: 30%;
-  }
-
-  .hero-picture img {
-    top: 0;
-    transform: none;
-  }
-
-  .urgent-band,
   .home-process,
   .evidence-thread-layout,
   .learning-help-grid,
@@ -178,22 +174,6 @@
     grid-row: auto;
   }
 
-  .urgent-band {
-    grid-template-columns: minmax(0, 1fr) auto;
-  }
-
-  .urgent-copy {
-    grid-column: 1;
-    padding: 14px 0;
-    border-top: 1px solid var(--line);
-    border-left: 0;
-  }
-
-  .urgent-action {
-    grid-column: 2;
-    grid-row: 1 / 3;
-  }
-
   .learning-help-grid {
     grid-template-columns: 1fr 1fr;
   }
@@ -220,6 +200,19 @@
     grid-template-columns: minmax(0, 1fr);
   }
 
+  .learning-composition,
+  .awareness-composition,
+  .contact-lower,
+  .guided-help-strip {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .evidence-type-grid,
+  .accessibility-grid,
+  .safety-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   .guidance-records li:first-child {
     grid-row: auto;
     min-height: 150px;
@@ -240,15 +233,6 @@
   .form-composition,
   .faq-composition {
     max-width: 720px;
-  }
-
-  .source-panel {
-    grid-template-columns: auto minmax(0, 1fr);
-    align-items: center;
-  }
-
-  .source-note {
-    grid-column: 1 / -1;
   }
 
   .context-panel,
@@ -296,6 +280,17 @@
     top: 0;
   }
 
+  .official-action-strip {
+    padding-block: 7px;
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .official-strip-link {
+    min-height: 44px;
+  }
+
   .header-identity {
     min-height: 68px;
     gap: 10px;
@@ -306,11 +301,16 @@
   }
 
   .header-menu-button {
-    width: 44px;
+    width: 46px;
+    flex: 0 0 46px;
     padding-inline: 11px;
   }
 
   .header-menu-button [data-header-menu-label] {
+    display: none;
+  }
+
+  .demo-profile-button {
     display: none;
   }
 
@@ -350,7 +350,7 @@
     padding: 9px 0;
     border-top: 1px solid var(--line);
     border-left: 0;
-    grid-template-columns: 32px minmax(0, 1fr) 36px;
+    grid-template-columns: 32px minmax(0, 1fr) 44px;
     gap: 10px;
   }
 
@@ -376,31 +376,6 @@
     margin-top: 12px;
   }
 
-  .hero-media {
-    order: 2;
-  }
-
-  .hero-media::after {
-    display: none;
-  }
-
-  .hero-picture img {
-    border-radius: 0;
-  }
-
-  .hero-picture {
-    height: 152px;
-    aspect-ratio: auto;
-    overflow: hidden;
-  }
-
-  .hero-picture img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    object-position: right center;
-  }
-
   .home-gateway .button-row {
     gap: 10px;
   }
@@ -408,27 +383,6 @@
   .home-gateway .button {
     min-width: 0;
     flex: 1 1 160px;
-  }
-
-  .urgent-band {
-    margin-top: 18px;
-    margin-bottom: -20px;
-  }
-
-  .urgent-band {
-    padding: 14px 16px;
-    grid-template-columns: 1fr;
-  }
-
-  .urgent-lead {
-    flex-wrap: wrap;
-  }
-
-  .urgent-action {
-    width: 100%;
-    grid-column: 1;
-    grid-row: auto;
-    justify-self: stretch;
   }
 
   .section {
@@ -451,6 +405,7 @@
   }
 
   .task-directory,
+  .task-priority-layout,
   .learning-help-grid,
   .help-paths,
   .status-records,
@@ -462,6 +417,45 @@
   .details-form .form-grid,
   .event-editor .form-grid {
     grid-template-columns: 1fr;
+  }
+
+  .learning-feature,
+  .learning-categories > div,
+  .evidence-type-grid,
+  .evidence-practice,
+  .payment-proof-example,
+  .safety-grid,
+  .accessibility-grid,
+  .help-paths,
+  .contact-lower {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .learning-feature {
+    min-height: 0;
+  }
+
+  .learning-feature-icon {
+    display: none;
+  }
+
+  .advisory-list article,
+  .module-list article {
+    grid-template-columns: minmax(0, 1fr);
+    align-items: start;
+  }
+
+  .route-tabs {
+    gap: 18px;
+  }
+
+  .guided-help-strip ol {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .accessibility-feedback {
+    align-items: stretch;
+    flex-direction: column;
   }
 
   .task-row,
@@ -874,7 +868,8 @@
   }
 
   .button-row .button,
-  .flow-actions .button {
+  .flow-actions .button,
+  .standalone-back .button {
     width: 100%;
   }
 

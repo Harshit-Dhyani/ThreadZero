@@ -1,4 +1,4 @@
-import SHELL from "./en/shell.js";
+import SHELL from "./en/shell.js?v=20260828p";
 import HOME from "./en/home.js";
 import FLOW from "./en/flow.js";
 import TRACKER from "./en/tracker.js";

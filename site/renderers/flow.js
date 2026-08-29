@@ -81,9 +81,9 @@ export function renderFlowRoute(ctx) {
       <ol>${phases.map((phase, index) => {
         const isCurrent = index === currentPhase;
         const isComplete = phase.routes.every((route) => state.completed.includes(route));
-        const status = isCurrent ? c.flow.current : isComplete ? c.flow.completed : c.flow.unavailable;
+        const status = isCurrent ? c.flow.current : isComplete ? c.flow.completed : "";
         const target = isCurrent ? state.route : phase.routes[0];
-        const content = `<span class="step-number">${index + 1}</span><span><strong>${esc(phase.label)}</strong><small>${esc(status)}</small></span>`;
+        const content = `<span class="step-number">${index + 1}</span><span><strong>${esc(phase.label)}</strong>${status ? `<small>${esc(status)}</small>` : ""}</span>`;
         const canNavigate = !state.locked || phase.routes.includes("review") || phase.routes.includes("next");
         const reached = isCurrent || getStepIndex(phase.routes[0]) <= highest;
         if (reached && canNavigate) return `<li class="flow-step-item">${routeLink(target, content, `flow-step raw-label${isCurrent ? " is-current" : ""}${isComplete ? " is-complete" : ""}`)}</li>`;
@@ -92,7 +92,7 @@ export function renderFlowRoute(ctx) {
       }).join("")}</ol>
       <div class="flow-official-card">
         ${icon("phone-call", "icon")}
-        <div><strong>${esc(c.common.actualIncident)}</strong><p>${esc(c.common.callManually)}</p></div>
+        <div><strong>${esc(language === "hi" ? "वास्तविक वित्तीय साइबर धोखाधड़ी?" : "Real financial cyber fraud?")}</strong><p>${esc(language === "hi" ? "अभी 1930 पर स्वयं कॉल करें।" : "Call 1930 manually now.")}</p></div>
       </div>
     </nav>`;
   }
@@ -116,6 +116,7 @@ export function renderFlowRoute(ctx) {
       <div class="flow-shell">
         <aside>${flowProgress()}</aside>
         <div class="flow-task">
+          <aside class="flow-guide-bar"><span>${language === "hi" ? "सही अगला कदम स्पष्ट नहीं?" : "Not sure about the next step?"}</span><button class="text-link" type="button" data-open-guide>${language === "hi" ? "ThreadZero मार्गदर्शक" : "ThreadZero Guide"}</button><button class="text-link" type="button" data-start-tour>${language === "hi" ? "इस पृष्ठ का परिचय" : "Show me around"}</button></aside>
           ${body}
           ${options.hideBack ? "" : `<div class="standalone-back">${routeLink(flowBackRoute(), `${icon("arrow-right", "icon icon-inline icon-back")} ${esc(c.common.back)}`, "button button-secondary raw-label")}</div>`}
         </div>
@@ -135,10 +136,8 @@ export function renderFlowRoute(ctx) {
         <div><span class="urgent-symbol" aria-hidden="true">1930</span><span><strong>${esc(c.common.callManually)}</strong><small>${esc(c.common.noCall)}</small></span></div>
         <div>${routeLink("official-tools", routeLabel("official-tools"), "text-link")}</div>
       </div>
-      <div class="boundary-card"><h2>${esc(s.boundaryTitle)}</h2><p>${esc(s.boundaryBody)}</p><p class="truth-line">${esc(c.meta.disclosure)}</p></div>
+      <div class="boundary-card"><h2>${esc(s.boundaryTitle)}</h2><p>${esc(s.boundaryBody)}</p></div>
       <form class="flow-form" data-route-form="act-now">
-        <label class="confirm-row" for="act-now-confirm"><input id="act-now-confirm" name="confirm" type="checkbox" data-state="actNowAcknowledged"${checked(state.actNowAcknowledged)}${invalidAttributes("flow")}><span>${esc(s.choice)}</span></label>
-        ${fieldError("flow")}
         <div class="flow-actions"><button class="button button-primary" type="submit">${esc(c.common.continue)} ${icon("arrow-right", "icon icon-inline")}</button></div>
       </form>`);
   }
@@ -175,7 +174,7 @@ export function renderFlowRoute(ctx) {
           <div class="flow-actions"><button class="button button-primary" type="submit">${esc(ui.confirm)} ${icon("arrow-right", "icon icon-inline")}</button></div>
         </form>
       </section>` : ""}
-      <details class="manual-incident"><summary>${esc(ui.manual)}</summary><form class="flow-form" data-route-form="incident"><fieldset class="choice-grid"><legend>${esc(s.legend)}</legend>${s.choices.map((choice) => `<label class="choice-card" for="incident-${esc(choice.value)}"><input id="incident-${esc(choice.value)}" name="incidentChoice" type="radio" value="${esc(choice.value)}" data-state="incidentChoice"${checked(state.incidentChoice === choice.value)}${invalidAttributes("flow")}><span><strong>${esc(choice.title)}</strong><small>${esc(choice.body)}</small></span></label>`).join("")}</fieldset>${fieldError("flow")}<div class="flow-actions"><button class="button button-primary" type="submit">${esc(c.common.continue)} ${icon("arrow-right", "icon icon-inline")}</button></div></form></details>`);
+      <details class="manual-incident"><summary>${esc(ui.manual)}</summary><form class="flow-form" data-route-form="incident"><fieldset class="choice-grid"><legend>${esc(s.legend)}</legend>${s.choices.map((choice) => `<label class="choice-card" for="incident-${esc(choice.value)}"><input id="incident-${esc(choice.value)}" name="incidentChoice" type="radio" value="${esc(choice.value)}" data-state="incidentChoice"${checked(state.incidentChoice === choice.value)}${invalidAttributes("flow")}><span><strong>${esc(choice.title)}</strong><small>${esc(choice.body)}</small></span></label>`).join("")}</fieldset>${fieldError("flow")}<div class="flow-actions"><button class="button button-secondary" type="button" data-open-guide>${language === "hi" ? "मुझे पता नहीं — चुनने में मदद करें" : "I’m not sure — help me choose"}</button><button class="button button-primary" type="submit">${esc(c.common.continue)} ${icon("arrow-right", "icon icon-inline")}</button></div></form></details>`);
   }
   
   function renderReadiness() {
@@ -183,7 +182,6 @@ export function renderFlowRoute(ctx) {
     const s = c.flow.readiness;
     return flowLayout(`${flowHeading(s)}${errorSummary()}
       <div class="readiness-grid">${s.states.map((item, index) => `<article class="readiness-card state-${["ready", "missing", "optional"][index]}">${icon(["check", "triangle-alert", "circle-help"][index], "readiness-icon")}<h2>${esc(item.title)}</h2><p>${esc(item.body)}</p></article>`).join("")}</div>
-      <p class="info-note">${esc(c.common.noUpload)}</p>
       <form class="flow-form" data-route-form="readiness">
         <label class="confirm-row" for="readiness-confirm"><input id="readiness-confirm" name="confirm" type="checkbox" data-state="readinessAcknowledged"${checked(state.readinessAcknowledged)}${invalidAttributes("flow")}><span>${esc(s.choice)}</span></label>
         ${fieldError("flow")}
@@ -218,9 +216,9 @@ export function renderFlowRoute(ctx) {
     const s = c.flow.evidence;
     const needsExtraction = state.evidence.some((item) => item.included && item.extractionRequired);
     return flowLayout(`${flowHeading(s)}${errorSummary()}
-      <div class="evidence-photo-note">${picture("evidence-thread-illustration-v1", c.home.mechanism.imageAlt, "evidence-photo")}<p>${esc(c.common.noUpload)}</p></div>
-      <p class="info-note">${esc(c.common.noUpload)}</p>
+      <div class="evidence-photo-note">${picture("P06-evidence-thread-v1", c.home.mechanism.imageAlt, "evidence-photo")}</div>
       <form class="flow-form" data-route-form="evidence">
+        <div class="uncertain-path"><span>${language === "hi" ? "साक्ष्य की स्थिति स्पष्ट नहीं?" : "Not sure about an evidence status?"}</span><button class="text-link" type="button" data-open-guide>${language === "hi" ? "चुनने में मदद लें" : "Help me choose"}</button></div>
         <div class="evidence-list">${state.evidence.map((item) => {
           const localized = evidenceCopy(item);
           const errorKey = item.id;
@@ -253,7 +251,7 @@ export function renderFlowRoute(ctx) {
     const c = copy();
     const s = c.flow.chronology;
     return flowLayout(`${flowHeading(s)}${errorSummary()}
-      <div class="chronology-layout"><ol class="timeline">${state.events.map((event, index) => `<li id="event-${esc(event.id)}" tabindex="-1"><div class="timeline-time"><strong>${esc(event.time)}</strong><small>${esc(new Intl.DateTimeFormat(language === "hi" ? "hi-IN" : "en-IN", { day: "numeric", month: "short", year: "numeric", timeZone: "UTC" }).format(new Date(`${event.date}T00:00:00Z`)))}</small></div><article><span class="timeline-dot" aria-hidden="true"></span><h2>${esc(event.description)}</h2><p>${esc(event.detail)}</p>${event.evidenceId ? `<small>${esc(s.evidence)}: ${esc(evidenceCopy(state.evidence.find((item) => item.id === event.evidenceId) || { id: "" }).name || s.noEvidence)}</small>` : ""}<div class="timeline-actions"><button type="button" data-event-action="edit" data-event-id="${esc(event.id)}">${esc(s.edit)}</button><button type="button" data-event-action="up" data-event-id="${esc(event.id)}"${index === 0 ? " disabled" : ""}>↑ ${esc(s.moveUp)}</button><button type="button" data-event-action="down" data-event-id="${esc(event.id)}"${index === state.events.length - 1 ? " disabled" : ""}>↓ ${esc(s.moveDown)}</button></div></article></li>`).join("")}</ol>
+      <div class="chronology-layout"><ol class="timeline">${state.events.map((event, index) => `<li id="event-${esc(event.id)}" class="${event.id === "event-payment" ? "is-critical" : ""}" tabindex="-1"><div class="timeline-time"><strong>${esc(event.time)}</strong><small>${esc(new Intl.DateTimeFormat(language === "hi" ? "hi-IN" : "en-IN", { day: "numeric", month: "short", year: "numeric", timeZone: "UTC" }).format(new Date(`${event.date}T00:00:00Z`)))}</small></div><article><span class="timeline-dot" aria-hidden="true"></span><h2>${esc(event.description)}</h2><p>${esc(event.detail)}</p>${event.evidenceId ? `<small>${esc(s.evidence)}: ${esc(evidenceCopy(state.evidence.find((item) => item.id === event.evidenceId) || { id: "" }).name || s.noEvidence)}</small>` : ""}<div class="timeline-actions"><button type="button" data-event-action="edit" data-event-id="${esc(event.id)}">${esc(s.edit)}</button><button type="button" data-event-action="up" data-event-id="${esc(event.id)}"${index === 0 ? " disabled" : ""}>↑ ${esc(s.moveUp)}</button><button type="button" data-event-action="down" data-event-id="${esc(event.id)}"${index === state.events.length - 1 ? " disabled" : ""}>↓ ${esc(s.moveDown)}</button></div></article></li>`).join("")}</ol>
         <button class="add-event-button" type="button" data-event-action="add">${icon("plus", "icon icon-small")}${esc(s.add)}</button>
         ${eventEditorMarkup()}
       </div>
@@ -284,7 +282,7 @@ export function renderFlowRoute(ctx) {
     const c = copy();
     const s = c.flow.submit;
     return flowLayout(`${flowHeading(s)}
-      <div class="simulation-boundary">${icon("triangle-alert", "dialog-symbol")}<div><h2>${esc(s.cardTitle)}</h2><p>${esc(s.cardBody)}</p><ul><li>${esc(c.meta.disclosure)}</li><li>${esc(c.common.noUpload)}</li><li>${esc(c.common.noCall)}</li></ul></div></div>
+      <div class="simulation-boundary">${icon("triangle-alert", "dialog-symbol")}<div><h2>${esc(s.cardTitle)}</h2><p>${esc(s.cardBody)}</p><ul><li>${esc(c.meta.disclosure)}</li><li>${esc(c.common.noCall)}</li></ul></div></div>
       <div class="flow-actions"><button class="button button-primary" type="button" data-open-simulation>${esc(s.action)}</button></div>`);
   }
   
@@ -298,7 +296,7 @@ export function renderFlowRoute(ctx) {
       <div class="reference-card"><span>${esc(c.common.syntheticReference)}</span><strong>${esc(DEMO.reportReference)}</strong><small>${esc(c.common.nothingSent)}</small><p>${esc(s.referenceHelp)}</p></div>
       <ol class="status-track compact-status">${s.states.map((item, index) => `<li class="${index === 0 ? "is-active" : ""}"><span aria-hidden="true">${index + 1}</span><div><strong>${esc(item.title)}</strong><p>${esc(item.body)}</p></div></li>`).join("")}</ol>
       <section class="smart-next-actions"><div><p class="eyebrow">${esc(c.common.actualIncident)}</p><h2>${esc(actionsTitle)}</h2><ol>${actions.map((action) => `<li>${icon(action.official ? "external-link" : "check", "icon icon-small")}<span>${esc(action.title)}</span></li>`).join("")}</ol></div>${routeLink("official-tools", routeLabel("official-tools"), "button button-secondary")}</section>
-      <section class="preparation-pack"><div><h2>${esc(pack.title)}</h2><p>${esc(pack.body)}</p><small>${esc(c.common.nothingSent)}</small></div><div class="button-row"><button class="button button-secondary" type="button" data-pack-action="copy">${esc(pack.copy)}</button><button class="button button-secondary" type="button" data-pack-action="download">${esc(pack.download)}</button>${officialAnchor("officialHome", c.common.officialSite, "button button-primary")}</div></section>
+      <section class="preparation-pack"><div><h2>${esc(pack.title)}</h2><p>${esc(pack.body)}</p></div><div class="button-row"><button class="button button-secondary" type="button" data-pack-action="copy">${esc(pack.copy)}</button><button class="button button-secondary" type="button" data-pack-action="download">${esc(pack.download)}</button>${officialAnchor("officialHome", c.common.officialSite, "button button-primary")}</div></section>
       <div class="flow-actions"><button class="button button-primary" type="button" data-reset-report>${esc(c.common.reset)}</button>${routeLink("track", c.nav.track, "button button-secondary")}</div>`, { hideBack: true });
   }
 

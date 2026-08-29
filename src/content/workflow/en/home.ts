@@ -1,0 +1,293 @@
+export default {
+  "hero": {
+    "title": "Report financial cyber fraud with confidence",
+    "intro": "Clear guidance, practical tools, and a clear handoff to the official reporting portal.",
+    "primary": "Start a report",
+    "secondary": "How it works",
+    "pathsLabel": "Complaint options",
+    "paths": [
+      {
+        "route": "incident",
+        "title": "Financial fraud",
+        "body": "Prepare the transaction, evidence, and timeline."
+      },
+      {
+        "route": "women-children",
+        "title": "Women or child related crime",
+        "body": "Understand anonymous and registered practice routes."
+      },
+      {
+        "route": "other-cybercrime",
+        "title": "Other cybercrime",
+        "body": "Prepare a clear demo complaint draft."
+      }
+    ],
+    "imageAlt": "Illustration of an Indian citizen organising a phone, transaction receipt, and notes at a desk"
+  },
+  "urgent": {
+    "title": "Lost money or need urgent action?",
+    "body": "Call 1930 manually as soon as possible for financial cyber fraud. Then use the official National Cyber Crime Reporting Portal.",
+    "siteTitle": "Official government reporting service",
+    "siteBody": "Open cybercrime.gov.in for real complaint preparation, reporting, and tracking."
+  },
+  "tasks": {
+    "eyebrow": "Citizen services",
+    "title": "What do you need to do?",
+    "intro": "Local preparation tools stay separate from real government actions.",
+    "items": [
+      {
+        "route": "incident",
+        "title": "Prepare a report",
+        "body": "Organise a demo financial-fraud incident."
+      },
+      {
+        "route": "track",
+        "title": "Track a complaint",
+        "body": "Use the demo tracker without leaving the portal."
+      },
+      {
+        "route": "official-tools",
+        "title": "Check or report a suspect",
+        "body": "Use demo contact, website, abuse, and appeal tools."
+      },
+      {
+        "route": "volunteers",
+        "title": "Cyber Volunteers",
+        "body": "Read the programme, terms, and registration guidance."
+      },
+      {
+        "route": "learning-corner",
+        "title": "Learning Corner",
+        "body": "Manuals, advisories, safety, training, and media."
+      },
+      {
+        "route": "contact",
+        "title": "Help and contact",
+        "body": "FAQ, feedback, grievance contacts, and notices."
+      }
+    ]
+  },
+  "prompt": {
+    "eyebrow": "Why prompt action matters",
+    "title": "Act quickly, then preserve what you already have.",
+    "intro": "Fast official reporting may help the relevant institutions respond. A clear record also reduces the burden of reconstructing events later.",
+    "points": [
+      {
+        "title": "Use the official channel first",
+        "body": "For financial cyber fraud, call 1930 manually and follow current guidance at cybercrime.gov.in."
+      },
+      {
+        "title": "Keep original records",
+        "body": "Preserve transaction references, messages, phone numbers, profile links, and timestamps without editing the originals."
+      },
+      {
+        "title": "Avoid further contact",
+        "body": "Do not send more money, share an OTP, install remote-access software, or pay anyone promising recovery."
+      }
+    ]
+  },
+  "mechanism": {
+    "eyebrow": "Your incident timeline",
+    "title": "See how the incident fits together.",
+    "intro": "Connect messages, payments, links, and evidence to the moment they belong to.",
+    "evidenceEyebrow": "Evidence connected to the incident",
+    "evidenceTitle": "See what you already have—and what is still missing.",
+    "evidenceIntro": "Connect each useful record to the moment it supports, without delaying official reporting when something is unavailable.",
+    "steps": [
+      "Evidence",
+      "Confirmed fact",
+      "Connected event",
+      "Coherent incident",
+      "Clear next action"
+    ],
+    "visualSteps": [
+      "Suspicious message",
+      "Link opened",
+      "₹25,000 payment",
+      "Contact disappears"
+    ],
+    "evidenceLabel": "Evidence connected to the incident timeline",
+    "evidenceLinks": [
+      { "evidence": "WhatsApp screenshot", "connection": "Supports event 1", "status": "ready" },
+      { "evidence": "Suspicious URL", "connection": "Supports event 2", "status": "ready" },
+      { "evidence": "Transaction receipt", "connection": "Supports event 3", "status": "ready" },
+      { "evidence": "Phone number", "connection": "Missing for event 4", "status": "missing" }
+    ],
+    "readiness": [
+      { "label": "I have it", "body": "A transaction receipt can show the amount, time, recipient, and reference.", "tone": "success" },
+      { "label": "I don’t have it", "body": "Add a phone number or account detail later if it becomes visible.", "tone": "warning" },
+      { "label": "Not sure", "body": "Check whether a public profile or website address is still available.", "tone": "muted" }
+    ],
+    "imageAlt": "Two-layer illustration connecting incident events to supporting evidence, with a missing phone number"
+  },
+  "process": {
+    "eyebrow": "How the demonstration works",
+    "title": "Simple steps. Honest boundaries.",
+    "intro": "The flow keeps the official action visible and stops before any external submission.",
+    "steps": [
+      {
+        "title": "Choose your incident",
+        "body": "Find the right category for your situation and start your report."
+      },
+      {
+        "title": "Prepare your evidence",
+        "body": "Collect and organise important details to support your report."
+      },
+      {
+        "title": "Understand the process",
+        "body": "Know what to expect before continuing on the official portal."
+      },
+      {
+        "title": "Continue on the official portal",
+        "body": "Continue to the official reporting portal yourself."
+      }
+    ],
+    "action": "See the reporting process",
+    "imageAlt": "An ordinary workspace with a laptop, phone, receipt, notebook, and organised evidence"
+  },
+  "checklist": {
+    "eyebrow": "Evidence preparation",
+    "title": "Useful records to keep nearby",
+    "intro": "Bring what you have. You can still report officially when an item is missing.",
+    "items": [
+      {
+        "title": "Payment proof",
+        "body": "Transaction receipt, screenshot, amount, time, UTR, or reference number."
+      },
+      {
+        "title": "Messages and calls",
+        "body": "Chat exports, SMS, email, caller number, and the sequence of contact."
+      },
+      {
+        "title": "Account and contact details",
+        "body": "UPI ID, bank account, wallet, profile name, website, or app link."
+      },
+      {
+        "title": "Your timeline",
+        "body": "A short event-by-event record written while details are still fresh."
+      },
+      {
+        "title": "Original files",
+        "body": "Keep originals unchanged and note where each item came from."
+      }
+    ],
+    "note": "Do not delay urgent official reporting while trying to collect everything.",
+    "imageAlt": "An overhead view of a phone, neutral transaction papers, notes, and a folder organised for evidence preparation"
+  },
+  "resources": {
+    "eyebrow": "Learning Corner",
+    "title": "Learn, verify, and stay informed.",
+    "intro": "Open practical guidance or continue to the complete learning directory.",
+    "action": "Explore Learning Corner",
+    "cards": [
+      {
+        "route": "advisories",
+        "image": "phishing",
+        "title": "Phishing and fake links",
+        "body": "Pause before opening urgent links or entering credentials on a page reached through a message."
+      },
+      {
+        "route": "safety",
+        "image": "payment",
+        "title": "Payment and UPI fraud",
+        "body": "A UPI PIN authorises money leaving an account; it is not needed to receive money."
+      },
+      {
+        "route": "awareness",
+        "image": "impersonation",
+        "title": "Impersonation pressure",
+        "body": "Verify unexpected officials, relatives, employers, or support agents through an independently found channel."
+      }
+    ],
+    "official": "Open NCRP advisories"
+  },
+  "official": {
+    "eyebrow": "Official actions",
+    "title": "Use every portal tool without losing your place.",
+    "intro": "Checks, reporting practice, mobile-connection guidance, and appeal preparation now stay inside this local experience.",
+    "items": [
+      {
+        "key": "officialTrack",
+        "title": "Track a demo complaint",
+        "body": "Use the documented demo reference and illustrative states."
+      },
+      {
+        "key": "officialSuspectSearch",
+        "title": "Check demo contact or account details",
+        "body": "Practise checking an example email, mobile, account, or social handle."
+      },
+      {
+        "key": "officialTafcop",
+        "title": "Review demo mobile connections",
+        "body": "Understand a TAFCOP-style result using example connections."
+      },
+      {
+        "key": "officialGac",
+        "title": "Prepare an appeal draft",
+        "body": "Organise a demo appeal without contacting GAC or a platform."
+      }
+    ]
+  },
+  "after": {
+    "eyebrow": "After official submission",
+    "title": "Keep expectations clear and records available.",
+    "intro": "This concept cannot see or predict what a police, bank, payment provider, or government system will do.",
+    "states": [
+      {
+        "title": "Prepared",
+        "body": "Your facts and evidence list are organised locally in this demonstration."
+      },
+      {
+        "title": "Ready for official reporting",
+        "body": "Use the official service yourself and follow its current instructions."
+      },
+      {
+        "title": "Keep records available",
+        "body": "Retain originals and respond only through verified official channels."
+      }
+    ],
+    "caution": "No outcome, fund freeze, recovery, investigation, or response time is promised."
+  },
+  "help": {
+    "eyebrow": "Help and legal directory",
+    "title": "Answers, contacts, and trusted destinations",
+    "intro": "Find answers, demos, policies, notices, and clearly separated source references.",
+    "faqs": [
+      {
+        "q": "Does this submit a complaint?",
+        "a": "No. It prepares only a demo record in memory and never sends data anywhere."
+      },
+      {
+        "q": "Can I continue with missing evidence?",
+        "a": "Yes. Missing evidence is guidance, not failure. Report urgently through official channels with what you have."
+      },
+      {
+        "q": "Can I upload a real screenshot here?",
+        "a": "No. There is no file input or upload. Every evidence item shown is an example."
+      },
+      {
+        "q": "Where do I track a real complaint?",
+        "a": "Use the official tracking action at cybercrime.gov.in. This concept tracks only one documented demo reference."
+      }
+    ],
+    "directory": [
+      {
+        "route": "official-tools",
+        "title": "Official tools and handoffs"
+      },
+      {
+        "route": "contact",
+        "title": "Nodal and grievance contacts"
+      },
+      {
+        "route": "policies",
+        "title": "Policies and disclaimers"
+      },
+      {
+        "route": "volunteers",
+        "title": "Cyber Volunteer information"
+      }
+    ]
+  }
+};
+

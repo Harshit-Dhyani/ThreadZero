@@ -1,8 +1,5 @@
 /* Flow, tracker, and dialogs */
-.is-flow-route .desktop-nav,
-.is-flow-route .header-menu-button,
-.is-flow-route .site-footer,
-.is-flow-route .mobile-nav {
+.is-flow-route .site-footer {
   display: none !important;
 }
 
@@ -82,6 +79,11 @@
   font-size: 0.67rem;
 }
 
+.flow-step strong {
+  font-size: 0.88rem;
+  font-weight: 600;
+}
+
 .step-number {
   width: 30px;
   height: 30px;
@@ -95,16 +97,16 @@
 }
 
 .flow-official-card {
-  margin: 8px;
-  padding: 13px;
-  border-radius: 8px;
-  background: var(--red-soft);
+  margin: 2px 16px 14px;
+  padding: 15px 0 0;
+  border-top: 1px solid #ecd4d1;
   display: flex;
   gap: 10px;
 }
 
 .flow-official-card strong {
-  font-size: 0.76rem;
+  font-size: 0.78rem;
+  font-weight: 600;
 }
 
 .flow-official-card p {
@@ -115,21 +117,20 @@
 
 .flow-task {
   min-width: 0;
-  padding: 24px;
-  border: 1px solid var(--line);
-  border-radius: var(--radius-md);
-  background: #fff;
+  padding: 28px 32px;
 }
 
 .flow-heading {
   max-width: 780px;
-  margin-bottom: 26px;
+  margin-bottom: 30px;
 }
 
 .flow-heading h1 {
   margin-bottom: 12px;
-  font-size: clamp(2rem, 3vw, 2.375rem);
-  font-weight: 650;
+  font-size: clamp(2.2rem, 3vw, 2.7rem);
+  font-weight: 620;
+  line-height: 1.08;
+  letter-spacing: -0.03em;
 }
 
 .flow-heading > p:last-child {
@@ -337,6 +338,11 @@
 }
 
 .urgent-guidance-card {
+  padding: 15px 0 15px 18px;
+  border: 0;
+  border-left: 3px solid var(--red);
+  border-radius: 0;
+  background: transparent;
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
   align-items: center;
@@ -368,8 +374,12 @@
 }
 
 .boundary-card {
-  border-color: var(--line);
-  background: #fff;
+  padding: 20px 0;
+  border: 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  border-radius: 0;
+  background: transparent;
 }
 
 .boundary-card h2 {
@@ -569,11 +579,35 @@
   background: var(--blue-600);
 }
 
-.timeline li > div:last-child {
+.timeline li > article {
   padding: 16px;
   border: 1px solid var(--line);
-  border-radius: var(--radius-md);
+  border-radius: 10px;
   background: #fff;
+}
+
+.timeline li.is-critical .timeline-dot {
+  top: 4px;
+  left: 1px;
+  width: 34px;
+  height: 34px;
+  border-color: #ffe1df;
+  background: var(--red);
+}
+
+.timeline li.is-critical > article {
+  border-color: #efb8b4;
+  border-left-width: 4px;
+  background: #fff7f6;
+}
+
+.timeline li.is-critical .timeline-time,
+.timeline li.is-critical h2 {
+  color: var(--red);
+}
+
+.timeline li.is-critical h2 {
+  font-size: 1.18rem;
 }
 
 .timeline-time {
@@ -816,9 +850,16 @@
 }
 
 .standalone-back {
-  margin-top: 28px;
-  padding-top: 20px;
+  margin-top: 22px;
+  padding-top: 18px;
   border-top: 1px solid var(--line);
+}
+
+.flow-actions .button,
+.standalone-back .button {
+  width: 156px;
+  min-width: 156px;
+  justify-content: center;
 }
 
 
@@ -1073,4 +1114,68 @@
   font-size: 0.84rem;
   font-weight: 590;
   text-decoration: none;
+}
+
+.tracker-heading-no-media {
+  grid-template-columns: minmax(0, 840px);
+}
+
+.more-demo-access {
+  min-height: 46px;
+  margin-top: 22px;
+  padding: 10px 13px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  background: var(--blue-50);
+  color: var(--ink);
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.demo-access-dialog {
+  width: min(560px, calc(100% - 32px));
+}
+
+.demo-access-dialog .dialog-heading-row {
+  align-items: flex-start;
+}
+
+.demo-access-dialog .dialog-heading-row h2 {
+  margin-bottom: 0;
+}
+
+.demo-access-dialog > .dialog-card > p {
+  color: var(--muted);
+}
+
+.demo-profile-options {
+  margin: 18px 0 12px;
+  display: grid;
+  gap: 9px;
+}
+
+.demo-profile-options button {
+  min-height: 66px;
+  padding: 12px 14px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  background: #fff;
+  color: var(--ink);
+  display: grid;
+  gap: 2px;
+  text-align: left;
+  cursor: pointer;
+}
+
+.demo-profile-options button:hover {
+  border-color: #9ab7e3;
+  background: var(--blue-50);
+}
+
+.demo-profile-options span {
+  color: var(--muted);
+  font-size: 0.78rem;
 }

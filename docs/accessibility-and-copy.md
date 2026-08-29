@@ -1,5 +1,7 @@
 # Accessibility and copy contract
 
+> **Historical V1/V2 baseline.** Preserve this record for provenance; its old route names and evidence labels are not current product copy. Use [THREADZERO_CURRENT_STATE_V5.md](../THREADZERO_CURRENT_STATE_V5.md) and [AGENTS.md](../AGENTS.md) for the active V5.3 accessibility and plain-language contract.
+
 ## Semantic structure
 
 Every active screen must provide:

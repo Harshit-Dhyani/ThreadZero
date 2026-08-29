@@ -1,5 +1,7 @@
 # Financial-fraud service blueprint
 
+> **Historical V1/V2 baseline.** This document preserves the retired vanilla portal and nine-route design record. For the active V5.3 Next.js product, five-stage journey, and release evidence, use [THREADZERO_CURRENT_STATE_V5.md](../THREADZERO_CURRENT_STATE_V5.md) and [README.md](../README.md).
+
 ## Contract
 
 This is the single citizen-flow specification for the approved prototype.
