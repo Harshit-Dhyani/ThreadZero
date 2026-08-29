@@ -4,6 +4,7 @@ import test from "node:test";
 import { applyReportKindSelection, createInitialState, evidenceForReportKind, refreshTimelineForReport, reportPresentation } from "../domains/report/index.ts";
 import { CHECK_MODES, CHECK_MODE_REDIRECTS } from "../features/check/index.ts";
 import { NAV_GROUPS, navigationMenuChildren } from "../lib/navigation.ts";
+import { parseReportState } from "../lib/storage/index.ts";
 import type { ReportKind } from "../lib/types.ts";
 
 const source = (path: string) => readFileSync(new URL(`../../${path}`, import.meta.url), "utf8");
@@ -86,6 +87,25 @@ test("Women/Child category changes its own timeline context without reintroducin
   assert.match(report.events[0].description, /child-related/i);
   assert.equal(report.events.some((event) => /payment sent|₹|utr/i.test(`${event.description} ${event.detail}`)), false);
   assert.match(reportPresentation(report, "en").timeline.title, /harmful content|contact/i);
+});
+
+test("pre-V6 non-financial saved state is sanitised instead of reviving financial fixtures", () => {
+  const stale: any = createInitialState();
+  stale.reportKind = "women-child";
+  stale.reportingMode = "registered";
+  stale.womenChildCategory = "cseam";
+  stale.incidentChoice = "women-child";
+  assert.ok(stale.incident.amount, "fixture should begin with a financial amount");
+  assert.ok(stale.events.some((event: any) => event.id === "event-payment"), "fixture should begin with a financial payment event");
+
+  const migrated = parseReportState(stale);
+  assert.ok(migrated);
+  assert.equal(migrated.incident.amount, "");
+  assert.equal(migrated.incident.paymentMethod, "");
+  assert.equal(migrated.incident.transactionReference, "");
+  assert.equal(migrated.incident.recipientIdentifier, "");
+  assert.equal(migrated.events.some((event) => event.id === "event-payment"), false);
+  assert.match(migrated.events[0].description, /child-related/i);
 });
 
 test("all later Report stages use family-specific presentation", () => {
