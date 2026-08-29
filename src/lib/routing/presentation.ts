@@ -14,7 +14,7 @@ const route = (workspace: Workspace, mode: string, archetype: string, actionMode
 
 export const WORKSPACES = Object.freeze({
   home: Object.freeze({ route: "home", en: "Home", hi: "होम" }),
-  report: Object.freeze({ route: "complaints", en: "Report", hi: "रिपोर्ट" }),
+  report: Object.freeze({ route: "incident", en: "Report", hi: "रिपोर्ट" }),
   check: Object.freeze({ route: "official-tools", en: "Check", hi: "जाँच" }),
   track: Object.freeze({ route: "track", en: "Track", hi: "ट्रैक" }),
   learn: Object.freeze({ route: "learning-corner", en: "Learn", hi: "सीखें" }),
@@ -24,11 +24,11 @@ export const WORKSPACES = Object.freeze({
 const FLOW_ROUTES = new Set(FLOW_ROUTE_IDS);
 
 const ROUTE_PRESENTATION = Object.freeze({
-  complaints: route("report", "paths", "task-chooser", "choose-report-path", "", "compact"),
-  "women-children": route("report", "women-children", "complaint-guidance", "choose-official-path", "", "compact"),
-  "anonymous-report": route("report", "anonymous", "local-form", "prepare-local-record", "", "compact"),
-  "registered-report": route("report", "registered", "local-form", "prepare-local-record", "", "compact"),
-  "other-cybercrime": route("report", "other", "local-form", "prepare-local-record", "", "compact"),
+  complaints: route("report", "legacy-entry", "redirect", "open-report-workspace", "", "compact"),
+  "women-children": route("report", "legacy-entry", "redirect", "open-report-workspace", "", "compact"),
+  "anonymous-report": route("report", "legacy-entry", "redirect", "open-report-workspace", "", "compact"),
+  "registered-report": route("report", "legacy-entry", "redirect", "open-report-workspace", "", "compact"),
+  "other-cybercrime": route("report", "legacy-entry", "redirect", "open-report-workspace", "", "compact"),
   "official-tools": route("check", "tools", "task-chooser", "choose-official-tool", "", "compact"),
   "check-identifier": route("check", "identifier", "local-form", "prepare-identifier", "", "compact"),
   "check-website": route("check", "website", "local-form", "prepare-address", "", "compact"),
