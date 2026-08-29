@@ -1,12 +1,12 @@
 "use client";
 
-import Image from "next/image";
-import { ArrowRight, BookOpen, CircleHelp, FileCheck2, FileText, SearchCheck, ShieldCheck, Users } from "lucide-react";
+import { ArrowRight, BookOpen, CircleHelp, FileCheck2, FileText, SearchCheck, Users, Waypoints } from "lucide-react";
 import { WORKFLOW_COPY as COPY } from "@/content/workflow";
 import { GUIDE_TASKS } from "@/features/guide";
 import { usePortal } from "./portal-provider";
+import { ResponsiveIllustration } from "./responsive-illustration";
 
-const serviceIcons = [FileCheck2, SearchCheck, FileText, BookOpen, Users, CircleHelp];
+const serviceIcons = [FileCheck2, SearchCheck, FileText, BookOpen, Users, Waypoints];
 
 export function Home() {
   const { language, navigate, openGuide } = usePortal();
@@ -78,8 +78,9 @@ export function Home() {
 
       <section className="mx-auto max-w-content px-5 py-12 md:px-8 lg:py-16">
         <div className="flex items-end justify-between gap-5"><div><p className="text-xs font-semibold uppercase tracking-[0.14em] text-civic-700">{c.resources.eyebrow}</p><h2 className="mt-3 text-[28px] font-semibold tracking-[-0.02em]">{c.resources.title}</h2></div><button className="hidden min-h-11 items-center gap-2 text-sm font-semibold text-civic-700 sm:flex" onClick={() => onGuide("learn")}>{c.resources.action}<ArrowRight className="size-4" /></button></div>
-        <div className="mt-7 grid gap-5 md:grid-cols-3">
-          {["learning-video.webp", "learning-infographic.webp", "learning-campaign.webp"].map((image, index) => <article key={image} className="overflow-hidden rounded-panel border border-line bg-white"><div className="relative aspect-[16/8] overflow-hidden bg-navy-900"><Image src={`/assets/images/${image}`} fill loading="eager" sizes="(min-width: 768px) 33vw, 100vw" className="object-cover" alt="" /></div><div className="p-5"><h3 className="text-lg font-semibold">{c.resources.cards[index].title}</h3><p className="mt-2 text-sm leading-6 text-muted">{c.resources.cards[index].body}</p><button className="mt-4 inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-civic-700" onClick={() => onGuide("learn")}>{language === "en" ? "Open guidance" : "मार्गदर्शन खोलें"}<ArrowRight className="size-4" /></button></div></article>)}
+        <div className="mt-7 grid overflow-hidden rounded-panel border border-line bg-white lg:grid-cols-[1.35fr_0.65fr]">
+          <article className="grid min-h-72 md:grid-cols-[0.9fr_1.1fr]"><div className="bg-civic-50 p-5"><ResponsiveIllustration assetId="training" language={language} className="h-full max-h-64 w-full object-contain" /></div><div className="flex flex-col justify-center p-6"><p className="text-xs font-semibold uppercase tracking-[0.12em] text-civic-700">{language === "hi" ? "विशेष संसाधन" : "Featured resource"}</p><h3 className="mt-3 text-2xl font-semibold">{c.resources.cards[0].title}</h3><p className="mt-2 text-sm leading-6 text-muted">{c.resources.cards[0].body}</p><button className="mt-4 inline-flex min-h-11 items-center gap-2 self-start text-sm font-semibold text-civic-700" onClick={() => navigate("training")}>{language === "en" ? "Browse training" : "प्रशिक्षण देखें"}<ArrowRight className="size-4" /></button></div></article>
+          <div className="divide-y divide-line border-t border-line lg:border-l lg:border-t-0">{c.resources.cards.slice(1).map((card, index) => <button key={card.title} className="group flex min-h-36 w-full items-center gap-4 p-5 text-left" onClick={() => navigate(index === 0 ? "safety" : "awareness")}><span className="grid size-11 shrink-0 place-items-center rounded-panel bg-civic-50 text-civic-700">{index === 0 ? <BookOpen className="size-5" /> : <CircleHelp className="size-5" />}</span><span className="flex-1"><strong className="block text-base">{card.title}</strong><span className="mt-1 block text-sm leading-6 text-muted">{card.body}</span></span><ArrowRight className="size-4 transition-transform group-hover:translate-x-1" /></button>)}</div>
         </div>
       </section>
     </>

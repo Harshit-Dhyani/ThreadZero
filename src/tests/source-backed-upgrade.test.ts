@@ -10,7 +10,6 @@ import { NAV_GROUPS, navigationContextFor, navigationGroupFor, navigationMenuChi
 import { ALL_ROUTE_IDS, routeDefinition, workspaceFor } from "../lib/routes.ts";
 import { REPORT_ENTRY_REDIRECTS } from "../data/demo.ts";
 
-const productionAssets = ["advisories", "safetyV2", "awarenessV2", "training", "media", "accessibilityV2", "volunteers", "help", "footerHelp"] as const;
 const assetRoot = fileURLToPath(new URL("../../public", import.meta.url));
 const proofPath = fileURLToPath(new URL("../../design-intelligence/generated-assets.json", import.meta.url));
 
@@ -80,15 +79,15 @@ test("source-backed resources keep bilingual parity and registered sources", () 
   }
 });
 
-test("new production illustrations resolve to approved alpha proofs and responsive files", () => {
+test("every shipped registry asset has approval, responsive files, dimensions, and bilingual alt policy", () => {
   const proofs = JSON.parse(readFileSync(proofPath, "utf8")).assets as Array<{ id: string; status: string; alpha_verified?: boolean }>;
-  for (const key of productionAssets) {
-    const asset = ASSETS[key];
+  for (const [key, asset] of Object.entries(ASSETS)) {
     const proof = proofs.find((entry) => entry.id === asset.id);
     assert.equal(proof?.status, "approved-illustration-v1", `${asset.id} is not approved`);
-    assert.equal(proof?.alpha_verified, true, `${asset.id} lacks alpha verification`);
+    if (asset.decorative) assert.equal(proof?.alpha_verified, true, `${asset.id} lacks required alpha verification`);
     assert.ok(asset.width > 0 && asset.height > 0, `${asset.id} lacks verified dimensions`);
     assert.ok(existsSync(`${assetRoot}${asset.sources.small}`), `${asset.id} small source is missing`);
     assert.ok(existsSync(`${assetRoot}${asset.sources.large}`), `${asset.id} large source is missing`);
+    assert.equal(asset.decorative ? asset.alt.en + asset.alt.hi : Boolean(asset.alt.en && asset.alt.hi), asset.decorative ? "" : true, `${key} violates bilingual alt policy`);
   }
 });
