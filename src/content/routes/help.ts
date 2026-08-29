@@ -16,8 +16,8 @@ export const HELP_ROUTES = [
       "hi": "रिपोर्ट से पहले नागरिकों के प्रश्न"
     },
     "intro": {
-      "en": "Clear answers about evidence, synthetic data, and official next steps.",
-      "hi": "साक्ष्य, सिंथेटिक डेटा और आधिकारिक अगले कदमों के स्पष्ट उत्तर।"
+      "en": "Clear answers about evidence, demo data, and official next steps.",
+      "hi": "साक्ष्य, डेमो डेटा और आधिकारिक अगले कदमों के स्पष्ट उत्तर।"
     },
     "items": [
       {
@@ -26,8 +26,8 @@ export const HELP_ROUTES = [
           "hi": "क्या यह शिकायत जमा करता है?"
         },
         "body": {
-          "en": "No. It prepares synthetic information locally and never contacts NCRP.",
-          "hi": "नहीं। यह स्थानीय रूप से सिंथेटिक जानकारी तैयार करता है और NCRP से संपर्क नहीं करता।"
+          "en": "No. It prepares demo information in this browser and never contacts NCRP.",
+          "hi": "नहीं। यह इस ब्राउज़र में डेमो जानकारी तैयार करता है और NCRP से संपर्क नहीं करता।"
         },
         "route": ""
       },
@@ -90,7 +90,7 @@ export const HELP_ROUTES = [
           "en": "Call 1930 manually and prepare the transaction evidence.",
           "hi": "1930 पर स्वयं कॉल करें और लेन-देन साक्ष्य तैयार करें।"
         },
-        "route": "act-now"
+        "route": "incident"
       },
       {
         "title": {

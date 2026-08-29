@@ -16,8 +16,8 @@ export const TRACKING_ROUTES = [
       "hi": "डेमो रिपोर्ट ट्रैक करें"
     },
     "intro": {
-      "en": "Use the documented synthetic reference only.",
-      "hi": "केवल दिए गए सिंथेटिक संदर्भ का उपयोग करें।"
+      "en": "Use the documented demo reference only.",
+      "hi": "केवल दिए गए डेमो संदर्भ का उपयोग करें।"
     },
     "items": [],
     "fields": [],

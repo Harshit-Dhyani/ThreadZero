@@ -133,26 +133,26 @@ export const LEARNING_ROUTES = [
     "group": "learning",
     "composition": "guidance",
     "label": {
-      "en": "Citizen manuals",
-      "hi": "नागरिक पुस्तिकाएँ"
+      "en": "Evidence",
+      "hi": "साक्ष्य"
     },
     "eyebrow": {
-      "en": "Citizen manuals",
-      "hi": "नागरिक पुस्तिकाएँ"
+      "en": "Evidence",
+      "hi": "साक्ष्य"
     },
     "title": {
       "en": "Prepare before you report",
       "hi": "रिपोर्ट से पहले तैयारी करें"
     },
     "intro": {
-      "en": "Collect transaction facts, preserve evidence, and write a clear chronology.",
-      "hi": "लेन-देन तथ्य, साक्ष्य और स्पष्ट घटनाक्रम तैयार करें।"
+      "en": "Collect transaction facts, preserve evidence, and write a clear timeline.",
+      "hi": "लेन-देन तथ्य, साक्ष्य और स्पष्ट समयरेखा तैयार करें।"
     },
     "items": [
       {
         "title": {
-          "en": "Record identifiers",
-          "hi": "पहचानकर्ता दर्ज करें"
+          "en": "Record contact and account details",
+          "hi": "संपर्क और खाता विवरण दर्ज करें"
         },
         "body": {
           "en": "Keep UTR, account, phone, email, profile, and URL details.",
@@ -174,7 +174,7 @@ export const LEARNING_ROUTES = [
       {
         "title": {
           "en": "Write a timeline",
-          "hi": "घटनाक्रम लिखें"
+          "hi": "समयरेखा लिखें"
         },
         "body": {
           "en": "Order messages, clicks, payments, and follow-up actions.",
@@ -457,7 +457,7 @@ export const LEARNING_ROUTES = [
       },
       {
         "title": {
-          "en": "Evidence readiness",
+          "en": "Evidence checklist",
           "hi": "साक्ष्य तैयारी"
         },
         "body": {

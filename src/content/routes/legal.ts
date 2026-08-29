@@ -37,8 +37,8 @@ export const LEGAL_ROUTES = [
           "hi": "कोई स्थायित्व नहीं"
         },
         "body": {
-          "en": "Reloading resets every synthetic form and result.",
-          "hi": "रीलोड करने पर हर सिंथेटिक फ़ॉर्म और परिणाम रीसेट होता है।"
+          "en": "Reloading resets every demo form and result.",
+          "hi": "रीलोड करने पर हर डेमो फ़ॉर्म और परिणाम रीसेट होता है।"
         },
         "route": ""
       },
@@ -83,8 +83,8 @@ export const LEGAL_ROUTES = [
     "items": [
       {
         "title": {
-          "en": "Synthetic data only",
-          "hi": "केवल सिंथेटिक डेटा"
+          "en": "Demo data only",
+          "hi": "केवल डेमो डेटा"
         },
         "body": {
           "en": "Use the supplied examples rather than real details.",
@@ -98,7 +98,7 @@ export const LEGAL_ROUTES = [
           "hi": "कोई अपलोड नहीं"
         },
         "body": {
-          "en": "Evidence controls are readiness choices, not file inputs.",
+          "en": "Evidence controls record what you have, what is missing, or what you are unsure about. They are not file inputs.",
           "hi": "साक्ष्य नियंत्रण तैयारी विकल्प हैं, फ़ाइल इनपुट नहीं।"
         },
         "route": ""
@@ -283,7 +283,7 @@ export const LEGAL_ROUTES = [
         },
         "body": {
           "en": "Financial-fraud preparation plus public information simulations.",
-          "hi": "वित्तीय धोखाधड़ी तैयारी और सार्वजनिक जानकारी सिमुलेशन।"
+          "hi": "वित्तीय धोखाधड़ी तैयारी और सार्वजनिक जानकारी डेमो।"
         },
         "route": ""
       },

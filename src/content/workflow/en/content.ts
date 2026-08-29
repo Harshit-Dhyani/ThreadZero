@@ -1,6 +1,6 @@
 export default {
   "official-tools": {
-    "eyebrow": "Official handoffs",
+    "eyebrow": "Official next steps",
     "title": "Use verified government destinations for real actions.",
     "intro": "This directory explains the boundary before opening each external service. No query, CAPTCHA, login, or complaint action is reproduced here.",
     "items": [
@@ -13,8 +13,8 @@ export default {
         "body": "Use the acknowledgement-number action on the official portal."
       },
       {
-        "title": "Check suspect identifiers",
-        "body": "The official repository can check supported phone, account, email, URL, and other suspect identifiers."
+        "title": "Check suspect contact or account details",
+        "body": "The official repository can check supported phone, account, email, URL, and other suspect details."
       },
       {
         "title": "Report a suspect",
@@ -76,7 +76,7 @@ export default {
         "body": "Keep the number, account, email, profile, website, and message sequence."
       },
       {
-        "title": "Chronology",
+        "title": "Timeline",
         "body": "Write one event per line and connect only the evidence that directly supports it."
       },
       {
@@ -272,7 +272,7 @@ export default {
     "items": [
       {
         "title": "Is this a government website?",
-        "body": "No. This synthetic preparation demo sends nothing to government systems."
+        "body": "No. This demo sends nothing to government systems."
       },
       {
         "title": "Does calling 1930 here place a call?",
@@ -280,11 +280,11 @@ export default {
       },
       {
         "title": "Can I enter real evidence?",
-        "body": "Do not. There is no upload and all examples are designed to be synthetic."
+        "body": "Do not. There is no upload and all records shown here are examples."
       },
       {
         "title": "Does the demo tracker show police progress?",
-        "body": "No. It recognises only one synthetic reference and shows preparation states, not agency status."
+        "body": "No. It recognises only one demo reference and shows preparation states, not agency status."
       },
       {
         "title": "What if evidence is missing?",
@@ -360,14 +360,14 @@ export default {
     "items": [
       {
         "title": "What works",
-        "body": "A deterministic reporting-preparation flow and synthetic tracker work entirely in this page session."
+        "body": "A demo reporting flow and tracker work entirely in this page session."
       },
       {
         "title": "What stays external",
         "body": "Real complaints, tracking, suspect searches, registration, feedback, CAPTCHA, and authenticated services."
       },
       {
-        "title": "What is synthetic",
+        "title": "What is an example",
         "body": "Every person, transaction, message, evidence item, event, reference, and preparation state."
       },
       {

@@ -5,7 +5,7 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Financial Cyber Fraud Reporting Guide",
-  description: "Independent ThreadZero concept using deterministic synthetic data."
+  description: "Independent ThreadZero concept using demo data. Nothing is sent to the government."
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {

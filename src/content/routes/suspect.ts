@@ -22,12 +22,12 @@ export const SUSPECT_ROUTES = [
     "items": [
       {
         "title": {
-          "en": "Check an identifier",
+          "en": "Check contact or account details",
           "hi": "पहचानकर्ता जाँचें"
         },
         "body": {
-          "en": "Try a synthetic mobile, email, account, or social handle.",
-          "hi": "सिंथेटिक मोबाइल, ईमेल, खाता या सोशल हैंडल जाँचें।"
+          "en": "Try a demo mobile, email, account, or social handle.",
+          "hi": "डेमो मोबाइल, ईमेल, खाता या सोशल हैंडल जाँचें।"
         },
         "route": "check-identifier"
       },
@@ -37,8 +37,8 @@ export const SUSPECT_ROUTES = [
           "hi": "वेबसाइट या ऐप जाँचें"
         },
         "body": {
-          "en": "Review a fictional URL against a deterministic fixture.",
-          "hi": "काल्पनिक URL को निश्चित फ़िक्स्चर से जाँचें।"
+          "en": "Review an example URL against a demo record.",
+          "hi": "उदाहरण URL को डेमो रिकॉर्ड से जाँचें।"
         },
         "route": "check-website"
       },
@@ -70,8 +70,8 @@ export const SUSPECT_ROUTES = [
           "hi": "मोबाइल कनेक्शन"
         },
         "body": {
-          "en": "Understand a TAFCOP-style check through synthetic data.",
-          "hi": "सिंथेटिक डेटा से TAFCOP-जैसी जाँच समझें।"
+          "en": "Understand a TAFCOP-style check through demo data.",
+          "hi": "डेमो डेटा से TAFCOP-जैसी जाँच समझें।"
         },
         "route": "mobile-connections"
       },
@@ -103,20 +103,20 @@ export const SUSPECT_ROUTES = [
     "group": "suspect",
     "composition": "form",
     "label": {
-      "en": "Identifier check",
+      "en": "Contact and account check",
       "hi": "पहचानकर्ता जाँच"
     },
     "eyebrow": {
-      "en": "Identifier check",
+      "en": "Contact and account check",
       "hi": "पहचानकर्ता जाँच"
     },
     "title": {
-      "en": "Check a demo identifier",
+      "en": "Check demo contact or account details",
       "hi": "डेमो पहचानकर्ता जाँचें"
     },
     "intro": {
-      "en": "This deterministic check recognises demo@example.test only.",
-      "hi": "यह निश्चित जाँच केवल demo@example.test को पहचानती है।"
+      "en": "This demo check recognises demo@example.test only.",
+      "hi": "यह डेमो जाँच केवल demo@example.test को पहचानती है।"
     },
     "items": [],
     "fields": [
@@ -124,7 +124,7 @@ export const SUSPECT_ROUTES = [
         "name": "identifierType",
         "type": "select",
         "label": {
-          "en": "Identifier type",
+          "en": "Detail type",
           "hi": "पहचानकर्ता प्रकार"
         },
         "required": true,
@@ -151,7 +151,7 @@ export const SUSPECT_ROUTES = [
         "name": "identifier",
         "type": "text",
         "label": {
-          "en": "Demo identifier",
+          "en": "Demo contact or account detail",
           "hi": "डेमो पहचानकर्ता"
         },
         "required": true,
@@ -184,8 +184,8 @@ export const SUSPECT_ROUTES = [
       "hi": "वेबसाइट या ऐप पता जाँचें"
     },
     "intro": {
-      "en": "Prepare a fictional address locally, then use the official repository for a real check.",
-      "hi": "एक काल्पनिक पता स्थानीय रूप से तैयार करें, फिर वास्तविक जाँच के लिए आधिकारिक रिपॉज़िटरी उपयोग करें।"
+      "en": "Try an example address here, then use the official repository for a real check.",
+      "hi": "यहाँ उदाहरण पता आज़माएँ, फिर वास्तविक जाँच के लिए आधिकारिक रिपॉज़िटरी उपयोग करें।"
     },
     "items": [],
     "fields": [
@@ -226,8 +226,8 @@ export const SUSPECT_ROUTES = [
       "hi": "संदिग्ध जानकारी तैयार करें"
     },
     "intro": {
-      "en": "Record only fictional identifiers and observations.",
-      "hi": "केवल काल्पनिक पहचानकर्ता और अवलोकन दर्ज करें।"
+      "en": "Record only demo contact or account details and observations.",
+      "hi": "केवल डेमो संपर्क या खाता विवरण और अवलोकन दर्ज करें।"
     },
     "items": [],
     "fields": [
@@ -235,8 +235,8 @@ export const SUSPECT_ROUTES = [
         "name": "identifier",
         "type": "text",
         "label": {
-          "en": "Synthetic identifier",
-          "hi": "सिंथेटिक पहचानकर्ता"
+          "en": "Demo contact or account detail",
+          "hi": "डेमो संपर्क या खाता विवरण"
         },
         "required": true,
         "example": "demo@example.test"
@@ -257,7 +257,7 @@ export const SUSPECT_ROUTES = [
     ],
     "result": {
       "en": "Suspect-information draft prepared locally",
-      "hi": "संदिग्ध-सूचना मसौदा स्थानीय रूप से तैयार"
+      "hi": "डेमो संदिग्ध-सूचना मसौदा तैयार"
     }
   },
   {
@@ -334,12 +334,12 @@ export const SUSPECT_ROUTES = [
       "hi": "मोबाइल कनेक्शन"
     },
     "title": {
-      "en": "Review synthetic mobile connections",
-      "hi": "सिंथेटिक मोबाइल कनेक्शन देखें"
+      "en": "Review demo mobile connections",
+      "hi": "डेमो मोबाइल कनेक्शन देखें"
     },
     "intro": {
-      "en": "This is an explanatory simulation, not TAFCOP and not a telecom lookup.",
-      "hi": "यह व्याख्यात्मक सिमुलेशन है, TAFCOP या दूरसंचार खोज नहीं।"
+      "en": "This is a demo explanation, not TAFCOP and not a telecom lookup.",
+      "hi": "यह डेमो व्याख्या है, TAFCOP या दूरसंचार खोज नहीं।"
     },
     "items": [],
     "fields": [
@@ -347,8 +347,8 @@ export const SUSPECT_ROUTES = [
         "name": "mobile",
         "type": "text",
         "label": {
-          "en": "Synthetic mobile number",
-          "hi": "सिंथेटिक मोबाइल नंबर"
+          "en": "Demo mobile number",
+          "hi": "डेमो मोबाइल नंबर"
         },
         "required": true,
         "pattern": "^9000000000$",
@@ -376,8 +376,8 @@ export const SUSPECT_ROUTES = [
       "hi": "अपील अभ्यास"
     },
     "title": {
-      "en": "Prepare a synthetic appeal",
-      "hi": "सिंथेटिक अपील तैयार करें"
+      "en": "Prepare a demo appeal",
+      "hi": "डेमो अपील तैयार करें"
     },
     "intro": {
       "en": "This does not file an appeal with GAC or any platform.",
@@ -389,8 +389,8 @@ export const SUSPECT_ROUTES = [
         "name": "reference",
         "type": "text",
         "label": {
-          "en": "Synthetic grievance reference",
-          "hi": "सिंथेटिक शिकायत संदर्भ"
+          "en": "Demo complaint reference",
+          "hi": "डेमो शिकायत संदर्भ"
         },
         "required": true,
         "pattern": "^APPEAL-DEMO-001$",
@@ -412,7 +412,7 @@ export const SUSPECT_ROUTES = [
     ],
     "result": {
       "en": "Appeal draft prepared locally",
-      "hi": "अपील मसौदा स्थानीय रूप से तैयार"
+      "hi": "डेमो अपील मसौदा तैयार"
     }
   }
 ];

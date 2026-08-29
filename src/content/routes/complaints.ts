@@ -40,7 +40,7 @@ export const COMPLAINTS_ROUTES = [
           "en": "Organise the incident, evidence, and timeline in a guided flow.",
           "hi": "निर्देशित प्रक्रिया में घटना, साक्ष्य और समयरेखा व्यवस्थित करें।"
         },
-        "route": "act-now"
+        "route": "incident"
       },
       {
         "title": {

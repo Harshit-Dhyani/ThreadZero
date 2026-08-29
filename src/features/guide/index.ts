@@ -15,9 +15,9 @@ export type GuideSearchEntry = {
 };
 
 export const GUIDE_TASKS: readonly GuideTask[] = [
-  { id: "lost-money", route: "act-now", workspace: "report", title: { en: "I lost money", hi: "मेरा पैसा गया" }, body: { en: "Start with urgent action, then organise the incident.", hi: "तत्काल कार्रवाई से शुरू करें, फिर घटना व्यवस्थित करें।" } },
-  { id: "suspicious", route: "official-tools", workspace: "check", title: { en: "I found something suspicious", hi: "मुझे कुछ संदिग्ध मिला" }, body: { en: "Choose the right identifier, website, or reporting path.", hi: "सही पहचानकर्ता, वेबसाइट या रिपोर्टिंग मार्ग चुनें।" } },
-  { id: "reported", route: "track", workspace: "track", title: { en: "I already reported", hi: "मैं पहले रिपोर्ट कर चुका हूँ" }, body: { en: "Check a documented fictional or saved local record.", hi: "दस्तावेजीकृत काल्पनिक या सहेजा स्थानीय रिकॉर्ड जाँचें।" } },
+  { id: "lost-money", route: "incident", workspace: "report", title: { en: "I lost money", hi: "मेरा पैसा गया" }, body: { en: "Start with urgent action, then organise the incident.", hi: "तत्काल कार्रवाई से शुरू करें, फिर घटना व्यवस्थित करें।" } },
+  { id: "suspicious", route: "official-tools", workspace: "check", title: { en: "I found something suspicious", hi: "मुझे कुछ संदिग्ध मिला" }, body: { en: "Choose the right contact, account, website, or reporting path.", hi: "सही संपर्क, खाता, वेबसाइट या रिपोर्टिंग मार्ग चुनें।" } },
+  { id: "reported", route: "track", workspace: "track", title: { en: "I already reported", hi: "मैं पहले रिपोर्ट कर चुका हूँ" }, body: { en: "Check the demo or a saved record.", hi: "डेमो या सहेजा रिकॉर्ड जाँचें।" } },
   { id: "report", route: "guides", workspace: "report", title: { en: "Prepare evidence", hi: "साक्ष्य तैयार करें" }, body: { en: "Organise useful records without delaying official action.", hi: "आधिकारिक कार्रवाई में देर किए बिना उपयोगी रिकॉर्ड व्यवस्थित करें।" } },
   { id: "learn", route: "safety", workspace: "learn", title: { en: "Learn safety basics", hi: "सुरक्षा की मूल बातें सीखें" }, body: { en: "Use practical phishing, payment, and impersonation guidance.", hi: "फ़िशिंग, भुगतान और प्रतिरूपण के व्यावहारिक सुझाव देखें।" } },
   { id: "help", route: "faq", workspace: "help", title: { en: "Find help", hi: "सहायता पाएँ" }, body: { en: "Find answers and trusted official destinations.", hi: "उत्तर और विश्वसनीय आधिकारिक गंतव्य पाएँ।" } }
@@ -53,7 +53,7 @@ export function buildSearchIndex(routes: readonly RouteDefinition[] = PORTAL_ROU
   return Object.freeze([
     virtualEntry("report-flow", "report", "incident", "incident", "Start a guided financial-fraud report", "Describe what happened, organise the facts, evidence, and timeline.", "मार्गदर्शित वित्तीय धोखाधड़ी रिपोर्ट शुरू करें", "क्या हुआ बताकर तथ्य, साक्ष्य और समयरेखा व्यवस्थित करें।", "lost money upi payment evidence timeline", "पैसा खोया यूपीआई भुगतान साक्ष्य समयरेखा", 100),
     virtualEntry("official-1930", "help", "urgent", "contact", "Official helpline 1930", "For actual financial cyber fraud in India, call 1930 manually and use cybercrime.gov.in.", "आधिकारिक हेल्पलाइन 1930", "भारत में वास्तविक वित्तीय साइबर धोखाधड़ी के लिए 1930 पर स्वयं कॉल करें और cybercrime.gov.in उपयोग करें।", "lost money urgent call official ncrp", "पैसा खोया तुरंत कॉल आधिकारिक एनसीआरपी", 110),
-    virtualEntry("report-evidence", "report", "evidence", "evidence", "Evidence readiness", "Mark evidence Ready, Missing, or Optional and review deterministic extraction.", "साक्ष्य तैयारी", "साक्ष्य को तैयार, अनुपलब्ध या वैकल्पिक चिह्नित करें और डेमो निष्कर्षण जाँचें।", "upi payment screenshot receipt utr messages url", "यूपीआई भुगतान स्क्रीनशॉट रसीद यूटीआर संदेश यूआरएल", 92),
+    virtualEntry("report-evidence", "report", "evidence", "evidence", "Evidence checklist", "Mark what you have, what is missing, or what you are unsure about.", "साक्ष्य सूची", "बताएँ कि आपके पास क्या है, क्या नहीं है या किसके बारे में पता नहीं है।", "upi payment screenshot receipt utr messages url", "यूपीआई भुगतान स्क्रीनशॉट रसीद यूटीआर संदेश यूआरएल", 92),
     virtualEntry("report-timeline", "report", "timeline", "chronology", "Incident timeline", "Put events in order and connect useful evidence.", "घटना समयरेखा", "घटनाओं को क्रम में रखें और उपयोगी साक्ष्य जोड़ें।", "chronology events order", "घटनाक्रम घटना क्रम", 90),
     ...entries
   ]);

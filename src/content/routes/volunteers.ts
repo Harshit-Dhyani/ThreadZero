@@ -16,8 +16,8 @@ export const VOLUNTEERS_ROUTES = [
       "hi": "साइबर स्वयंसेवक मार्ग समझें"
     },
     "intro": {
-      "en": "Learn the three published programme roles, application flow, KYC distinction, and conduct limits. Practice routes are synthetic and create no account.",
-      "hi": "तीन प्रकाशित कार्यक्रम भूमिकाएँ, आवेदन प्रक्रिया, KYC अंतर और आचरण सीमाएँ समझें। अभ्यास मार्ग सिंथेटिक हैं और कोई खाता नहीं बनाते।"
+      "en": "Learn the three published programme roles, application flow, KYC distinction, and conduct limits. Practice routes are demos and create no account.",
+      "hi": "तीन प्रकाशित कार्यक्रम भूमिकाएँ, आवेदन प्रक्रिया, KYC अंतर और आचरण सीमाएँ समझें। अभ्यास मार्ग डेमो हैं और कोई खाता नहीं बनाते।"
     },
     "items": [
       {
@@ -48,8 +48,8 @@ export const VOLUNTEERS_ROUTES = [
           "hi": "पंजीकरण अभ्यास"
         },
         "body": {
-          "en": "Complete a synthetic interest form.",
-          "hi": "सिंथेटिक रुचि फ़ॉर्म भरें।"
+          "en": "Complete a demo interest form.",
+          "hi": "डेमो रुचि फ़ॉर्म भरें।"
         },
         "route": "volunteer-register"
       },
@@ -59,8 +59,8 @@ export const VOLUNTEERS_ROUTES = [
           "hi": "लॉगिन अभ्यास"
         },
         "body": {
-          "en": "Use a deterministic demo identity.",
-          "hi": "निश्चित डेमो पहचान का उपयोग करें।"
+          "en": "Use a demo identity.",
+          "hi": "डेमो पहचान का उपयोग करें।"
         },
         "route": "volunteer-login"
       }
@@ -246,8 +246,8 @@ export const VOLUNTEERS_ROUTES = [
         "name": "fullName",
         "type": "text",
         "label": {
-          "en": "Synthetic name",
-          "hi": "सिंथेटिक नाम"
+          "en": "Demo name",
+          "hi": "डेमो नाम"
         },
         "required": true,
         "example": "Demo Volunteer"
@@ -256,8 +256,8 @@ export const VOLUNTEERS_ROUTES = [
         "name": "region",
         "type": "text",
         "label": {
-          "en": "Synthetic region",
-          "hi": "सिंथेटिक क्षेत्र"
+          "en": "Demo region",
+          "hi": "डेमो क्षेत्र"
         },
         "required": true,
         "example": "Demo District"
@@ -291,8 +291,8 @@ export const VOLUNTEERS_ROUTES = [
       "officialVolunteerInstructions"
     ],
     "result": {
-      "en": "Volunteer interest draft prepared locally",
-      "hi": "स्वयंसेवक रुचि मसौदा स्थानीय रूप से तैयार"
+      "en": "Demo volunteer interest draft ready",
+      "hi": "डेमो स्वयंसेवक रुचि मसौदा तैयार"
     }
   },
   {
@@ -308,8 +308,8 @@ export const VOLUNTEERS_ROUTES = [
       "hi": "स्वयंसेवक लॉगिन"
     },
     "title": {
-      "en": "Open the synthetic volunteer area",
-      "hi": "सिंथेटिक स्वयंसेवक क्षेत्र खोलें"
+      "en": "Open the demo volunteer area",
+      "hi": "डेमो स्वयंसेवक क्षेत्र खोलें"
     },
     "intro": {
       "en": "Use VOL-DEMO-001 and demo-only. This is not authentication.",
@@ -344,8 +344,8 @@ export const VOLUNTEERS_ROUTES = [
       "officialVolunteerLogin"
     ],
     "result": {
-      "en": "Synthetic volunteer area ready",
-      "hi": "सिंथेटिक स्वयंसेवक क्षेत्र तैयार"
+      "en": "Demo volunteer area ready",
+      "hi": "डेमो स्वयंसेवक क्षेत्र तैयार"
     }
   }
 ];

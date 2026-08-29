@@ -178,8 +178,8 @@ export function createPreparationPack(incident: DerivedIncident, locale: Languag
   const hi = locale === "hi";
   const sections = [
     [hi ? "घटना सारांश" : "Incident Summary", incident.narrative || "—"],
-    [hi ? "घटनाक्रम" : "Chronology", orderEvents(incident.events).map((event, index) => `${index + 1}. ${event.title}`).join("\n") || "—"],
-    [hi ? "पहचानकर्ता" : "Identifiers", Object.entries(incident.identifiers).filter(([, value]) => value).map(([key, value]) => `${key}: ${value}`).join("\n") || "—"],
+    [hi ? "समयरेखा" : "Timeline", orderEvents(incident.events).map((event, index) => `${index + 1}. ${event.title}`).join("\n") || "—"],
+    [hi ? "संपर्क और खाता विवरण" : "Contact and account details", Object.entries(incident.identifiers).filter(([, value]) => value).map(([key, value]) => `${key}: ${value}`).join("\n") || "—"],
     [hi ? "लेन-देन विवरण" : "Transaction Details", `${incident.amount ? `₹${incident.amount.toLocaleString("en-IN")}` : "—"} · ${incident.paymentMethod || "—"}`],
     [hi ? "साक्ष्य सूची" : "Evidence Inventory", incident.evidence.map((item) => `${item.status.toUpperCase()}: ${item.label}`).join("\n")],
     [hi ? "अनुपलब्ध जानकारी" : "Missing Information", incident.missingFacts.join(", ") || "—"],
