@@ -113,6 +113,7 @@ export type SourceBackedResource = {
   id: string;
   title: LocalizedText;
   summary: LocalizedText;
+  action?: LocalizedText;
   category: string;
   sourceId: string;
   destination: string;
