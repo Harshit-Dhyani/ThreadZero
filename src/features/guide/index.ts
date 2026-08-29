@@ -2,6 +2,7 @@ import { extractIncident } from "../../domains/incident/index.ts";
 import { PORTAL_ROUTES } from "../../content/routes/index.ts";
 import { workspaceFor } from "../../lib/routing/presentation.ts";
 import type { GuideTask, Language, LocalizedText, RouteDefinition, Workspace } from "../../lib/types.ts";
+import { localized, romanizeHindi } from "../../lib/i18n.ts";
 
 export type GuideSearchEntry = {
   id: string;
@@ -10,6 +11,7 @@ export type GuideSearchEntry = {
   route: string;
   en: { title: string; body: string; keywords: string };
   hi: { title: string; body: string; keywords: string };
+  hinglish: { title: string; body: string; keywords: string };
   priority: number;
   action: "navigate";
 };
@@ -36,7 +38,6 @@ const KEYWORDS: Record<string, LocalizedText> = Object.freeze({
   contact: { en: "1930 official helpline grievance support cybercrime.gov.in", hi: "1930 आधिकारिक हेल्पलाइन शिकायत सहायता साइबरक्राइम" }
 });
 
-const localized = (value: LocalizedText, language: Language) => value[language] || value.en;
 const normalize = (value: unknown) => String(value || "").toLocaleLowerCase().normalize("NFKD").replace(/[^\p{L}\p{N}@.]+/gu, " ").trim();
 
 export function buildSearchIndex(routes: readonly RouteDefinition[] = PORTAL_ROUTES): readonly GuideSearchEntry[] {
@@ -47,6 +48,7 @@ export function buildSearchIndex(routes: readonly RouteDefinition[] = PORTAL_ROU
     route: route.id,
     en: { title: localized(route.title, "en") || localized(route.label, "en"), body: `${localized(route.intro, "en")} ${route.items.map((item) => localized(item.title, "en") + " " + localized(item.body, "en")).join(" ")}`, keywords: KEYWORDS[route.id]?.en || "" },
     hi: { title: localized(route.title, "hi") || localized(route.label, "hi"), body: `${localized(route.intro, "hi")} ${route.items.map((item) => localized(item.title, "hi") + " " + localized(item.body, "hi")).join(" ")}`, keywords: KEYWORDS[route.id]?.hi || "" },
+    hinglish: { title: localized(route.title, "hinglish") || localized(route.label, "hinglish"), body: `${localized(route.intro, "hinglish")} ${route.items.map((item) => localized(item.title, "hinglish") + " " + localized(item.body, "hinglish")).join(" ")}`, keywords: localized(KEYWORDS[route.id], "hinglish") },
     priority: Math.max(1, 60 - index),
     action: "navigate" as const
   }));
@@ -60,7 +62,7 @@ export function buildSearchIndex(routes: readonly RouteDefinition[] = PORTAL_ROU
 }
 
 function virtualEntry(id: string, workspace: Workspace, mode: string, route: string, titleEn: string, bodyEn: string, titleHi: string, bodyHi: string, keywordsEn: string, keywordsHi: string, priority: number): GuideSearchEntry {
-  return Object.freeze({ id, workspace, mode, route, en: { title: titleEn, body: bodyEn, keywords: keywordsEn }, hi: { title: titleHi, body: bodyHi, keywords: keywordsHi }, priority, action: "navigate" });
+  return Object.freeze({ id, workspace, mode, route, en: { title: titleEn, body: bodyEn, keywords: keywordsEn }, hi: { title: titleHi, body: bodyHi, keywords: keywordsHi }, hinglish: { title: romanizeHindi(titleHi), body: romanizeHindi(bodyHi), keywords: romanizeHindi(keywordsHi) }, priority, action: "navigate" });
 }
 
 export function searchGuideIndex(index: readonly GuideSearchEntry[], query: string, language: Language = "en", limit = 8, currentWorkspace: Workspace | "" = "") {
@@ -104,7 +106,7 @@ export function organiseGuide({ choice = "", narrative = "", language = "en" }: 
     recommendedWorkspace,
     recommendedMode,
     route: recommendedMode,
-    title: task?.title[language] || (language === "hi" ? "सुझाया गया अगला कदम" : "Recommended next step"),
+    title: task ? localized(task.title, language) : (language === "hi" ? "सुझाया गया अगला कदम" : "Recommended next step"),
     facts: draft.suggestedFacts,
     missingFacts: draft.missingFacts,
     evidence: draft.evidence,
