@@ -14,6 +14,7 @@ import { navigationLabel, navigationParent } from "@/lib/navigation";
 import { ResponsiveIllustration } from "./responsive-illustration";
 import { MediaLibrary } from "@/features/media-library/media-library";
 import { usePortal } from "./portal-provider";
+import { WorkspaceNavigator } from "./workspace-navigator";
 
 const ICONS = [FileText, SearchCheck, ShieldCheck, BookOpen, Users, CircleHelp];
 const HEROES: Record<string, AssetId> = {
@@ -32,6 +33,7 @@ export function PublicRoute({ routeId }: { routeId: string }) {
   const parent = navigationParent(routeId);
   return <div className="mx-auto max-w-content px-5 py-8 md:px-8 md:py-10">
     <nav aria-label="Breadcrumb" className="flex flex-wrap items-center gap-2 text-xs text-civic-700"><Link href="/">{language === "hi" ? "होम" : "Home"}</Link><span>/</span>{parent && <><Link href={`/${parent.route}`}>{navigationLabel(parent, language)}</Link><span>/</span></>}<span aria-current="page">{route.label}</span>{parent && <Link href={`/${parent.route}`} className="ml-auto inline-flex min-h-11 items-center font-semibold underline underline-offset-4">{language === "hi" ? `${navigationLabel(parent, language)} पर वापस` : `Back to ${navigationLabel(parent, language)}`}</Link>}</nav>
+    <WorkspaceNavigator routeId={routeId} />
     <header className={`mt-7 grid gap-7 border-b border-line pb-8 ${hero ? "md:grid-cols-[1fr_360px] md:items-center" : ""}`}>
       <div><h1 className="max-w-[22ch] text-[38px] font-semibold leading-[1.08] tracking-[-0.035em] sm:text-[44px]">{route.title}</h1><p className="mt-4 max-w-3xl text-base leading-7 text-muted">{route.intro}</p></div>
       {hero && <ResponsiveIllustration assetId={hero} language={language} className="mx-auto max-h-48 w-full max-w-[360px] object-contain" priority />}
