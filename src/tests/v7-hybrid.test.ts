@@ -4,6 +4,7 @@ import test from "node:test";
 import { applyReportKindSelection, createInitialState, evidenceForReportKind, refreshTimelineForReport, reportPresentation } from "../domains/report/index.ts";
 import { CHECK_MODES } from "../features/check/index.ts";
 import { NAV_GROUPS, navigationMenuChildren } from "../lib/navigation.ts";
+import { parseReportState } from "../lib/storage/index.ts";
 import type { ReportKind } from "../lib/types.ts";
 
 const source = (path: string) => readFileSync(new URL(`../../${path}`, import.meta.url), "utf8");
@@ -85,6 +86,25 @@ test("the five-stage Report UI is wired to adaptive report helpers", () => {
   assert.match(flow, /refreshTimelineForReport/);
   assert.match(flow, /reportPresentation\(report/);
   assert.doesNotMatch(flow, /function resetAfterReportKindChange/);
+});
+
+test("saved non-financial report state is sanitised instead of reviving financial fixtures", () => {
+  const stale: any = createInitialState();
+  stale.reportKind = "women-child";
+  stale.reportingMode = "registered";
+  stale.womenChildCategory = "cseam";
+  stale.incidentChoice = "women-child";
+  assert.ok(stale.incident.amount, "fixture should begin with a financial amount");
+  assert.ok(stale.events.some((event: any) => event.id === "event-payment"), "fixture should begin with a financial payment event");
+
+  const migrated = parseReportState(stale);
+  assert.ok(migrated);
+  assert.equal(migrated.incident.amount, "");
+  assert.equal(migrated.incident.paymentMethod, "");
+  assert.equal(migrated.incident.transactionReference, "");
+  assert.equal(migrated.incident.recipientIdentifier, "");
+  assert.equal(migrated.events.some((event) => event.id === "event-payment"), false);
+  assert.match(migrated.events[0].description, /child-related/i);
 });
 
 test("Track keeps the restored reference tracker while adding truthful preparation progress", () => {
