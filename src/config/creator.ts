@@ -22,6 +22,18 @@ export const CREATOR_PROFILE = {
       label: "GitHub",
       handle: "Harshit-Dhyani",
       url: "https://github.com/Harshit-Dhyani"
+    },
+    {
+      platform: "instagram",
+      label: "Instagram",
+      handle: "@harshbuilds1",
+      url: "https://www.instagram.com/harshbuilds1/"
+    },
+    {
+      platform: "youtube",
+      label: "YouTube",
+      handle: "@HarshBuilds1",
+      url: "https://www.youtube.com/@HarshBuilds1"
     }
   ] satisfies CreatorSocial[]
 } as const;
