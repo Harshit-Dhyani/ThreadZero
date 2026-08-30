@@ -15,16 +15,19 @@ test("V7.4 restores useful Home breadth without restoring the hero prototype eye
   assert.doesNotMatch(home, />\s*Independent concept\s*</);
 });
 
-test("Report gains a page masthead while keeping five stages and one H1", () => {
+test("Report gains a page masthead while keeping the five-stage logic owner unchanged", () => {
   assert.equal(FLOW_STAGES.length, 5);
+  const screen = source("src/components/route-screen.tsx");
   const flow = source("src/components/flow-route.tsx");
-  assert.match(flow, /Prepare a cybercrime report/);
-  assert.match(flow, /does not submit to official systems/);
-  const headingStart = flow.indexOf("function Heading");
-  const headingEnd = flow.indexOf("function ContextBar", headingStart);
-  const heading = flow.slice(headingStart, headingEnd);
-  assert.match(heading, /<h2/);
-  assert.doesNotMatch(heading, /<h1/);
+  const overrides = source("src/components/v74-visual-overrides.tsx");
+  assert.match(screen, /function ReportV74Frame/);
+  assert.match(screen, /Prepare a cybercrime report/);
+  assert.match(screen, /does not submit to official systems/);
+  assert.match(screen, /v74-report-body/);
+  assert.match(overrides, /\.v74-report-body h1/);
+  assert.match(flow, /FLOW_STAGES\.map/);
+  assert.match(flow, /IncidentStep/);
+  assert.match(flow, /ReviewStep/);
 });
 
 test("Check remains the seven-mode reference workspace", () => {
@@ -34,29 +37,35 @@ test("Check remains the seven-mode reference workspace", () => {
   assert.match(check, /Report or take action/);
 });
 
-test("Track uses a compact evidence summary instead of a desktop evidence sidebar", () => {
+test("Track keeps its data owner while V7.4 compacts the preparation presentation", () => {
   const track = source("src/components/track.tsx");
-  assert.doesNotMatch(track, /lg:grid-cols-\[1fr_280px\]/);
+  const screen = source("src/components/route-screen.tsx");
+  const overrides = source("src/components/v74-visual-overrides.tsx");
   assert.match(track, /Evidence readiness/);
-  assert.match(track, /Have|I have it/);
+  assert.match(track, /I have it/);
   assert.match(track, /Missing/);
   assert.match(track, /Not sure/);
+  assert.match(track, /resolveTrackRecord/);
+  assert.match(screen, /v74-track-frame/);
+  assert.match(overrides, /preparation-progress-title/);
+  assert.match(overrides, /display: flex/);
+  assert.match(overrides, /border-left: 0/);
 });
 
 test("Learn and Help use a persistent workspace rail", () => {
   assert.equal(existsSync(new URL("../components/workspace-rail.tsx", import.meta.url)), true);
   assert.equal(existsSync(new URL("../components/learning-help-v74.tsx", import.meta.url)), true);
   const rail = source("src/components/workspace-rail.tsx");
-  const publicRoute = source("src/components/public-route.tsx");
+  const screen = source("src/components/route-screen.tsx");
   const landing = source("src/components/learning-help-v74.tsx");
   assert.match(rail, /navigationContextFor/);
   assert.match(rail, /Choose.*section/);
-  assert.match(publicRoute, /WorkspaceRail/);
+  assert.match(screen, /WorkspaceRail/);
+  assert.match(screen, /SecondaryWorkspaceFrame/);
   assert.match(landing, /WorkspaceRail/);
 });
 
 test("Learn uses hybrid editorial hierarchy and Help is urgent-first", () => {
-  assert.equal(existsSync(new URL("../components/learning-help-v74.tsx", import.meta.url)), true);
   const landing = source("src/components/learning-help-v74.tsx");
   assert.match(landing, /What do you need help learning\?/);
   assert.match(landing, /Featured alert/);
@@ -68,7 +77,12 @@ test("Learn uses hybrid editorial hierarchy and Help is urgent-first", () => {
 
 test("footer guidance uses a background-style illustration composition", () => {
   const shell = source("src/components/shell.tsx");
-  assert.match(shell, /absolute[^\n]*bottom-0[^\n]*right-0|absolute[^\n]*right-0[^\n]*bottom-0/);
-  assert.match(shell, /overflow-hidden/);
-  assert.doesNotMatch(shell, /grid-cols-\[minmax\(0,1fr\)_144px\]/);
+  const overrides = source("src/components/v74-visual-overrides.tsx");
+  assert.match(shell, /assetId="footerHelp"/);
+  assert.match(overrides, /footer > div:first-child > section:last-child/);
+  assert.match(overrides, /position: absolute/);
+  assert.match(overrides, /right: 0/);
+  assert.match(overrides, /bottom: 0/);
+  assert.match(overrides, /width: 60%/);
+  assert.match(overrides, /overflow: hidden/);
 });
