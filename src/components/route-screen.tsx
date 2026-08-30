@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { FlowRoute } from "./flow-route";
 import { PublicRoute } from "./public-route";
 import { TrackWorkspace } from "./track";
+import { LearningV73, HelpV73 } from "./learning-help-v73";
 import { FLOW_ROUTE_SET, LEGACY_FLOW_REDIRECTS } from "@/lib/routes";
 import { REPORT_ENTRY_REDIRECTS } from "@/data/demo";
 import type { ReportKind, ReportingMode } from "@/lib/types";
@@ -24,6 +25,8 @@ export function RouteScreen({ routeId }: { routeId: string }) {
   if (checkMode) return <CheckModeRedirect mode={checkMode} />;
   if (routeId === "official-tools") return <Suspense fallback={<CheckFallback />}><CheckWorkspace /></Suspense>;
   if (routeId === "track") return <TrackWorkspace />;
+  if (routeId === "learning-corner") return <LearningV73 />;
+  if (routeId === "contact") return <HelpV73 />;
   if (FLOW_ROUTE_SET.has(routeId)) return <FlowRoute routeId={routeId} />;
   return <PublicRoute routeId={routeId} />;
 }
