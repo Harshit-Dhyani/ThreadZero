@@ -51,8 +51,8 @@ test("creator socials use icon-only controls and include verified X, GitHub, Ins
   assert.equal(CREATOR_PROFILE.socials.find((item) => item.platform === "youtube")?.url, "https://www.youtube.com/@HarshBuilds1");
 
   const socials = source("src/components/creator-social-links.tsx");
-  assert.match(socials, /Instagram/);
-  assert.match(socials, /Youtube|YouTube/);
+  assert.match(socials, /platform === "instagram"/);
+  assert.match(socials, /platform === "youtube"/);
   assert.match(socials, /title=\{social\.label\}/);
   assert.match(socials, /sr-only/);
   assert.doesNotMatch(socials, /<span>\{social\.label\}<\/span>/);
