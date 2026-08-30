@@ -4,17 +4,20 @@
 
 - This repository contains an independent hackathon concept inspired by the National Cyber Crime Reporting Portal (NCRP).
 - `ThreadZero` is the internal codename. The public prototype title is **Financial Cyber Fraud Reporting Guide**; it is not an official government service.
-- Every public route must make the demo boundary clear: “Demo only. Nothing entered here is sent to the government.”
+- Public flows must keep the independent/demo boundary truthful, but do not repeat prototype labels or status-chip rows merely to prove that boundary. Use concise contextual copy where it matters.
 - Keep official emergency guidance visible: for actual financial cyber fraud in India, call `1930` manually and use `cybercrime.gov.in`.
 
-## Active V7 Hybrid scope
+## Active V7.3 Hybrid scope
 
 - The active application is the static Next.js runtime under `src/`, with assets in `public/`.
 - The six public workspaces are Home, Report, Check, Track, Learn, and Help.
-- V7 is a hybrid of the restored first redesign plus proven adaptive behavior. **Keep useful breadth; fix confusion. Do not create simplicity by deleting useful citizen capabilities.**
-- Home intentionally keeps its richer hero, incident timeline, process explanation, citizen-service choices, Evidence–Timeline explainer, and Learning Corner preview.
-- Check intentionally stays one canonical workspace with Overview, Person / account, Website / app, Mobile, Platform abuse, Report suspect, and Appeal modes. Improve grouping or clarity without deleting those modes.
-- Learn intentionally keeps its broad learning routes and formats; Help intentionally keeps FAQ, feedback, escalation, legal/privacy/accessibility, and related support routes.
+- V7.3 keeps the useful breadth of the restored first redesign while removing presentation clutter. **Preserve capabilities and routes; simplify only where the user has explicitly approved removal or consolidation.**
+- Home is intentionally focused on the primary hero, incident-timeline mechanism, and four-step `How it works` strip. Do not restore the former Citizen services, Evidence-connected explainer, Home Learning Corner, or `Independent concept` eyebrow without new approval.
+- Check intentionally stays one canonical workspace with Overview, Person / account, Website / app, Mobile / SIM, Platform abuse, Report suspect, and Appeal modes. Do not restore the former `Demo Check workspace` eyebrow or the four-item `Demo only / No upload / No live lookup / Official handoff` status row. Keep the safety boundary through calm contextual copy and truthful result language.
+- The Check Overview `Report or take action` choices are one consistent bounded action group with equal row rhythm, horizontal padding, aligned 44px icon targets, and a safe arrow column; do not revert to bare edge-to-edge divided rows.
+- Learn keeps its broad learning routes and formats, but the `learning-corner` landing page owns a dedicated V7.3 hierarchy: larger hero illustration, situation-first choices, latest practical alerts, and a compact resource directory.
+- Help keeps FAQ, feedback, escalation, legal/privacy/accessibility, and related support routes, but the `contact` landing page owns a dedicated V7.3 hierarchy: larger hero illustration, clear help-path choices, a prominent immediate-1930 band, then official help destinations.
+- Footer creator socials remain icon-only. The footer guidance illustration should retain meaningful visual weight rather than shrinking back to a postage-stamp treatment.
 - Guide and Search / Ask remain separate first-redesign surfaces unless a later user-approved experiment proves consolidation is better.
 - The canonical report flow is What happened? → Details → Evidence → Timeline → Review & next.
 - Report family selection is a state boundary, not only a label. Financial, Women/Child, Other Cybercrime, and Unsure must drive their own Details, Evidence, Timeline, and Review context.
@@ -70,7 +73,7 @@
 
 - Use the Codex in-app browser for user-facing acceptance when available.
 - Exercise navigation, dialogs, language switching, the five-stage report journey, Evidence–Timeline links, Review actions, Track, redirects, history, reload, and reset.
-- For V7 specifically, verify all four report families through downstream stages, all seven Check modes remain reachable, rich Learn/Help routes remain present, and Track shows both local preparation progress and the restored demo/reference tracker.
+- For V7.3 specifically, verify all four report families through downstream stages, all seven Check modes remain reachable, rich Learn/Help routes remain present, the streamlined Home does not regain the removed sections, Learn/Help landing pages retain their larger visual hierarchy, and Track shows both local preparation progress and the restored demo/reference tracker.
 - Check keyboard access, validation recovery, reduced motion, exactly one visible `h1`, 44px targets, overflow, image loading, and browser console output.
 - Never claim pixel-perfect, production-ready, or complete without current browser evidence and explicit user approval.
 - Keep unrelated or user-owned changes intact. Do not reset, clean, or delete them.
