@@ -15,7 +15,7 @@ function group(route: string) {
   return entry;
 }
 
-test("V7 preserves the restored first-redesign product breadth", () => {
+test("V7.3 keeps product breadth while simplifying Home presentation", () => {
   assert.deepEqual(NAV_GROUPS.map((entry) => entry.route), ["home", "incident", "official-tools", "track", "learning-corner", "contact"]);
   assert.equal(group("track").label.en, "Track");
   assert.deepEqual([...CHECK_MODES], ["overview", "identifier", "website", "mobile", "abuse", "suspect", "appeal"]);
@@ -25,12 +25,14 @@ test("V7 preserves the restored first-redesign product breadth", () => {
 
   const shell = source("src/components/shell.tsx");
   const home = source("src/components/home.tsx");
+  const routeScreen = source("src/components/route-screen.tsx");
   assert.match(shell, /Guide/);
   assert.match(shell, /Search \/ Ask/);
-  assert.match(home, /GUIDE_TASKS/);
   assert.match(home, /c\.process\.steps/);
   assert.match(home, /c\.mechanism/);
-  assert.match(home, /c\.resources/);
+  assert.doesNotMatch(home, /GUIDE_TASKS|c\.tasks|c\.resources/);
+  assert.match(routeScreen, /LearningV73/);
+  assert.match(routeScreen, /HelpV73/);
 });
 
 test("Report family selection changes state, evidence, timeline, and later-stage presentation", () => {

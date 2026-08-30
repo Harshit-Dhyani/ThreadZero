@@ -101,6 +101,7 @@ test("shared brand, topic rows, urgent strip, and Guide transitions reflect brow
 test("production components do not bypass the central image registry", () => {
   const home = source("../components/home.tsx");
   const evidence = source("../components/flow-route.tsx");
-  assert.doesNotMatch(home + evidence, /\/assets\/images\//);
-  assert.match(home, /ResponsiveIllustration/);
+  const learningHelp = source("../components/learning-help-v73.tsx");
+  assert.doesNotMatch(home + evidence + learningHelp, /\/assets\/images\//);
+  assert.match(learningHelp, /ResponsiveIllustration/);
 });
