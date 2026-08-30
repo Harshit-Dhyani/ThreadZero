@@ -13,7 +13,7 @@ test("Home keeps only the primary hero and how-it-works mechanism", () => {
   assert.match(home, /id="how-it-works"/);
 });
 
-test("Check removes prototype labels and uses one calm boundary sentence", () => {
+test("Check removes prototype labels and replaces the chip row with a calm boundary", () => {
   const check = source("src/components/check-workspace.tsx");
   assert.doesNotMatch(check, /Demo Check workspace/);
   assert.doesNotMatch(check, /aria-label=\{language === "hi" \? "जाँच सीमाएँ" : "Check boundaries"\}/);
@@ -23,15 +23,17 @@ test("Check removes prototype labels and uses one calm boundary sentence", () =>
   assert.match(check, /px-5 py-4/);
 });
 
-test("Learn and Help use stronger dedicated hero framing and cleaner directories", () => {
-  const publicRoute = source("src/components/public-route.tsx");
-  assert.match(publicRoute, /routeId === "learning-corner" \|\| routeId === "contact"/);
-  assert.match(publicRoute, /max-h-72/);
-  assert.match(publicRoute, /LearningSituationGrid/);
-  assert.match(publicRoute, /LearningResourceDirectory/);
-  assert.match(publicRoute, /HelpPathGrid/);
-  assert.match(publicRoute, /Immediate help/);
-  assert.match(publicRoute, /Official help paths/);
+test("Learn and Help use dedicated V7.3 surfaces with stronger hierarchy", () => {
+  const routeScreen = source("src/components/route-screen.tsx");
+  const dedicated = source("src/components/learning-help-v73.tsx");
+  assert.match(routeScreen, /LearningV73/);
+  assert.match(routeScreen, /HelpV73/);
+  assert.match(dedicated, /max-h-72/);
+  assert.match(dedicated, /LearningSituationGrid/);
+  assert.match(dedicated, /LearningResourceDirectory/);
+  assert.match(dedicated, /HelpPathGrid/);
+  assert.match(dedicated, /Immediate help/);
+  assert.match(dedicated, /Official help paths/);
 });
 
 test("footer guidance gives its illustration enough visual weight", () => {
