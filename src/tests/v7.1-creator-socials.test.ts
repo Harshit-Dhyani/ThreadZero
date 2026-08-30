@@ -8,9 +8,11 @@ const source = (path: string) => readFileSync(new URL(`../../${path}`, import.me
 test("creator attribution uses only verified public accounts", () => {
   assert.equal(CREATOR_PROFILE.name, "Harshit Dhyani");
   assert.equal(CREATOR_PROFILE.brand, "HarshBuilds");
-  assert.deepEqual(CREATOR_PROFILE.socials.map((item) => item.platform), ["x", "github"]);
-  assert.equal(CREATOR_PROFILE.socials[0]?.url, "https://x.com/HarshBuilds_1");
-  assert.equal(CREATOR_PROFILE.socials[1]?.url, "https://github.com/Harshit-Dhyani");
+  assert.deepEqual(CREATOR_PROFILE.socials.map((item) => item.platform), ["x", "github", "instagram", "youtube"]);
+  assert.equal(CREATOR_PROFILE.socials.find((item) => item.platform === "x")?.url, "https://x.com/HarshBuilds_1");
+  assert.equal(CREATOR_PROFILE.socials.find((item) => item.platform === "github")?.url, "https://github.com/Harshit-Dhyani");
+  assert.equal(CREATOR_PROFILE.socials.find((item) => item.platform === "instagram")?.url, "https://www.instagram.com/harshbuilds1/");
+  assert.equal(CREATOR_PROFILE.socials.find((item) => item.platform === "youtube")?.url, "https://www.youtube.com/@HarshBuilds1");
   assert.deepEqual(OFFICIAL_SOCIALS, []);
 });
 
