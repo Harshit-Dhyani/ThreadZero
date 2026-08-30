@@ -6,8 +6,10 @@ import { useRouter } from "next/navigation";
 import { FlowRoute } from "./flow-route";
 import { PublicRoute } from "./public-route";
 import { TrackWorkspace } from "./track";
-import { LearningV73, HelpV73 } from "./learning-help-v73";
-import { FLOW_ROUTE_SET, LEGACY_FLOW_REDIRECTS } from "@/lib/routes";
+import { LearningV74, HelpV74 } from "./learning-help-v74";
+import { WorkspaceRail } from "./workspace-rail";
+import { FLOW_ROUTE_SET, LEGACY_FLOW_REDIRECTS, routeDefinition } from "@/lib/routes";
+import { navigationLabel, navigationParent } from "@/lib/navigation";
 import { REPORT_ENTRY_REDIRECTS } from "@/data/demo";
 import type { ReportKind, ReportingMode } from "@/lib/types";
 import { usePortal } from "./portal-provider";
@@ -15,6 +17,9 @@ import { CheckWorkspace } from "./check-workspace";
 import { CHECK_MODE_REDIRECTS, type CheckMode } from "@/features/check";
 
 type ReportEntry = { reportKind: ReportKind; reportingMode: ReportingMode };
+
+const LEARN_SECONDARY = new Set(["safety", "awareness", "advisories", "daily-digest", "training", "media", "accessibility"]);
+const HELP_SECONDARY = new Set(["faq", "feedback", "grievance"]);
 
 export function RouteScreen({ routeId }: { routeId: string }) {
   const legacyTarget = (LEGACY_FLOW_REDIRECTS as Record<string, string>)[routeId];
@@ -24,11 +29,41 @@ export function RouteScreen({ routeId }: { routeId: string }) {
   const checkMode = (CHECK_MODE_REDIRECTS as Record<string, CheckMode>)[routeId];
   if (checkMode) return <CheckModeRedirect mode={checkMode} />;
   if (routeId === "official-tools") return <Suspense fallback={<CheckFallback />}><CheckWorkspace /></Suspense>;
-  if (routeId === "track") return <TrackWorkspace />;
-  if (routeId === "learning-corner") return <LearningV73 />;
-  if (routeId === "contact") return <HelpV73 />;
-  if (FLOW_ROUTE_SET.has(routeId)) return <FlowRoute routeId={routeId} />;
+  if (routeId === "track") return <div className="v74-track-frame"><TrackWorkspace /></div>;
+  if (routeId === "learning-corner") return <LearningV74 />;
+  if (routeId === "contact") return <HelpV74 />;
+  if (FLOW_ROUTE_SET.has(routeId)) return <ReportV74Frame routeId={routeId} />;
+  if (LEARN_SECONDARY.has(routeId) || HELP_SECONDARY.has(routeId)) return <SecondaryWorkspaceFrame routeId={routeId} />;
   return <PublicRoute routeId={routeId} />;
+}
+
+function ReportV74Frame({ routeId }: { routeId: string }) {
+  const { language } = usePortal();
+  return <div className="v74-report-frame">
+    <div className="mx-auto max-w-content px-5 pt-8 md:px-8 md:pt-10">
+      <nav aria-label="Report breadcrumb" className="text-xs text-civic-700"><Link className="inline-flex min-h-11 items-center" href="/">{language === "hi" ? "होम" : "Home"}</Link><span className="mx-2">/</span><span aria-current="page">{language === "hi" ? "रिपोर्ट" : "Report"}</span></nav>
+      <header className="mt-5 border-b border-line pb-7">
+        <p className="max-w-[22ch] text-[38px] font-semibold leading-[1.08] tracking-[-0.035em] text-ink sm:text-[44px]">{language === "hi" ? "साइबर अपराध रिपोर्ट तैयार करें" : "Prepare a cybercrime report"}</p>
+        <p className="mt-4 max-w-3xl text-base leading-7 text-muted">{language === "hi" ? "उचित आधिकारिक गंतव्य पर आगे बढ़ने से पहले क्या हुआ, महत्वपूर्ण विवरण, साक्ष्य और समयरेखा व्यवस्थित करें।" : "Organise what happened, important details, evidence, and the timeline before continuing to the appropriate official destination."}</p>
+        <p className="mt-3 max-w-3xl text-sm leading-6 text-muted">{language === "hi" ? "ThreadZero जानकारी स्थानीय रूप से तैयार करता है और आधिकारिक प्रणालियों में जमा नहीं करता।" : "ThreadZero prepares information locally and does not submit to official systems."}</p>
+      </header>
+    </div>
+    <div className="v74-report-body"><FlowRoute routeId={routeId} /></div>
+  </div>;
+}
+
+function SecondaryWorkspaceFrame({ routeId }: { routeId: string }) {
+  const { language } = usePortal();
+  const route = routeDefinition(routeId, language);
+  const parent = navigationParent(routeId);
+  if (!route) return null;
+  return <div className="mx-auto max-w-content px-5 py-8 md:px-8 md:py-10">
+    <nav aria-label="Breadcrumb" className="flex flex-wrap items-center gap-2 text-xs text-civic-700"><Link className="inline-flex min-h-11 items-center" href="/">{language === "hi" ? "होम" : "Home"}</Link><span>/</span>{parent && <><Link className="inline-flex min-h-11 items-center" href={`/${parent.route}`}>{navigationLabel(parent, language)}</Link><span>/</span></>}<span aria-current="page">{route.label}</span></nav>
+    <div className="mt-6 grid gap-7 lg:grid-cols-[230px_minmax(0,1fr)] lg:items-start">
+      <WorkspaceRail routeId={routeId} />
+      <div className="v74-secondary-body min-w-0"><PublicRoute routeId={routeId} /></div>
+    </div>
+  </div>;
 }
 
 function CheckModeRedirect({ mode }: { mode: CheckMode }) {
