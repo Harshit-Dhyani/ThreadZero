@@ -26,8 +26,8 @@ test("Check keeps one canonical workspace and deterministic fixture truth", () =
 test("Check copy is bilingual and inputs remain outside URLs and storage", () => {
   const check = source("../components/check-workspace.tsx");
   const redirect = source("../components/route-screen.tsx");
-  assert.match(check, /Absence from this demo does not mean the item is safe/);
-  assert.match(check, /डेमो में अनुपस्थिति का अर्थ यह नहीं/);
+  assert.match(check, /This does not mean the person, account, website, or number is safe/);
+  assert.match(check, /इसका अर्थ यह नहीं कि व्यक्ति, खाता, वेबसाइट या नंबर सुरक्षित है/);
   assert.doesNotMatch(check + redirect, /localStorage|sessionStorage/);
   assert.match(redirect, /\/official-tools\?mode=\$\{mode\}/);
   assert.doesNotMatch(redirect, /value=|identifier=/);
@@ -51,15 +51,17 @@ test("shared shell aligns to content width and report progress owns its scrollba
   assert.match(css, /\.flow-step-scrollbar::-webkit-scrollbar-thumb/);
 });
 
-test("workspace families share quiet navigation and Check keeps canonical mode URLs", () => {
+test("workspace families keep quiet navigation while Check owns its canonical V7.2 tool rail", () => {
   const navigator = source("../components/workspace-navigator.tsx");
   const check = source("../components/check-workspace.tsx");
   assert.match(navigator, /CHECK_MODE_REDIRECTS/);
   assert.match(navigator, /\/official-tools\?mode=\$\{mode\}/);
   assert.match(navigator, /border-b-2/);
   assert.match(navigator, /md:hidden/);
-  assert.match(check, /WorkspaceNavigator routeId=\{activeRoute\}/);
-  assert.doesNotMatch(check, /Check tools|Local demo tools|स्थानीय डेमो उपकरण|CHECK_MODES|modeLabel/);
+  assert.match(check, /CheckToolRail/);
+  assert.match(check, /Check tools/);
+  assert.match(check, /\/official-tools\?mode=\$\{next\}/);
+  assert.doesNotMatch(check, /WorkspaceNavigator/);
 });
 
 test("demo identity and footer guidance stay compact without losing their boundaries", () => {
