@@ -15,7 +15,7 @@ function group(route: string) {
   return entry;
 }
 
-test("V7.3 keeps product breadth while simplifying Home presentation", () => {
+test("V7.4 preserves product breadth and restores the full Home gateway", () => {
   assert.deepEqual(NAV_GROUPS.map((entry) => entry.route), ["home", "incident", "official-tools", "track", "learning-corner", "contact"]);
   assert.equal(group("track").label.en, "Track");
   assert.deepEqual([...CHECK_MODES], ["overview", "identifier", "website", "mobile", "abuse", "suspect", "appeal"]);
@@ -30,9 +30,12 @@ test("V7.3 keeps product breadth while simplifying Home presentation", () => {
   assert.match(shell, /Search \/ Ask/);
   assert.match(home, /c\.process\.steps/);
   assert.match(home, /c\.mechanism/);
-  assert.doesNotMatch(home, /GUIDE_TASKS|c\.tasks|c\.resources/);
-  assert.match(routeScreen, /LearningV73/);
-  assert.match(routeScreen, /HelpV73/);
+  assert.match(home, /GUIDE_TASKS/);
+  assert.match(home, /c\.tasks/);
+  assert.match(home, /c\.resources/);
+  assert.doesNotMatch(home, />\s*Independent concept\s*</);
+  assert.match(routeScreen, /LearningV74/);
+  assert.match(routeScreen, /HelpV74/);
 });
 
 test("Report family selection changes state, evidence, timeline, and later-stage presentation", () => {
