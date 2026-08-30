@@ -40,7 +40,7 @@ test("pre-result guidance explains what Check can and cannot do", () => {
   assert.match(workspace, /Can do/);
   assert.match(workspace, /Cannot do/);
   assert.match(workspace, /access NCRP|query police systems/i);
-  assert.match(workspace, /No live lookup/);
+  assert.match(workspace, /For real checks or action, use the verified official destination/);
 });
 
 test("creator socials use icon-only controls and include verified X, GitHub, Instagram, and YouTube", () => {
