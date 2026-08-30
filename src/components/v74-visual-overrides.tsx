@@ -28,8 +28,12 @@ export function V74VisualOverrides() {
       padding: 0;
     }
 
-    .v74-secondary-body > div > nav:nth-of-type(2) {
+    .v74-secondary-body > div > nav {
       display: none;
+    }
+
+    .v74-secondary-body > div > header {
+      margin-top: 0;
     }
 
     footer > div:first-child > section:last-child {
