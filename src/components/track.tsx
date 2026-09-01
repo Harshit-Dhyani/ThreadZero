@@ -9,6 +9,7 @@ import { DEMO_FIXTURE } from "@/data/demo";
 import { FLOW_STAGES } from "@/lib/routes";
 import { localized } from "@/lib/i18n";
 import { usePortal } from "./portal-provider";
+import { ResponsiveIllustration } from "./responsive-illustration";
 
 export function TrackWorkspace() {
   const { language, report: savedReport, navigate } = usePortal();
@@ -62,9 +63,9 @@ export function TrackWorkspace() {
 
   return <div className="mx-auto max-w-content px-5 py-8 md:px-8 md:py-10">
     <p className="text-xs text-civic-700">{c.breadcrumb}</p>
-    <header className="mt-7 max-w-document border-b border-line pb-8"><h1 className="max-w-[22ch] text-[38px] font-semibold leading-[1.08] tracking-[-0.035em] sm:text-[44px]">{c.title}</h1><p className="mt-4 max-w-2xl text-base leading-7 text-muted">{c.intro}</p></header>
+    <header className="mt-7 grid gap-6 border-b border-line pb-8 md:grid-cols-[minmax(0,1fr)_340px] md:items-center"><div><h1 className="max-w-[22ch] text-[38px] font-semibold leading-[1.08] tracking-[-0.035em] sm:text-[44px]">{c.title}</h1><p className="mt-4 max-w-2xl text-base leading-7 text-muted">{c.intro}</p></div><ResponsiveIllustration assetId="homeEvidenceThreadV5" language={language} className="mx-auto max-h-48 w-full max-w-[340px] object-contain" priority /></header>
 
-    <section className="mt-7 overflow-hidden rounded-panel border border-line bg-white" aria-labelledby="preparation-progress-title">
+    <section data-tour="track-preparation" className="mt-7 overflow-hidden rounded-panel border border-line bg-white" aria-labelledby="preparation-progress-title">
       <div className="grid gap-5 border-b border-line bg-civic-50 p-5 sm:grid-cols-[1fr_auto] sm:items-center sm:p-7">
         <div>
           <p className="text-xs font-semibold uppercase tracking-[0.12em] text-civic-700">{language === "hi" ? "इस डिवाइस पर स्थानीय स्थिति" : "Local status on this device"}</p>
@@ -98,7 +99,7 @@ export function TrackWorkspace() {
       {language === "hi" ? "ThreadZero सरकारी, NCRP या पुलिस केस की स्थिति नहीं देख सकता। नीचे का रेफरेंस ट्रैकर केवल डेमो या इस ब्राउज़र में सहेजी गई रिपोर्ट स्थिति दिखाता है।" : "ThreadZero cannot see government, NCRP, or police case status. The reference tracker below only shows deterministic demo or browser-saved report state."}
     </aside>
 
-    <section className="mt-6 rounded-panel border border-line bg-white p-5 sm:p-7">
+    <section data-tour="track-reference" className="mt-6 rounded-panel border border-line bg-white p-5 sm:p-7">
       <form className="flex max-w-form flex-col gap-3 sm:flex-row sm:items-end" onSubmit={submit} noValidate>
         <label className="grid flex-1 gap-2"><span className="text-sm font-medium">{c.label}</span><input ref={inputRef} value={reference} onChange={(event) => setReference(event.target.value)} className="min-h-11 rounded-control border border-line px-3 font-mono text-sm uppercase" aria-invalid={Boolean(error)} aria-describedby="track-boundary" /></label>
         <div className="flex gap-2"><button className="inline-flex min-h-11 items-center gap-2 rounded-control bg-civic-600 px-5 text-sm font-semibold text-white"><Search className="size-4" />{c.submit}</button><button type="button" className="min-h-11 rounded-control border border-line px-4 text-sm font-medium" onClick={clear}>{c.reset}</button></div>

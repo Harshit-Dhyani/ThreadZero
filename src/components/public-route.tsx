@@ -22,7 +22,9 @@ const ICONS = [FileText, SearchCheck, Waypoints, BookOpen, Users, CircleHelp];
 const HEROES: Record<string, AssetId> = {
   "learning-corner": "training", advisories: "advisories", safety: "safetyV2",
   awareness: "awarenessV2", accessibility: "accessibilityV2", contact: "help",
-  media: "media", training: "training", volunteers: "volunteers"
+  media: "media", training: "training", volunteers: "volunteers", "daily-digest": "advisories",
+  "volunteer-terms": "volunteers", "unlawful-content": "volunteers", "volunteer-register": "volunteers", "volunteer-login": "volunteers",
+  guides: "reportPreparation", faq: "help", feedback: "help", grievance: "help", policies: "help", privacy: "accessibilityV2", disclaimer: "help", notices: "advisories", about: "help"
 };
 
 export function PublicRoute({ routeId }: { routeId: string }) {
@@ -30,8 +32,8 @@ export function PublicRoute({ routeId }: { routeId: string }) {
   const route = routeDefinition(routeId, language);
   if (!route) return null;
   const presentation = presentationFor(routeId);
-  const hero = HEROES[routeId];
   const parent = navigationParent(routeId);
+  const hero = HEROES[routeId] ?? (parent?.route === "learning-corner" ? "training" : parent?.route === "contact" ? "help" : parent?.route === "incident" ? "reportPreparation" : undefined);
   return <div className="mx-auto max-w-content px-5 py-8 md:px-8 md:py-10">
     <nav aria-label="Breadcrumb" className="flex flex-wrap items-center gap-2 text-xs text-civic-700"><Link className="inline-flex min-h-11 min-w-11 items-center" href="/">{language === "hi" ? "होम" : "Home"}</Link><span>/</span>{parent && <><Link className="inline-flex min-h-11 min-w-11 items-center" href={`/${parent.route}`}>{navigationLabel(parent, language)}</Link><span>/</span></>}<span aria-current="page">{route.label}</span>{parent && <Link href={`/${parent.route}`} className="ml-auto inline-flex min-h-11 items-center font-semibold underline underline-offset-4">{language === "hi" ? `${navigationLabel(parent, language)} पर वापस` : `Back to ${navigationLabel(parent, language)}`}</Link>}</nav>
     <WorkspaceNavigator routeId={routeId} />

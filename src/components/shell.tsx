@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowRight, ChevronDown, CircleHelp, Globe2, Menu, Phone, Search, UserRound, Waypoints } from "lucide-react";
+import { ArrowRight, ChevronDown, CircleHelp, Globe2, Menu, Phone, UserRound, Waypoints } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { CREATOR_PROFILE } from "@/config/creator";
 import { NAV_GROUPS, navigationGroupFor, navigationLabel, navigationMenuChildren, type NavigationItem } from "@/lib/navigation";
@@ -14,7 +14,7 @@ const pathFor = (route: string) => route === "home" ? "/" : `/${route}`;
 const utility = "inline-flex min-h-11 items-center justify-center gap-2 rounded-control border border-white/25 px-3 text-xs font-semibold transition-colors hover:bg-white/10";
 
 export function Shell({ children }: { children: React.ReactNode }) {
-  const { language, setLanguage, currentRoute, currentWorkspace, openGuide, openSearch, openProfile } = usePortal();
+  const { language, setLanguage, currentRoute, currentWorkspace, guideOpen, openGuide, openSearch, openProfile, profileOpen, searchOpen } = usePortal();
   const header = useRef<HTMLElement>(null);
   const mobile = useRef<HTMLDetailsElement>(null);
   const [desktopOpen, setDesktopOpen] = useState<string | null>(null);
@@ -37,14 +37,13 @@ export function Shell({ children }: { children: React.ReactNode }) {
           <span className="min-w-0"><span className="block max-w-[22rem] text-[16px] font-semibold leading-[1.08] sm:text-[19px]">{title}</span><span className="mt-1 hidden text-[11px] text-white/70 sm:block">{language === "hi" ? "स्वतंत्र अवधारणा · सरकारी सेवा नहीं" : "Independent concept · Not a government service"}</span></span>
         </Link>
         <div className="hidden items-center gap-2 nav:flex">
-          <button className={utility} onClick={() => openGuide(currentWorkspace)}><CircleHelp className="size-4" />{language === "hi" ? "मार्गदर्शिका" : "Guide"}</button>
-          <button className={utility} onClick={openSearch}><Search className="size-4" />{language === "hi" ? "खोजें / पूछें" : "Search / Ask"}</button>
-          <button className={utility} onClick={() => openGuide("lost-money")}><Phone className="size-4" />1930</button>
-          <button className={utility} onClick={openProfile}><UserRound className="size-4" />{language === "hi" ? "डेमो प्रोफ़ाइल" : "Demo profile"}</button>
-          <LanguageSelect language={language} onChange={setLanguage} />
+          <button data-tour="guide-trigger-desktop" className={utility} onClick={() => openGuide(currentWorkspace)}><CircleHelp className="size-4" />{language === "hi" ? "मार्गदर्शिका" : "Guide"}</button>
+          <button data-tour="urgent-help-desktop" className={utility} onClick={() => openGuide("lost-money")}><Phone className="size-4" />1930</button>
+          <button data-tour="profile-trigger-desktop" className={utility} onClick={openProfile}><UserRound className="size-4" />{language === "hi" ? "डेमो प्रोफ़ाइल" : "Demo profile"}</button>
+          <LanguageSelect dataTour="language-desktop" language={language} onChange={setLanguage} />
         </div>
         <details ref={mobile} className="group relative nav:hidden">
-          <summary aria-label={language === "hi" ? "सेवा मेनू खोलें" : "Open services menu"} className="grid size-11 cursor-pointer list-none place-items-center rounded-control border border-white/30"><Menu className="size-5" /></summary>
+          <summary data-tour="mobile-services" aria-label={language === "hi" ? "सेवा मेनू खोलें" : "Open services menu"} className="grid size-11 cursor-pointer list-none place-items-center rounded-control border border-white/30"><Menu className="size-5" /></summary>
           <div className="fixed inset-x-4 top-[78px] z-50 hidden max-h-[calc(100dvh-94px)] overflow-y-auto rounded-panel border border-line bg-white p-3 text-ink shadow-xl group-open:block">
             <nav className="grid gap-1" aria-label={language === "hi" ? "मोबाइल सेवाएँ" : "Mobile services"}>{NAV_GROUPS.map((entry) => {
               const active = navigationGroupFor(currentRoute)?.route === entry.route;
@@ -59,23 +58,27 @@ export function Shell({ children }: { children: React.ReactNode }) {
               </div>;
             })}</nav>
             <div className="mt-2 grid gap-2 border-t border-line pt-3 sm:grid-cols-2">
-              <button className="min-h-11 rounded-control border border-line px-3 text-sm font-semibold" onClick={() => { closeMobile(); openGuide(currentWorkspace); }}>{language === "hi" ? "मार्गदर्शिका" : "Guide"}</button>
-              <button className="min-h-11 rounded-control border border-line px-3 text-sm font-semibold" onClick={() => { closeMobile(); openSearch(); }}>{language === "hi" ? "खोजें / पूछें" : "Search / Ask"}</button>
-              <button className="min-h-11 rounded-control border border-line px-3 text-sm font-semibold" onClick={() => { closeMobile(); openProfile(); }}>{language === "hi" ? "डेमो प्रोफ़ाइल" : "Demo profile"}</button>
-              <select aria-label="Language" value={language} onChange={(event) => setLanguage(event.target.value as Language)} className="min-h-11 rounded-control border border-line bg-white px-3 text-sm font-semibold"><option value="en">English</option><option value="hi">हिन्दी</option><option value="hinglish">Hinglish</option></select>
+              <button data-tour="guide-trigger-mobile" className="min-h-11 rounded-control border border-line px-3 text-sm font-semibold" onClick={() => { closeMobile(); openGuide(currentWorkspace); }}>{language === "hi" ? "मार्गदर्शिका" : "Guide"}</button>
+              <button data-tour="profile-trigger-mobile" className="min-h-11 rounded-control border border-line px-3 text-sm font-semibold" onClick={() => { closeMobile(); openProfile(); }}>{language === "hi" ? "डेमो प्रोफ़ाइल" : "Demo profile"}</button>
+              <select data-tour="language-mobile" aria-label="Language" value={language} onChange={(event) => setLanguage(event.target.value as Language)} className="min-h-11 rounded-control border border-line bg-white px-3 text-sm font-semibold"><option value="en">English</option><option value="hi">हिन्दी</option><option value="hinglish">Hinglish</option></select>
             </div>
           </div>
         </details>
       </div></div>
 
       <div className="hidden min-h-[60px] border-b border-line bg-white text-ink shadow-[0_8px_24px_rgb(6_26_54/0.05)] nav:block"><div className="mx-auto flex h-[60px] max-w-content items-stretch px-5 md:px-8">
-        <nav className="flex min-w-0 flex-1" aria-label={language === "hi" ? "मुख्य सेवाएँ" : "Primary services"}>{NAV_GROUPS.map((entry) => <DesktopNavigationItem key={entry.route} entry={entry} language={language} currentRoute={currentRoute} open={desktopOpen === entry.route} setOpen={setDesktopOpen} />)}</nav>
+        <nav data-tour="workspace-navigation" className="flex min-w-0 flex-1" aria-label={language === "hi" ? "मुख्य सेवाएँ" : "Primary services"}>{NAV_GROUPS.map((entry) => <DesktopNavigationItem key={entry.route} entry={entry} language={language} currentRoute={currentRoute} open={desktopOpen === entry.route} setOpen={setDesktopOpen} />)}</nav>
         <Link href="/incident" className="my-2 ml-4 inline-flex min-h-11 items-center gap-2 rounded-control bg-civic-600 px-4 text-xs font-semibold text-white shadow-sm hover:bg-civic-700">{language === "hi" ? "शुरू करें" : "Get Started"}<ArrowRight className="size-4" /></Link>
       </div></div>
 
-      <div className="border-b border-[#f1c6c2] bg-[#fff8f6] text-ink"><div className="mx-auto flex max-w-content flex-col gap-1 px-5 py-2.5 text-xs sm:flex-row sm:items-center sm:gap-3 md:px-8"><Phone className="hidden size-4 shrink-0 text-urgent sm:block" /><p className="min-w-0 flex-1 leading-5"><strong className="text-urgent">{language === "hi" ? "पैसा गया? 1930 पर स्वयं कॉल करें।" : "Lost money? Call 1930 manually."}</strong> <span className="ml-1 text-muted">{language === "hi" ? "यह डेमो कॉल या रिपोर्ट नहीं करता।" : "This demo does not place a call or report."}</span></p><a className="inline-flex min-h-11 items-center gap-1 self-start font-semibold text-civic-700 underline decoration-civic-200 underline-offset-4 sm:self-auto" href="https://cybercrime.gov.in/" target="_blank" rel="noreferrer">{language === "hi" ? "cybercrime.gov.in खोलें" : "Open cybercrime.gov.in"}<ArrowRight className="size-3.5" /></a></div></div>
+      <div data-tour="official-guidance" className="border-b border-[#f1c6c2] bg-[#fff8f6] text-ink"><div className="mx-auto flex max-w-content flex-col gap-1 px-5 py-2.5 text-xs sm:flex-row sm:items-center sm:gap-3 md:px-8"><Phone className="hidden size-4 shrink-0 text-urgent sm:block" /><p className="min-w-0 flex-1 leading-5"><strong className="text-urgent">{language === "hi" ? "पैसा गया? 1930 पर स्वयं कॉल करें।" : "Lost money? Call 1930 manually."}</strong> <span className="ml-1 text-muted">{language === "hi" ? "यह डेमो कॉल या रिपोर्ट नहीं करता।" : "This demo does not place a call or report."}</span></p><a className="inline-flex min-h-11 items-center gap-1 self-start font-semibold text-civic-700 underline decoration-civic-200 underline-offset-4 sm:self-auto" href="https://cybercrime.gov.in/" target="_blank" rel="noreferrer">{language === "hi" ? "cybercrime.gov.in खोलें" : "Open cybercrime.gov.in"}<ArrowRight className="size-3.5" /></a></div></div>
     </header>
     <main id="main-content">{children}</main>
+    {!guideOpen && !profileOpen && !searchOpen ? <button data-tour="search-chatbot-trigger" type="button" className="assistant-launcher" onClick={openSearch} aria-label={language === "hi" ? "ThreadZero सहायक खोलें" : "Open ThreadZero assistant"}>
+      <span className="assistant-launcher-character" aria-hidden="true"><ResponsiveIllustration assetId="onboardingGuide" language={language} className="assistant-launcher-image" priority /></span>
+      <span className="assistant-launcher-copy"><strong>{language === "hi" ? "ThreadZero से पूछें" : "Ask ThreadZero"}</strong></span>
+      <span className="assistant-orbit assistant-orbit-one" aria-hidden="true" /><span className="assistant-orbit assistant-orbit-two" aria-hidden="true" />
+    </button> : null}
     <Footer />
   </div>;
 }
@@ -95,8 +98,8 @@ function DesktopNavigationItem({ entry, language, currentRoute, open, setOpen }:
   </div>;
 }
 
-function LanguageSelect({ language, onChange }: { language: Language; onChange: (value: Language) => void }) {
-  return <label className="relative"><span className="sr-only">Language</span><Globe2 className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2" /><select value={language} onChange={(event) => onChange(event.target.value as Language)} className="min-h-11 appearance-none rounded-control border border-white/25 bg-transparent py-2 pl-9 pr-8 text-xs font-semibold text-white"><option className="text-ink" value="en">English</option><option className="text-ink" value="hi">हिन्दी</option><option className="text-ink" value="hinglish">Hinglish</option></select><ChevronDown className="pointer-events-none absolute right-2 top-1/2 size-4 -translate-y-1/2" /></label>;
+function LanguageSelect({ dataTour, language, onChange }: { dataTour: string; language: Language; onChange: (value: Language) => void }) {
+  return <label data-tour={dataTour} className="relative"><span className="sr-only">Language</span><Globe2 className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2" /><select value={language} onChange={(event) => onChange(event.target.value as Language)} className="min-h-11 appearance-none rounded-control border border-white/25 bg-transparent py-2 pl-9 pr-8 text-xs font-semibold text-white"><option className="text-ink" value="en">English</option><option className="text-ink" value="hi">हिन्दी</option><option className="text-ink" value="hinglish">Hinglish</option></select><ChevronDown className="pointer-events-none absolute right-2 top-1/2 size-4 -translate-y-1/2" /></label>;
 }
 
 function Footer() {

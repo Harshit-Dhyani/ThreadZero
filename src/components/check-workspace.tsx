@@ -6,6 +6,7 @@ import { FormEvent, useRef, useState } from "react";
 import { ArrowRight, CheckCircle2, CircleHelp, ExternalLink, FileText, Globe2, SearchCheck, Smartphone, TriangleAlert, UserRound, Waypoints } from "lucide-react";
 import { normalizeCheckMode, resolveCheckOutcome, type CheckMode, type CheckOutcome } from "@/features/check";
 import { routeDefinition } from "@/lib/routes";
+import { ResponsiveIllustration } from "./responsive-illustration";
 import { OFFICIAL_DESTINATIONS } from "@/data/official-sources";
 import { localized } from "@/lib/i18n";
 import type { Language } from "@/lib/types";
@@ -62,15 +63,16 @@ export function CheckWorkspace() {
   return <div className="mx-auto max-w-content px-5 py-8 md:px-8 md:py-10">
     <nav aria-label="Breadcrumb" className="text-xs text-civic-700"><Link className="inline-flex min-h-11 min-w-11 items-center justify-center" href="/">{language === "hi" ? "होम" : "Home"}</Link><span className="mx-2">/</span><span aria-current="page">{language === "hi" ? "जाँच" : "Check"}</span></nav>
 
-    <header className="mt-5 border-b border-line pb-7">
-      <h1 className="max-w-[20ch] text-[38px] font-semibold leading-[1.08] tracking-[-0.035em] sm:text-[44px]">{language === "hi" ? "संदिग्ध विवरण जाँचें" : "Check suspicious details"}</h1>
+    <header className="mt-5 grid gap-6 border-b border-line pb-7 md:grid-cols-[minmax(0,1fr)_320px] md:items-center">
+      <div><h1 className="max-w-[20ch] text-[38px] font-semibold leading-[1.08] tracking-[-0.035em] sm:text-[44px]">{language === "hi" ? "संदिग्ध विवरण जाँचें" : "Check suspicious details"}</h1>
       <p className="mt-4 max-w-3xl text-base leading-7 text-muted">{language === "hi" ? "मोबाइल नंबर, ईमेल, वेबसाइट या अन्य विवरण जाँचें और सही अगला कदम तैयार करें।" : "Check a phone number, email, website, or other detail and prepare the right next step."}</p>
-      <p className="mt-3 max-w-3xl text-sm leading-6 text-muted">{language === "hi" ? "ThreadZero स्थानीय उदाहरणों का उपयोग करता है और आधिकारिक प्रणालियों से संपर्क नहीं करता।" : "ThreadZero uses local examples and does not contact official systems."}</p>
+      <p className="mt-3 max-w-3xl text-sm leading-6 text-muted">{language === "hi" ? "ThreadZero स्थानीय उदाहरणों का उपयोग करता है और आधिकारिक प्रणालियों से संपर्क नहीं करता।" : "ThreadZero uses local examples and does not contact official systems."}</p></div>
+      <ResponsiveIllustration assetId="advisories" language={language} className="mx-auto max-h-44 w-full max-w-[320px] object-contain" priority />
     </header>
 
     <div className="mt-7 grid min-w-0 gap-7 lg:grid-cols-[230px_minmax(0,1fr)] lg:items-start">
       <CheckToolRail mode={mode} setMode={setMode} language={language} />
-      <section className="min-w-0" data-check-mode={mode}>
+      <section data-tour="check-active-tool" className="min-w-0" data-check-mode={mode}>
         {mode === "overview" ? <OverviewLauncher setMode={setMode} /> : mode === "identifier" || mode === "website" ? <IdentifierCheck mode={mode} /> : mode === "abuse" ? <AbuseMode /> : <LocalDraft mode={mode} />}
       </section>
     </div>
@@ -86,7 +88,7 @@ function CheckToolRail({ mode, setMode, language }: { mode: CheckMode; setMode: 
     className={`flex min-h-12 w-full items-center gap-3 rounded-control px-3 text-left text-sm font-semibold transition-colors ${mode === item ? "bg-civic-50 text-civic-700" : "text-ink hover:bg-civic-50 hover:text-civic-700"}`}
   ><ModeIcon mode={item} className="size-4 shrink-0" /><span>{modeLabel(item, language)}</span></button>;
 
-  return <aside className="min-w-0">
+  return <aside data-tour="check-tools" className="min-w-0">
     <label className="grid gap-2 text-sm font-semibold lg:hidden"><span>{language === "hi" ? "जाँच उपकरण चुनें" : "Choose Check tool"}</span><select value={mode} onChange={(event) => setMode(event.target.value as CheckMode)} className="min-h-11 rounded-control border border-line bg-white px-3 font-normal">{(["overview", ...SUSPICIOUS_MODES, ...ACTION_MODES] as CheckMode[]).map((item) => <option key={item} value={item}>{modeLabel(item, language)}</option>)}</select></label>
     <nav aria-label={language === "hi" ? "जाँच उपकरण" : "Check tools"} className="sticky top-5 hidden rounded-panel border border-line bg-white p-3 lg:block">
       <p className="px-3 pb-2 text-xs font-semibold uppercase tracking-[0.12em] text-civic-700">{language === "hi" ? "जाँच उपकरण" : "Check tools"}</p>
@@ -106,7 +108,7 @@ function OverviewLauncher({ setMode }: { setMode: (mode: CheckMode) => void }) {
 
       <section className="mt-7" aria-labelledby="check-suspicious-title"><p id="check-suspicious-title" className="text-xs font-semibold uppercase tracking-[0.12em] text-civic-700">{language === "hi" ? "संदिग्ध चीज़ जाँचें" : "Check something suspicious"}</p><div className="mt-3 grid overflow-hidden rounded-panel border border-line bg-white md:grid-cols-3">{SUSPICIOUS_MODES.map((item) => <ModeLauncher key={item} mode={item} language={language} setMode={setMode} />)}</div></section>
 
-      <section className="mt-8" aria-labelledby="check-actions-title"><p id="check-actions-title" className="text-xs font-semibold uppercase tracking-[0.12em] text-civic-700">{language === "hi" ? "रिपोर्ट या कार्रवाई" : "Report or take action"}</p><div className="mt-3 rounded-panel border border-line bg-white overflow-hidden divide-y divide-line">{ACTION_MODES.map((item) => <button key={item} type="button" onClick={() => setMode(item)} className="group grid min-h-[76px] w-full grid-cols-[44px_minmax(0,1fr)_20px] items-center gap-4 px-5 py-4 text-left transition-colors hover:bg-civic-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-civic-600"><span className="grid size-11 shrink-0 place-items-center rounded-panel bg-civic-50 text-civic-700"><ModeIcon mode={item} /></span><span className="min-w-0"><strong className="block">{modeLabel(item, language)}</strong><span className="mt-1 block text-sm leading-6 text-muted">{modeBody(item, language)}</span></span><ArrowRight className="size-4 shrink-0 text-civic-700 transition-transform group-hover:translate-x-1" /></button>)}</div></section>
+      <section data-tour="check-actions" className="mt-8" aria-labelledby="check-actions-title"><p id="check-actions-title" className="text-xs font-semibold uppercase tracking-[0.12em] text-civic-700">{language === "hi" ? "रिपोर्ट या कार्रवाई" : "Report or take action"}</p><div className="mt-3 rounded-panel border border-line bg-white overflow-hidden divide-y divide-line">{ACTION_MODES.map((item) => <button key={item} type="button" onClick={() => setMode(item)} className="group grid min-h-[76px] w-full grid-cols-[44px_minmax(0,1fr)_20px] items-center gap-4 px-5 py-4 text-left transition-colors hover:bg-civic-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-civic-600"><span className="grid size-11 shrink-0 place-items-center rounded-panel bg-civic-50 text-civic-700"><ModeIcon mode={item} /></span><span className="min-w-0"><strong className="block">{modeLabel(item, language)}</strong><span className="mt-1 block text-sm leading-6 text-muted">{modeBody(item, language)}</span></span><ArrowRight className="size-4 shrink-0 text-civic-700 transition-transform group-hover:translate-x-1" /></button>)}</div></section>
     </div>
     <AboutThisCheck />
   </div>;

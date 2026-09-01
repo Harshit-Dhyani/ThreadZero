@@ -15,7 +15,7 @@ export function WorkspaceRail({ routeId }: { routeId: string }) {
   if (!context) return null;
 
   const label = localized(context.label, language);
-  return <aside className="min-w-0">
+  return <aside data-tour="workspace-rail" className="min-w-0">
     <label className="grid gap-2 text-sm font-semibold lg:hidden">
       <span>{language === "hi" ? `${label} अनुभाग चुनें` : `Choose ${label} section`}</span>
       <select value={routeId} onChange={(event) => router.push(pathFor(event.target.value))} className="min-h-11 rounded-control border border-line bg-white px-3 font-normal text-ink">

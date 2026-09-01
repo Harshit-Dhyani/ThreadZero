@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
-import { ArrowRight, Phone, Search, X } from "lucide-react";
+import { ArrowRight, Map, PanelsTopLeft, Phone, Search, X } from "lucide-react";
 import { buildSearchIndex, GUIDE_TASKS, organiseGuide } from "@/features/guide";
 import { PORTAL_ROUTES } from "@/lib/routes";
 import { localized } from "@/lib/i18n";
@@ -11,7 +11,7 @@ const INDEX = buildSearchIndex(PORTAL_ROUTES);
 const CHOICES = GUIDE_TASKS.map((task) => task.id);
 
 export function GuideDrawer() {
-  const { guideOpen, guidePreset, closeGuide, language, currentWorkspace, navigate, openSearch } = usePortal();
+  const { guideOpen, guidePreset, closeGuide, language, currentWorkspace, navigate, openOnboarding, openSearch } = usePortal();
   const dialogRef = useRef<HTMLDialogElement>(null);
   const returnFocus = useRef<HTMLElement | null>(null);
   const first = useRef<HTMLButtonElement>(null);
@@ -42,6 +42,10 @@ export function GuideDrawer() {
     <div className="p-5 sm:p-7">
       <div className="grid grid-cols-2 border-b border-line" role="tablist"><button role="tab" aria-selected={mode === "guided"} className={`min-h-11 border-b-2 text-sm font-semibold ${mode === "guided" ? "border-civic-600 text-civic-700" : "border-transparent text-muted"}`} onClick={() => setMode("guided")}>{language === "hi" ? "मार्गदर्शित" : "Guided"}</button><button role="tab" aria-selected={mode === "fast"} className={`min-h-11 border-b-2 text-sm font-semibold ${mode === "fast" ? "border-civic-600 text-civic-700" : "border-transparent text-muted"}`} onClick={() => setMode("fast")}>{language === "hi" ? "त्वरित" : "Fast"}</button></div>
       <button className="mt-5 flex min-h-11 w-full items-center gap-3 rounded-control border border-line px-4 text-left text-sm font-semibold text-muted hover:border-civic-600" onClick={() => { closeGuide(); requestAnimationFrame(openSearch); }}><Search className="size-5" />{language === "hi" ? "सभी पेज खोजें या प्रश्न पूछें" : "Search every page or ask a question"}</button>
+      <div className="mt-3 grid gap-3 sm:grid-cols-2">
+        <button className="flex min-h-11 items-center gap-3 rounded-control border border-civic-200 bg-civic-50 px-4 text-left text-sm font-semibold text-civic-700 hover:border-civic-600" onClick={() => openOnboarding("core")}><Map className="size-5 shrink-0" />{language === "hi" ? "वेबसाइट दौरा शुरू करें" : "Start website tour"}</button>
+        <button className="flex min-h-11 items-center gap-3 rounded-control border border-line px-4 text-left text-sm font-semibold text-ink hover:border-civic-600" onClick={() => openOnboarding(currentWorkspace)}><PanelsTopLeft className="size-5 shrink-0" />{language === "hi" ? "इस कार्यक्षेत्र का दौरा" : "Tour this workspace"}</button>
+      </div>
       {mode === "guided" ? <>
         <div className="mt-6 grid gap-3 sm:grid-cols-2">{GUIDE_TASKS.map((task) => <button key={task.id} aria-pressed={choice === task.id} className={`flex min-h-16 items-center justify-between gap-4 rounded-panel border p-4 text-left text-sm font-medium ${choice === task.id ? "border-civic-600 bg-civic-50" : "border-line hover:border-civic-600"}`} onClick={() => setChoice(task.id)}><span><span className="block">{localized(task.title, language)}</span><span className="mt-1 block text-xs font-normal leading-5 text-muted">{localized(task.body, language)}</span></span><ArrowRight className="size-4 shrink-0" /></button>)}</div>
         <label className="mt-6 grid gap-2"><span className="text-sm font-semibold">{language === "hi" ? "उदाहरण घटना बताएँ (वैकल्पिक)" : "Describe an example incident (optional)"}</span><textarea value={narrative} onChange={(event) => setNarrative(event.target.value)} className="min-h-28 rounded-control border border-line p-3" placeholder={language === "hi" ? "उदाहरण: WhatsApp पर निवेश संदेश आया..." : "Example: An investment message arrived on WhatsApp..."} /></label>

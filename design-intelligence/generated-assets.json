@@ -455,6 +455,38 @@
       "production_path": "public/assets/images/footer-guidance-v1-1200.webp",
       "responsive_paths": ["public/assets/images/footer-guidance-v1-640.webp", "public/assets/images/footer-guidance-v1-1200.webp"],
       "used_in_production": true
+    },
+    {
+      "id": "onboarding-guide-host-v2",
+      "prompt_version": 2,
+      "prompt": "Original charismatic 3D Indian digital navigator with a warm expression, dynamic explaining pose, refined navy and civic-blue clothing, and three translucent blue orbit objects; no text, logo, crown, government identity, uniform, seal, shield, lock, badge, or copied mascot.",
+      "reference_images": ["onboarding-guide-host-v1.png"],
+      "section": "shared-onboarding-assistant",
+      "role": "floating local assistant and tour host",
+      "dimensions": {"width": 1024, "height": 1024},
+      "sha256": "6e78f3406cda3150d6fbee22fce5928c021f861611bea7a50599c26df07d1682",
+      "status": "approved-illustration-v1",
+      "alpha_verified": true,
+      "archive_path": "design-intelligence/assets/images/output/onboarding-guide-host-v2.png",
+      "production_path": "public/assets/images/onboarding-guide-host-v2-1200.webp",
+      "responsive_paths": ["public/assets/images/onboarding-guide-host-v2-640.webp", "public/assets/images/onboarding-guide-host-v2-1200.webp"],
+      "used_in_production": false
+    },
+    {
+      "id": "onboarding-guide-host-v3",
+      "prompt_version": 3,
+      "prompt": "Preserve the approved original ThreadZero guide's face, hair, moustache, expression, navy and civic-blue clothing, explanatory pose, complete legs, both shoes, and translucent blue orbit objects in an uncropped 2:3 full-body composition; no text, logo, badge, uniform, seal, shield, lock, government identity, or copied mascot.",
+      "reference_images": ["onboarding-guide-host-v2.png", "exec-f20e955f-def2-4362-99aa-2c01840d3ce0.png"],
+      "section": "shared-onboarding-assistant",
+      "role": "full-body floating local assistant and tour host",
+      "dimensions": {"width": 1024, "height": 1536},
+      "sha256": "b4b9332e23225b020993a5a34ce95a82249b1aeef8ac87b766bcb4eecd152360",
+      "status": "approved-illustration-v1",
+      "alpha_verified": true,
+      "archive_path": "design-intelligence/assets/images/output/onboarding-guide-host-v3.png",
+      "production_path": "public/assets/images/onboarding-guide-host-v3-1200.webp",
+      "responsive_paths": ["public/assets/images/onboarding-guide-host-v3-640.webp", "public/assets/images/onboarding-guide-host-v3-1200.webp"],
+      "used_in_production": true
     }
   ]
 }

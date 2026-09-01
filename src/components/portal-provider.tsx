@@ -3,8 +3,9 @@
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { createInitialState } from "@/domains/report";
+import type { OnboardingCloseReason, OnboardingScope } from "@/features/onboarding";
 import type { Language, ReportState, Workspace } from "@/lib/types";
-import { ACCESS_KEY, LANGUAGE_KEY, readSavedDemoAccess, writeSavedDemoAccess, type DemoProfile } from "@/lib/storage";
+import { ACCESS_KEY, LANGUAGE_KEY, readOnboardingStatus, readSavedDemoAccess, readWorkspaceOnboardingStatus, writeOnboardingStatus, writeSavedDemoAccess, writeWorkspaceOnboardingStatus, type DemoProfile } from "@/lib/storage";
 import { workspaceFor } from "@/lib/routes";
 
 type PortalContextValue = {
@@ -31,6 +32,10 @@ type PortalContextValue = {
   profileOpen: boolean;
   openProfile: () => void;
   closeProfile: () => void;
+  onboardingOpen: boolean;
+  onboardingScope: OnboardingScope;
+  openOnboarding: (scope?: OnboardingScope) => void;
+  closeOnboarding: (reason?: OnboardingCloseReason) => void;
 };
 
 const PortalContext = createContext<PortalContextValue | null>(null);
@@ -54,12 +59,25 @@ export function PortalProvider({ children }: { children: React.ReactNode }) {
   const [guidePreset, setGuidePreset] = useState("");
   const [searchOpen, setSearchOpen] = useState(false);
   const [profileOpen, setProfileOpen] = useState(false);
+  const [onboardingOpen, setOnboardingOpen] = useState(false);
+  const [onboardingScope, setOnboardingScope] = useState<OnboardingScope>("core");
+  const [coreOnboardingSettled, setCoreOnboardingSettled] = useState(false);
+  const [workspaceToursSeen, setWorkspaceToursSeen] = useState<Workspace[]>([]);
 
   useEffect(() => {
-    const storedLanguage = localStorage.getItem(LANGUAGE_KEY);
-    if (storedLanguage === "en" || storedLanguage === "hi" || storedLanguage === "hinglish") setLanguageState(storedLanguage);
-    const saved = readSavedDemoAccess(localStorage);
-    if (saved) { setProfile(saved.profile); setProfileLabel(saved.label); setReport(saved.report); }
+    try {
+      const storedLanguage = localStorage.getItem(LANGUAGE_KEY);
+      if (storedLanguage === "en" || storedLanguage === "hi" || storedLanguage === "hinglish") setLanguageState(storedLanguage);
+      const saved = readSavedDemoAccess(localStorage);
+      if (saved) { setProfile(saved.profile); setProfileLabel(saved.label); setReport(saved.report); }
+      const coreStatus = readOnboardingStatus(localStorage);
+      setCoreOnboardingSettled(Boolean(coreStatus));
+      setWorkspaceToursSeen(readWorkspaceOnboardingStatus(localStorage)?.seen ?? []);
+      if (!coreStatus) setOnboardingOpen(true);
+    } catch {
+      setCoreOnboardingSettled(false);
+      setOnboardingOpen(true);
+    }
     setHydrated(true);
   }, []);
 
@@ -74,23 +92,35 @@ export function PortalProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     const shortcut = (event: KeyboardEvent) => {
+      if (onboardingOpen) return;
       const editable = event.target instanceof HTMLElement && event.target.matches("input, textarea, select, [contenteditable='true']");
       if (editable) return;
       if ((event.key === "/" && !event.ctrlKey && !event.metaKey && !event.altKey) || ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === "k")) {
         event.preventDefault();
+        setGuideOpen(false);
+        setProfileOpen(false);
         setSearchOpen(true);
       }
     };
     document.addEventListener("keydown", shortcut);
     return () => document.removeEventListener("keydown", shortcut);
-  }, []);
+  }, [onboardingOpen]);
+
+  useEffect(() => {
+    if (!hydrated || !coreOnboardingSettled || onboardingOpen || guideOpen || searchOpen || profileOpen || workspaceToursSeen.includes(currentWorkspace)) return;
+    const timer = window.setTimeout(() => {
+      setOnboardingScope(currentWorkspace);
+      setOnboardingOpen(true);
+    }, 220);
+    return () => window.clearTimeout(timer);
+  }, [coreOnboardingSettled, currentWorkspace, guideOpen, hydrated, onboardingOpen, profileOpen, searchOpen, workspaceToursSeen]);
 
   const value = useMemo<PortalContextValue>(() => ({
     hydrated,
     language,
     setLanguage(next) {
       setLanguageState(next);
-      localStorage.setItem(LANGUAGE_KEY, next);
+      try { localStorage.setItem(LANGUAGE_KEY, next); } catch { /* Keep the active session usable when storage is unavailable. */ }
     },
     currentRoute,
     currentWorkspace,
@@ -117,18 +147,44 @@ export function PortalProvider({ children }: { children: React.ReactNode }) {
     },
     guideOpen,
     guidePreset,
-    openGuide(preset = "") { setGuidePreset(preset); setGuideOpen(true); },
+    openGuide(preset = "") {
+      setOnboardingOpen(false); setSearchOpen(false); setProfileOpen(false);
+      setGuidePreset(preset); setGuideOpen(true);
+    },
     // V7 keeps Guide and Search as separate first-redesign surfaces. Adaptive Report uses
     // this compatibility name internally, but it intentionally opens the existing Guide.
-    openAssistant(preset = "") { setGuidePreset(preset); setGuideOpen(true); },
+    openAssistant(preset = "") {
+      setOnboardingOpen(false); setSearchOpen(false); setProfileOpen(false);
+      setGuidePreset(preset); setGuideOpen(true);
+    },
     closeGuide() { setGuideOpen(false); },
     searchOpen,
-    openSearch() { setSearchOpen(true); },
+    openSearch() { setGuideOpen(false); setOnboardingOpen(false); setProfileOpen(false); setSearchOpen(true); },
     closeSearch() { setSearchOpen(false); },
     profileOpen,
-    openProfile() { setProfileOpen(true); },
-    closeProfile() { setProfileOpen(false); }
-  }), [currentRoute, currentWorkspace, guideOpen, guidePreset, hydrated, language, profile, profileLabel, profileOpen, report, router, searchOpen]);
+    openProfile() { setGuideOpen(false); setOnboardingOpen(false); setSearchOpen(false); setProfileOpen(true); },
+    closeProfile() { setProfileOpen(false); },
+    onboardingOpen,
+    onboardingScope,
+    openOnboarding(scope = "core") {
+      setGuideOpen(false); setSearchOpen(false); setProfileOpen(false);
+      setOnboardingScope(scope); setOnboardingOpen(true);
+    },
+    closeOnboarding(reason) {
+      setOnboardingOpen(false);
+      if (!reason) return;
+      if (onboardingScope === "core") {
+        setCoreOnboardingSettled(true);
+        writeOnboardingStatus(localStorage, reason === "complete" ? "completed" : "skipped");
+        return;
+      }
+      setWorkspaceToursSeen((seen) => {
+        const next = seen.includes(onboardingScope) ? seen : [...seen, onboardingScope];
+        writeWorkspaceOnboardingStatus(localStorage, next);
+        return next;
+      });
+    }
+  }), [coreOnboardingSettled, currentRoute, currentWorkspace, guideOpen, guidePreset, hydrated, language, onboardingOpen, onboardingScope, profile, profileLabel, profileOpen, report, router, searchOpen, workspaceToursSeen]);
 
   return <PortalContext.Provider value={value}>{children}</PortalContext.Provider>;
 }
