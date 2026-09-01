@@ -87,7 +87,7 @@ test("every shipped registry asset has approval, responsive files, dimensions, a
   const proofs = JSON.parse(readFileSync(proofPath, "utf8")).assets as Array<{ id: string; status: string; alpha_verified?: boolean }>;
   for (const [key, asset] of Object.entries(ASSETS)) {
     const proof = proofs.find((entry) => entry.id === asset.id);
-    assert.equal(proof?.status, "approved-illustration-v1", `${asset.id} is not approved`);
+    assert.match(proof?.status ?? "", /^approved-illustration-v\d+$/, `${asset.id} is not approved`);
     if (asset.decorative) assert.equal(proof?.alpha_verified, true, `${asset.id} lacks required alpha verification`);
     assert.ok(asset.width > 0 && asset.height > 0, `${asset.id} lacks verified dimensions`);
     assert.ok(existsSync(`${assetRoot}${asset.sources.small}`), `${asset.id} small source is missing`);

@@ -28,12 +28,13 @@ test("the V5 runtime has no legacy frontend dependencies or compatibility module
   }
 });
 
-test("review annotations keep dialogs centered and boundary notes unboxed", () => {
+test("the profile stays centered while the assistant uses its requested bottom-right surface", () => {
   const components = join(root, "components");
   const dialogs = readFileSync(join(components, "portal-dialogs.tsx"), "utf8");
   const shell = readFileSync(join(components, "shell.tsx"), "utf8");
   const annotatedSurfaces = ["track.tsx", "public-route.tsx", "flow-route.tsx"].map((file) => readFileSync(join(components, file), "utf8")).join("\n");
-  assert.equal(dialogs.match(/className="m-auto/g)?.length, 2, "search and profile dialogs must stay centered");
+  assert.equal(dialogs.match(/className="m-auto/g)?.length, 1, "only the profile dialog should remain centered");
+  assert.match(dialogs, /className=\{`assistant-dialog/);
   assert.doesNotMatch(annotatedSurfaces, /border-l-(?:4|\[3px\]) border-civic-600 bg-civic-50/, "informational boundaries must not use the rejected blue callout treatment");
   assert.match(shell, /border-b border-line bg-white text-ink/, "desktop navigation must use the calmer white surface");
 });

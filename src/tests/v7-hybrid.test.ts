@@ -27,7 +27,8 @@ test("V7.4 preserves product breadth and restores the full Home gateway", () => 
   const home = source("src/components/home.tsx");
   const routeScreen = source("src/components/route-screen.tsx");
   assert.match(shell, /Guide/);
-  assert.match(shell, /Search \/ Ask/);
+  assert.match(shell, /Ask ThreadZero/);
+  assert.match(shell, /data-tour="search-chatbot-trigger"/);
   assert.match(home, /c\.process\.steps/);
   assert.match(home, /c\.mechanism/);
   assert.match(home, /GUIDE_TASKS/);
