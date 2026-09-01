@@ -10,6 +10,7 @@ import { FLOW_STAGES } from "@/lib/routes";
 import { localized } from "@/lib/i18n";
 import type { ChronologyEvent, EvidenceAvailability, EvidenceCategory, Incident, Language, LocalizedText, ReportKind, ReportState, ReportingMode, WomenChildCategory } from "@/lib/types";
 import { usePortal } from "./portal-provider";
+import { ResponsiveIllustration } from "./responsive-illustration";
 
 const fieldClass = "min-h-11 w-full rounded-control border border-line bg-white px-3 font-normal";
 const categories: EvidenceCategory[] = ["payment", "messages", "person-account", "links"];
@@ -72,18 +73,18 @@ export function FlowRoute({ routeId }: { routeId: string }) {
   return <div className="mx-auto max-w-content px-5 py-8 md:px-8 md:py-10">
     <nav aria-label="Breadcrumb" className="flex items-center text-xs text-civic-700"><Link className="inline-flex min-h-11 items-center" href="/">{t(language, "Home", "होम")}</Link><span className="px-2">/</span><Link className="inline-flex min-h-11 items-center" href="/incident">{t(language, "Report", "रिपोर्ट")}</Link><span className="px-2">/</span><span>{c.flow.routes[routeId as keyof typeof c.flow.routes]}</span></nav>
     <div className="mt-6 grid grid-cols-[minmax(0,1fr)] gap-6 lg:grid-cols-[220px_minmax(0,1fr)]">
-      <aside className="min-w-0 self-start rounded-panel border border-line bg-white p-3 lg:sticky lg:top-4">
+      <aside data-tour="report-stage-rail" className="min-w-0 self-start rounded-panel border border-line bg-white p-3 lg:sticky lg:top-4">
         <p className="px-3 py-2 text-xs font-semibold uppercase tracking-[0.12em] text-civic-700">{c.flow.progress}</p>
         <ol className="flow-step-scrollbar flex gap-2 overflow-x-auto py-2 lg:grid lg:overflow-visible">{FLOW_STAGES.map((stage, stageIndex) => {
           const done = report.completed.includes(stage.id);
           return <li key={stage.id} className="shrink-0 lg:shrink"><button disabled={!canEnterRoute(stage.id, report) || report.locked && stage.id !== "review"} aria-current={stage.id === routeId ? "step" : undefined} className={`flex min-h-11 min-w-32 items-center gap-3 rounded-control px-3 text-left text-sm font-semibold lg:w-full ${stage.id === routeId ? "bg-civic-50 text-civic-700" : done ? "text-success" : "text-muted"}`} onClick={() => navigate(stage.id)}><span className={`grid size-7 shrink-0 place-items-center rounded-full border ${done ? "border-success bg-success text-white" : "border-line"}`}>{done ? <Check className="size-4" /> : stageIndex + 1}</span><span>{c.flow.routes[stage.id as keyof typeof c.flow.routes]}</span></button></li>;
         })}</ol>
       </aside>
-      <section className="min-w-0 rounded-panel border border-line bg-white p-5 sm:p-7">
+      <section data-tour="report-active-step" className="min-w-0 rounded-panel border border-line bg-white p-5 sm:p-7">
         {Object.keys(errors).length > 0 && <div ref={errorRef} tabIndex={-1} role="alert" className="mb-6 border-l-4 border-urgent bg-urgent-soft p-4"><h2 className="font-semibold text-urgent">{c.common.errorsTitle}</h2><ul className="mt-2 list-disc pl-5 text-sm text-urgent">{Object.values(errors).map((error) => <li key={error}>{error}</li>)}</ul></div>}
         {routeId === "incident" && <IncidentStep complete={() => complete("details")} fail={fail} />}
         {routeId === "details" && <DetailsStep complete={() => complete("evidence")} fail={fail} />}
-        {routeId === "evidence" && <EvidenceStep complete={() => complete("chronology")} fail={fail} />}
+        {routeId === "evidence" && <div data-tour="report-evidence"><EvidenceStep complete={() => complete("chronology")} fail={fail} /></div>}
         {routeId === "chronology" && <TimelineStep complete={() => complete("review")} fail={fail} />}
         {routeId === "review" && <ReviewStep fail={fail} />}
         <div className="mt-7 flex flex-wrap gap-3 border-t border-line pt-5">{index > 0 && !report.locked && <button className="inline-flex min-h-11 items-center gap-2 rounded-control border border-line px-4 text-sm font-semibold" onClick={() => navigate(FLOW_STAGES[index - 1].id)}><ArrowLeft className="size-4" />{c.common.back}</button>}<button className="inline-flex min-h-11 items-center gap-2 rounded-control border border-line px-4 text-sm font-semibold" onClick={() => { resetReport(); navigate("incident"); }}><RotateCcw className="size-4" />{c.common.reset}</button></div>
@@ -93,7 +94,8 @@ export function FlowRoute({ routeId }: { routeId: string }) {
 }
 
 function Heading({ section }: { section: { eyebrow?: string; title: string; intro: string } }) {
-  return <header>{section.eyebrow ? <p className="text-xs font-semibold uppercase tracking-[0.12em] text-civic-700">{section.eyebrow}</p> : null}<h1 tabIndex={-1} className={`${section.eyebrow ? "mt-3" : ""} max-w-[25ch] text-[36px] font-semibold leading-tight tracking-[-0.03em] sm:text-[42px]`}>{section.title}</h1><p className="mt-4 max-w-3xl text-base leading-7 text-muted">{section.intro}</p></header>;
+  const { language } = usePortal();
+  return <header className="grid gap-5 md:grid-cols-[minmax(0,1fr)_280px] md:items-center"><div>{section.eyebrow ? <p className="text-xs font-semibold uppercase tracking-[0.12em] text-civic-700">{section.eyebrow}</p> : null}<h1 tabIndex={-1} className={`${section.eyebrow ? "mt-3" : ""} max-w-[25ch] text-[36px] font-semibold leading-tight tracking-[-0.03em] sm:text-[42px]`}>{section.title}</h1><p className="mt-4 max-w-3xl text-base leading-7 text-muted">{section.intro}</p></div><ResponsiveIllustration assetId="homePreparationV5" language={language} className="mx-auto max-h-44 w-full max-w-[280px] object-contain" priority /></header>;
 }
 
 function ContextBar({ label, language }: { label: string; language: Language }) {
@@ -131,7 +133,7 @@ function IncidentStep({ complete, fail }: { complete: () => void; fail: (errors:
 
   return <>
     <Heading section={{ eyebrow: s.eyebrow, title: t(language, "What happened?", "क्या हुआ?"), intro: t(language, "Start with your situation. Every later step changes from this choice, so you do not need to understand portal categories first.", "अपनी स्थिति से शुरू करें। आगे के सभी चरण इस चुनाव के अनुसार बदलेंगे, इसलिए पहले पोर्टल की श्रेणियाँ समझना जरूरी नहीं है।") }} />
-    <fieldset className="mt-7"><legend className="font-semibold">{t(language, "Which situation is closest?", "कौन-सी स्थिति सबसे निकट है?")}</legend><div className="mt-4 grid gap-3 sm:grid-cols-2">{REPORT_KIND_CHOICES.map((choice) => <label key={choice.value} className={`flex min-h-28 cursor-pointer gap-3 rounded-panel border p-4 ${report.reportKind === choice.value ? "border-civic-600 bg-civic-50" : "border-line hover:border-civic-300"}`}><input type="radio" name="report-kind" value={choice.value} checked={report.reportKind === choice.value} onChange={() => chooseKind(choice.value)} className="mt-1 size-5" /><span><strong className="block">{localized(choice.title, language)}</strong><span className="mt-1 block text-sm leading-6 text-muted">{localized(choice.body, language)}</span></span></label>)}</div></fieldset>
+    <fieldset data-tour="report-family" className="mt-7"><legend className="font-semibold">{t(language, "Which situation is closest?", "कौन-सी स्थिति सबसे निकट है?")}</legend><div className="mt-4 grid gap-3 sm:grid-cols-2">{REPORT_KIND_CHOICES.map((choice) => <label key={choice.value} className={`flex min-h-28 cursor-pointer gap-3 rounded-panel border p-4 ${report.reportKind === choice.value ? "border-civic-600 bg-civic-50" : "border-line hover:border-civic-300"}`}><input type="radio" name="report-kind" value={choice.value} checked={report.reportKind === choice.value} onChange={() => chooseKind(choice.value)} className="mt-1 size-5" /><span><strong className="block">{localized(choice.title, language)}</strong><span className="mt-1 block text-sm leading-6 text-muted">{localized(choice.body, language)}</span></span></label>)}</div></fieldset>
 
     {report.reportKind === "financial" && <>
       <aside className="mt-6 border-l-4 border-urgent bg-urgent-soft p-4"><div className="flex gap-3"><Phone className="mt-0.5 size-5 shrink-0 text-urgent" /><div><h2 className="font-semibold text-urgent">{t(language, "Lost money recently? Call 1930 now.", "हाल ही में पैसा गया? अभी 1930 पर कॉल करें।")}</h2><p className="mt-1 text-sm leading-6 text-muted">{t(language, "Call manually for urgent help. This demo cannot place the call or freeze funds.", "तात्कालिक सहायता के लिए स्वयं कॉल करें। यह डेमो कॉल नहीं कर सकता या धन नहीं रोक सकता।")}</p></div></div></aside>
