@@ -76,7 +76,7 @@ export function Shell({ children }: { children: React.ReactNode }) {
     <main id="main-content">{children}</main>
     {!guideOpen && !profileOpen && !searchOpen ? <button data-tour="search-chatbot-trigger" type="button" className="assistant-launcher" onClick={openSearch} aria-label={language === "hi" ? "ThreadZero सहायक खोलें" : "Open ThreadZero assistant"}>
       <span className="assistant-launcher-character" aria-hidden="true"><ResponsiveIllustration assetId="onboardingGuide" language={language} className="assistant-launcher-image" priority /></span>
-      <span className="assistant-launcher-copy"><strong>{language === "hi" ? "ThreadZero से पूछें" : "Ask ThreadZero"}</strong><span>{language === "hi" ? "स्थानीय मार्ग सहायक" : "Local route assistant"}</span></span>
+      <span className="assistant-launcher-copy"><strong>{language === "hi" ? "ThreadZero से पूछें" : "Ask ThreadZero"}</strong></span>
       <span className="assistant-orbit assistant-orbit-one" aria-hidden="true" /><span className="assistant-orbit assistant-orbit-two" aria-hidden="true" />
     </button> : null}
     <Footer />
