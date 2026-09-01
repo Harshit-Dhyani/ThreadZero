@@ -1,12 +1,17 @@
 import { canonicalFlowRoute, createInitialState, refreshTimelineForReport } from "../../domains/report/index.ts";
 import { FLOW_STAGES } from "../../data/demo.ts";
-import type { EvidenceAvailability, Language, ReportKind, ReportingMode, ReportState, WomenChildCategory } from "../types.ts";
+import type { EvidenceAvailability, Language, ReportKind, ReportingMode, ReportState, WomenChildCategory, Workspace } from "../types.ts";
 
 export type DemoProfile = "anonymous" | "local" | "account";
 export type SavedDemoAccess = { version: 2; profile: Exclude<DemoProfile, "anonymous">; label: string; language: Language; report: ReportState };
+export type OnboardingStatus = "completed" | "skipped";
+export type SavedOnboardingStatus = { version: 1; status: OnboardingStatus };
+export type SavedWorkspaceOnboardingStatus = { version: 1; seen: Workspace[] };
 
 export const ACCESS_KEY = "threadzero-v5-demo-access";
 export const LANGUAGE_KEY = "threadzero-v5-language";
+export const ONBOARDING_KEY = "threadzero-v7-onboarding";
+export const WORKSPACE_ONBOARDING_KEY = "threadzero-v7-workspace-onboarding";
 
 const isString = (value: unknown): value is string => typeof value === "string";
 const availability = (value: unknown): EvidenceAvailability => value === "have" || value === "ready" ? "have" : value === "missing" ? "missing" : "unsure";
@@ -102,7 +107,46 @@ export function readSavedDemoAccess(storage: Storage): SavedDemoAccess | null {
 
 export function writeSavedDemoAccess(storage: Storage, value: SavedDemoAccess) { storage.setItem(ACCESS_KEY, JSON.stringify(value)); }
 
+export function parseOnboardingStatus(value: unknown): SavedOnboardingStatus | null {
+  if (!value || typeof value !== "object") return null;
+  const saved = value as Record<string, unknown>;
+  return saved.version === 1 && (saved.status === "completed" || saved.status === "skipped")
+    ? { version: 1, status: saved.status }
+    : null;
+}
+
+export function readOnboardingStatus(storage: Storage): SavedOnboardingStatus | null {
+  try { return parseOnboardingStatus(JSON.parse(storage.getItem(ONBOARDING_KEY) || "null")); }
+  catch { return null; }
+}
+
+export function writeOnboardingStatus(storage: Storage, status: OnboardingStatus) {
+  try { storage.setItem(ONBOARDING_KEY, JSON.stringify({ version: 1, status } satisfies SavedOnboardingStatus)); return true; }
+  catch { return false; }
+}
+
+const WORKSPACES = new Set<Workspace>(["home", "report", "check", "track", "learn", "help"]);
+
+export function parseWorkspaceOnboardingStatus(value: unknown): SavedWorkspaceOnboardingStatus | null {
+  if (!value || typeof value !== "object") return null;
+  const saved = value as Record<string, unknown>;
+  if (saved.version !== 1 || !Array.isArray(saved.seen) || !saved.seen.every((workspace) => WORKSPACES.has(workspace as Workspace))) return null;
+  return { version: 1, seen: [...new Set(saved.seen as Workspace[])] };
+}
+
+export function readWorkspaceOnboardingStatus(storage: Storage): SavedWorkspaceOnboardingStatus | null {
+  try { return parseWorkspaceOnboardingStatus(JSON.parse(storage.getItem(WORKSPACE_ONBOARDING_KEY) || "null")); }
+  catch { return null; }
+}
+
+export function writeWorkspaceOnboardingStatus(storage: Storage, seen: readonly Workspace[]) {
+  try { storage.setItem(WORKSPACE_ONBOARDING_KEY, JSON.stringify({ version: 1, seen: [...new Set(seen)] } satisfies SavedWorkspaceOnboardingStatus)); return true; }
+  catch { return false; }
+}
+
 export function eraseSavedDemoData(storage: Storage) {
   storage.removeItem(ACCESS_KEY);
   storage.removeItem(LANGUAGE_KEY);
+  storage.removeItem(ONBOARDING_KEY);
+  storage.removeItem(WORKSPACE_ONBOARDING_KEY);
 }
