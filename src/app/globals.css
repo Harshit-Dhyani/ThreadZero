@@ -298,6 +298,7 @@ dialog::backdrop { background: rgb(6 26 54 / 0.58); }
 }
 
 .assistant-composer input { min-width: 0; min-height: 2.75rem; border: 0; background: transparent; outline: none; font-size: 0.875rem; }
+.assistant-composer input:focus-visible { outline: 3px solid #f5b400; outline-offset: 3px; }
 .assistant-composer button { display: grid; width: 2.75rem; height: 2.75rem; place-items: center; border: 0; border-radius: 999px; background: var(--color-civic-600); color: white; }
 
 @keyframes assistant-character-float {
