@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Analytics } from "@vercel/analytics/next";
 import { PortalFrame } from "@/components/portal-frame";
 import { PortalProvider } from "@/components/portal-provider";
 import "./globals.css";
@@ -15,6 +16,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <PortalProvider>
           <PortalFrame>{children}</PortalFrame>
         </PortalProvider>
+        <Analytics />
       </body>
     </html>
   );
