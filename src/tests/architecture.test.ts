@@ -55,6 +55,7 @@ test("Netlify publishes the static Next export with hydration-safe headers", () 
 test("Vercel applies the static-export security policy", () => {
   const config = JSON.parse(readFileSync(join(projectRoot, "vercel.json"), "utf8")) as {
     headers: Array<{ source: string; headers: Array<{ key: string; value: string }> }>;
+    redirects: Array<{ source: string; destination: string; permanent: boolean }>;
   };
   const global = config.headers.find(({ source }) => source === "/(.*)");
 
@@ -69,4 +70,8 @@ test("Vercel applies the static-export security policy", () => {
   assert.equal(headers.get("X-Frame-Options"), "DENY");
   assert.ok(config.headers.some(({ source }) => source === "/_next/static/(.*)"));
   assert.ok(config.headers.some(({ source }) => source === "/assets/(.*)"));
+  assert.deepEqual(config.redirects, [
+    { source: "/site", destination: "/", permanent: true },
+    { source: "/site/:path*", destination: "/:path*", permanent: true }
+  ]);
 });
