@@ -131,6 +131,14 @@ test("the tour is native, modal, inert, decorative, and client-only", () => {
   assert.doesNotMatch(implementation, /\bfetch\s*\(|XMLHttpRequest|sendBeacon|WebSocket|axios/i);
 });
 
+test("skipping the core tour prevents automatic workspace tours", () => {
+  const provider = source("src/components/portal-provider.tsx");
+
+  assert.match(provider, /coreOnboardingSkipped/);
+  assert.match(provider, /!hydrated \|\| !coreOnboardingSettled \|\| coreOnboardingSkipped/);
+  assert.match(provider, /setCoreOnboardingSkipped\(reason !== "complete"\)/);
+});
+
 test("Search Ask is a functional expandable bottom-right local assistant", () => {
   const dialogs = source("src/components/portal-dialogs.tsx");
   const shell = source("src/components/shell.tsx");

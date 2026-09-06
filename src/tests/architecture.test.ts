@@ -51,3 +51,22 @@ test("Netlify publishes the static Next export with hydration-safe headers", () 
   assert.match(config, /for = "\/_next\/static\/\*"[\s\S]*?max-age=31536000, immutable/);
   assert.match(config, /for = "\/assets\/\*"[\s\S]*?max-age=31536000, immutable/);
 });
+
+test("Vercel applies the static-export security policy", () => {
+  const config = JSON.parse(readFileSync(join(projectRoot, "vercel.json"), "utf8")) as {
+    headers: Array<{ source: string; headers: Array<{ key: string; value: string }> }>;
+  };
+  const global = config.headers.find(({ source }) => source === "/(.*)");
+
+  assert.ok(global);
+  const headers = new Map(global.headers.map(({ key, value }) => [key, value]));
+
+  assert.match(headers.get("Content-Security-Policy") ?? "", /connect-src 'none'/);
+  assert.equal(headers.get("Cross-Origin-Resource-Policy"), "same-origin");
+  assert.equal(headers.get("Permissions-Policy"), "camera=(), microphone=(), geolocation=()");
+  assert.equal(headers.get("Referrer-Policy"), "strict-origin-when-cross-origin");
+  assert.equal(headers.get("X-Content-Type-Options"), "nosniff");
+  assert.equal(headers.get("X-Frame-Options"), "DENY");
+  assert.ok(config.headers.some(({ source }) => source === "/_next/static/(.*)"));
+  assert.ok(config.headers.some(({ source }) => source === "/assets/(.*)"));
+});
