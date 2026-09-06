@@ -62,6 +62,7 @@ export function PortalProvider({ children }: { children: React.ReactNode }) {
   const [onboardingOpen, setOnboardingOpen] = useState(false);
   const [onboardingScope, setOnboardingScope] = useState<OnboardingScope>("core");
   const [coreOnboardingSettled, setCoreOnboardingSettled] = useState(false);
+  const [coreOnboardingSkipped, setCoreOnboardingSkipped] = useState(false);
   const [workspaceToursSeen, setWorkspaceToursSeen] = useState<Workspace[]>([]);
 
   useEffect(() => {
@@ -72,6 +73,7 @@ export function PortalProvider({ children }: { children: React.ReactNode }) {
       if (saved) { setProfile(saved.profile); setProfileLabel(saved.label); setReport(saved.report); }
       const coreStatus = readOnboardingStatus(localStorage);
       setCoreOnboardingSettled(Boolean(coreStatus));
+      setCoreOnboardingSkipped(coreStatus?.status === "skipped");
       setWorkspaceToursSeen(readWorkspaceOnboardingStatus(localStorage)?.seen ?? []);
       if (!coreStatus) setOnboardingOpen(true);
     } catch {
@@ -107,13 +109,13 @@ export function PortalProvider({ children }: { children: React.ReactNode }) {
   }, [onboardingOpen]);
 
   useEffect(() => {
-    if (!hydrated || !coreOnboardingSettled || onboardingOpen || guideOpen || searchOpen || profileOpen || workspaceToursSeen.includes(currentWorkspace)) return;
+    if (!hydrated || !coreOnboardingSettled || coreOnboardingSkipped || onboardingOpen || guideOpen || searchOpen || profileOpen || workspaceToursSeen.includes(currentWorkspace)) return;
     const timer = window.setTimeout(() => {
       setOnboardingScope(currentWorkspace);
       setOnboardingOpen(true);
     }, 220);
     return () => window.clearTimeout(timer);
-  }, [coreOnboardingSettled, currentWorkspace, guideOpen, hydrated, onboardingOpen, profileOpen, searchOpen, workspaceToursSeen]);
+  }, [coreOnboardingSettled, coreOnboardingSkipped, currentWorkspace, guideOpen, hydrated, onboardingOpen, profileOpen, searchOpen, workspaceToursSeen]);
 
   const value = useMemo<PortalContextValue>(() => ({
     hydrated,
@@ -175,6 +177,7 @@ export function PortalProvider({ children }: { children: React.ReactNode }) {
       if (!reason) return;
       if (onboardingScope === "core") {
         setCoreOnboardingSettled(true);
+        setCoreOnboardingSkipped(reason !== "complete");
         writeOnboardingStatus(localStorage, reason === "complete" ? "completed" : "skipped");
         return;
       }
